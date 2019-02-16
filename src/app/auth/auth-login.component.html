@@ -1,0 +1,46 @@
+<!--Login Page Starts-->
+<section id="login" class="bg-admin">
+  <div class="container-fluid">
+    <div class="row full-height-vh">
+      <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="card card-inverse text-center width-400">
+          <div class="card-body">
+            <div class="card-block">
+              <div class="align-items-center">
+                <img class="mt-3 mb-3" src="assets/img/logo-dark.png">
+              </div>
+              <div *ngIf="loginForm">
+                <form #loginForm="ngForm" (ngSubmit)="doLogin(loginForm.value, loginForm.valid)" novalidate>
+                  <p>Login met je gebruikersnaam en wachtwoord.</p>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <input type="text" class="form-control" id="username" placeholder="Gebruikersnaam" required name="username" [(ngModel)]="auth.username" #authUsername="ngModel" [ngClass]="authUsername.valid || authUsername.pristine ? (loginError ? 'is-invalid' : '') : 'is-invalid'">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <input type="password" class="form-control" id="password" placeholder="Wachtwoord" required minlength="8" name="authPassword" [(ngModel)]="auth.password" #authPassword="ngModel" [ngClass]="authPassword.valid || authPassword.pristine ? (loginError ? 'is-invalid' : '') : 'is-invalid'">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <button type="submit" class="btn btn-green btn-block btn-raised" [disabled]="!loginForm.valid" [ngClass]="loading ? 'has-icon-right' : ''">
+                        <span>Inloggen</span>
+                        <i *ngIf="loading" class="ft-loader spinner"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-center">
+            <div *ngIf="loginForm">
+              <a (click)="forgotPassword()">Wachtwoord vergeten?</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
