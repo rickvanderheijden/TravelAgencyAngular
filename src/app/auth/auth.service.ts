@@ -40,10 +40,11 @@ export class AuthenticationService {
   }
 
   login(credentials) {
-    const url = this.url + '/auth/login';
+    const url = this.url + '/login';
     return this.http.post(url, credentials)
       .pipe(
         tap(res => {
+          console.log(res);
           localStorage.set(TOKEN_KEY, res['token']);
           this.user = new User(res['user']);
           this.authenticationState.next(true);
