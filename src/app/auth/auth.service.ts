@@ -35,6 +35,7 @@ export class AuthenticationService {
           this.authenticationState.next(true);
         } else {
           localStorage.removeItem(TOKEN_KEY);
+          this.authenticationState.next(false);
         }
       }
   }
@@ -80,4 +81,28 @@ export class AuthenticationService {
   showAlert(msg) {
     console.log(msg);
   }
+
+  checkLoggedInUser() {
+      return this.http.get(`${this.url}/me`).pipe(
+        catchError(e => {
+          const status = e.status;
+          if (status === 401) {
+            this.logout();
+          }
+          throw new Error(e);
+        })
+      );
+  }
+
+  loggedIn() {
+    return this.tokenExpired();
+  }
+
+  tokenExpired() {
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (token) {
+      return this.helper.isTokenExpired(token);
+    }
+    return false;
+  };
 }
