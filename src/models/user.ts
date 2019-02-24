@@ -6,7 +6,7 @@ export class User {
     public firstname?: String;
     public middlename?: String;
     public lastname?: String;
-    public email?: String;
+    public emailAddress?: String;
     public roles: Array<UserRole>;
 
     constructor(model?) {
@@ -16,7 +16,7 @@ export class User {
             this.firstname = model.firstname;
             this.middlename = model.middlename;
             this.lastname = model.lastname;
-            this.email = model.email;
+            this.emailAddress = model.emailAddress;
             this.roles = new Array<UserRole>();
             if ( model.roles !== undefined ) {
                 for ( const role of model.roles ) {

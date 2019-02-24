@@ -25,7 +25,7 @@ export function jwtOptionsFactory() {
     tokenGetter: () => {
       return localStorage.getItem('access_token');
     },
-    whitelistedDomains: ['http://localhost:5000/']
+    whitelistedDomains: ['http://localhost:9000/']
   };
 }
 @NgModule({
