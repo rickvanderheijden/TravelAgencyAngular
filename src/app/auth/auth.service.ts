@@ -35,15 +35,17 @@ export class AuthenticationService {
           this.authenticationState.next(true);
         } else {
           localStorage.removeItem(TOKEN_KEY);
+          this.authenticationState.next(false);
         }
       }
   }
 
   login(credentials) {
-    const url = this.url + '/auth/login';
+    const url = this.url + '/login';
     return this.http.post(url, credentials)
       .pipe(
         tap(res => {
+          console.log(res);
           localStorage.set(TOKEN_KEY, res['token']);
           this.user = new User(res['user']);
           this.authenticationState.next(true);
@@ -79,4 +81,28 @@ export class AuthenticationService {
   showAlert(msg) {
     console.log(msg);
   }
+
+  checkLoggedInUser() {
+      return this.http.get(`${this.url}/me`).pipe(
+        catchError(e => {
+          const status = e.status;
+          if (status === 401) {
+            this.logout();
+          }
+          throw new Error(e);
+        })
+      );
+  }
+
+  loggedIn() {
+    return this.tokenExpired();
+  }
+
+  tokenExpired() {
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (token) {
+      return this.helper.isTokenExpired(token);
+    }
+    return false;
+  };
 }

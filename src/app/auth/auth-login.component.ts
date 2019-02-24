@@ -30,6 +30,8 @@ export class AuthLoginComponent implements OnInit, OnDestroy {
   }
 
   doLogin(form: any, valid: any): void  {
+
+    console.log(this.auth);
     if (valid) {
       this.loginError = false;
       this.loading = true;
@@ -41,8 +43,8 @@ export class AuthLoginComponent implements OnInit, OnDestroy {
           error => {
             this.loading = false;
             this.loginError = true;
-            const response = error.json();
-            console.log(response);
+            // const response = error.json();
+            console.log(error);
           });
     }
   }
