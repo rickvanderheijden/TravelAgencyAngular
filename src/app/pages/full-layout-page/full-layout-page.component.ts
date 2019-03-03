@@ -6,4 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./full-layout-page.component.scss']
 })
 export class FullLayoutPageComponent {
+
 }
