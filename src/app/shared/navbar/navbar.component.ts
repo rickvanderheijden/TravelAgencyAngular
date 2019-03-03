@@ -6,7 +6,7 @@ import { Component, AfterViewChecked } from '@angular/core';
     styleUrls: ['./navbar.component.scss']
 })
 
-export class NavbarComponent implements AfterViewChecked{
+export class NavbarComponent implements AfterViewChecked {
 
     toggleClass = 'ft-maximize';
     placement = 'bottom-right'
