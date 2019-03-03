@@ -31,7 +31,6 @@ export class AuthLoginComponent implements OnInit, OnDestroy {
 
   doLogin(form: any, valid: any): void  {
 
-    console.log(this.auth);
     if (valid) {
       this.loginError = false;
       this.loading = true;
