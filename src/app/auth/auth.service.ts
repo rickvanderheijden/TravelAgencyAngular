@@ -29,7 +29,6 @@ export class AuthenticationService {
     const token = localStorage.getItem(TOKEN_KEY);
       if (token) {
         const isExpired = this.helper.isTokenExpired(token);
-        console.log(isExpired);
 
         if (!isExpired) {
           this.authenticationState.next(true);
@@ -41,13 +40,11 @@ export class AuthenticationService {
   }
 
   login(credentials) {
-    const url = this.url + '/login';
+    const url = this.url + '/auth/login';
     return this.http.post(url, credentials)
       .pipe(
         tap(res => {
-          console.log(res);
-          localStorage.set(TOKEN_KEY, res['token']);
-          this.user = new User(res['user']);
+          localStorage.setItem(TOKEN_KEY, res['token']);
           this.authenticationState.next(true);
         }),
         catchError(e => {
@@ -95,12 +92,13 @@ export class AuthenticationService {
   }
 
   loggedIn() {
-    return this.tokenExpired();
+    return !this.tokenExpired();
   }
 
   tokenExpired() {
     const token = localStorage.getItem(TOKEN_KEY);
     if (token) {
+      console.log(token);
       return this.helper.isTokenExpired(token);
     }
     return false;

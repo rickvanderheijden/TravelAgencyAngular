@@ -4,7 +4,6 @@ export class User {
 
     public username?: String;
     public firstname?: String;
-    public middlename?: String;
     public lastname?: String;
     public emailAddress?: String;
     public roles: Array<UserRole>;
@@ -14,7 +13,6 @@ export class User {
 
             this.username = model.username;
             this.firstname = model.firstname;
-            this.middlename = model.middlename;
             this.lastname = model.lastname;
             this.emailAddress = model.emailAddress;
             this.roles = new Array<UserRole>();
