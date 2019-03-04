@@ -18,6 +18,8 @@ import {AuthLoginComponent} from './auth/auth-login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { HomepageComponent } from './pages/public/homepage/homepage.component';
+import { TopFiltersComponent } from './components/top-filters/top-filters.component';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 
 
@@ -35,7 +37,8 @@ export function jwtOptionsFactory() {
         FullLayoutComponent,
         ContentLayoutComponent,
         AuthLoginComponent,
-        HomepageComponent
+        HomepageComponent,
+        TopFiltersComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -44,6 +47,7 @@ export function jwtOptionsFactory() {
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        NgSelectModule,
         NgbModule.forRoot(),
         JwtModule.forRoot({
           jwtOptionsProvider: {

@@ -9,7 +9,7 @@ import { Component, AfterViewChecked } from '@angular/core';
 export class NavbarComponent implements AfterViewChecked {
 
     toggleClass = 'ft-maximize';
-    placement = 'bottom-right'
+    placement = 'bottom-right';
     public isCollapsed = true;
 
     ngAfterViewChecked() {
