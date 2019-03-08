@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Country} from '../../../models/country';
+import {AuthenticationService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-top-filters',
@@ -15,7 +16,7 @@ export class TopFiltersComponent implements OnInit {
   till: any;
   from: any;
 
-  constructor() {
+  constructor( private authService: AuthenticationService) {
     this.continents = [{name: 'Azie'}, {name: 'Oceanie'}, {name: 'Afrika'}, {name: 'Europa'}, {name: 'Noord-Amerika'}, {name: 'Zuid-Amerika'} ];
   }
 
@@ -34,6 +35,12 @@ export class TopFiltersComponent implements OnInit {
   clearAll() {
     this.countries = [];
     this.country = null;
+  }
+
+  doFilter() {
+    this.authService.getLoggedInUser().subscribe(response => {
+      console.log(response);
+    })
   }
 
 }
