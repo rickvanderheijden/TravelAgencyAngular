@@ -18,6 +18,7 @@ import { HomepageComponent } from './pages/public/homepage/homepage.component';
 import { TopFiltersComponent } from './components/top-filters/top-filters.component';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
+import {CommonModule} from '@angular/common';
 
 
 
@@ -39,6 +40,7 @@ export function jwtOptionsFactory() {
         TopFiltersComponent
     ],
     imports: [
+        CommonModule,
         BrowserAnimationsModule,
         AppRoutingModule,
         SharedModule,
