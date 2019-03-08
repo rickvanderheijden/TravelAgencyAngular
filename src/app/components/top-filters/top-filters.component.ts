@@ -13,6 +13,7 @@ export class TopFiltersComponent implements OnInit {
   country: Country;
   continent: any;
   till: any;
+  from: any;
 
   constructor() {
     this.continents = [{name: 'Azie'}, {name: 'Oceanie'}, {name: 'Afrika'}, {name: 'Europa'}, {name: 'Noord-Amerika'}, {name: 'Zuid-Amerika'} ];
@@ -23,7 +24,7 @@ export class TopFiltersComponent implements OnInit {
 
 
   getCountries(continent) {
-    //TODO: request countries by selected continent
+    // TODO: request countries by selected continent
     this.countries = new Array<Country>();
     this.countries.push(new Country({name: 'Nederland', continent: 'europa', cities:  ['Rotterdam', 'Amsterdam']}));
     this.countries.push(new Country({name: 'Belgine', continent: 'europa', cities:  ['Brussel', 'Antwerpen']}));

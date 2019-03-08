@@ -19,16 +19,18 @@ import { TopFiltersComponent } from './components/top-filters/top-filters.compon
 import {NgSelectModule} from '@ng-select/ng-select';
 import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 import {CommonModule} from '@angular/common';
+import {TokenService} from './services/token.service';
 
 
-
-export function jwtOptionsFactory() {
+export function jwtOptionsFactory(tokenService) {
   return {
     tokenGetter: () => {
-      return localStorage.getItem('access_token');
+      return tokenService.getAsyncToken();
     },
-    whitelistedDomains: ['http://localhost:9000/']
-  };
+    whitelistedDomains: ['http://localhost:9000/'],
+    headerName: 'Authorization',
+    authScheme: 'Bearer'
+  }
 }
 @NgModule({
     declarations: [
@@ -36,7 +38,6 @@ export function jwtOptionsFactory() {
         FullLayoutComponent,
         ContentLayoutComponent,
         AuthLoginComponent,
-        HomepageComponent,
         TopFiltersComponent
     ],
     imports: [
@@ -53,10 +54,12 @@ export function jwtOptionsFactory() {
         JwtModule.forRoot({
           jwtOptionsProvider: {
             provide: JWT_OPTIONS,
-            useFactory: jwtOptionsFactory
+            useFactory: jwtOptionsFactory,
+            deps: [TokenService]
           }}),
     ],
     providers: [
+      TokenService
     ],
     bootstrap: [AppComponent]
 })

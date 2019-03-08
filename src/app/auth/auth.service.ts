@@ -47,7 +47,6 @@ export class AuthenticationService {
       .pipe(
         tap( res => {
           localStorage.setItem(TOKEN_KEY, res['token']);
-          this.getLoggedInUser();
           this.authenticationState.next(true);
         }),
         catchError(e => {
@@ -62,33 +61,8 @@ export class AuthenticationService {
     this.authenticationState.next(false);
   }
 
-  getSpecialData() {
-    return this.http.get(`${this.url}/api/special`).pipe(
-      catchError(e => {
-        const status = e.status;
-        if (status === 401) {
-          this.logout();
-        }
-        throw new Error(e);
-      })
-    );
-  }
-
   isAuthenticated() {
     return this.authenticationState.value;
-  }
-
-
-  checkLoggedInUser() {
-      return this.http.get(`${this.url}/me`).pipe(
-        catchError(e => {
-          const status = e.status;
-          if (status === 401) {
-            this.logout();
-          }
-          throw new Error(e);
-        })
-      );
   }
 
   loggedIn() {
@@ -111,6 +85,7 @@ export class AuthenticationService {
         const user = new User(response);
         this.loggedInUser.next(user);
       }),
-      catchError(error => {throw new Error(error)}))
+      catchError(error => {throw new Error(error)})
+    );
   }
 }

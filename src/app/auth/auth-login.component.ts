@@ -37,7 +37,13 @@ export class AuthLoginComponent implements OnInit, OnDestroy {
       this.authService.login(this.auth)
         .subscribe(response => {
             this.loading = false;
-            this.router.navigate(['/']);
+            console.log(response);
+
+            console.log('get loggedin User');
+            this.authService.getLoggedInUser().subscribe(response => {
+              console.log(response);
+            });
+            // this.router.navigate(['/']);
           },
           error => {
             this.loading = false;
