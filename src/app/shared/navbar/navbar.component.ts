@@ -50,9 +50,9 @@ export class NavbarComponent implements AfterViewChecked {
     ToggleClass() {
         if (this.toggleClass === 'ft-maximize') {
             this.toggleClass = 'ft-minimize';
+        } else {
+          this.toggleClass = 'ft-maximize'
         }
-        else
-            this.toggleClass = 'ft-maximize'
     }
 
   logout() {
