@@ -9,9 +9,6 @@ import { AppComponent } from './app.component';
 import { ContentLayoutComponent } from './layouts/content/content-layout.component';
 import { FullLayoutComponent } from './layouts/full/full-layout.component';
 
-import { AuthService } from './shared/auth/auth.service';
-import { AuthGuard } from './shared/auth/auth-guard.service';
-
 import * as $ from 'jquery';
 import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
 import {AuthLoginComponent} from './auth/auth-login.component';
@@ -20,6 +17,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { HomepageComponent } from './pages/public/homepage/homepage.component';
 import { TopFiltersComponent } from './components/top-filters/top-filters.component';
 import {NgSelectModule} from '@ng-select/ng-select';
+import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 
 
 
@@ -48,6 +46,7 @@ export function jwtOptionsFactory() {
         ReactiveFormsModule,
         HttpClientModule,
         NgSelectModule,
+        SweetAlert2Module.forRoot(),
         NgbModule.forRoot(),
         JwtModule.forRoot({
           jwtOptionsProvider: {
@@ -56,8 +55,6 @@ export function jwtOptionsFactory() {
           }}),
     ],
     providers: [
-        AuthService,
-        AuthGuard
     ],
     bootstrap: [AppComponent]
 })

@@ -15,6 +15,7 @@ export class AppComponent {
   ) {
     this.authService.authenticationState.subscribe(next => {
      if (next) {
+       this.authService.getLoggedInUser();
        this.router.navigate(['/']);
      }
     });

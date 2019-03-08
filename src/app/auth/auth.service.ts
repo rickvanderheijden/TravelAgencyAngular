@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {catchError, tap} from 'rxjs/operators';
 import {User} from '../../models/user';
+import swal from 'sweetalert2';
 
 const TOKEN_KEY = 'access_token';
 
@@ -17,6 +18,7 @@ export class AuthenticationService {
   url = environment.server;
   user: User = null;
   authenticationState = new BehaviorSubject(false);
+  loggedInUser = new BehaviorSubject(null);
 
   constructor(
     private http: HttpClient,
@@ -43,12 +45,13 @@ export class AuthenticationService {
     const url = this.url + '/auth/login';
     return this.http.post(url, credentials)
       .pipe(
-        tap(res => {
+        tap( res => {
           localStorage.setItem(TOKEN_KEY, res['token']);
+          this.getLoggedInUser();
           this.authenticationState.next(true);
         }),
         catchError(e => {
-          this.showAlert(e);
+          swal('Oops', e.message, 'error');
           throw new Error(e);
         })
       );
@@ -75,9 +78,6 @@ export class AuthenticationService {
     return this.authenticationState.value;
   }
 
-  showAlert(msg) {
-    console.log(msg);
-  }
 
   checkLoggedInUser() {
       return this.http.get(`${this.url}/me`).pipe(
@@ -103,4 +103,14 @@ export class AuthenticationService {
     }
     return false;
   };
+
+  getLoggedInUser() {
+    return this.http.get(environment.server + '/users/user').pipe(
+      tap(response => {
+        console.log(response);
+        const user = new User(response);
+        this.loggedInUser.next(user);
+      }),
+      catchError(error => {throw new Error(error)}))
+  }
 }
