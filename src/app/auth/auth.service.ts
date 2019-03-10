@@ -46,7 +46,7 @@ export class AuthenticationService {
     return this.http.post(url, credentials)
       .pipe(
         tap( res => {
-          localStorage.setItem(TOKEN_KEY, res['token']);
+          this.storeToken(res['token']);
           this.authenticationState.next(true);
         }),
         catchError(e => {
@@ -87,5 +87,17 @@ export class AuthenticationService {
       }),
       catchError(error => {throw new Error(error)})
     );
+  }
+
+  refreshToken() {
+    return this.http.get(environment.server + 'auth/refresh').pipe(
+      tap((token: any) => {
+        this.storeToken(token.token);
+      })
+    )
+  }
+
+  private storeToken(token: any) {
+    localStorage.setItem(TOKEN_KEY, token);
   }
 }
