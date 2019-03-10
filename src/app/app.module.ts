@@ -19,6 +19,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { HomepageComponent } from './pages/public/homepage/homepage.component';
 
+import {AgmCoreModule} from '@agm/core';
+import { AgmDirectionModule} from 'agm-direction';
 
 
 export function jwtOptionsFactory() {
@@ -49,7 +51,11 @@ export function jwtOptionsFactory() {
           jwtOptionsProvider: {
             provide: JWT_OPTIONS,
             useFactory: jwtOptionsFactory
-          }}),
+        }}),
+        AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyC-S5EhjoPBHBiDieR4Pr4jKBNwV_212Cc'
+        }),
+        AgmDirectionModule,
     ],
     providers: [
         AuthService,
