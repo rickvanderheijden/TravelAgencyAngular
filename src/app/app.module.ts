@@ -21,6 +21,7 @@ import { HomepageComponent } from './pages/public/homepage/homepage.component';
 
 import {AgmCoreModule} from '@agm/core';
 import { AgmDirectionModule} from 'agm-direction';
+import {MapsComponent} from './maps/maps.component';
 
 
 export function jwtOptionsFactory() {
@@ -37,7 +38,8 @@ export function jwtOptionsFactory() {
         FullLayoutComponent,
         ContentLayoutComponent,
         AuthLoginComponent,
-        HomepageComponent
+        HomepageComponent,
+        MapsComponent
     ],
     imports: [
         BrowserAnimationsModule,
