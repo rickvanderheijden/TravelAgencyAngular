@@ -1,0 +1,17 @@
+<p>
+  trip works!
+</p>
+
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputName">Name</label>
+      <input type="text" class="form-control" id="inputName" name="name" placeholder="Name" [(ngModel)]="name">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputTotalPrice">Password</label>
+      <input type="text" class="form-control" id="inputTotalPrice" name="total_price" placeholder="Total price" [(ngModel)]="total_price">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="enterTrip()">Enter trip</button>
+</form>
