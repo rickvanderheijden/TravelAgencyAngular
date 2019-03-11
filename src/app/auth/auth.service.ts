@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
-import {JwtHelperService} from '@auth0/angular-jwt';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {JWT_OPTIONS, JwtHelperService} from '@auth0/angular-jwt';
 import {catchError, tap} from 'rxjs/operators';
 import {User} from '../../models/user';
+import swal from 'sweetalert2';
 
 const TOKEN_KEY = 'access_token';
 
@@ -17,6 +18,7 @@ export class AuthenticationService {
   url = environment.server;
   user: User = null;
   authenticationState = new BehaviorSubject(false);
+  loggedInUser = new BehaviorSubject(null);
 
   constructor(
     private http: HttpClient,
@@ -43,12 +45,12 @@ export class AuthenticationService {
     const url = this.url + '/auth/login';
     return this.http.post(url, credentials)
       .pipe(
-        tap(res => {
-          localStorage.setItem(TOKEN_KEY, res['token']);
+        tap( res => {
+          this.storeToken(res['token']);
           this.authenticationState.next(true);
         }),
         catchError(e => {
-          this.showAlert(e);
+          swal('Oops', e.message, 'error');
           throw new Error(e);
         })
       );
@@ -59,36 +61,8 @@ export class AuthenticationService {
     this.authenticationState.next(false);
   }
 
-  getSpecialData() {
-    return this.http.get(`${this.url}/api/special`).pipe(
-      catchError(e => {
-        const status = e.status;
-        if (status === 401) {
-          this.logout();
-        }
-        throw new Error(e);
-      })
-    );
-  }
-
   isAuthenticated() {
     return this.authenticationState.value;
-  }
-
-  showAlert(msg) {
-    console.log(msg);
-  }
-
-  checkLoggedInUser() {
-      return this.http.get(`${this.url}/me`).pipe(
-        catchError(e => {
-          const status = e.status;
-          if (status === 401) {
-            this.logout();
-          }
-          throw new Error(e);
-        })
-      );
   }
 
   loggedIn() {
@@ -103,4 +77,27 @@ export class AuthenticationService {
     }
     return false;
   };
+
+  getLoggedInUser() {
+    return this.http.get(environment.server + '/users/user').pipe(
+      tap(response => {
+        console.log(response);
+        const user = new User(response);
+        this.loggedInUser.next(user);
+      }),
+      catchError(error => {throw new Error(error)})
+    );
+  }
+
+  refreshToken() {
+    return this.http.get(environment.server + 'auth/refresh').pipe(
+      tap((token: any) => {
+        this.storeToken(token.token);
+      })
+    )
+  }
+
+  private storeToken(token: any) {
+    localStorage.setItem(TOKEN_KEY, token);
+  }
 }
