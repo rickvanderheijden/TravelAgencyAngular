@@ -18,9 +18,9 @@ const appRoutes: Routes = [
   {
     path: 'auth/login', component: AuthLoginComponent
   },
-  { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES /*, canActivate: [AuthGuardService]*/ },
+  // { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES /*, canActivate: [AuthGuardService]*/ },
   // { path: '', component: ContentLayoutComponent, data: { title: 'full Views' }, children: CONTENT_ROUTES /*, canActivate: [AuthGuardService]*/ },
-  // { path: '', component: HomepageComponent, data: { title: 'Homepage' }, children: PUBLIC_ROUTES },
+  { path: '', component: FullLayoutComponent, data: { title: 'Scrum Air' }, children: PUBLIC_ROUTES },
 
 ];
 
