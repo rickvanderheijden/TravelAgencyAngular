@@ -10,7 +10,6 @@ import {PUBLIC_ROUTES} from './shared/routes/public.routes';
 
 import {AuthLoginComponent} from './auth/auth-login.component';
 import {AuthGuardService} from './auth/auth.guard';
-import {HomepageComponent} from './pages/public/homepage/homepage.component';
 
 
 

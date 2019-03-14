@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TopFiltersComponent } from './top-filters.component';
+import {visit} from '@angular/compiler-cli/src/ngtsc/util/src/visitor';
 
 describe('TopFiltersComponent', () => {
   let component: TopFiltersComponent;
