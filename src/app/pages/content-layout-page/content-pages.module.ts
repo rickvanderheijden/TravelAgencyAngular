@@ -11,7 +11,7 @@ import { ContentLayoutPageComponent } from './content-layout-page.component';
     imports: [
         CommonModule,
         ContentPagesRoutingModule,
-        FormsModule        
+        FormsModule
     ],
     declarations: [
         ContentLayoutPageComponent
