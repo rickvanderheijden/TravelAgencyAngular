@@ -36,6 +36,7 @@ export class TopFiltersComponent implements OnInit {
   clearAll() {
     this.countries = [];
     this.country = null;
+    this.continent = null;
   }
 
   doFilter() {

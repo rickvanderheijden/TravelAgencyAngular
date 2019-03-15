@@ -37,4 +37,11 @@ describe('TopFiltersComponent', () => {
   it('should be greater than or equal to 1', () => {
     expect(component.continents.length).toBeGreaterThanOrEqual(1);
   });
+
+  it('should clear all inputs', () => {
+    component.clearAll();
+    expect(component.continent).toBeNull();
+    expect(component.country).toBeNull();
+    expect(component.countries.length).toBe(0);
+  });
 });
