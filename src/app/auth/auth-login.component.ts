@@ -45,8 +45,6 @@ export class AuthLoginComponent implements OnInit {
           error => {
             this.loading = false;
             this.loginError = true;
-            // const response = error.json();
-            console.log(error);
           });
     }
   }
