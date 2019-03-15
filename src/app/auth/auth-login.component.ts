@@ -8,7 +8,7 @@ import {AuthenticationService} from './auth.service';
   templateUrl: './auth-login.component.html',
   styleUrls: ['./auth-login.component.scss'],
 })
-export class AuthLoginComponent implements OnInit, OnDestroy {
+export class AuthLoginComponent implements OnInit {
   auth: User;
   loginForm = true;
   forgotPasswordForm = false;
@@ -49,10 +49,6 @@ export class AuthLoginComponent implements OnInit, OnDestroy {
             console.log(error);
           });
     }
-  }
-
-
-  ngOnDestroy() {
   }
 
 }
