@@ -16,12 +16,17 @@ import {MapsComponent} from './maps/maps.component';
 
 
 const appRoutes: Routes = [
+<<<<<<< HEAD
   {
     path: 'auth/login', component: AuthLoginComponent
   },
   {
     path: 'maps', component: MapsComponent
   },
+=======
+  {path: 'auth/login', component: AuthLoginComponent},
+  {path: 'maps', component: MapsComponent},
+>>>>>>> 2f659f80c6d21bb00b2176a0ee7dfaeae7a1a5f2
   { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES /*, canActivate: [AuthGuardService]*/ },
   // { path: '', component: ContentLayoutComponent, data: { title: 'full Views' }, children: CONTENT_ROUTES /*, canActivate: [AuthGuardService]*/ },
   // { path: '', component: HomepageComponent, data: { title: 'Homepage' }, children: PUBLIC_ROUTES },
