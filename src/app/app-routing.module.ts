@@ -11,12 +11,16 @@ import {PUBLIC_ROUTES} from './shared/routes/public.routes';
 import {AuthLoginComponent} from './auth/auth-login.component';
 import {AuthGuardService} from './auth/auth.guard';
 import {HomepageComponent} from './pages/public/homepage/homepage.component';
+import {MapsComponent} from './maps/maps.component';
 
 
 
 const appRoutes: Routes = [
   {
     path: 'auth/login', component: AuthLoginComponent
+  },
+  {
+    path: 'maps', component: MapsComponent
   },
   { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES /*, canActivate: [AuthGuardService]*/ },
   // { path: '', component: ContentLayoutComponent, data: { title: 'full Views' }, children: CONTENT_ROUTES /*, canActivate: [AuthGuardService]*/ },

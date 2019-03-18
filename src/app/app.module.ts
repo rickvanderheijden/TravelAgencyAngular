@@ -21,6 +21,7 @@ import { HomepageComponent } from './pages/public/homepage/homepage.component';
 
 import {AgmCoreModule} from '@agm/core';
 import { AgmDirectionModule} from 'agm-direction';
+import {MapsComponent} from './maps/maps.component';
 
 
 export function jwtOptionsFactory() {
@@ -37,7 +38,8 @@ export function jwtOptionsFactory() {
         FullLayoutComponent,
         ContentLayoutComponent,
         AuthLoginComponent,
-        HomepageComponent
+        HomepageComponent,
+        MapsComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -53,7 +55,7 @@ export function jwtOptionsFactory() {
             useFactory: jwtOptionsFactory
         }}),
         AgmCoreModule.forRoot({
-          apiKey: 'AIzaSyC-S5EhjoPBHBiDieR4Pr4jKBNwV_212Cc'
+          apiKey: 'AIzaSyC_xNfcNGLJdRMi229CJlat9nL-OkPj6d8'
         }),
         AgmDirectionModule,
     ],
