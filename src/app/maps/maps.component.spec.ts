@@ -8,6 +8,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {HomepageComponent} from '../pages/public/homepage/homepage.component';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
+import any = jasmine.any;
 
 @Component({
   template: ''
@@ -53,7 +54,9 @@ describe('MapsComponent', function () {
     component.ngOnInit();
     expect(component.origin).toBeUndefined();
     expect(component.destination).toBeUndefined();
-    expect(component.waypoints).toBeUndefined();
+    let a;
+    a = new Array();
+    expect(component.waypoints).toEqual(a);
   });
 
   it('setDirection should change the destination and origin', () => {
@@ -66,19 +69,19 @@ describe('MapsComponent', function () {
     expect(component.destination).toBe(null);
 
     component.setDirection({lat: 51.66083, lng: 5.61944}, {lat: 51.6482102, lng: 5.6771949});
-    expect(component.origin).toBe({lat: 51.66083, lng: 5.61944});
-    expect(component.destination).toBe({lat: 51.6482102, lng: 5.6771949});
+    expect(component.origin).toEqual({lat: 51.66083, lng: 5.61944});
+    expect(component.destination).toEqual({lat: 51.6482102, lng: 5.6771949});
   });
 
   it('addWaypoint should add a waypoint to the waypoints array', () => {
     component.addWaypoint('Lageburchtweg 3, Uden', false);
-    expect(component.waypoints[component.waypoints.length - 1]).toBe({location: 'Lageburchtweg 3, Uden', stopover: false});
+    expect(component.waypoints[component.waypoints.length - 1]).toEqual({location: 'Lageburchtweg 3, Uden', stopover: false});
 
-    component.addWaypoint(null, null);
-    expect(component.waypoints[component.waypoints.length - 1]).toBe({location: null, stopover: null});
+    expect(component.addWaypoint(null, null)).toBeFalsy();
+    expect(component.waypoints[component.waypoints.length - 1]).toEqual({location: null, stopover: null});
 
-    component.setDirection({lat: 51.66083, lng: 5.61944}, false);
-    expect(component.waypoints[component.waypoints.length - 1]).toBe({location: {lat: 51.66083, lng: 5.61944}, stopover: false});
+    component.addWaypoint({lat: 51.66083, lng: 5.61944}, false);
+    expect(component.waypoints[component.waypoints.length - 1]).toEqual({location: {lat: 51.66083, lng: 5.61944}, stopover: false});
   });
 
 });

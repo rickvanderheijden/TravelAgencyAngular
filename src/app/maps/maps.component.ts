@@ -23,8 +23,8 @@ export class MapsComponent implements OnInit {
     this.waypoints = new Array();
 
     //For testing purposes
-    this.setDirection(this.org, this.dest);
-    this.addWaypoint('Pianostraat 7, Uden',true);
+    //this.setDirection(this.org, this.dest);
+    //this.addWaypoint('Pianostraat 7, Uden',true);
   }
 
   setDirection(org: any, dest: any): void {
