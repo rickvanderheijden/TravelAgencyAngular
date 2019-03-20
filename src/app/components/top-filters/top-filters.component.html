@@ -1,0 +1,44 @@
+<div class="filter-bar background-secondary align-content-center">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-12">
+            <h5 class="text-light">Waar wil je Naartoe?</h5>
+          </div>
+          <div class="col-12">
+            <ng-select  name="continent" placeholder="Continent" [items]="continents" bindLabel="name" bindValue="name"
+                        [(ngModel)]="continent"  [clearable]="true" (change)="getCountries(continent)"
+                        (clear)="clearAll()" class="m-1">
+            </ng-select>
+          </div>
+          <div class="col-12">
+            <ng-select name="country" placeholder="land" [items]="countries" bindLabel="name" bindValue="name"
+                       [(ngModel)]="country" [clearable]="true" class="m-1" >
+            </ng-select>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-12">
+            <h5 class="text-light">Wanneer?</h5>
+          </div>
+          <div class="col-12">
+            <input class="form-control m-1" data-placement="top" data-title="Date Opened" data-toggle="tooltip"
+                   data-trigger="hover" id="dateFrom" name="dateFrom" type="date" [(ngModel)]="from" placeholder="van">
+          </div>
+          <div class="col-12">
+            <input class="form-control m-1" data-placement="top" data-title="Date Opened"
+                   data-toggle="tooltip" data-trigger="hover" id="dateTill" name="dateTill" type="date" [(ngModel)]="till">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 ">
+        <button class="btn btn-full btn-blue align-content-center valign-bottom" (click)="doFilter()"> {{countries ? countries.length > 0 ? countries.length: "600"  : "600"}} reizen <i class="fa fa-chevron-right"></i> </button>
+      </div>
+    </div>
+  </div>
+</div>

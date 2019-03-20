@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ChangeLogComponent } from "./changelog.component";
+
 
 const routes: Routes = [
   {
     path: '',
-     component: ChangeLogComponent,
+    // component: ,
     data: {
-      title: 'ChangeLog'
-    },    
+      title: 'Secure'
+    },
   }
 ];
 
@@ -17,4 +17,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ChangeLogRoutingModule { }
+export class PublicPagesRoutingModule { }
