@@ -13,14 +13,9 @@ import * as $ from 'jquery';
 import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
 import {AuthLoginComponent} from './auth/auth-login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-<<<<<<< HEAD
 import {HttpClientModule} from '@angular/common/http';
 import { HomepageComponent } from './pages/public/homepage/homepage.component';
 
-import {AgmCoreModule} from '@agm/core';
-import { AgmDirectionModule} from 'agm-direction';
-import {MapsComponent} from './maps/maps.component';
-=======
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TopFiltersComponent } from './components/top-filters/top-filters.component';
 import {NgSelectModule} from '@ng-select/ng-select';
@@ -28,7 +23,10 @@ import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 import {CommonModule} from '@angular/common';
 import {TokenService} from './services/token.service';
 import {JwtInterceptor} from './interceptors/jwt.interceptor';
->>>>>>> master
+
+import {AgmCoreModule} from '@agm/core';
+import { AgmDirectionModule} from 'agm-direction';
+import {MapsComponent} from './maps/maps.component';
 
 
 export function jwtOptionsFactory(tokenService) {
