@@ -17,7 +17,8 @@ export class TopFiltersComponent implements OnInit {
   from: any;
 
   constructor( private authService: AuthenticationService) {
-    this.continents = [{name: 'Azie'}, {name: 'Oceanie'}, {name: 'Afrika'}, {name: 'Europa'}, {name: 'Noord-Amerika'}, {name: 'Zuid-Amerika'} ];
+    this.continents = [];
+    this.continents.push({name: 'Azie'}, {name: 'Oceanie'}, {name: 'Afrika'}, {name: 'Europa'}, {name: 'Noord-Amerika'}, {name: 'Zuid-Amerika'} );
   }
 
   ngOnInit() {
@@ -35,6 +36,7 @@ export class TopFiltersComponent implements OnInit {
   clearAll() {
     this.countries = [];
     this.country = null;
+    this.continent = null;
   }
 
   doFilter() {

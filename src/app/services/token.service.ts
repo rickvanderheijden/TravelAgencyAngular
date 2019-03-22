@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 const TOKEN_KEY = 'access_token';
 @Injectable({
@@ -9,9 +9,6 @@ export class TokenService {
   constructor() { }
 
   async getAsyncToken() {
-    console.log('tokengetter called');
-    const token = localStorage.getItem(TOKEN_KEY);
-    console.log(token);
-    return token;
+    return localStorage.getItem(TOKEN_KEY);
   }
 }

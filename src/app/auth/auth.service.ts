@@ -72,7 +72,6 @@ export class AuthenticationService {
   tokenExpired() {
     const token = localStorage.getItem(TOKEN_KEY);
     if (token) {
-      console.log(token);
       return this.helper.isTokenExpired(token);
     }
     return false;
