@@ -13,6 +13,9 @@ import * as $ from 'jquery';
 import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
 import {AuthLoginComponent} from './auth/auth-login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import { HomepageComponent } from './pages/public/homepage/homepage.component';
+
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TopFiltersComponent } from './components/top-filters/top-filters.component';
 import {NgSelectModule} from '@ng-select/ng-select';
@@ -21,6 +24,10 @@ import {CommonModule} from '@angular/common';
 import {TokenService} from './services/token.service';
 import {JwtInterceptor} from './interceptors/jwt.interceptor';
 import { TripComponent } from './pages/trip/trip.component';
+
+import {AgmCoreModule} from '@agm/core';
+import { AgmDirectionModule} from 'agm-direction';
+import {MapsComponent} from './maps/maps.component';
 
 
 export function jwtOptionsFactory(tokenService) {
@@ -39,7 +46,9 @@ export function jwtOptionsFactory(tokenService) {
         FullLayoutComponent,
         ContentLayoutComponent,
         AuthLoginComponent,
-        TopFiltersComponent,
+        HomepageComponent,
+        MapsComponent,
+        TopFiltersComponent
         TripComponent
     ],
     imports: [
@@ -56,9 +65,14 @@ export function jwtOptionsFactory(tokenService) {
         JwtModule.forRoot({
           jwtOptionsProvider: {
             provide: JWT_OPTIONS,
-            useFactory: jwtOptionsFactory,
-            deps: [TokenService]
-          }}),
+            useFactory: jwtOptionsFactory
+			            deps: [TokenService]
+
+        }}),
+        AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyC_xNfcNGLJdRMi229CJlat9nL-OkPj6d8'
+        }),
+        AgmDirectionModule,
     ],
     providers: [
       TokenService,
