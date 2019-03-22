@@ -20,6 +20,7 @@ import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 import {CommonModule} from '@angular/common';
 import {TokenService} from './services/token.service';
 import {JwtInterceptor} from './interceptors/jwt.interceptor';
+import { TripComponent } from './pages/trip/trip.component';
 
 
 export function jwtOptionsFactory(tokenService) {
@@ -38,7 +39,8 @@ export function jwtOptionsFactory(tokenService) {
         FullLayoutComponent,
         ContentLayoutComponent,
         AuthLoginComponent,
-        TopFiltersComponent
+        TopFiltersComponent,
+        TripComponent
     ],
     imports: [
         CommonModule,
