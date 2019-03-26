@@ -48,7 +48,7 @@ export function jwtOptionsFactory(tokenService) {
         AuthLoginComponent,
         HomepageComponent,
         MapsComponent,
-        TopFiltersComponent
+        TopFiltersComponent,
         TripComponent
     ],
     imports: [
@@ -65,8 +65,8 @@ export function jwtOptionsFactory(tokenService) {
         JwtModule.forRoot({
           jwtOptionsProvider: {
             provide: JWT_OPTIONS,
-            useFactory: jwtOptionsFactory
-			            deps: [TokenService]
+            useFactory: jwtOptionsFactory,
+			deps: [TokenService]
 
         }}),
         AgmCoreModule.forRoot({
