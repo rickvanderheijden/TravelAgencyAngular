@@ -16,6 +16,7 @@ export class AppComponent {
     this.authService.authenticationState.subscribe(next => {
      if (next) {
        this.router.navigate(['/']);
+
      }
     });
   }
