@@ -60,3 +60,6 @@ app-root:empty ~ .page-loading {
 .card.card-inverse input {
   color: #000 !important;
 }
+
+.btn-primary{ color: #fff!important;}
+
