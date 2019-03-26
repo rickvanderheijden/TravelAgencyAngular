@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import {PublicPagesRoutingModule} from '../public-pages-routing.module';
 import {HomepageComponent} from './homepage.component';
+import {HomepageRoutingModule} from './homepage-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    PublicPagesRoutingModule
+    HomepageRoutingModule
   ],
   declarations: [
     HomepageComponent
   ]
 })
-export class HomepageModuleModule { }
+export class HomepageModule { }

@@ -13,7 +13,6 @@ import * as $ from 'jquery';
 import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
 import {AuthLoginComponent} from './auth/auth-login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
 import { HomepageComponent } from './pages/public/homepage/homepage.component';
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -48,7 +47,7 @@ export function jwtOptionsFactory(tokenService) {
         AuthLoginComponent,
         HomepageComponent,
         MapsComponent,
-        TopFiltersComponent
+        TopFiltersComponent,
         TripComponent
     ],
     imports: [
@@ -65,8 +64,8 @@ export function jwtOptionsFactory(tokenService) {
         JwtModule.forRoot({
           jwtOptionsProvider: {
             provide: JWT_OPTIONS,
-            useFactory: jwtOptionsFactory
-			            deps: [TokenService]
+            useFactory: jwtOptionsFactory,
+            deps: [TokenService]
 
         }}),
         AgmCoreModule.forRoot({

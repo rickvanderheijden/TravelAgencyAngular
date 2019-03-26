@@ -8,8 +8,10 @@ import {PUBLIC_ROUTES} from './shared/routes/public.routes';
 
 import {AuthLoginComponent} from './auth/auth-login.component';
 import {AuthGuardService} from './auth/auth.guard';
-
 import {MapsComponent} from './maps/maps.component';
+import {HOME_ROUTES} from './shared/routes/home.routes';
+import {HomepageComponent} from './pages/public/homepage/homepage.component';
+
 
 
 
@@ -20,10 +22,12 @@ const appRoutes: Routes = [
   {
     path: 'maps', component: MapsComponent
   },
-  { 
-  // { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES /*, canActivate: [AuthGuardService]*/ },
-  { path: '', component: FullLayoutComponent, data: { title: 'Scrum Air' }, children: PUBLIC_ROUTES },
-
+  {
+    path: '',
+    component: FullLayoutComponent,
+    children: HOME_ROUTES,
+    // canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

@@ -15,7 +15,7 @@ export class TripComponent implements OnInit {
   ngOnInit() {
   }
 
-  enterTrip(){
+  enterTrip() {
     if (this.name && this.total_price) {
     // create Trip
     }
