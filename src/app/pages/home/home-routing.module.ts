@@ -1,20 +1,16 @@
 import {RouterModule, Routes} from '@angular/router';
-import {HomepageComponent} from './homepage.component';
+import {HomeComponent} from './home.component';
 import {NgModule} from '@angular/core';
-
 
 const routes: Routes = [
   {
     path: '',
-    component: HomepageComponent,
-    data: {
-      title: 'Full Layout Page'
-    },
-  }
+    component: HomeComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class HomepageRoutingModule { }
+export class HomeRoutingModule { }

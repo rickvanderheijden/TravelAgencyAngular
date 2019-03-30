@@ -14,12 +14,12 @@
                   <p>Login met je gebruikersnaam en wachtwoord.</p>
                   <div class="form-group">
                     <div class="col-md-12">
-                      <input type="text" class="form-control" id="email" placeholder="Gebruikersnaam" required name="username" [(ngModel)]="auth.username" #authUsername="ngModel" [ngClass]="authUsername.valid || authUsername.pristine ? (loginError ? 'is-invalid' : '') : 'is-invalid'">
+                      <input type="text" class="form-control" id="email" placeholder="Gebruikersnaam" required name="username" [(ngModel)]="auth.username" #authUsername="ngModel" [ngClass]="authUsername.valid ? 'is-valid': authUsername.pristine ? (loginError ? 'is-invalid' : '') : 'is-invalid'">
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-md-12">
-                      <input type="password" class="form-control" id="password" placeholder="Wachtwoord" required minlength="4" name="authPassword" [(ngModel)]="auth.password" #authPassword="ngModel" [ngClass]="authPassword.valid || authPassword.pristine ? (loginError ? 'is-invalid' : '') : 'is-invalid'">
+                      <input type="password" class="form-control" id="password" placeholder="Wachtwoord" required minlength="4" name="authPassword" [(ngModel)]="auth.password" #authPassword="ngModel" [ngClass]="authPassword.valid ? 'is-valid': authPassword.pristine ? (loginError ? 'is-invalid' : '') : 'is-invalid'">
                     </div>
                   </div>
                   <div class="form-group">
@@ -32,11 +32,72 @@
                   </div>
                 </form>
               </div>
+              <div *ngIf="registerForm">
+                <form #registerForm="ngForm" (ngSubmit)="doRegister(registerForm.value, registerForm.valid)" novalidate>
+                  <p>Registreer een nieuw account.</p>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <input type="text" class="form-control" id="registerUsername" placeholder="Gebruikersnaam" required
+                             name="username" [(ngModel)]="auth.username" #authUsername="ngModel"
+                             [ngClass]="authUsername.valid ? 'is-valid': authUsername.pristine ? (registerError ? 'is-invalid' : '') : 'is-invalid'">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <input type="password" class="form-control" id="registerPassword" placeholder="Wachtwoord"
+                             required minlength="4" name="authPassword" [(ngModel)]="auth.password"
+                             #authPassword="ngModel"
+                             [ngClass]="authPassword.valid ? 'is-valid' : authPassword.pristine ? (registerError ? 'is-invalid' : '') : 'is-invalid'">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <input type="password" class="form-control" id="registerPasswordConfirm" placeholder="Wachtwoord bevestigen"
+                             required minlength="4" name="authPasswordConfirm"  [(ngModel)]="passwordConfirm"
+                             [ngClass]="passwordConfirm == auth.password ? 'is-valid' : 'is-invalid'">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <input type="text" class="form-control" id="registerFirstname" placeholder="Voornaam" required
+                             name="firstname" [(ngModel)]="auth.firstname" #authFirstname="ngModel"
+                             [ngClass]="authFirstname.valid ? 'is-valid' : authFirstname.pristine ? (registerError ? 'is-invalid' : '') : 'is-invalid'">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <input type="text" class="form-control" id="registerLastname" placeholder="Achternaam" required
+                             name="lastname" [(ngModel)]="auth.lastname" #authLastname="ngModel"
+                             [ngClass]="authLastname.valid ? 'is-valid': authLastname.pristine ? (registerError ? 'is-invalid' : '') : 'is-invalid'">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <input type="email" class="form-control" id="registerEmailAdress" placeholder="Emailadres" required
+                             name="email" [(ngModel)]="auth.emailAddress" #authEmailAdress="ngModel"
+                             [ngClass]="authEmailAdress.valid ? 'is-valid': authEmailAdress.pristine ? (registerError ? 'is-invalid' : '') : 'is-invalid'">
+                      {{authEmailAdress.valid}}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <button type="submit" class="btn btn-primary btn-block" [disabled]="!registerForm.valid || auth.password != passwordConfirm"
+                              [ngClass]="loading ? 'has-icon-right' : ''">
+                        <span>Registreren</span>
+                        <i *ngIf="loading" class="ft-loader spinner"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
           <div class="card-footer text-center">
             <div *ngIf="loginForm">
-              <a (click)="forgotPassword()">Wachtwoord vergeten?</a>
+              <a (click)="register()">Nog geen account?</a>
+            </div>
+            <div *ngIf="registerForm">
+              <a (click)="login()">Al een account?</a>
             </div>
           </div>
         </div>

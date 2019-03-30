@@ -6,14 +6,12 @@ import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
-import { ContentLayoutComponent } from './layouts/content/content-layout.component';
 import { FullLayoutComponent } from './layouts/full/full-layout.component';
 
 import * as $ from 'jquery';
 import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
 import {AuthLoginComponent} from './auth/auth-login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HomepageComponent } from './pages/public/homepage/homepage.component';
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TopFiltersComponent } from './components/top-filters/top-filters.component';
@@ -22,11 +20,13 @@ import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 import {CommonModule} from '@angular/common';
 import {TokenService} from './services/token.service';
 import {JwtInterceptor} from './interceptors/jwt.interceptor';
-import { TripComponent } from './pages/trip/trip.component';
+import { TripComponent } from './components/trip/trip.component';
 
 import {AgmCoreModule} from '@agm/core';
 import { AgmDirectionModule} from 'agm-direction';
-import {MapsComponent} from './maps/maps.component';
+import {MapsComponent} from './components/maps/maps.component';
+import {ToastrModule} from 'ngx-toastr';
+import {UserModule} from './pages/user/index/user.module';
 
 
 export function jwtOptionsFactory(tokenService) {
@@ -43,9 +43,7 @@ export function jwtOptionsFactory(tokenService) {
     declarations: [
         AppComponent,
         FullLayoutComponent,
-        ContentLayoutComponent,
         AuthLoginComponent,
-        HomepageComponent,
         MapsComponent,
         TopFiltersComponent,
         TripComponent
@@ -59,13 +57,15 @@ export function jwtOptionsFactory(tokenService) {
         ReactiveFormsModule,
         HttpClientModule,
         NgSelectModule,
+        UserModule,
+        ToastrModule.forRoot(),
         SweetAlert2Module.forRoot(),
         NgbModule.forRoot(),
         JwtModule.forRoot({
           jwtOptionsProvider: {
             provide: JWT_OPTIONS,
             useFactory: jwtOptionsFactory,
-			deps: [TokenService]
+            deps: [TokenService]
         }}),
         AgmCoreModule.forRoot({
           apiKey: 'AIzaSyC_xNfcNGLJdRMi229CJlat9nL-OkPj6d8'

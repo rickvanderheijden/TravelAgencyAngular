@@ -7,10 +7,9 @@
         <div class="navbar-container">
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
-              <p class="text-light" *ngIf="loggedIn">Welkom {{user.firstname}} {{user.lastname}}</p><br>
-              <button class="btn btn-light float-left clearfix" *ngIf="loggedIn" (click)="logout()">Uitloggen</button>
-              <button class="btn btn-light float-left clearfix" *ngIf="!loggedIn" routerLink="auth/login">Inloggen</button>
-                <ul class="navbar-nav">
+              <p class="text-light" *ngIf="loggedIn">Welkom {{user.firstname}}</p>
+              <button class="btn btn-secondary color-light float-left clearfix" *ngIf="!loggedIn" routerLink="auth/login">Inloggen</button>
+                <ul class="navbar-nav" *ngIf="loggedIn">
                     <li class="nav-item" ngbDropdown [placement]="placement">
                         <a class="nav-link position-relative" id="dropdownBasic3"  ngbDropdownToggle>
                             <i class="ft-user font-large-3 "></i>
@@ -21,18 +20,14 @@
                                 <i class="ft-settings mr-2"></i>
                                 <span>Settings</span>
                             </a>
-                            <a class="dropdown-item py-1" href="javascript:;">
+                            <a class="dropdown-item py-1" href="javascript:;" routerLink="user/update/{{user.id}}">
                                 <i class="ft-edit mr-2"></i>
                                 <span>Edit Profile</span>
                             </a>
-                            <a class="dropdown-item py-1" href="javascript:;">
-                                <i class="ft-mail mr-2"></i>
-                                <span>My Inbox</span>
-                            </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="javascript:;">
+                            <a class="dropdown-item" href="javascript:;" (click)="logout()">
                                 <i class="ft-power mr-2"></i>
-                                <span>Logout</span>
+                                <span>Uitloggen</span>
                             </a>
                         </div>
                     </li>

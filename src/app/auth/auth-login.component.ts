@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import {User} from '../../models/user';
 import {AuthenticationService} from './auth.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-auth-login',
@@ -11,22 +12,25 @@ import {AuthenticationService} from './auth.service';
 export class AuthLoginComponent implements OnInit {
   auth: User;
   loginForm = true;
-  forgotPasswordForm = false;
+  registerForm = false;
+  registerError = false;
   loginError = false;
   loading = false;
+  passwordConfirm: string;
 
   constructor(
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.auth = new User(undefined);
   }
 
-  forgotPassword() {
+  register() {
     this.loginForm = false;
-    this.forgotPasswordForm = true;
+    this.registerForm = true;
   }
 
   doLogin(form: any, valid: any): void  {
@@ -37,9 +41,6 @@ export class AuthLoginComponent implements OnInit {
       this.authService.login(this.auth)
         .subscribe(response => {
             this.loading = false;
-            this.authService.getLoggedInUser().subscribe(response => {
-              console.log(response);
-            });
             this.router.navigate(['/']);
           },
           error => {
@@ -49,4 +50,25 @@ export class AuthLoginComponent implements OnInit {
     }
   }
 
+  doRegister(form: any, valid: boolean) {
+    if ( valid ) {
+      this.authService.register(this.auth).subscribe(
+        response => {
+          console.log(response);
+          if (response === true) {
+            this.toastr.success('Account succesvol aangemaakt', 'Gelukt!');
+            this.auth = new User(undefined);
+            this.login();
+          } else {
+            this.toastr.error('Fout', 'Registreren niet gelukt');
+          }
+        }
+      )
+    }
+  }
+
+  login() {
+    this.loginForm = true;
+    this.registerForm = false;
+  }
 }

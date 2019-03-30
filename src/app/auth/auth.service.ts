@@ -3,7 +3,7 @@ import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {JWT_OPTIONS, JwtHelperService} from '@auth0/angular-jwt';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 import {User} from '../../models/user';
 import swal from 'sweetalert2';
 
@@ -33,6 +33,7 @@ export class AuthenticationService {
         const isExpired = this.helper.isTokenExpired(token);
 
         if (!isExpired) {
+          this.loggedInUser.next(this.user);
           this.authenticationState.next(true);
         } else {
           localStorage.removeItem(TOKEN_KEY);
@@ -56,12 +57,26 @@ export class AuthenticationService {
       );
   }
 
+  register(user: User) {
+    const url = this.url + '/auth/register';
+    return this.http.post(url, user).pipe(
+      map(
+        (response: any) => {
+          console.log(response);
+          if (response) {
+            return true;
+          }
+        }
+      )
+    );
+  }
   logout() {
     localStorage.removeItem(TOKEN_KEY);
     this.authenticationState.next(false);
   }
 
   isAuthenticated() {
+    this.getLoggedInUser();
     return this.authenticationState.value;
   }
 
@@ -80,7 +95,6 @@ export class AuthenticationService {
   getLoggedInUser() {
     return this.http.get(environment.server + '/users/user').pipe(
       tap(response => {
-        console.log(response);
         const user = new User(response);
         this.loggedInUser.next(user);
       }),
@@ -96,7 +110,22 @@ export class AuthenticationService {
     )
   }
 
+
+
   private storeToken(token: any) {
     localStorage.setItem(TOKEN_KEY, token);
+  }
+
+  isAdmin() {
+    if (!this.isAuthenticated()) {
+      return false;
+    } else {
+      if (this.user == null) {
+        this.getLoggedInUser().subscribe(user => {
+          this.user = new User(user);
+          return this.user.isAdmin();
+        });
+      }
+    }
   }
 }

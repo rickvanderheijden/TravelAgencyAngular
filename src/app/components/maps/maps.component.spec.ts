@@ -3,7 +3,7 @@ import {Component, NO_ERRORS_SCHEMA} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {JwtModule} from '@auth0/angular-jwt';
 import {MapsComponent} from './maps.component';
-import {User} from '../../models/user';
+import {User} from '../../../models/user';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HomepageComponent} from '../pages/public/homepage/homepage.component';
 import {FormsModule} from '@angular/forms';
