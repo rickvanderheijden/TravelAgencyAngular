@@ -6,9 +6,9 @@ import {JwtModule} from '@auth0/angular-jwt';
 import {AuthLoginComponent} from './auth-login.component';
 import {User} from '../../models/user';
 import {RouterTestingModule} from '@angular/router/testing';
-import {HomepageComponent} from '../pages/public/homepage/homepage.component';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
+import {ToastrModule} from 'ngx-toastr';
 @Component({
   template: ''
 })
@@ -30,6 +30,7 @@ describe('AuthLoginComponent', function () {
         HttpClientModule,
         FormsModule,
         BrowserModule,
+        ToastrModule.forRoot(),
         RouterTestingModule.withRoutes([
           { path: '', component: DummyComponent }
         ]),
@@ -54,10 +55,10 @@ describe('AuthLoginComponent', function () {
     expect(component.auth.username).toBeUndefined();
   });
 
-  it('forgotPassword should set login form to false and forgotPadsswordForm to true', () => {
-    component.forgotPassword();
+  it('register should set login form to false and register to true', () => {
+    component.register();
     expect(component.loginForm).toBeFalsy();
-    expect(component.forgotPasswordForm).toBeTruthy();
+    expect(component.registerForm).toBeTruthy();
   });
 
   it('doLogin should call the login method on the authservice', () => {
