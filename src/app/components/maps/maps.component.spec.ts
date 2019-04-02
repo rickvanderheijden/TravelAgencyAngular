@@ -5,7 +5,6 @@ import {JwtModule} from '@auth0/angular-jwt';
 import {MapsComponent} from './maps.component';
 import {User} from '../../../models/user';
 import {RouterTestingModule} from '@angular/router/testing';
-import {HomepageComponent} from '../pages/public/homepage/homepage.component';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import any = jasmine.any;
