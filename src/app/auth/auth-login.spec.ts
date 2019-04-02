@@ -8,6 +8,7 @@ import {User} from '../../models/user';
 import {RouterTestingModule} from '@angular/router/testing';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
+import {ToastrModule} from 'ngx-toastr';
 @Component({
   template: ''
 })
@@ -29,6 +30,7 @@ describe('AuthLoginComponent', function () {
         HttpClientModule,
         FormsModule,
         BrowserModule,
+        ToastrModule.forRoot(),
         RouterTestingModule.withRoutes([
           { path: '', component: DummyComponent }
         ]),
