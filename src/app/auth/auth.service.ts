@@ -76,7 +76,9 @@ export class AuthenticationService {
   }
 
   isAuthenticated() {
-    this.getLoggedInUser();
+    if (this.authenticationState.value){
+      this.getLoggedInUser();
+    }
     return this.authenticationState.value;
   }
 

@@ -54,7 +54,7 @@
                     <div class="col-md-12">
                       <input type="password" class="form-control" id="registerPasswordConfirm" placeholder="Wachtwoord bevestigen"
                              required minlength="4" name="authPasswordConfirm"  [(ngModel)]="passwordConfirm"
-                             [ngClass]="passwordConfirm == auth.password ? 'is-valid' : 'is-invalid'">
+                             [ngClass]="passwordConfirm == '' || passwordConfirm == undefined ? 'ng-untouched' : passwordConfirm == auth.password && passwordConfirm !== '' ? 'is-valid': 'is-invalid'">
                     </div>
                   </div>
                   <div class="form-group">
@@ -76,7 +76,6 @@
                       <input type="email" class="form-control" id="registerEmailAdress" placeholder="Emailadres" required
                              name="email" [(ngModel)]="auth.emailAddress" #authEmailAdress="ngModel"
                              [ngClass]="authEmailAdress.valid ? 'is-valid': authEmailAdress.pristine ? (registerError ? 'is-invalid' : '') : 'is-invalid'">
-                      {{authEmailAdress.valid}}
                     </div>
                   </div>
                   <div class="form-group">
