@@ -27,6 +27,9 @@ import { AgmDirectionModule} from 'agm-direction';
 import {MapsComponent} from './components/maps/maps.component';
 import {ToastrModule} from 'ngx-toastr';
 import {UserModule} from './pages/user/index/user.module';
+import {Ng2SmartTableModule} from 'ng2-smart-table';
+import { TripListComponent } from './components/trip-list/trip-list.component';
+import { TripSummaryComponent } from './components/trip-summary/trip-summary.component';
 
 
 export function jwtOptionsFactory(tokenService) {
@@ -56,6 +59,7 @@ export function jwtOptionsFactory(tokenService) {
         ReactiveFormsModule,
         HttpClientModule,
         NgSelectModule,
+        Ng2SmartTableModule,
         UserModule,
         ToastrModule.forRoot(),
         SweetAlert2Module.forRoot(),
