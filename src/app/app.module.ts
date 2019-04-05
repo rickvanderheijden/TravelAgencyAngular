@@ -44,7 +44,6 @@ export function jwtOptionsFactory(tokenService) {
         AppComponent,
         FullLayoutComponent,
         AuthLoginComponent,
-        MapsComponent,
         TopFiltersComponent,
         TripComponent
     ],
