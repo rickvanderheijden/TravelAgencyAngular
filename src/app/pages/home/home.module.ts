@@ -5,11 +5,13 @@ import {HomeRoutingModule} from './home-routing.module';
 import {MapsComponent} from '../../components/maps/maps.component';
 import {TripListComponent} from '../../components/trip-list/trip-list.component';
 import {TripSummaryComponent} from '../../components/trip-summary/trip-summary.component';
+import {AgmDirectionModule} from 'agm-direction';
 
 @NgModule({
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    AgmDirectionModule
   ],
   providers: [MapsComponent],
   declarations: [HomeComponent, MapsComponent, TripListComponent, TripSummaryComponent],
