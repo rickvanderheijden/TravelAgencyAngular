@@ -1,22 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
-import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import { TripCreateComponent } from './trip-create.component';
 
-describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+describe('TripCreateComponent', () => {
+  let component: TripCreateComponent;
+  let fixture: ComponentFixture<TripCreateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+      declarations: [ TripCreateComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeComponent);
+    fixture = TestBed.createComponent(TripCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
