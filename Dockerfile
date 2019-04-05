@@ -1,6 +1,6 @@
 # base image
 FROM node:9.6.1
-MAINTAINER koen sengers
+LABEL maintainer="koen sengers"
 
 # install chrome for protractor tests
 #RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -

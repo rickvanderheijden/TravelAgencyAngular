@@ -30,11 +30,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Docker
 
-Build backend in console
-```
-- docker build -t travel .
-```
-
 Run docker front-end
 ```
 - docker-compose up --build

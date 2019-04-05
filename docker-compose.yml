@@ -7,7 +7,7 @@ services:
     depends_on:
       - backend
   backend:
-    image: "travel:latest"
+    image: "rickvanderheijden/travelagency:latest"
     ports:
       - "9000:9000"
     links:
