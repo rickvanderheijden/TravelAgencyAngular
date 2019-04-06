@@ -1,4 +1,3 @@
-<p>
-  Hier komt een lijstjes
-</p>
-<app-trip-summary></app-trip-summary>
+<div *ngFor="let trip of trips">
+  <app-trip-summary [trip]="trip"></app-trip-summary>
+</div>

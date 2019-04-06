@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Trip} from '../../../models/trip';
 
 @Component({
   selector: 'app-trip-summary',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TripSummaryComponent implements OnInit {
 
+  @Input()
+  trip: Trip;
   constructor() { }
 
   ngOnInit() {
