@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../../models/user';
 import {environment} from '../../environments/environment';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 import swal from 'sweetalert2';
 
 @Injectable({
@@ -32,10 +32,10 @@ export class UserService {
    * Get User by ID
    * @param id
    */
-  getById(id) {
-    this.http.get(environment.server + '/user/' + id).pipe(
-      tap(response => {
-        console.log(response);
+  getById(id): Observable<User> {
+    return this.http.get(environment.server + '/users/id/' + id).pipe(
+      map((response: any) => {
+        return new User(response);
       }),
       catchError(error => {
         swal('Oops', 'Er is iets nie goed gegaan', 'error');
@@ -74,5 +74,16 @@ export class UserService {
         throw new Error(error);
       })
     );
+  }
+
+  deleteUser(id: any): Observable<boolean> {
+   return this.http.delete(environment.url + 'user/delete' + id).pipe(
+      map((response: any) => {
+        return response.json();
+      })
+    );
+  }
+
+  updateUser(user: any, userId: any) {
   }
 }
