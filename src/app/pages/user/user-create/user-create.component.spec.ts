@@ -12,7 +12,7 @@ describe('UserCreateComponent', () => {
   let component: UserCreateComponent;
   let fixture: ComponentFixture<UserCreateComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ UserCreateComponent ],
       schemas: [NO_ERRORS_SCHEMA],
@@ -28,7 +28,7 @@ describe('UserCreateComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UserCreateComponent);

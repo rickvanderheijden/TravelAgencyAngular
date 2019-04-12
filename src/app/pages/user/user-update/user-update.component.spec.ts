@@ -14,7 +14,7 @@ describe('UserUpdateComponent', () => {
   let component: UserUpdateComponent;
   let fixture: ComponentFixture<UserUpdateComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ UserUpdateComponent, FormGroup, FormControl ],
       providers: [FormControl],
@@ -31,7 +31,7 @@ describe('UserUpdateComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UserUpdateComponent);
