@@ -20,7 +20,7 @@ describe('MapsComponent', function () {
   let component: MapsComponent;
   let fixture: ComponentFixture<MapsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [MapsComponent, DummyComponent],
       schemas: [NO_ERRORS_SCHEMA],
@@ -41,7 +41,7 @@ describe('MapsComponent', function () {
       ]
     })
       .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MapsComponent);

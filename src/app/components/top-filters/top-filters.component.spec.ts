@@ -11,7 +11,7 @@ describe('TopFiltersComponent', () => {
   let fixture: ComponentFixture<TopFiltersComponent>;
   let authservice: AuthenticationService;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ TopFiltersComponent ],
       providers: [AuthenticationService],
@@ -25,7 +25,7 @@ describe('TopFiltersComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TopFiltersComponent);

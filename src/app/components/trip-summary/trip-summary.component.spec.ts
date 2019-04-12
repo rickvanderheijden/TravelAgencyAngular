@@ -6,12 +6,12 @@ describe('TripSummaryComponent', () => {
   let component: TripSummaryComponent;
   let fixture: ComponentFixture<TripSummaryComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ TripSummaryComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TripSummaryComponent);
