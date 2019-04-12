@@ -26,7 +26,7 @@ export class TripService {
         return trips;
       }),
       catchError(err => {
-        swal('Oops!!', 'Er is iets niet goed gegaan.', 'error');
+        swal('getTrips', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(err);
       }));
   }
@@ -42,7 +42,21 @@ export class TripService {
         return new Trip(response);
       }),
       catchError(error => {
-        swal('Oops', 'Er is iets niet goed gegaan.', 'error');
+        swal('getById', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(error);
+      })
+    );
+  }
+
+  getFirst(): Observable<Trip> {
+    console.log('getFirst')
+    return this.http.get(environment.server + '/trips/all/' + 1).pipe(
+      map(response => {
+        console.log(response);
+        return new Trip(response);
+      }),
+      catchError(error => {
+        swal('getFirst', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(error);
       })
     );

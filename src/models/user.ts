@@ -1,5 +1,4 @@
 import {Authority} from './authority';
-import {forEach} from '@angular/router/src/utils/collection';
 
 export class User {
 
