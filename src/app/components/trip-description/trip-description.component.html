@@ -51,8 +51,19 @@
           <span class="sr-only">Next</span>
         </a>
       </ngb-carousel>
-      <div _ngcontent-c7="" class="card-body">
-        <p _ngcontent-c7="" class="card-text">{{trip.description}}</p>
+      <div class="row" style="margin: 20px; width: 100%">
+        <div style="width: 75%">
+        <p _ngcontent-c7="" style="margin-right: 40px">{{trip.description}}</p>
+        </div>
+        <div style=" background-color: #bbbbbb">
+          <div class="row" style="margin-left: 0px; margin-right: 0px;">
+            <p>MAPS</p>
+            <app-maps style="width: 200px; height: 200px"></app-maps>
+          </div>
+          <div class="row" style="margin-left: 0px; margin-right: 0px;">
+            <p>IETS ANDERS</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
