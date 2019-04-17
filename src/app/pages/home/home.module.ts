@@ -9,11 +9,16 @@ import {TripSummaryComponent} from '../../components/trip-summary/trip-summary.c
 import {AgmDirectionModule} from 'agm-direction';
 import {TripDescriptionComponent} from '../../components/trip-description/trip-description.component';
 import {TripServiceOptionComponent} from '../../components/trip-service-option/trip-service-option.component';
+import {AgmCoreModule} from '@agm/core';
 
 @NgModule({
   imports: [
     CommonModule,
     HomeRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC_xNfcNGLJdRMi229CJlat9nL-OkPj6d8'
+    }),
+    AgmDirectionModule,
   ],
   providers: [MapsComponent],
   declarations: [HomeComponent, MapsComponent, TripComponent, TripListComponent, TripSummaryComponent, TripDescriptionComponent, TripServiceOptionComponent],
