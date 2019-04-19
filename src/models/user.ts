@@ -1,9 +1,11 @@
 import {Authority} from './authority';
 import {forEach} from '@angular/router/src/utils/collection';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {isBoolean} from 'util';
 
 export class User {
 
-    public id? : number;
+    public id?: number;
     public username?: String;
     public password?: String;
     public firstname?: String;
@@ -34,14 +36,20 @@ export class User {
         }
     }
 
-    isAdmin() {
-      let isAdmin = false;
-      this.authorities.forEach(function (authoriry, index) {
+    async isAdmin()  {
+      const isAdmin = new BehaviorSubject<boolean>(false);
+      await this.authorities.forEach(function (authoriry, index) {
         if (authoriry.authorityName === 'ROLE_ADMIN') {
-          isAdmin = true;
+          isAdmin.next( true);
         }
       });
-      return isAdmin;
+
+      let can = false;
+
+      await isAdmin.subscribe(admin => {
+        can =  admin;
+      });
+      return  can;
     }
 }
 

@@ -17,14 +17,14 @@ export class MapsComponent implements OnInit {
     travelMode: string;
 
   ngOnInit(): void {
-    //Get current location or something?
+    // Get current location or something?
     this.org = 'Lageburchtweg 3, Uden';
     this.dest = 'primera uden';
     this.waypoints = new Array();
 
-    //For testing purposes
-    //this.setDirection(this.org, this.dest);
-    //this.addWaypoint('Pianostraat 7, Uden',true);
+    // For testing purposes
+    this.setDirection(this.org, this.dest);
+    this.addWaypoint('Pianostraat 7, Uden', true);
   }
 
   setDirection(org: any, dest: any): void {
@@ -32,7 +32,7 @@ export class MapsComponent implements OnInit {
     this.destination = dest;
   }
   addWaypoint(location: any, stopover: boolean) {
-    var w = {location, stopover};
-    this.waypoints.push(w);
+    const waypoint = {location, stopover};
+    this.waypoints.push(waypoint);
   }
 }

@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service';
 import swal from 'sweetalert2';
 import {User} from '../../../../models/user';
+import {AuthenticationService} from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-user-update',
@@ -20,19 +21,32 @@ export class UserUpdateComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
-    route: ActivatedRoute
+    private authService: AuthenticationService,
+    private route: ActivatedRoute
   ) {
     this.changePassword = false;
-    this.userService.getById(route.snapshot.params.id).subscribe((data: any) => {
-      console.log(data);
-      this.user = data;
-      this.setForm();
-      this.userId = route.snapshot.params.id;
+
+    this.userService.isAdmin().subscribe( isAdmin => {
+      if (isAdmin) {
+        return this.userService.getById(route.snapshot.params.id).subscribe((data: any) => {
+          console.log(data);
+          this.user = data;
+          this.setForm();
+          this.userId = route.snapshot.params.id;
+        });
+      } else {
+        return this.authService.getLoggedInUser().subscribe((data: any) => {
+          console.log(data);
+          this.user = data;
+          this.setForm();
+          this.userId = route.snapshot.params.id;
+        });
+      }
     });
   }
   setForm() {
     this.userUpdateForm = new FormGroup({
-      username: new FormControl(this.user.username, [Validators.minLength(5), Validators.required]),
+      username: new FormControl(this.user.username, [Validators.minLength(4), Validators.required]),
       firstname: new FormControl(this.user.firstname),
       lastname: new FormControl(this.user.lastname),
       emailAddress: new FormControl(this.user.emailAddress, [Validators.minLength(6), Validators.email, Validators.required]),
@@ -54,17 +68,17 @@ export class UserUpdateComponent implements OnInit {
     } else {
       if (this.loading === false) {
         this.loading = true;
-        this.userService.updateUser(this.user, this.userId);
-          // .subscribe(response => {
-          //   swal({ title: response.title, text: response.message, type: 'success' }).then(function () {
-          //     thiz.router.navigate(['/user/']);
-          //   });
-          //   this.loading = false;
-          // },
-          // error => {
-          //   swal('Error', 'Er is iets fout gegaan', 'error');
-          //   this.loading = false;
-          // });
+        this.userService.updateUser(this.user)
+          .subscribe(response => {
+            swal({ title: 'Gelukt', text: 'Gebruiker succesvol geupdate', type: 'success' }).then(function () {
+              thiz.router.navigate(['/user/']);
+            });
+            this.loading = false;
+          },
+          error => {
+            swal('Error', 'Er is iets fout gegaan', 'error');
+            this.loading = false;
+          });
       }
     }
   }

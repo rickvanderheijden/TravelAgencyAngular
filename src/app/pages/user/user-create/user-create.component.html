@@ -1,3 +1,71 @@
-<p>
-  user-create works!
-</p>
+<section id="user-create">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4 class="card-title">Nieuwe Gebruiker aanmaken</h4>
+            </div>
+            <div class="col-sm-6">
+              <a class="btn btn-raised btn-grey float-sm-right" (click)="back()">
+                Terug
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-block">
+            <form *ngIf="authorities != null" [formGroup]="userCreateForm" novalidate (ngSubmit)="submitForm(userCreateForm)">
+              <div class="form-group">
+                <label>Gebruikersnaam</label>
+                <input type="text" name="username" formControlName="username" autocomplete="off"  class="form-control">
+              </div>
+
+              <div class="form-group">
+                <label>Voornaam</label>
+                <input type="text" name="firstname" formControlName="firstname"  class="form-control">
+              </div>
+
+
+              <div class="form-group">
+                <label>Achternaam</label>
+                <input type="text" name="lastname" formControlName="lastname"  class="form-control">
+              </div>
+
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" formControlName="emailAddress"  class="form-control">
+              </div>
+
+              <div class="form-group">
+                <div class="password">
+                  <label>Wachtwoord</label>
+                  <input type="password" name="password" formControlName="password"  class="form-control">
+                </div>
+              </div>
+              <ng-select [items]="authorities"
+                         formControlName="authorities"
+                         bindLabel="authorityName"
+                         bindValue="id"
+                         [multiple]="false"
+                         [(ngModel)]="authority">
+              </ng-select>
+
+              <div class="form-actions">
+                <div class="row">
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary" [disabled]="!userCreateForm.valid">
+                      <span>Gebruiker opslaan</span>
+                      <i *ngIf="loading" class="ft-loader spinner right"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

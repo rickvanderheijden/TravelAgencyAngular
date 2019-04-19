@@ -10,7 +10,8 @@ import {AgmDirectionModule} from 'agm-direction';
 @NgModule({
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    AgmDirectionModule
   ],
   providers: [MapsComponent],
   declarations: [HomeComponent, MapsComponent, TripListComponent, TripSummaryComponent],
