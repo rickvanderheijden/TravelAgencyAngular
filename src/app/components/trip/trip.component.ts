@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Trip} from '../../../models/trip';
+import {TripService} from '../../services/trip.service';
+import {Service} from '../../../models/service';
 
 @Component({
   selector: 'app-trip',
@@ -7,18 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TripComponent implements OnInit {
 
-  name: string;
-  total_price: string;
-
-  constructor() { }
+  @Input()
+  tripId: number;
+  trip: Trip;
+  tripServices: TripService[];
+  loading = false;
+  constructor(private tripService: TripService) {
+  }
 
   ngOnInit() {
+    this.loading = true;
+    this.tripService.getById(this.tripId).subscribe(
+      (response: any) => {
+        this.trip = response;
+        this.tripServices = this.trip.tripServices;
+        this.loading = false;
+      }
+    );
   }
-
-  enterTrip() {
-    if (this.name && this.total_price) {
-    // create Trip
-    }
-  }
-
 }

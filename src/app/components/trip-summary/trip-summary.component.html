@@ -5,17 +5,13 @@
     <div class="card-body" width-75-per>
         <div class="px-3 d-flex align-items-start flex-column" style="width: 100%">
           <h4 style="font-size: 30px" class="card-title">{{trip.name}}</h4>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed velit a ex fringilla tincidunt. Ut aliquam tortor vitae aliquam vulputate. Duis lacinia magna at neque ultricies, vitae egestas est facilisis. Donec tempor, nisl non laoreet semper, diam nulla aliquet odio, at aliquet felis augue in ex. Morbi condimentum dolor odio, non porttitor justo luctus nec. Vestibulum quis placerat ante. Donec non dolor ligula. Nullam leo turpis, porttitor faucibus ultricies ut, pellentesque ac purus. Maecenas facilisis sem fringilla neque dapibus commodo.
-
-            Sed faucibus pretium neque, ac ornare tortor semper blandit. Nullam pulvinar placerat sollicitudin. Vivamus in auctor ex. Morbi eu augue eget ipsum facilisis semper a nec tortor. Quisque quis placerat nibh. In nisl odio, sodales ut erat id, dictum finibus nibh. Duis porttitor gravida nulla. Proin tempor metus nisi, eget vulputate ex pharetra vitae. Ut porttitor viverra orci, sed iaculis eros porttitor mattis. Nam scelerisque nisl at lacinia mattis. Vivamus eu pharetra magna. Proin faucibus diam et felis suscipit, at tincidunt augue luctus. Donec ultrices, eros sit amet vestibulum suscipit, tellus magna gravida tellus, eu tincidunt sapien augue eget nulla. Mauris efficitur eu est vel congue.
-
-            Quisque blandit venenatis mauris. Suspendisse euismod feugiat ullamcorper. Nunc pellentesque convallis lacus sit amet malesuada. Cras fringilla mollis justo a aliquam. Nullam ut orci vestibulum, vehicula nisl eget, efficitur quam. Suspendisse sit amet odio consectetur, pulvinar risus nec, pharetra tellus. In maximus vehicula ultricies. Donec varius vulputate ultricies. Donec eu libero vehicula, varius leo venenatis, euismod odio. Ut malesuada lobortis sem, non molestie mi venenatis nec. Vivamus vestibulum ante in iaculis lacinia. Aenean pharetra eros ullamcorper, volutpat elit sed, sagittis velit. Morbi rutrum lacus vel dignissim porta. Proin rutrum lacus id tempus consequat. Suspendisse ornare nulla neque, eleifend pellentesque nulla molestie eu. Fusce nisi ligula, suscipit eget lacus eget, porttitor elementum dolor.</p>
+          <p class="card-text">{{trip.summary}}</p>
           <div class="row" style="height: 50px; width: 104%">
             <div class="col-6">
               <p style="font-size: 30px">€ {{trip.total_price}}</p>
             </div>
             <div class="col-6" style="text-align: right;">
-              <a class="btn btn-primary">Bekijk deze reis</a>
+              <a class="btn btn-primary" (click)="loadTrip(trip.id)">Bekijk deze reis</a>
             </div>
           </div>
         </div>

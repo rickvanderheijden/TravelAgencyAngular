@@ -21,7 +21,7 @@ describe('AuthLoginComponent', function () {
   let fixture: ComponentFixture<AuthLoginComponent>;
   let authservice: AuthenticationService;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ AuthLoginComponent, DummyComponent ],
       providers: [AuthenticationService],
@@ -41,7 +41,7 @@ describe('AuthLoginComponent', function () {
       ]
     })
       .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AuthLoginComponent);

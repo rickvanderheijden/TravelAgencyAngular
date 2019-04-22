@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Trip} from '../../../models/trip';
 
 @Component({
@@ -10,9 +10,15 @@ export class TripSummaryComponent implements OnInit {
 
   @Input()
   trip: Trip;
+
+  @Output()
+  tripId = new EventEmitter<number>();
   constructor() { }
 
   ngOnInit() {
   }
 
+  loadTrip(id: number) {
+    this.tripId.emit(id);
+  }
 }
