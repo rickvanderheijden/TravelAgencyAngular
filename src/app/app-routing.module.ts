@@ -34,7 +34,7 @@ const appRoutes: Routes = [
     path: 'trip',
     component: FullLayoutComponent,
     children: Trip_ROUTES,
-    canActivate: [AdminGuard]
+    // canActivate: [AdminGuard]
   }
 ];
 
