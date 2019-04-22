@@ -1,3 +1,33 @@
 <p>
   trip-create works!
 </p>
+
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputName">Name</label>
+      <input type="text" class="form-control" id="inputName" name="name" placeholder="Name" [(ngModel)]="name">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputDescription">Description</label>
+      <input type="text" class="form-control" id="inputDescription" name="description" placeholder="Description" [(ngModel)]="description">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputSummary">Summary</label>
+      <input type="text" class="form-control" id="inputSummary" name="summary" placeholder="Summary" [(ngModel)]="summary">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputImageUrl">ImageUrl</label>
+      <input type="text" class="form-control" id="inputImageUrl" name="summary" placeholder="Image URL" [(ngModel)]="imageUrl">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputTotalPrice">Total Price</label>
+      <input type="number" class="form-control" id="inputTotalPrice" name="total_price" placeholder="Total price" [(ngModel)]="total_price">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputDiscount">Discount</label>
+      <input type="number" class="form-control" id="inputDiscount" name="discount" placeholder="Discount" [(ngModel)]="discount">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="enterTrip()">Enter trip</button>
+</form>

@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: 'create',
     component: TripCreateComponent,
-    canActivate: [AdminGuard]
+    // canActivate: [AdminGuard]
   },
   {
     path: 'update/:id',
