@@ -3,12 +3,10 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
-import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { FullLayoutComponent } from './layouts/full/full-layout.component';
 
-import * as $ from 'jquery';
 import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
 import {AuthLoginComponent} from './auth/auth-login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -26,6 +24,7 @@ import { AgmDirectionModule} from 'agm-direction';
 import {ToastrModule} from 'ngx-toastr';
 import {UserModule} from './pages/user/index/user.module';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
+import {NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 export function jwtOptionsFactory(tokenService) {
   return {
@@ -42,7 +41,7 @@ export function jwtOptionsFactory(tokenService) {
     AppComponent,
     FullLayoutComponent,
     AuthLoginComponent,
-    TopFiltersComponent,
+    TopFiltersComponent
   ],
   imports: [
     CommonModule,
@@ -53,6 +52,7 @@ export function jwtOptionsFactory(tokenService) {
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
+    NgbCarouselModule,
     NgSelectModule,
     Ng2SmartTableModule,
     UserModule,
