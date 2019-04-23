@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserComponent } from './user.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
@@ -6,12 +6,13 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {ToastrModule} from 'ngx-toastr';
-import {RouterTestingModule} from '@angular/router/testing';
 import {JwtModule} from '@auth0/angular-jwt';
+import {UserService} from '../../../services/user.service';
 
 describe('UserComponent', () => {
   let component: UserComponent;
   let fixture: ComponentFixture<UserComponent>;
+  const userService: UserService = new UserService(null);
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -28,6 +29,13 @@ describe('UserComponent', () => {
           }})
       ]
     })
+      .overrideComponent(UserService, {
+        set: {
+          providers: [
+            { provide: UserService, useFactory: () => userService }
+          ]
+        }
+      })
     .compileComponents();
   });
 
@@ -37,7 +45,8 @@ describe('UserComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    spyOn(userService, 'getUsers').and.returnValue(null);
+    expect(component).toBeTruthy();
+  });
 });
