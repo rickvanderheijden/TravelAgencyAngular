@@ -1,4 +1,4 @@
-import {TripService} from './TripService';
+// import {Service} from './TripService';
 
 export class Trip {
 
@@ -9,7 +9,7 @@ export class Trip {
   public total_price: number;
   public image_url: String;
   public discount: number;
-  public tripServices: TripService[];
+  // public tripServices: TripService[];
 
   constructor(model) {
     if (model !== undefined) {
@@ -20,7 +20,7 @@ export class Trip {
       this.total_price = model.totalPrice;
       this.image_url = model.imageUrl;
       this.discount = model.discount;
-      this.tripServices = model.tripServices;
+      // this.tripServices = model.tripServices;
     }
   }
 }
