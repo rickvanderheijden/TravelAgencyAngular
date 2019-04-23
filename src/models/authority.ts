@@ -5,7 +5,7 @@ export class Authority {
     constructor(model) {
         if (model !== undefined) {
             this.id = model.id;
-            this.authorityName = model.authorityName;
+            this.authorityName = model.name;
         }
     }
 }

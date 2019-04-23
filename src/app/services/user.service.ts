@@ -49,7 +49,7 @@ export class UserService {
    * @param username
    */
   getByUsername(username) {
-    this.http.get(environment.server + '/user/' + username).pipe(
+    this.http.get(environment.server + '/users/' + username).pipe(
       tap(response => {
         console.log(response);
       }),
@@ -65,7 +65,7 @@ export class UserService {
    * @param emailAddress
    */
   getByEmailAddress(emailAddress) {
-    this.http.get(environment.server + '/user/' + emailAddress).pipe(
+    this.http.get(environment.server + '/users/' + emailAddress).pipe(
       tap(response => {
         console.log(response);
       }),
@@ -77,13 +77,38 @@ export class UserService {
   }
 
   deleteUser(id: any): Observable<boolean> {
-   return this.http.delete(environment.url + 'user/delete' + id).pipe(
+   return this.http.delete(environment.url + 'users/delete' + id).pipe(
       map((response: any) => {
         return response.json();
       })
     );
   }
 
-  updateUser(user: any, userId: any) {
+  updateUser(user: User) {
+    return this.http.post(environment.server + '/users/update' , user).pipe(
+      map((response: any) => {
+        return new User(response);
+      })
+    );
+  }
+
+  createUser(user: User) {
+    return this.http.post(environment.server + '/users/create' , user).pipe(
+      map((response: any) => {
+        return new User(response);
+      })
+    );
+  }
+
+  getAuthorities() {
+    return this.http.get(environment.server + '/users/getAllAuthorities');
+  }
+
+  isAdmin(): Observable<boolean> {
+    return this.http.get(environment.server + '/users/is-admin').pipe(
+      map( (response: boolean) => {
+        return response;
+      })
+    );
   }
 }

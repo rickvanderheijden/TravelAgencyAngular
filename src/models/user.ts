@@ -2,7 +2,7 @@ import {Authority} from './authority';
 
 export class User {
 
-    public id? : number;
+    public id?: number;
     public username?: String;
     public password?: String;
     public firstname?: String;
