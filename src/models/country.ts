@@ -1,10 +1,11 @@
-import {Optional} from '@angular/core';
+import {City} from './city';
+
 
 export class Country {
 
   private _name?: string;
   private _continent?: string;
-  private _cities?: [string];
+  private _cities?: [City];
 
 
   constructor(model) {
@@ -30,11 +31,11 @@ export class Country {
     this._continent = value;
   }
 
-  get cities(): [string] {
+  get cities(): [City] {
     return this._cities;
   }
 
-  set cities(value: [string]) {
+  set cities(value: [City]) {
     this._cities = value;
   }
 }

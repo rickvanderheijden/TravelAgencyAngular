@@ -1,4 +1,4 @@
-import {TripService} from '../app/services/trip.service';
+import {TripService} from './TripService';
 
 export class Trip {
 
