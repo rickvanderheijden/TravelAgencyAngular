@@ -1,9 +1,9 @@
 import {Address} from './Address';
 
 
-export class TripService {
+export class TripItem {
   public id?: number;
-  public service_type?: String;
+  public tripItemType?: String;
   public name?: String;
   public description?: String;
   public imageUrl?: String;
@@ -17,7 +17,7 @@ export class TripService {
       this.id = model.id;
       this.name = model.name;
       this.description = model.description;
-      this.service_type = model.serviceType;
+      this.tripItemType = model.tripItemType;
       this.address = new Address(model.address);
       this.price = model.price;
       this.date = new Date(model.date);

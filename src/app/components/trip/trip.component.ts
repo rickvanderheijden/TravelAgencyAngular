@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Trip} from '../../../models/trip';
 import {TripService} from '../../services/trip.service';
-import {Service} from '../../../models/service';
+import {TripItem} from '../../../models/TripItem';
 
 @Component({
   selector: 'app-trip',
@@ -13,7 +13,7 @@ export class TripComponent implements OnInit {
   @Input()
   tripId: number;
   trip: Trip;
-  // tripServices: TripService[];
+  tripItems: TripItem[];
   loading = false;
   constructor(private tripService: TripService) {
   }
@@ -23,7 +23,7 @@ export class TripComponent implements OnInit {
     this.tripService.getById(this.tripId).subscribe(
       (response: any) => {
         this.trip = response;
-        // this.tripServices = this.trip.tripServices;
+        this.tripItems = this.trip.tripItems;
         this.loading = false;
       }
     );
