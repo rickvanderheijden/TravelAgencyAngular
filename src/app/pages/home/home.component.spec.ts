@@ -16,7 +16,6 @@ class MockTripService {
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
-  let mock: MockTripService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
