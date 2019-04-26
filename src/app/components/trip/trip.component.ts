@@ -1,7 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Trip} from '../../../models/trip';
 import {TripService} from '../../services/trip.service';
 import {TripItem} from '../../../models/TripItem';
+import {Travel} from '../../../models/travel';
+import {TripDescriptionComponent} from '../trip-description/trip-description.component';
 
 @Component({
   selector: 'app-trip',
@@ -10,8 +12,12 @@ import {TripItem} from '../../../models/TripItem';
 })
 export class TripComponent implements OnInit {
 
+  @ViewChild(TripDescriptionComponent) tripDescriptionComponent;
+
   @Input()
   tripId: number;
+
+  travel: Travel;
   trip: Trip;
   tripItems: TripItem[];
   loading = false;
@@ -24,8 +30,14 @@ export class TripComponent implements OnInit {
       (response: any) => {
         this.trip = response;
         this.tripItems = this.trip.tripItems;
+        this.travel = new Travel(this.trip);
         this.loading = false;
       }
     );
+  }
+
+  addTripItem(tripItem: TripItem) {
+    console.log('addTripItem');
+    this.tripDescriptionComponent.addTripItem(tripItem);
   }
 }
