@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../../models/user';
 import {Authority} from '../../../../models/authority';
 import {UserService} from '../../../services/user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-create',
@@ -17,7 +18,7 @@ export class UserCreateComponent implements OnInit {
   authorities: Array<Authority>;
   authority: Authority;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
     this.user = new User();
     this.userService.getAuthorities().subscribe(
       (authoritiesResponse: Array<any>) => {
@@ -47,16 +48,24 @@ export class UserCreateComponent implements OnInit {
   }
 
   submitForm(userCreateForm: FormGroup) {
+    this.user.authorities = new Array<Authority>();
+
+    for ( const authority of this.authorities) {
+      if (authority.id === this.authority) {
+        this.user.addAuthority(authority);
+      }
+    }
+
     if (this.userCreateForm.valid) {
         this.userService.createUser(this.user).subscribe(
           (response: any) => {
-            console.log(response);
+            this.router.navigate(['/user']);
           }
         )
     }
   }
 
   back() {
-
+    this.router.navigate(['/user']);
   }
 }

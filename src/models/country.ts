@@ -8,10 +8,12 @@ export class Country {
   private _cities?: [City];
 
 
-  constructor(model) {
-    this._name = model.name;
-    this._continent = model.continent;
-    this._cities = model.cities;
+  constructor(model?) {
+    if (model !== undefined) {
+      this._name = model.name;
+      this._continent = model.continent;
+      this._cities = model.cities;
+    }
   }
 
 

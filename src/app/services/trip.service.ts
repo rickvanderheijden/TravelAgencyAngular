@@ -49,7 +49,7 @@ export class TripService {
   }
 
   getFirst(): Observable<Trip> {
-    console.log('getFirst')
+    console.log('getFirst');
     return this.http.get(environment.server + '/trips/all/' + 1).pipe(
       map(response => {
         console.log(response);
@@ -58,6 +58,18 @@ export class TripService {
       catchError(error => {
         swal('getFirst', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(error);
+      })
+    );
+  }
+
+  /**
+   * Delete a trip
+   * @param id
+   */
+  deleteTrip(id: any) {
+    this.http.delete(environment.url + '/trips/' + id ).pipe(
+      map( (response: any) => {
+        console.log(response);
       })
     );
   }
