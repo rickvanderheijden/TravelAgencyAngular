@@ -30,4 +30,12 @@ export class Travel {
       }
     }
   }
+
+  public removeTripItem(tripItem: TripItem) {
+    if ( tripItem !== undefined) {
+      if (this.tripItems.indexOf(tripItem) !== -1) {
+        this.tripItems.splice(this.tripItems.indexOf(tripItem), 1);
+      }
+    }
+  }
 }

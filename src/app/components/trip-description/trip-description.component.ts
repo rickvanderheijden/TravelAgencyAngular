@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Trip} from '../../../models/trip';
 import {Travel} from '../../../models/travel';
 import {TripItem} from '../../../models/TripItem';
@@ -16,6 +16,9 @@ export class TripDescriptionComponent implements OnInit {
   @Input()
   travel: Travel;
 
+  @Output()
+  tripItemOut = new EventEmitter<TripItem>();
+
   loading = false;
   constructor() {
   }
@@ -30,6 +33,10 @@ export class TripDescriptionComponent implements OnInit {
 
   addTripItem(tripItem: TripItem) {
     this.travel.addTripItem(tripItem);
-    console.log(this.travel);
+  }
+
+  removeTripItem(tripItem: TripItem) {
+    this.travel.removeTripItem(tripItem);
+    this.tripItemOut.emit(tripItem);
   }
 }

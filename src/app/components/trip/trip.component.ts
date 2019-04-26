@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Trip} from '../../../models/trip';
 import {TripService} from '../../services/trip.service';
 import {TripItem} from '../../../models/TripItem';
@@ -37,7 +37,16 @@ export class TripComponent implements OnInit {
   }
 
   addTripItem(tripItem: TripItem) {
-    console.log('addTripItem');
     this.tripDescriptionComponent.addTripItem(tripItem);
+
+    if (this.tripItems.indexOf(tripItem) !== -1) {
+      this.tripItems.splice(this.tripItems.indexOf(tripItem), 1);
+    }
+  }
+
+  removeTripItem(tripItem: TripItem) {
+    if (this.tripItems.indexOf(tripItem) === -1) {
+      this.tripItems.push(tripItem);
+    }
   }
 }
