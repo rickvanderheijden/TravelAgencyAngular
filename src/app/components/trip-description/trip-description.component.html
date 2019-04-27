@@ -52,16 +52,20 @@
         </a>
       </ngb-carousel>
       <div class="row" style="margin: 20px; width: 100%">
-        <div style="width: 75%">
+        <div class = "w-75">
         <p _ngcontent-c7="" style="margin-right: 40px">{{trip.description}}</p>
         </div>
-        <div style=" background-color: #bbbbbb">
+        <div style="width: 21%; margin-right: 30px; background-color: #bbbbbb">
           <div class="row" style="margin-left: 0px; margin-right: 0px;">
-            <p>MAPS</p>
             <app-maps style="width: 200px; height: 200px"></app-maps>
           </div>
           <div class="row" style="margin-left: 0px; margin-right: 0px;">
             <p>IETS ANDERS</p>
+            <ul>
+              <li *ngFor="let tripItem of travel.tripItems">
+                <p>{{tripItem.price}}<i class="fa fa-times" (click)="removeTripItem(tripItem)"></i> </p>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
