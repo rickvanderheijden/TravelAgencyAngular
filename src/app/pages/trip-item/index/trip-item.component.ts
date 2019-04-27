@@ -3,15 +3,15 @@ import {LocalDataSource, ViewCell} from 'ng2-smart-table';
 import {Trip} from '../../../../models/trip';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
+import {TripItemService} from '../../../services/trip-item.service';
 
-import {TripService} from '../../../services/trip.service';
 
 @Component({
-  selector: 'app-trip-actions',
+  selector: 'app-trip-item-actions',
   template: `
     <div>
       <span>
-        <button class="btn btn-raised btn-success" routerLink="/trip/update/{{this.rowData.id}}">
+        <button class="btn btn-raised btn-success" routerLink="/trip-item/update/{{this.rowData.id}}">
           <i class="ft-edit"></i>
         </button>
       </span>
@@ -23,7 +23,7 @@ import {TripService} from '../../../services/trip.service';
     </div>
   `,
 })
-export class TripActionButtonsComponent implements ViewCell, OnInit {
+export class TripItemActionButtonsComponent implements ViewCell, OnInit {
 
   loading = false;
   @Input() value: string | number;
@@ -36,7 +36,7 @@ export class TripActionButtonsComponent implements ViewCell, OnInit {
 
   constructor (
     private router: Router,
-    private tripService: TripService
+    private tripItemService: TripItemService
   ) { }
 
   ngOnInit() {
@@ -44,20 +44,20 @@ export class TripActionButtonsComponent implements ViewCell, OnInit {
   }
 
   deleteTrip() {
-    this.tripService.deleteTrip(this.rowData.id);
+    this.tripItemService.deleteTripItem(this.rowData.id);
   }
 }
 
 @Component({
-  selector: 'app-trip',
-  templateUrl: './trip.component.html',
-  styleUrls: ['./trip.component.scss']
+  selector: 'app-trip-item',
+  templateUrl: './trip-item.component.html',
+  styleUrls: ['./trip-item.component.scss']
 })
-export class TripComponent implements OnInit {
+export class TripItemComponent implements OnInit {
   trips: Array<Trip>;
   settings: any;
   source: LocalDataSource;
-  constructor(private service: TripService) {
+  constructor(private service: TripItemService) {
     this.settings = {
       columns: {
         id: {
@@ -67,8 +67,8 @@ export class TripComponent implements OnInit {
         name: {
           title: 'Naam',
         },
-        totalPrice: {
-          title: 'totalPrice',
+        price: {
+          title: 'Prijs',
           type: 'text',
           filter: true,
           sort: true,
@@ -77,12 +77,15 @@ export class TripComponent implements OnInit {
             return '€' + value;
           }
         },
+        tripItemType: {
+          title: 'Type'
+        },
         actions: {
           title: 'Acties',
           type: 'custom',
           filter: false,
           sort: false,
-          renderComponent: TripActionButtonsComponent
+          renderComponent: TripItemActionButtonsComponent
         },
       },
       actions: {
@@ -97,7 +100,7 @@ export class TripComponent implements OnInit {
     };
 
     this.source = new LocalDataSource();
-    this.service.getTrips().subscribe((data: any) => {
+    this.service.getTripItems().subscribe((data: any) => {
       this.source.load(data);
     });
   }

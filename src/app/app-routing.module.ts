@@ -10,6 +10,7 @@ import {AdminGuard} from './services/admin.guard';
 import {User_ROUTES} from './shared/routes/user-layout.routes';
 import {Home_ROUTES} from './shared/routes/home-layout.routes';
 import {Trip_ROUTES} from './shared/routes/trip-layout.routes';
+import {TripItem_ROUTES} from './shared/routes/trip-item-layout.routes';
 
 
 const appRoutes: Routes = [
@@ -31,6 +32,12 @@ const appRoutes: Routes = [
     path: 'trip',
     component: FullLayoutComponent,
     children: Trip_ROUTES,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'trip-item',
+    component: FullLayoutComponent,
+    children: TripItem_ROUTES,
     canActivate: [AdminGuard]
   },
   { path: '**', redirectTo: '' },
