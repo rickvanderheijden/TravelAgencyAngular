@@ -1,9 +1,11 @@
-<agm-map [latitude]="latitude" [longitude]="longitude">
+<agm-map
+  [latitude]="latitude"
+  [longitude]="longitude"
+  [zoomControl]="false"
+  [disableDefaultUI]="true">
   <agm-direction
     [origin]="origin"
     [destination]="destination"
     [waypoints]="waypoints">
   </agm-direction>
 </agm-map>
-
-<p>hoi</p>
