@@ -3,7 +3,9 @@ export class City {
   public name?: String;
 
   constructor(model?) {
-    this.id = model.id;
-    this.name = model.name;
+    if (model !== undefined) {
+      this.id = model.id;
+      this.name = model.name;
+    }
   }
 }
