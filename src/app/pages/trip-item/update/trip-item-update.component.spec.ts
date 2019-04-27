@@ -1,6 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { TripUpdateComponent } from './trip-update.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {TripUpdateComponent} from '../../trip/trip-update/trip-update.component';
 
 describe('TripUpdateComponent', () => {
   let component: TripUpdateComponent;

@@ -10,7 +10,7 @@ describe('TripCreateComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ TripCreateComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

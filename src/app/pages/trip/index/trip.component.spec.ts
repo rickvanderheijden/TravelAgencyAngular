@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TripComponent } from './trip.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('TripComponent', () => {
   let component: TripComponent;
@@ -8,7 +10,11 @@ describe('TripComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ TripComponent ]
+      declarations: [ TripComponent ],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        HttpClientModule
+      ]
     })
     .compileComponents();
   });
