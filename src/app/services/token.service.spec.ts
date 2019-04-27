@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed, tick, fakeAsync} from '@angular/core/testing';
 import {TokenService} from './token.service';
 
 
@@ -13,13 +13,16 @@ describe('TokenService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get a token', () => {
+  it('should get a token', fakeAsync(() => {
     const expected = 'testToken';
     localStorage.setItem(TOKEN_KEY, 'testToken');
     const service: TokenService = TestBed.get(TokenService);
-   service.getAsyncToken().then(result => {
-      const token = result;
-     expect(token).toEqual(expected);
+    service.getAsyncToken().then(result => {
+      this.token = result;
     });
-  })
+
+    tick(2000);
+
+    expect(this.token).toEqual(expected);
+  }))
 });
