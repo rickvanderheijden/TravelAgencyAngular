@@ -72,17 +72,9 @@ export class TripService {
    * @param total_price
    * @param discount
    */
-  createTrip(name: string, description: string, summary: string, imageUrl: string, total_price: number, discount: number ){
+  createTrip(trip: Trip ){
     console.log('CreateTrip')
-    const body = new URLSearchParams();
-    body.set('name', name);
-    body.set('description', description);
-    body.set('summary', summary);
-    body.set('imageUrl', imageUrl);
-    body.set('total_price', total_price.toString());
-    body.set('discount', discount.toString());
-
-    return this.http.post(environment.server + '/trips/createTrip/' + 1, body).pipe(
+    return this.http.post(environment.server + '/trips/createTrip', trip).pipe(
       map(response => {
         console.log(response);
         console.log('[CreateUser] ' + JSON.stringify(response));

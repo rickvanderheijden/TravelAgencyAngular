@@ -1,6 +1,6 @@
 <section id="homepage">
   <app-maps></app-maps>
-  <div *ngIf="loading">
+  <div *ngIf="loading" class="spinner">
     <i class="fa fa-spinner fa-spin"></i>
   </div>
   <div *ngIf="!loading && (tripId == null)">

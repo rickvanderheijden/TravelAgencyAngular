@@ -12,9 +12,6 @@ import {Home_ROUTES} from './shared/routes/home-layout.routes';
 import {Trip_ROUTES} from './shared/routes/trip-layout.routes';
 
 
-
-
-
 const appRoutes: Routes = [
   {
     path: 'auth/login', component: AuthLoginComponent
@@ -34,8 +31,9 @@ const appRoutes: Routes = [
     path: 'trip',
     component: FullLayoutComponent,
     children: Trip_ROUTES,
-    // canActivate: [AdminGuard]
-  }
+    canActivate: [AdminGuard]
+  },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

@@ -14,10 +14,6 @@ export class AppComponent {
     private router: Router
   ) {
     this.authService.authenticationState.subscribe(next => {
-     if (next) {
-       this.router.navigate(['/']);
-
-     }
     });
   }
 
