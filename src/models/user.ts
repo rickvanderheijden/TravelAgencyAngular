@@ -36,7 +36,7 @@ export class User {
     isAdmin() {
       let isAdmin = false;
       this.authorities.forEach(function (authoriry, index) {
-        if (authoriry.authorityName === 'ROLE_ADMIN') {
+        if (authoriry.name === 'ROLE_ADMIN') {
           isAdmin = true;
         }
       });

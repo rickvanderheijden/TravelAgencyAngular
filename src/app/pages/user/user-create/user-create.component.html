@@ -19,34 +19,34 @@
             <form *ngIf="authorities != null" [formGroup]="userCreateForm" novalidate (ngSubmit)="submitForm(userCreateForm)">
               <div class="form-group">
                 <label>Gebruikersnaam</label>
-                <input type="text" name="username" formControlName="username" autocomplete="off"  class="form-control">
+                <input type="text" name="username" formControlName="username" autocomplete="off"  class="form-control" [(ngModel)]="user.username">
               </div>
 
               <div class="form-group">
                 <label>Voornaam</label>
-                <input type="text" name="firstname" formControlName="firstname"  class="form-control">
+                <input type="text" name="firstname" formControlName="firstname"  class="form-control" [(ngModel)]="user.firstname">
               </div>
 
 
               <div class="form-group">
                 <label>Achternaam</label>
-                <input type="text" name="lastname" formControlName="lastname"  class="form-control">
+                <input type="text" name="lastname" formControlName="lastname"  class="form-control" [(ngModel)]="user.lastname">
               </div>
 
               <div class="form-group">
                 <label>Email</label>
-                <input type="email" name="email" formControlName="emailAddress"  class="form-control">
+                <input type="email" name="email" formControlName="emailAddress"  class="form-control" [(ngModel)]="user.emailAddress">
               </div>
 
               <div class="form-group">
                 <div class="password">
                   <label>Wachtwoord</label>
-                  <input type="password" name="password" formControlName="password"  class="form-control">
+                  <input type="password" name="password" formControlName="password"  class="form-control" [(ngModel)]="user.password">
                 </div>
               </div>
               <ng-select [items]="authorities"
                          formControlName="authorities"
-                         bindLabel="authorityName"
+                         bindLabel="name"
                          bindValue="id"
                          [multiple]="false"
                          [(ngModel)]="authority">

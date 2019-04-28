@@ -12,7 +12,7 @@ export class TripItem {
   public price?: number;
 
 
-  constructor(model) {
+  constructor(model?) {
     if (model !== undefined) {
       this.id = model.id;
       this.name = model.name;
@@ -22,6 +22,9 @@ export class TripItem {
       this.price = model.price;
       this.date = new Date(model.date);
       this.imageUrl = model.imageUrl;
+    } else {
+      this.date = new Date();
+      this.address = new Address();
     }
   }
 }
