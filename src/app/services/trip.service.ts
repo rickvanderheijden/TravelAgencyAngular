@@ -64,13 +64,8 @@ export class TripService {
   }
 
   /**
-   * Create Trip with parameters
-   * @param name
-   * @param description
-   * @param summary
-   * @param imageUrl
-   * @param total_price
-   * @param discount
+   * Create a trip
+   * @param trip
    */
   createTrip(name: string, description: string, summary: string, imageUrl: string, total_price: number, discount: number ){
     console.log('CreateTrip')
@@ -85,12 +80,43 @@ export class TripService {
     return this.http.post(environment.server + '/trips/createTrip/' + 1, body).pipe(
       map(response => {
         console.log(response);
-        console.log('[CreateUser] ' + JSON.stringify(response));
+        console.log('[CreateTrip] ' + JSON.stringify(response));
         return new Trip(response);
       }),
       catchError(error => {
         swal('createTrip', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(error);
+      })
+    );
+  }
+
+  /**
+   * Update a trip
+   * @param trip
+   */
+  updateTrip(trip: Trip ){
+    console.log('UpdateTrip')
+    return this.http.put(environment.server + '/trips/updateTrip', trip).pipe(
+      map(response => {
+        console.log(response);
+        console.log('[UpdateTrip] ' + JSON.stringify(response));
+        return new Trip(response);
+      }),
+      catchError(error => {
+        swal('updateTrip', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(error);
+      })
+    );
+  }
+
+  /**
+   * Delete a trip
+   * @param id
+   */
+  deleteTrip(id: any) {
+    this.http.delete(environment.url + '/trips/' + id ).pipe(
+      map( (response: any) => {
+        console.log(response);
       })
     );
   }
