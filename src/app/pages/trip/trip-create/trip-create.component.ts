@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TripService} from '../../../services/trip.service';
 import {Trip} from '../../../../models/trip';
+import {Router} from '@angular/router';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-trip-create',
@@ -8,9 +10,11 @@ import {Trip} from '../../../../models/trip';
   styleUrls: ['./trip-create.component.scss']
 })
 export class TripCreateComponent implements OnInit {
+  tripCreateForm: FormGroup;
   trip: Trip;
+  loading = false;
 
-  constructor(private tripService: TripService) {
+  constructor(private tripService: TripService, private router: Router) {
     this.trip = new Trip();
   }
 
@@ -22,7 +26,12 @@ export class TripCreateComponent implements OnInit {
       this.tripService.createTrip(this.trip).subscribe(
         (response: any) => {
           console.log(response);
+          this.back();
         });
     }
+  }
+
+  back() {
+    this.router.navigate(['/trip/']);
   }
 }
