@@ -60,13 +60,41 @@
             <app-maps style="width: 200px; height: 200px"></app-maps>
           </div>
           <div class="row" style="margin-left: 0px; margin-right: 0px;">
-            <p>IETS ANDERS</p>
-            <ul>
-              <li *ngFor="let tripItem of travel.tripItems">
-                <p>{{tripItem.name}}  {{tripItem.price}}<i class="fa fa-times" (click)="removeTripItem(tripItem)"></i> </p>
-              </li>
-            </ul>
-            <p>Totale prijs: {{travel.totalPrice}}</p>
+            <table _ngcontent-c8="" class="table table-responsive-md">
+              <thead _ngcontent-c8="">
+              </thead>
+              <tbody _ngcontent-c8="">
+                <tr _ngcontent-c8="" *ngFor="let tripItem of travel.tripItems">
+                  <td _ngcontent-c8="">{{tripItem.name}}</td>
+                  <td _ngcontent-c8="">{{tripItem.price}}</td>
+                  <td _ngcontent-c8="">
+                    <a _ngcontent-c8="" class="danger" data-original-title="" title="">
+                      <i _ngcontent-c8="" class="ft-trash font-medium-3" (click)="removeTripItem(tripItem)"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table _ngcontent-c8="" class="table table-responsive-md" style="position: absolute; bottom: 0; width: 21%">
+              <thead _ngcontent-c8="">
+              </thead>
+              <tbody _ngcontent-c8="">
+                <tr _ngcontent-c8="">
+                  <td _ngcontent-c8="">
+                    <b _ngcontent-c8="">Totale prijs</b>
+                  </td>
+                  <td _ngcontent-c8="">
+                    <b _ngcontent-c8="">{{travel.totalPrice}}</b>
+                  </td>
+                  <td _ngcontent-c8=""></td>
+                </tr>
+                <tr _ngcontent-c8="">
+                  <td _ngcontent-c8=""></td>
+                  <td _ngcontent-c8=""></td>
+                  <td _ngcontent-c8=""></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
