@@ -63,9 +63,10 @@
             <p>IETS ANDERS</p>
             <ul>
               <li *ngFor="let tripItem of travel.tripItems">
-                <p>{{tripItem.price}}<i class="fa fa-times" (click)="removeTripItem(tripItem)"></i> </p>
+                <p>{{tripItem.name}}  {{tripItem.price}}<i class="fa fa-times" (click)="removeTripItem(tripItem)"></i> </p>
               </li>
             </ul>
+            <p>Totale prijs: {{travel.totalPrice}}</p>
           </div>
         </div>
       </div>
