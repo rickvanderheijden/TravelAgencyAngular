@@ -9,7 +9,7 @@ export class Country {
 
 
   constructor(model?) {
-    if (model !== undefined) {
+    if (typeof model !== 'undefined') {
       this._name = model.name;
       this._continent = model.continent;
       this._cities = model.cities;
