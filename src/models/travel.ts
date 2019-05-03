@@ -27,6 +27,7 @@ export class Travel {
     if ( tripItem !== undefined) {
       if (this.tripItems.indexOf(tripItem) === -1) {
         this.tripItems.push(tripItem);
+        this.totalPrice = this.totalPrice + tripItem.price;
       }
     }
   }
@@ -35,6 +36,7 @@ export class Travel {
     if ( tripItem !== undefined) {
       if (this.tripItems.indexOf(tripItem) !== -1) {
         this.tripItems.splice(this.tripItems.indexOf(tripItem), 1);
+        this.totalPrice = this.totalPrice - tripItem.price;
       }
     }
   }
