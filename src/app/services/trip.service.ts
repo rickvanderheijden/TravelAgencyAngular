@@ -67,7 +67,7 @@ export class TripService {
    * Create a trip
    * @param trip
    */
-  createTrip(name: string, description: string, summary: string, imageUrl: string, total_price: number, discount: number ){
+  createTrip(trip: Trip ) {
     console.log('CreateTrip')
     const body = new URLSearchParams();
     body.set('name', name);

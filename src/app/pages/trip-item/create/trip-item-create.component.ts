@@ -46,6 +46,5 @@ export class TripItemCreateComponent implements OnInit {
   }
 
   submitForm(tripItemCreateForm: FormGroup) {
-    
   }
 }
