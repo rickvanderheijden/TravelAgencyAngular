@@ -11,6 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class TripUpdateComponent implements OnInit {
   trip: Trip;
   tripId: any;
+  loading = false;
 
   constructor(private tripService: TripService, private route: ActivatedRoute, private router: Router) {
     this.tripService.getById(route.snapshot.params.id).subscribe((data: any) => {
