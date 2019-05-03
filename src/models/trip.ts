@@ -1,16 +1,26 @@
-export class Trip{
+import {TripItem} from './TripItem';
+
+export class Trip {
 
   public id: number;
-  public name?: String;
-  public total_price?: number;
+  public name: String;
+  public description: String;
+  public summary: String;
+  public totalPrice: number;
+  public imageUrl: String;
+  public discount: number;
+  public tripItems: TripItem[];
 
-  constructor(model)
-  {
-    if (model !== undefined)
-    {
+  constructor(model) {
+    if (typeof model !== 'undefined') {
       this.id = model.id;
       this.name = model.name;
-      this.total_price = model.total_price;
+      this.description = model.description;
+      this.summary = model.summary;
+      this.totalPrice = model.totalPrice;
+      this.imageUrl = model.imageUrl;
+      this.discount = model.discount;
+      this.tripItems = model.tripItems;
     }
   }
 }

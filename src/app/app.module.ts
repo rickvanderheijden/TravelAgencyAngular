@@ -3,12 +3,10 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { FullLayoutComponent } from './layouts/full/full-layout.component';
 
-import * as $ from 'jquery';
 import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
 import {AuthLoginComponent} from './auth/auth-login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -20,14 +18,13 @@ import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 import {CommonModule} from '@angular/common';
 import {TokenService} from './services/token.service';
 import {JwtInterceptor} from './interceptors/jwt.interceptor';
-import { TripComponent } from './components/trip/trip.component';
 
 import {AgmCoreModule} from '@agm/core';
 import { AgmDirectionModule} from 'agm-direction';
-import {MapsComponent} from './components/maps/maps.component';
 import {ToastrModule} from 'ngx-toastr';
 import {UserModule} from './pages/user/index/user.module';
-
+import {Ng2SmartTableModule} from 'ng2-smart-table';
+import {NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 export function jwtOptionsFactory(tokenService) {
   return {
@@ -40,42 +37,45 @@ export function jwtOptionsFactory(tokenService) {
   }
 }
 @NgModule({
-    declarations: [
-        AppComponent,
-        FullLayoutComponent,
-        AuthLoginComponent,
-        MapsComponent,
-        TopFiltersComponent,
-        TripComponent
-    ],
-    imports: [
-        CommonModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        SharedModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        NgSelectModule,
-        UserModule,
-        ToastrModule.forRoot(),
-        SweetAlert2Module.forRoot(),
-        NgbModule.forRoot(),
-        JwtModule.forRoot({
-          jwtOptionsProvider: {
-            provide: JWT_OPTIONS,
-            useFactory: jwtOptionsFactory,
-            deps: [TokenService]
-        }}),
-        AgmCoreModule.forRoot({
-          apiKey: 'AIzaSyC_xNfcNGLJdRMi229CJlat9nL-OkPj6d8'
-        }),
-        AgmDirectionModule,
-    ],
-    providers: [
-      TokenService,
-      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    FullLayoutComponent,
+    AuthLoginComponent,
+    TopFiltersComponent
+  ],
+  imports: [
+    CommonModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgbModule,
+    NgbCarouselModule,
+    NgSelectModule,
+    Ng2SmartTableModule,
+    UserModule,
+    ToastrModule.forRoot(),
+    SweetAlert2Module.forRoot(),
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory,
+        deps: [TokenService]
+      }
+    }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC_xNfcNGLJdRMi229CJlat9nL-OkPj6d8'
+    }),
+    AgmDirectionModule,
+  ],
+  providers: [
+    TokenService,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+  ],
+  exports: [
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

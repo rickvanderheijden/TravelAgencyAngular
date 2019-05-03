@@ -1,0 +1,3 @@
+<div *ngFor="let trip of trips">
+  <app-trip-summary [trip]="trip" (tripId)="onTripIdChanged($event)"></app-trip-summary>
+</div>

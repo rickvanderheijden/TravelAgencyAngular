@@ -1,3 +1,12 @@
-<p>
-  home works!
-</p>
+<section id="homepage">
+<!--  <app-maps></app-maps>-->
+  <div *ngIf="loading" class="spinner">
+    <i class="fa fa-spinner fa-spin"></i>
+  </div>
+  <div *ngIf="!loading && (tripId == null)">
+    <app-trip-list [trips]="trips" (tripId)="onTripIdChanged($event)"></app-trip-list>
+  </div>
+  <div *ngIf="!loading && (tripId != null)">
+    <app-trip [tripId] = "tripId"></app-trip>
+  </div>
+</section>

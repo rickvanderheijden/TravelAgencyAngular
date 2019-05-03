@@ -1,7 +1,8 @@
-<p>
-  Hieronder een map
-</p>
-<agm-map [latitude]="latitude" [longitude]="longitude">
+<agm-map
+  [latitude]="latitude"
+  [longitude]="longitude"
+  [zoomControl]="false"
+  [disableDefaultUI]="true">
   <agm-direction
     [origin]="origin"
     [destination]="destination"

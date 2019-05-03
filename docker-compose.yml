@@ -1,0 +1,23 @@
+version: '3'
+services:
+  frontend:
+    build: .
+    ports:
+     - "4200:4200"
+    depends_on:
+      - backend
+  backend:
+    image: "rickvanderheijden/travelagency:latest"
+    ports:
+      - "9000:9000"
+    links:
+      - "mysql:mysql"
+    depends_on:
+      - mysql
+  mysql:
+    image: "mysql:latest"
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_DATABASE: travel-agency
+      MYSQL_RANDOM_ROOT_PASSWORD: 1

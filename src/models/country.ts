@@ -1,16 +1,19 @@
-import {Optional} from '@angular/core';
+import {City} from './city';
+
 
 export class Country {
 
   private _name?: string;
   private _continent?: string;
-  private _cities?: [string];
+  private _cities?: [City];
 
 
-  constructor(model) {
-    this._name = model.name;
-    this._continent = model.continent;
-    this._cities = model.cities;
+  constructor(model?) {
+    if (typeof model !== 'undefined') {
+      this._name = model.name;
+      this._continent = model.continent;
+      this._cities = model.cities;
+    }
   }
 
 
@@ -30,11 +33,11 @@ export class Country {
     this._continent = value;
   }
 
-  get cities(): [string] {
+  get cities(): [City] {
     return this._cities;
   }
 
-  set cities(value: [string]) {
+  set cities(value: [City]) {
     this._cities = value;
   }
 }

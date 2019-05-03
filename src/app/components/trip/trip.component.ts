@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Trip} from '../../../models/trip';
+import {TripService} from '../../services/trip.service';
+import {TripItem} from '../../../models/TripItem';
+import {Travel} from '../../../models/travel';
+import {TripDescriptionComponent} from '../trip-description/trip-description.component';
 
 @Component({
   selector: 'app-trip',
@@ -7,18 +12,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TripComponent implements OnInit {
 
-  name: string;
-  total_price: string;
+  @ViewChild(TripDescriptionComponent) tripDescriptionComponent;
 
-  constructor() { }
+  @Input()
+  tripId: number;
 
-  ngOnInit() {
+  travel: Travel;
+  trip: Trip;
+  tripItems: TripItem[];
+  loading = false;
+  constructor(private tripService: TripService) {
   }
 
-  enterTrip() {
-    if (this.name && this.total_price) {
-    // create Trip
+  ngOnInit() {
+    this.loading = true;
+    this.tripService.getById(this.tripId).subscribe(
+      (response: any) => {
+        this.trip = response;
+        this.tripItems = this.trip.tripItems;
+        this.travel = new Travel(this.trip);
+        this.loading = false;
+      }
+    );
+  }
+
+  addTripItem(tripItem: TripItem) {
+    this.tripDescriptionComponent.addTripItem(tripItem);
+
+    if (this.tripItems.indexOf(tripItem) !== -1) {
+      this.tripItems.splice(this.tripItems.indexOf(tripItem), 1);
     }
   }
 
+  removeTripItem(tripItem: TripItem) {
+    if (this.tripItems.indexOf(tripItem) === -1) {
+      this.tripItems.push(tripItem);
+    }
+  }
 }

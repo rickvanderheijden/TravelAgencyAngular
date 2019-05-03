@@ -1,9 +1,8 @@
 import {Authority} from './authority';
-import {forEach} from '@angular/router/src/utils/collection';
 
 export class User {
 
-    public id? : number;
+    public id?: number;
     public username?: String;
     public password?: String;
     public firstname?: String;
@@ -12,7 +11,7 @@ export class User {
     public authorities: Array<Authority>;
 
     constructor(model?) {
-        if (model !== undefined) {
+        if (typeof model !== 'undefined') {
             this.id = model.id;
             this.username = model.username;
             this.firstname = model.firstname;
@@ -37,7 +36,7 @@ export class User {
     isAdmin() {
       let isAdmin = false;
       this.authorities.forEach(function (authoriry, index) {
-        if (authoriry.authorityName === 'ROLE_ADMIN') {
+        if (authoriry.name === 'ROLE_ADMIN') {
           isAdmin = true;
         }
       });

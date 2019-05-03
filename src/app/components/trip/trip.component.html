@@ -1,17 +1,6 @@
-<p>
-  trip works!
-</p>
-
-<form>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputName">Name</label>
-      <input type="text" class="form-control" id="inputName" name="name" placeholder="Name" [(ngModel)]="name">
+<div *ngIf="!loading" style="display: inline-block; position: absolute; float: left; height: auto">
+    <app-trip-description [trip]="trip" [travel]="travel" (tripItemOut)="removeTripItem($event)" style="display: inline-block"></app-trip-description>
+    <div *ngFor="let tripItem of trip.tripItems">
+      <app-trip-item-option [tripItem]="tripItem" (tripItemOut)="addTripItem($event)"></app-trip-item-option>
     </div>
-    <div class="form-group col-md-6">
-      <label for="inputTotalPrice">Password</label>
-      <input type="text" class="form-control" id="inputTotalPrice" name="total_price" placeholder="Total price" [(ngModel)]="total_price">
-    </div>
-  </div>
-  <button type="submit" class="btn btn-primary" (click)="enterTrip()">Enter trip</button>
-</form>
+</div>

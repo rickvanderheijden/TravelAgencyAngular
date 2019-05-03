@@ -9,28 +9,19 @@ import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import any = jasmine.any;
 
-@Component({
-  template: ''
-})
-class DummyComponent {
-}
-
 describe('MapsComponent', function () {
 
   let component: MapsComponent;
   let fixture: ComponentFixture<MapsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MapsComponent, DummyComponent],
+      declarations: [MapsComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
         HttpClientModule,
         FormsModule,
         BrowserModule,
-        RouterTestingModule.withRoutes([
-          {path: '', component: DummyComponent}
-        ]),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -41,21 +32,12 @@ describe('MapsComponent', function () {
       ]
     })
       .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MapsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it('NgOnInit should made map without destination and origin', () => {
-    component.ngOnInit();
-    expect(component.origin).toBeUndefined();
-    expect(component.destination).toBeUndefined();
-    let a;
-    a = new Array();
-    expect(component.waypoints).toEqual(a);
   });
 
   it('setDirection should change the destination and origin', () => {

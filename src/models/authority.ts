@@ -1,11 +1,11 @@
 export class Authority {
     public id?: number;
-    public authorityName?: string;
+    public name?: String;
 
     constructor(model) {
-        if (model !== undefined) {
+        if (typeof model !== 'undefined') {
             this.id = model.id;
-            this.authorityName = model.authorityName;
+            this.name = model.name;
         }
     }
 }

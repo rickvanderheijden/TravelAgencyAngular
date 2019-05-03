@@ -1,0 +1,23 @@
+.card-img {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.card.horizontal {
+  margin-right: 15px;
+}
+
+.card-content {
+  height: 100%;
+}
+
+.card-title {
+  margin: 10px 0 5px 0;
+}
+
+.card-text {
+  height:6em;
+  overflow: hidden;
+  width: 75ch;
+  margin-bottom: 50px;
+}

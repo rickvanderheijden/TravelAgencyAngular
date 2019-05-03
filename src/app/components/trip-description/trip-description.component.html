@@ -1,0 +1,103 @@
+<div _ngcontent-c7="" class="col-lg-4 col-md-12 col-sm-12">
+  <div _ngcontent-c7="" class="card" style="width: 1170px; height: auto; margin-left: -15px">
+    <div _ngcontent-c7="" class="card-header">
+      <h4 style="font-size: 30px" _ngcontent-c7="" class="card-title">{{trip.name}}</h4>
+      <h6 _ngcontent-c7="" class="card-subtitle text-muted">Support card subtitle</h6>
+    </div>
+    <div _ngcontent-c7="" class="card-content">
+      <ngb-carousel _ngcontent-c7="" class="carousel slide" tabindex="0" style="display: block;">
+        <!---->
+        <ol class="carousel-indicators ng-star-inserted">
+          <!---->
+          <li id="ngb-slide-0" class="ng-star-inserted active"></li>
+          <li id="ngb-slide-1" class="ng-star-inserted"></li>
+          <li id="ngb-slide-2" class="ng-star-inserted"></li>
+        </ol>
+        <div class="carousel-inner">
+          <!---->
+          <div class="carousel-item ng-star-inserted active">
+            <!---->
+            <img _ngcontent-c7="" alt="Random first slide" src="assets/img/photos/17.jpg" class="ng-star-inserted">
+            <div _ngcontent-c7="" class="carousel-caption ng-star-inserted">
+              <h3 _ngcontent-c7="">First slide label</h3>
+              <p _ngcontent-c7="">Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            </div>
+          </div>
+          <div class="carousel-item ng-star-inserted">
+            <!---->
+            <img _ngcontent-c7="" alt="Random second slide" src="assets/img/photos/13.jpg" class="ng-star-inserted">
+            <div _ngcontent-c7="" class="carousel-caption ng-star-inserted">
+              <h3 _ngcontent-c7="">Second slide label</h3>
+              <p _ngcontent-c7="">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+          </div>
+          <div class="carousel-item ng-star-inserted">
+            <!---->
+            <img _ngcontent-c7="" alt="Random third slide" src="assets/img/photos/12.jpg" class="ng-star-inserted">
+            <div _ngcontent-c7="" class="carousel-caption ng-star-inserted">
+              <h3 _ngcontent-c7="">Third slide label</h3>
+              <p _ngcontent-c7="">Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+            </div>
+          </div>
+        </div>
+        <!---->
+        <a class="carousel-control-prev ng-star-inserted" role="button">
+          <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <!---->
+        <a class="carousel-control-next ng-star-inserted" role="button">
+          <span aria-hidden="true" class="carousel-control-next-icon"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </ngb-carousel>
+      <div class="row" style="margin: 20px; width: 100%">
+        <div class = "w-75">
+        <p _ngcontent-c7="" style="margin-right: 40px">{{trip.description}}</p>
+        </div>
+        <div style="width: 21%; margin-right: 30px; background-color: #bbbbbb">
+          <div class="row" style="margin-left: 0px; margin-right: 0px;">
+            <app-maps style="width: 200px; height: 200px"></app-maps>
+          </div>
+          <div class="row" style="margin-left: 0px; margin-right: 0px;">
+            <table _ngcontent-c8="" class="table table-responsive-md">
+              <thead _ngcontent-c8="">
+              </thead>
+              <tbody _ngcontent-c8="">
+                <tr _ngcontent-c8="" *ngFor="let tripItem of travel.tripItems">
+                  <td _ngcontent-c8="">{{tripItem.name}}</td>
+                  <td _ngcontent-c8="">{{tripItem.price}}</td>
+                  <td _ngcontent-c8="">
+                    <a _ngcontent-c8="" class="danger" data-original-title="" title="">
+                      <i _ngcontent-c8="" class="ft-trash font-medium-3" (click)="removeTripItem(tripItem)"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table _ngcontent-c8="" class="table table-responsive-md" style="position: absolute; bottom: 0; width: 21%">
+              <thead _ngcontent-c8="">
+              </thead>
+              <tbody _ngcontent-c8="">
+                <tr _ngcontent-c8="">
+                  <td _ngcontent-c8="">
+                    <b _ngcontent-c8="">Totale prijs</b>
+                  </td>
+                  <td _ngcontent-c8="">
+                    <b _ngcontent-c8="">{{travel.totalPrice}}</b>
+                  </td>
+                  <td _ngcontent-c8=""></td>
+                </tr>
+                <tr _ngcontent-c8="">
+                  <td _ngcontent-c8=""></td>
+                  <td _ngcontent-c8=""></td>
+                  <td _ngcontent-c8=""></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

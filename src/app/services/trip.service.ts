@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Trip} from '../../models/trip';
 import {environment} from '../../environments/environment';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 import swal from 'sweetalert2';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +16,17 @@ export class TripService {
   /**
    * Get All trips
    */
-  getTrips(){
+  getTrips(): Observable<Array<Trip>> {
     return this.http.get(environment.server + '/trips/all').pipe(
-      tap(response => {
-        console.log(response);
-        // return new Array(new Trip(response));
+      map((response: Array<any>) => {
+        const trips: Array<Trip> = [];
+        response.forEach(function (trip, index) {
+          trips.push(new Trip(trip));
+        });
+        return trips;
       }),
       catchError(err => {
-        swal('Oops!!', 'Er is iets niet goed gegaan.', 'error');
+        swal('getTrips', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(err);
       }));
   }
@@ -31,14 +35,41 @@ export class TripService {
    * Get Trip by ID
    * @param id
    */
-  getById(id) {
-    this.http.get(environment.server + '/trip/' + id).pipe(
-      tap(response => {
+  getById(id): Observable<Trip> {
+    return this.http.get(environment.server + '/trips/' + id).pipe(
+      map(response => {
         console.log(response);
+        return new Trip(response);
       }),
       catchError(error => {
-        swal('Oops', 'Er is iets niet goed gegaan.', 'error');
+        swal('getById', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(error);
+      })
+    );
+  }
+
+  getFirst(): Observable<Trip> {
+    console.log('getFirst');
+    return this.http.get(environment.server + '/trips/all/' + 1).pipe(
+      map(response => {
+        console.log(response);
+        return new Trip(response);
+      }),
+      catchError(error => {
+        swal('getFirst', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(error);
+      })
+    );
+  }
+
+  /**
+   * Delete a trip
+   * @param id
+   */
+  deleteTrip(id: any) {
+    this.http.delete(environment.url + '/trips/' + id ).pipe(
+      map( (response: any) => {
+        console.log(response);
       })
     );
   }
