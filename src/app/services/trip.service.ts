@@ -66,7 +66,7 @@ export class TripService {
    * Create a trip
    * @param trip
    */
-  createTrip(trip: Trip ){
+  createTrip(trip: Trip ) {
     console.log('CreateTrip')
     return this.http.post(environment.server + '/trips/createTrip', trip).pipe(
       map(response => {
