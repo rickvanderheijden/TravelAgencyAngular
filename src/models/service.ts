@@ -12,7 +12,7 @@ export class Service {
 
 
   constructor(model) {
-    if (model !== undefined) {
+    if (!model) {
       this.id = model.id;
       this.serviceType = model.serviceType;
       this.name = model.name;
