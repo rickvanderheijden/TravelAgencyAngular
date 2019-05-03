@@ -3,7 +3,7 @@ export class City {
   public name?: String;
 
   constructor(model?) {
-    if (!model) {
+    if (typeof model !== 'undefined') {
       this.id = model.id;
       this.name = model.name;
     }

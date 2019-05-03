@@ -11,7 +11,7 @@ export class Travel {
   public paid: boolean;
 
   constructor(model?) {
-    if (!model) {
+    if (typeof model !== 'undefined') {
       this.id = model.id;
       this.trip = model.trip;
       this.tripItems = model.tripItems;
@@ -24,7 +24,7 @@ export class Travel {
   }
 
   public addTripItem(tripItem: TripItem) {
-    if (!tripItem) {
+    if (typeof tripItem !== 'undefined') {
       if (this.tripItems.indexOf(tripItem) === -1) {
         this.tripItems.push(tripItem);
         this.totalPrice = this.totalPrice + tripItem.price;
