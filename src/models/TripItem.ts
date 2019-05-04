@@ -13,7 +13,7 @@ export class TripItem {
 
 
   constructor(model?) {
-    if (model !== null) {
+    if (typeof model !== typeof undefined) {
       this.id = model.id;
       this.name = model.name;
       this.description = model.description;

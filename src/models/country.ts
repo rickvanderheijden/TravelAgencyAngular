@@ -10,7 +10,7 @@ export class Country {
 
   constructor(model?) {
     const self = this;
-    if (model !== null) {
+    if (typeof model !== typeof undefined) {
       this.name = model.name;
       this.continent = model.continent;
       this.cities = new Array<City>();
