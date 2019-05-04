@@ -10,7 +10,7 @@ export class Address {
 
 
   constructor(model?) {
-  if (typeof model !== 'undefined') {
+    if (model !== null) {
       this.id = model.id;
       this.address = model.address;
       this.zipcode = model.zipcode;

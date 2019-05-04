@@ -11,7 +11,7 @@ export class User {
     public authorities: Array<Authority>;
 
     constructor(model?) {
-        if (typeof model !== 'undefined') {
+        if (model !== null) {
             this.id = model.id;
             this.username = model.username;
             this.firstname = model.firstname;
