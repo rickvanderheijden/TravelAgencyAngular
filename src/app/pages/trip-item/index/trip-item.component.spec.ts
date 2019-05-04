@@ -1,6 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {TripComponent} from '../../../components/trip/trip.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {Observable, of} from 'rxjs';
+import {TripItem} from '../../../../models/TripItem';
+import {TripItemService} from '../../../services/trip-item.service';
+import {HttpClientModule} from '@angular/common/http';
+import {TripService} from '../../../services/trip.service';
+import {Trip} from '../../../../models/trip';
 
-import { TripComponent } from './trip.component';
+class TestTrips {
+  getTripItems(): Observable<Array<TripItem>> {
+    return of(new Array<TripItem>())
+  }
+}
+
+class TestService {
+  getById(id): Observable<Array<Trip>> {
+    return of(new Array<Trip>())
+  }
+}
 
 describe('TripComponent', () => {
   let component: TripComponent;
@@ -8,7 +26,12 @@ describe('TripComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ TripComponent ]
+      declarations: [ TripComponent ],
+      providers: [{provide: TripItemService, useValue: new TestTrips()}, {provide: TripService, useValue: new TestService()}],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        HttpClientModule
+      ]
     })
     .compileComponents();
   });
@@ -19,7 +42,7 @@ describe('TripComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

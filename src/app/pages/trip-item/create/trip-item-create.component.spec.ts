@@ -1,6 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { TripCreateComponent } from './trip-create.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {TripCreateComponent} from '../../trip/trip-create/trip-create.component';
 
 describe('TripCreateComponent', () => {
   let component: TripCreateComponent;
@@ -19,7 +18,7 @@ describe('TripCreateComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

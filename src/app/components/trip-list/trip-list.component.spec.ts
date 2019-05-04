@@ -1,6 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TripListComponent } from './trip-list.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('TripListComponent', () => {
   let component: TripListComponent;
@@ -8,7 +9,8 @@ describe('TripListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ TripListComponent ]
+      declarations: [ TripListComponent ],
+      schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
   });
@@ -19,7 +21,7 @@ describe('TripListComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

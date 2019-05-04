@@ -3,7 +3,7 @@ export class Authority {
     public name?: String;
 
     constructor(model) {
-        if (model !== undefined) {
+        if (typeof model !== 'undefined') {
             this.id = model.id;
             this.name = model.name;
         }
