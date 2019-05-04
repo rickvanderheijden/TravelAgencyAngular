@@ -12,7 +12,7 @@ export class Trip {
   public tripItems: TripItem[];
 
   constructor(model) {
-    if (typeof model !== typeof undefined) {
+    if (model !== null) {
       this.id = model.id;
       this.name = model.name;
       this.description = model.description;
