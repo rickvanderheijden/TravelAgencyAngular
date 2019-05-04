@@ -41,4 +41,8 @@ export class TripDescriptionComponent implements OnInit {
     this.travel.removeTripItem(tripItem);
     this.tripItemOut.emit(tripItem);
   }
+
+  bookTravel() {
+    //TODO
+  }
 }
