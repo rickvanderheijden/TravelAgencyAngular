@@ -11,7 +11,7 @@ export class Travel {
   public paid: boolean;
 
   constructor(model?) {
-    if (model !== null) {
+    if (typeof model !== typeof undefined) {
       this.id = model.id;
       this.trip = model.trip;
       this.tripItems = model.tripItems;
