@@ -14,7 +14,9 @@ export class TripItemCreateComponent implements OnInit {
   tripItemCreateForm: FormGroup;
   loading = false;
   tripItem: TripItem;
+  tripItemTypes: any;
   constructor(private tripItemService: TripItemService, private router: Router) {
+    this.tripItemTypes = [{id: 1, name: 'OUTING'}, {id: 2, name: 'PRODUCT'}, {id: 3, name: 'HOTEL'}];
     this.tripItem = new TripItem();
     this.setForm();
   }
@@ -46,5 +48,12 @@ export class TripItemCreateComponent implements OnInit {
   }
 
   submitForm(tripItemCreateForm: FormGroup) {
+    if (this.tripItemCreateForm.valid) {
+      this.tripItemService.createTripItem(this.tripItem).subscribe(
+        (response: any) => {
+          this.router.navigate(['/trip-item']);
+        }
+      )
+    }
   }
 }
