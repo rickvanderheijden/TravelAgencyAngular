@@ -27,7 +27,6 @@ export class TripCreateComponent implements OnInit {
     if (this.trip) {
       this.tripService.createTrip(this.trip).subscribe(
         (response: any) => {
-          console.log(response);
           this.back();
         });
     }

@@ -65,19 +65,8 @@ export class TripService {
    * @param trip
    */
   createTrip(trip: Trip ) {
-    console.log('CreateTrip')
-    const body = new URLSearchParams();
-    body.set('name', name);
-    body.set('description', description);
-    body.set('summary', summary);
-    body.set('imageUrl', imageUrl);
-    body.set('total_price', total_price.toString());
-    body.set('discount', discount.toString());
-
-    return this.http.post(environment.server + '/trips/createTrip/' + 1, body).pipe(
+    return this.http.post(environment.server + '/trips/createTrip', trip).pipe(
       map(response => {
-        console.log(response);
-        console.log('[CreateTrip] ' + JSON.stringify(response));
         return new Trip(response);
       }),
       catchError(error => {
@@ -92,11 +81,8 @@ export class TripService {
    * @param trip
    */
   updateTrip(trip: Trip ){
-    console.log('UpdateTrip')
     return this.http.put(environment.server + '/trips/updateTrip', trip).pipe(
       map(response => {
-        console.log(response);
-        console.log('[UpdateTrip] ' + JSON.stringify(response));
         return new Trip(response);
       }),
       catchError(error => {
