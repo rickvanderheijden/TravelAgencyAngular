@@ -38,7 +38,13 @@
                   </div>
                   <div class="form-group">
                     <label>Type</label>
-                    <input type="text" name="tripItemType" formControlName="tripItemType" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.tripItemType">
+                    <ng-select [items]="tripItemTypes"
+                               formControlName="tripItemType"
+                               bindValue="name"
+                               bindLabel="name"
+                               [multiple]="false"
+                               [(ngModel)]="tripItem.tripItemType">
+                    </ng-select>
                   </div>
                   <div class="form-group">
                     <label>Datum</label>

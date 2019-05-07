@@ -6,6 +6,7 @@ import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {catchError} from 'rxjs/internal/operators/catchError';
 import swal from 'sweetalert2';
+import {joinTestLogs} from 'protractor/built/util';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +22,14 @@ export class TripItemService {
     return this.http.get(environment.server + '/tripItems/all').pipe(
       map((response: Array<any>) => {
         const tripItems: Array<TripItem> = [];
+        console.log(response);
         response.forEach(function (tripItem, index) {
           tripItems.push(new TripItem(tripItem));
         });
         return tripItems;
       }),
       catchError(err => {
+        console.log(err);
         swal('getTripItems', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(err);
       }));
@@ -41,10 +44,6 @@ export class TripItemService {
       map(response => {
         console.log(response);
         return new TripItem(response);
-      }),
-      catchError(error => {
-        swal('getById', 'Er is iets niet goed gegaan.', 'error');
-        throw new Error(error);
       })
     );
   }
@@ -63,10 +62,10 @@ export class TripItemService {
 
   /**
    * Create a tripItem
-   * @param id
+   * @param tripItem
    */
   createTripItem(tripItem: TripItem) {
-    this.http.post(environment.url + '/tripItems/createTripItem', tripItem ).pipe(
+    return this.http.post(environment.url + '/tripItems/createTripItem', tripItem ).pipe(
       map( (response: any) => {
         console.log(response);
       })

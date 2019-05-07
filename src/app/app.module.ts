@@ -24,7 +24,6 @@ import { AgmDirectionModule} from 'agm-direction';
 import {ToastrModule} from 'ngx-toastr';
 import {UserModule} from './pages/user/index/user.module';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
-import {NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 export function jwtOptionsFactory(tokenService) {
   return {
@@ -51,8 +50,6 @@ export function jwtOptionsFactory(tokenService) {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule,
-    NgbCarouselModule,
     NgSelectModule,
     Ng2SmartTableModule,
     UserModule,
