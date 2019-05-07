@@ -19,7 +19,7 @@ export class UserService {
   getUsers() /*: Observable<Array<User>> */{
     return this.http.get(environment.server + '/users/all').pipe(
       tap(response => {
-        console.log(response);
+        // console.log(response);
         // return new Array(new User(response));
       }),
       catchError(err => {
@@ -51,7 +51,7 @@ export class UserService {
   getByUsername(username) {
     this.http.get(environment.server + '/users/' + username).pipe(
       tap(response => {
-        console.log(response);
+        // console.log(response);
       }),
       catchError(error => {
         swal('Oops', 'Er is iets nie goed gegaan', 'error');
@@ -67,7 +67,7 @@ export class UserService {
   getByEmailAddress(emailAddress) {
     this.http.get(environment.server + '/users/' + emailAddress).pipe(
       tap(response => {
-        console.log(response);
+        // console.log(response);
       }),
       catchError(error => {
         swal('Oops', 'Er is iets nie goed gegaan', 'error');

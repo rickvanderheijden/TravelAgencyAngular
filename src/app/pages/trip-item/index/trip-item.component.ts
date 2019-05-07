@@ -73,7 +73,6 @@ export class TripItemComponent implements OnInit {
           filter: true,
           sort: true,
           valuePrepareFunction: (value) => {
-            console.log(value);
             return '€' + value;
           }
         },

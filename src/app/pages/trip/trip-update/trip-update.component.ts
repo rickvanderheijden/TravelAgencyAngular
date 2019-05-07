@@ -15,7 +15,6 @@ export class TripUpdateComponent implements OnInit {
 
   constructor(private tripService: TripService, private route: ActivatedRoute, private router: Router) {
     this.tripService.getById(route.snapshot.params.id).subscribe((data: any) => {
-      console.log(data);
       this.trip = data;
       this.tripId = route.snapshot.params.id;
     });
@@ -28,7 +27,6 @@ export class TripUpdateComponent implements OnInit {
     if (this.trip) {
       this.tripService.updateTrip(this.trip).subscribe(
         (response: any) => {
-          console.log(response);
           this.back();
         });
     }
