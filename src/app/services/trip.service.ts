@@ -38,7 +38,6 @@ export class TripService {
   getById(id): Observable<Trip> {
     return this.http.get(environment.server + '/trips/' + id).pipe(
       map(response => {
-        console.log(response);
         return new Trip(response);
       }),
       catchError(error => {
@@ -49,14 +48,44 @@ export class TripService {
   }
 
   getFirst(): Observable<Trip> {
-    console.log('getFirst');
     return this.http.get(environment.server + '/trips/all/' + 1).pipe(
       map(response => {
-        console.log(response);
         return new Trip(response);
       }),
       catchError(error => {
         swal('getFirst', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(error);
+      })
+    );
+  }
+
+  /**
+   * Create a trip
+   * @param trip
+   */
+  createTrip(trip: Trip ) {
+    return this.http.post(environment.server + '/trips/createTrip', trip).pipe(
+      map(response => {
+        return new Trip(response);
+      }),
+      catchError(error => {
+        swal('createTrip', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(error);
+      })
+    );
+  }
+
+  /**
+   * Update a trip
+   * @param trip
+   */
+  updateTrip(trip: Trip ){
+    return this.http.put(environment.server + '/trips/updateTrip', trip).pipe(
+      map(response => {
+        return new Trip(response);
+      }),
+      catchError(error => {
+        swal('updateTrip', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(error);
       })
     );
@@ -69,7 +98,7 @@ export class TripService {
   deleteTrip(id: any) {
     this.http.delete(environment.url + '/trips/' + id ).pipe(
       map( (response: any) => {
-        console.log(response);
+        // console.log(response);
       })
     );
   }

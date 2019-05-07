@@ -20,7 +20,6 @@ export class NavbarComponent implements AfterViewChecked {
 
   constructor(private authService: AuthenticationService) {
     this.authService.authenticationState.subscribe(response => {
-      console.log(response, 'in navbar');
       if (response === true) {
         this.authService.getLoggedInUser().subscribe(
           user => {

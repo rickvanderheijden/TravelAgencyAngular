@@ -62,7 +62,6 @@ export class AuthenticationService {
     return this.http.post(url, user).pipe(
       map(
         (response: any) => {
-          console.log(response);
           if (response) {
             return true;
           }

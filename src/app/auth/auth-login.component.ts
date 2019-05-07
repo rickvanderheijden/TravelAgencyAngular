@@ -54,7 +54,6 @@ export class AuthLoginComponent implements OnInit {
     if ( valid ) {
       this.authService.register(this.auth).subscribe(
         response => {
-          console.log(response);
           if (response === true) {
             this.toastr.success('Account succesvol aangemaakt', 'Gelukt!');
             this.auth = new User(undefined);

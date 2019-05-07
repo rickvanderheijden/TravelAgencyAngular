@@ -22,14 +22,12 @@ export class TripItemService {
     return this.http.get(environment.server + '/tripItems/all').pipe(
       map((response: Array<any>) => {
         const tripItems: Array<TripItem> = [];
-        console.log(response);
         response.forEach(function (tripItem, index) {
           tripItems.push(new TripItem(tripItem));
         });
         return tripItems;
       }),
       catchError(err => {
-        console.log(err);
         swal('getTripItems', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(err);
       }));
@@ -42,7 +40,6 @@ export class TripItemService {
   getById(id): Observable<TripItem> {
     return this.http.get(environment.server + '/tripItems/' + id).pipe(
       map(response => {
-        console.log(response);
         return new TripItem(response);
       })
     );
@@ -55,7 +52,7 @@ export class TripItemService {
   deleteTripItem(id: any) {
     this.http.delete(environment.url + '/tripItems/' + id ).pipe(
       map( (response: any) => {
-        console.log(response);
+        // console.log(response);
       })
     );
   }
@@ -67,7 +64,7 @@ export class TripItemService {
   createTripItem(tripItem: TripItem) {
     return this.http.post(environment.url + '/tripItems/createTripItem', tripItem ).pipe(
       map( (response: any) => {
-        console.log(response);
+        // console.log(response);
       })
     );
   }

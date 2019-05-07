@@ -21,7 +21,6 @@ export class UserAuthorityComponent implements ViewCell, OnInit {
   ngOnInit() {
     const thiz = this;
     this.rowData.authorities.forEach( function (authority, index) {
-      console.log(authority);
       thiz.authorities = authority.name;
     });
   }
