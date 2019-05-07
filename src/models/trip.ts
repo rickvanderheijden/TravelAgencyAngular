@@ -2,7 +2,7 @@ import {TripItem} from './TripItem';
 
 export class Trip {
 
-  public id: number;
+  public id?: number;
   public name: String;
   public description: String;
   public summary: String;
@@ -11,7 +11,7 @@ export class Trip {
   public discount: number;
   public tripItems: TripItem[];
 
-  constructor(model) {
+  constructor(model?) {
     if (typeof model !== typeof undefined) {
       this.id = model.id;
       this.name = model.name;
