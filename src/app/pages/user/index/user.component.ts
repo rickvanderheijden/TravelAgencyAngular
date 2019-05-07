@@ -23,7 +23,6 @@ export class UserAuthorityComponent implements ViewCell, OnInit {
     this.rowData.authorities.forEach( function (authority, index) {
       thiz.authorities = authority.name;
     });
-    console.log(this.rowData);
   }
 
 }
@@ -97,7 +96,7 @@ export class UserComponent implements OnInit {
           title: 'Emailadres',
         },
         authorities: {
-          title: 'Status',
+          title: 'Rol',
           type: 'custom',
           filter: false,
           renderComponent: UserAuthorityComponent

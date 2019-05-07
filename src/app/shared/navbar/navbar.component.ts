@@ -20,7 +20,7 @@ export class NavbarComponent implements AfterViewChecked {
 
   constructor(private authService: AuthenticationService) {
     this.authService.authenticationState.subscribe(response => {
-      if (response) {
+      if (response === true) {
         this.authService.getLoggedInUser().subscribe(
           user => {
             this.user = new User(user);
@@ -29,33 +29,9 @@ export class NavbarComponent implements AfterViewChecked {
         );
       }
     });
-    // this.authService.loggedInUser.subscribe(user => {
-    //   console.log(user);
-    //     if ( user === null ) {
-    //       console.log(this.authService.isAuthenticated());
-    //       this.loggedIn = false;
-    //     } else {
-    //       this.loggedIn = true;
-    //       this.user = user;
-    //     }
-    //   }
-    // )
   }
 
   ngAfterViewChecked() {
-    this.authService.getLoggedInUser();
-
-        // setTimeout(() => {
-        //     var wrapperDiv = document.getElementsByClassName("wrapper")[0];
-        //     var dir = wrapperDiv.getAttribute("dir");
-        //     if (dir === 'rtl') {
-        //         this.placement = 'bottom-left';
-        //     }
-        //     else if (dir === 'ltr') {
-        //         this.placement = 'bottom-right';
-        //     }
-        // }, 3000);
-
 
     }
 

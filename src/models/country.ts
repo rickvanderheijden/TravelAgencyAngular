@@ -1,40 +1,26 @@
-import {Optional} from '@angular/core';
+import {City} from './city';
+
 
 export class Country {
 
-  private _name?: string;
-  private _continent?: string;
-  private _cities?: [string];
+  public name?: string;
+  public continent?: string;
+  public cities?: City[];
 
 
-  constructor(model) {
-    this._name = model.name;
-    this._continent = model.continent;
-    this._cities = model.cities;
+  constructor(model?) {
+    const self = this;
+    if (typeof model !== typeof undefined) {
+      this.name = model.name;
+      this.continent = model.continent;
+      this.cities = new Array<City>();
+
+      if (model.cities !== null) {
+        model.cities.forEach(function (city, index) {
+          self.cities.push(new City(city));
+        })
+      }
+    }
   }
 
-
-  get name(): string {
-    return this._name;
-  }
-
-  set name(value: string) {
-    this._name = value;
-  }
-
-  get continent(): string {
-    return this._continent;
-  }
-
-  set continent(value: string) {
-    this._continent = value;
-  }
-
-  get cities(): [string] {
-    return this._cities;
-  }
-
-  set cities(value: [string]) {
-    this._cities = value;
-  }
 }

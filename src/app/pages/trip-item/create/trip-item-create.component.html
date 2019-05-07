@@ -1,0 +1,94 @@
+<section id="trip-item-create">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4 class="card-title">Trips-Items aanmaken</h4>
+            </div>
+            <div class="col-sm-6">
+              <a class="btn btn-raised btn-grey float-sm-right" (click)="back()">
+                Terug
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-block">
+            <form [formGroup]="tripItemCreateForm" novalidate (ngSubmit)="submitForm(tripItemCreateForm)">
+            <ngb-tabset>
+              <ngb-tab title="Gegevens TripItem">
+                <ng-template ngbTabContent>
+                  <div class="form-group">
+                    <label>Naam</label>
+                    <input type="text" name="name" formControlName="name" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.name">
+                  </div>
+                  <div class="form-group">
+                    <label>Omschrijving</label>
+                    <input type="text" name="description" formControlName="description" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.description">
+                  </div>
+                  <div class="form-group">
+                    <label>Prijs</label>
+                    <input type="tel" name="name" formControlName="price" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.price">
+                  </div>
+                  <div class="form-group">
+                    <label>Foto</label>
+                    <input type="text" name="imageUrl" formControlName="imageUrl" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.imageUrl">
+                  </div>
+                  <div class="form-group">
+                    <label>Type</label>
+                    <ng-select [items]="tripItemTypes"
+                               formControlName="tripItemType"
+                               bindValue="name"
+                               bindLabel="name"
+                               [multiple]="false"
+                               [(ngModel)]="tripItem.tripItemType">
+                    </ng-select>
+                  </div>
+                  <div class="form-group">
+                    <label>Datum</label>
+                    <input type="date" name="date" formControlName="date" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.date">
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>Adres gegevens</ng-template>
+                <ng-template ngbTabContent>
+                  <div class="form-group">
+                    <label>Adres</label>
+                    <input type="text" name="address" formControlName="address" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.address.address">
+                  </div>
+                  <div class="form-group">
+                    <label>Postcode</label>
+                    <input type="text" name="zipcode" formControlName="zipcode" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.address.zipcode">
+                  </div>
+                  <div class="form-group">
+                    <label>Stad</label>
+                    <input type="text" name="city" formControlName="city" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.address.city.name">
+                  </div>
+                  <div class="form-group">
+                    <label>Land</label>
+                    <input type="text" name="country" formControlName="country" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.address.country.name">
+                  </div>
+                </ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+              <div class="form-actions">
+                <div class="row">
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary" [disabled]="!tripItemCreateForm.valid">
+                      <span>Trip-item opslaan</span>
+                      <i *ngIf="loading" class="ft-loader spinner right"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

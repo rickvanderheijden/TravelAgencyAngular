@@ -62,7 +62,6 @@ export class AuthenticationService {
     return this.http.post(url, user).pipe(
       map(
         (response: any) => {
-          console.log(response);
           if (response) {
             return true;
           }
@@ -76,7 +75,7 @@ export class AuthenticationService {
   }
 
   isAuthenticated() {
-    if (this.authenticationState.value){
+    if (this.authenticationState.value) {
       this.getLoggedInUser();
     }
     return this.authenticationState.value;
@@ -99,6 +98,7 @@ export class AuthenticationService {
       tap(response => {
         const user = new User(response);
         this.loggedInUser.next(user);
+        return user;
       }),
       catchError(error => {throw new Error(error)})
     );
@@ -118,16 +118,4 @@ export class AuthenticationService {
     localStorage.setItem(TOKEN_KEY, token);
   }
 
-  isAdmin() {
-    if (!this.isAuthenticated()) {
-      return false;
-    } else {
-      if (this.user == null) {
-        this.getLoggedInUser().subscribe(user => {
-          this.user = new User(user);
-          return this.user.isAdmin();
-        });
-      }
-    }
-  }
 }

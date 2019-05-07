@@ -1,6 +1,21 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TripCreateComponent } from './trip-create.component';
+import {RouterTestingModule} from '@angular/router/testing';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {Trip} from '../../../../models/trip';
+import {Observable, of} from 'rxjs';
+import {TripService} from '../../../services/trip.service';
+
+class DummyComponent {
+}
+
+class TestTrip {
+  createTrip(trip: Trip): Observable<Trip> {
+    return of(new Trip);
+  }
+}
+
 
 describe('TripCreateComponent', () => {
   let component: TripCreateComponent;
@@ -8,9 +23,15 @@ describe('TripCreateComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ TripCreateComponent ]
+      declarations: [ TripCreateComponent ],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [{provide: TripService, useValue: new TestTrip()}],
+      imports: [ RouterTestingModule.withRoutes([
+          { path: '', component: DummyComponent }
+        ]),
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +40,7 @@ describe('TripCreateComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });
