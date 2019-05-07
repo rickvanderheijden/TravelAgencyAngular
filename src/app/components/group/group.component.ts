@@ -8,7 +8,7 @@ import {Travelgroup} from '../../../models/travelgroup';
 })
 export class GroupComponent implements OnInit {
 
-  constructor(private travelGroup: Travelgroup) { }
+  constructor() { }
 
   ngOnInit() {
   }
