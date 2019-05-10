@@ -15,10 +15,6 @@ export class TripCreateComponent implements OnInit {
   trip: Trip;
   loading = false;
 
-  tripCreateForm: FormGroup;
-  trip: Trip;
-  loading = false;
-
   constructor(private tripService: TripService, private router: Router) {
     this.trip = new Trip();
   }

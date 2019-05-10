@@ -11,11 +11,15 @@ import {User_ROUTES} from './shared/routes/user-layout.routes';
 import {Home_ROUTES} from './shared/routes/home-layout.routes';
 import {Trip_ROUTES} from './shared/routes/trip-layout.routes';
 import {TripItem_ROUTES} from './shared/routes/trip-item-layout.routes';
+import {GroupComponent} from './components/group/group.component';
 
 
 const appRoutes: Routes = [
   {
     path: 'auth/login', component: AuthLoginComponent
+  },
+  {
+    path: 'groups', component: GroupComponent
   },
   {
     path: '',

@@ -1,3 +1,24 @@
-<p>
-  group works!
-</p>
+<div *ngIf="!loading" style="display: inline-block; position: absolute; float: left; height: auto">
+
+<div _ngcontent-c24="" class="card-content">
+  <div _ngcontent-c24="" class="card-body">
+    <table _ngcontent-c24="" class="table table-responsive-md text-center">
+        <tr _ngcontent-c24="">
+          <th _ngcontent-c24="">Groep</th>
+        </tr>
+      <tbody _ngcontent-c24="">
+      <tr _ngcontent-c24="" *ngFor="let tripItem of groups" >
+        <td _ngcontent-c24="">{{tripItem.groupName}}</td>
+        <td _ngcontent-c24=""><a _ngcontent-c24="" class="info p-0" data-original-title="" title=""><i _ngcontent-c24=""
+                                                                                                       class="ft-user font-medium-3 mr-2"></i></a><a
+          _ngcontent-c24="" class="success p-0" data-original-title="" title=""><i _ngcontent-c24=""
+                                                                                   class="ft-edit-2 font-medium-3 mr-2"></i></a><a
+          _ngcontent-c24="" class="danger p-0" data-original-title="" title=""><i _ngcontent-c24=""
+                                                                                  class="ft-x font-medium-3 mr-2"></i></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
