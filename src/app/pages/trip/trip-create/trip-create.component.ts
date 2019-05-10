@@ -11,6 +11,9 @@ import {FormGroup} from '@angular/forms';
   styleUrls: ['./trip-create.component.scss']
 })
 export class TripCreateComponent implements OnInit {
+  tripCreateForm: FormGroup;
+  trip: Trip;
+  loading = false;
 
   tripCreateForm: FormGroup;
   trip: Trip;
