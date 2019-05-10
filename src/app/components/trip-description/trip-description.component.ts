@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Trip} from '../../../models/trip';
 import {Travel} from '../../../models/travel';
 import {TripItem} from '../../../models/TripItem';
+import {AuthenticationService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-trip-description',
@@ -20,7 +21,7 @@ export class TripDescriptionComponent implements OnInit {
   tripItemOut = new EventEmitter<TripItem>();
 
   loading = false;
-  constructor() {
+  constructor(private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
@@ -40,6 +41,10 @@ export class TripDescriptionComponent implements OnInit {
   }
 
   bookTravel() {
+    // TODO
+  }
+
+  loginToBookTravel() {
     // TODO
   }
 }
