@@ -1,4 +1,4 @@
-export class Travelgroup {
+export class TravelGroup {
   public id?: number;
   public groupName?: string;
 
