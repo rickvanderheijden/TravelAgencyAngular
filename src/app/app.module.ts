@@ -24,6 +24,8 @@ import { AgmDirectionModule} from 'agm-direction';
 import {ToastrModule} from 'ngx-toastr';
 import {UserModule} from './pages/user/index/user.module';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
+import {GroupDetailComponent } from './components/group-detail/group-detail.component';
+import {GroupComponent} from './components/group/group.component';
 
 export function jwtOptionsFactory(tokenService) {
   return {
@@ -40,7 +42,9 @@ export function jwtOptionsFactory(tokenService) {
     AppComponent,
     FullLayoutComponent,
     AuthLoginComponent,
-    TopFiltersComponent
+    TopFiltersComponent,
+    GroupComponent,
+    GroupDetailComponent,
   ],
   imports: [
     CommonModule,
