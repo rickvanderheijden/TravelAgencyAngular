@@ -13,7 +13,6 @@ export class UserUpdateResolver implements Resolve<User> {
   constructor(private userService: UserService, private authService: AuthenticationService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    console.log('user update resolver');
     return this.userService.isAdmin().subscribe( isAdmin => {
       if (isAdmin) {
         return this.userService.getById(route.params.id);

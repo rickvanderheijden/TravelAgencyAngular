@@ -29,14 +29,12 @@ export class UserUpdateComponent implements OnInit {
     this.userService.isAdmin().subscribe( isAdmin => {
       if (isAdmin) {
         return this.userService.getById(route.snapshot.params.id).subscribe((data: any) => {
-          console.log(data);
           this.user = data;
           this.setForm();
           this.userId = route.snapshot.params.id;
         });
       } else {
         return this.authService.getLoggedInUser().subscribe((data: any) => {
-          console.log(data);
           this.user = data;
           this.setForm();
           this.userId = route.snapshot.params.id;

@@ -24,12 +24,9 @@ export class TripDescriptionComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('ngOnInit');
     this.travel = new Travel();
     this.travel.trip = this.trip;
     this.travel.totalPrice = this.trip.totalPrice;
-    console.log(this.trip);
-    console.log(this.travel);
   }
 
   addTripItem(tripItem: TripItem) {
@@ -40,5 +37,9 @@ export class TripDescriptionComponent implements OnInit {
   removeTripItem(tripItem: TripItem) {
     this.travel.removeTripItem(tripItem);
     this.tripItemOut.emit(tripItem);
+  }
+
+  bookTravel() {
+    // TODO
   }
 }

@@ -26,7 +26,6 @@ export class UserCreateComponent implements OnInit {
         for (const auth of authoritiesResponse) {
           this.authorities.push(new Authority(auth));
         }
-        console.log(this.authorities);
         this.setForm();
       }
     )

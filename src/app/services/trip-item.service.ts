@@ -6,6 +6,7 @@ import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {catchError} from 'rxjs/internal/operators/catchError';
 import swal from 'sweetalert2';
+import {joinTestLogs} from 'protractor/built/util';
 
 @Injectable({
   providedIn: 'root'
@@ -39,12 +40,7 @@ export class TripItemService {
   getById(id): Observable<TripItem> {
     return this.http.get(environment.server + '/tripItems/' + id).pipe(
       map(response => {
-        console.log(response);
         return new TripItem(response);
-      }),
-      catchError(error => {
-        swal('getById', 'Er is iets niet goed gegaan.', 'error');
-        throw new Error(error);
       })
     );
   }
@@ -56,19 +52,19 @@ export class TripItemService {
   deleteTripItem(id: any) {
     this.http.delete(environment.url + '/tripItems/' + id ).pipe(
       map( (response: any) => {
-        console.log(response);
+        // console.log(response);
       })
     );
   }
 
   /**
    * Create a tripItem
-   * @param id
+   * @param tripItem
    */
   createTripItem(tripItem: TripItem) {
-    this.http.post(environment.url + '/tripItems/createTripItem', tripItem ).pipe(
+    return this.http.post(environment.url + '/tripItems/createTripItem', tripItem ).pipe(
       map( (response: any) => {
-        console.log(response);
+        // console.log(response);
       })
     );
   }
