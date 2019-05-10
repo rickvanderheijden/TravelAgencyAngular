@@ -20,7 +20,14 @@ export class Trip {
       this.totalPrice = model.totalPrice;
       this.imageUrl = model.imageUrl;
       this.discount = model.discount;
-      this.tripItems = model.tripItems;
+      this.tripItems = model.tripItems !== null ? model.tripItems : new Array<TripItem>();
     }
+  }
+
+  addTripItem(tripItem: TripItem) {
+    if(this.tripItems.indexOf(tripItem) !== -1) {
+      this.tripItems.push(tripItem);
+    }
+
   }
 }

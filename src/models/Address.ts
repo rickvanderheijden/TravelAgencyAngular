@@ -3,8 +3,8 @@ import {City} from './city';
 
 export class Address {
   public id?: number;
-  public address?: String;
-  public zipcode?: String;
+  public addressLine?: String;
+  public zipCode?: String;
   public city?: City;
   public country?: Country;
 
@@ -12,8 +12,8 @@ export class Address {
   constructor(model?) {
     if (typeof model !== typeof undefined) {
       this.id = model.id;
-      this.address = model.address;
-      this.zipcode = model.zipcode;
+      this.addressLine = model.addressLine;
+      this.zipCode = model.zipCode;
       this.city = new City(model.city);
       this.country = new Country(model.country);
     } else {

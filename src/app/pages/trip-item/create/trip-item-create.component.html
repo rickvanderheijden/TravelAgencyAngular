@@ -57,19 +57,33 @@
                 <ng-template ngbTabContent>
                   <div class="form-group">
                     <label>Adres</label>
-                    <input type="text" name="address" formControlName="address" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.address.address">
+                    <input type="text" name="address" formControlName="address" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.address.addressLine">
                   </div>
                   <div class="form-group">
                     <label>Postcode</label>
-                    <input type="text" name="zipcode" formControlName="zipcode" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.address.zipcode">
+                    <input type="text" name="zipcode" formControlName="zipcode" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.address.zipCode">
                   </div>
                   <div class="form-group">
                     <label>Stad</label>
-                    <input type="text" name="city" formControlName="city" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.address.city.name">
+                    <ng-select [items]="cities"
+                               formControlName="city"
+                               bindValue="name"
+                               bindLabel="name"
+                               [multiple]="false"
+                               [(ngModel)]="tripItem.address.city.name">
+                    </ng-select>
+<!--                    <input type="text" name="city" formControlName="city" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.address.city.name">-->
                   </div>
                   <div class="form-group">
                     <label>Land</label>
-                    <input type="text" name="country" formControlName="country" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.address.country.name">
+                    <ng-select [items]="countries"
+                               formControlName="country"
+                               bindValue="name"
+                               bindLabel="name"
+                               [multiple]="false"
+                               [(ngModel)]="tripItem.address.country.name">
+                    </ng-select>
+<!--                    <input type="text" name="country" formControlName="country" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.address.country.name">-->
                   </div>
                 </ng-template>
               </ngb-tab>

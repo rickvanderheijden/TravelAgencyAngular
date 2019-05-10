@@ -62,4 +62,5 @@ app-root:empty ~ .page-loading {
 }
 
 .btn-primary, .btn-secondary{ color: #fff!important;}
+section {max-width: 1170px; margin: 0 auto;}
 

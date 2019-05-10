@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {TripService} from '../../../services/trip.service';
 import {Trip} from '../../../../models/trip';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {TripItem} from '../../../../models/TripItem';
+import {TripItemService} from '../../../services/trip-item.service';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-trip-update',
@@ -14,8 +17,14 @@ export class TripUpdateComponent implements OnInit {
   trip: Trip;
   tripId: any;
   loading = false;
+  tripItems: Array<TripItem>;
 
-  constructor(private tripService: TripService, private route: ActivatedRoute, private router: Router) {
+  constructor(
+    private tripService: TripService,
+    private tripItemService: TripItemService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.tripService.getById(route.snapshot.params.id).subscribe((data: any) => {
       this.trip = new Trip(data);
       console.log(this.trip);
@@ -25,9 +34,16 @@ export class TripUpdateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
+    this.tripItemService.getTripItems().subscribe((tripItems: any) => {
+      this.tripItems = tripItems;
+      this.loading = false;
+    });
   }
 
   updateTrip() {
+    console.log(this.trip);
+    return;
     if (this.trip) {
       this.tripService.updateTrip(this.trip).subscribe(
         (response: any) => {
@@ -47,7 +63,19 @@ export class TripUpdateComponent implements OnInit {
       summary: new FormControl(this.trip.summary),
       imageUrl: new FormControl(this.trip.imageUrl, [Validators.minLength(6), Validators.email, Validators.required]),
       totalPrice: new FormControl(this.trip.totalPrice, [Validators.minLength(5)]),
-      discount: new FormControl(this.trip.discount)
+      discount: new FormControl(this.trip.discount),
+      tripItems: new FormControl(this.trip.tripItems)
     });
   }
+
+  addTripItem(event) {
+    this.trip.addTripItem(event);
+    console.log(event);
+
+  }
+
+  removeTripItem(event) {
+    console.log(event);
+  }
+
 }
