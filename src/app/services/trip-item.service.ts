@@ -6,7 +6,6 @@ import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {catchError} from 'rxjs/internal/operators/catchError';
 import swal from 'sweetalert2';
-import {joinTestLogs} from 'protractor/built/util';
 
 @Injectable({
   providedIn: 'root'
@@ -67,5 +66,9 @@ export class TripItemService {
         // console.log(response);
       })
     );
+  }
+
+  updateTripItem(tripItem: TripItem) {
+
   }
 }
