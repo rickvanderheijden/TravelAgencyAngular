@@ -3,7 +3,7 @@ export class Travelgroup {
   public groupName?: string;
 
   constructor(model) {
-    if (model !== undefined) {
+    if (typeof model !== typeof undefined) {
       this.id = model.id;
       this.groupName = model.groupName;
     }
