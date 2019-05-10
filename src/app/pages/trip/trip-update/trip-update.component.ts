@@ -18,6 +18,7 @@ export class TripUpdateComponent implements OnInit {
   tripId: any;
   loading = false;
   tripItems: Array<TripItem>;
+  selectedTripItems: Array<any>;
 
   constructor(
     private tripService: TripService,
@@ -25,25 +26,23 @@ export class TripUpdateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.tripService.getById(route.snapshot.params.id).subscribe((data: any) => {
-      this.trip = new Trip(data);
-      console.log(this.trip);
-      this.tripId = route.snapshot.params.id;
-      this.setForm();
-    });
+
   }
 
   ngOnInit() {
     this.loading = true;
     this.tripItemService.getTripItems().subscribe((tripItems: any) => {
       this.tripItems = tripItems;
-      this.loading = false;
+      this.tripService.getById(this.route.snapshot.params.id).subscribe((data: any) => {
+        this.trip = new Trip(data);
+        this.tripId = this.route.snapshot.params.id;
+        this.setForm();
+        this.loading = false;
+      });
     });
   }
 
   updateTrip() {
-    console.log(this.trip);
-    return;
     if (this.trip) {
       this.tripService.updateTrip(this.trip).subscribe(
         (response: any) => {
@@ -66,16 +65,6 @@ export class TripUpdateComponent implements OnInit {
       discount: new FormControl(this.trip.discount),
       tripItems: new FormControl(this.trip.tripItems)
     });
-  }
-
-  addTripItem(event) {
-    this.trip.addTripItem(event);
-    console.log(event);
-
-  }
-
-  removeTripItem(event) {
-    console.log(event);
   }
 
 }

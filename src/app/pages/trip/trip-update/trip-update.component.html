@@ -45,11 +45,9 @@
                 <label>Trip Items</label>
                 <ng-select [items]="tripItems"
                            formControlName="tripItems"
-                           bindValue="name"
-                           bindLabel="name"
+                            bindLabel="name"
                            [multiple]="true"
-                           (add)="addTripItem($event)"
-                           (remove)="removeTripItem($event)"
+                           [(ngModel)]="trip.tripItems"
                             >
                 </ng-select>
               </div>
