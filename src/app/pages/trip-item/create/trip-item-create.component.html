@@ -34,6 +34,20 @@
                   </div>
                   <div class="form-group">
                     <label>Foto</label>
+                    <div *ngIf="srcUrl" class="image-display-container">
+                      <img  [src]="srcUrl" alt="src"> <span (click)="srcUrl = null">x</span>
+                    </div>
+
+                    <div ng2FileDrop
+                         *ngIf="!srcUrl"
+                         [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                         (onFileDrop)="fileDropped($event)"
+                         (fileOver)="fileOverBase($event)"
+                         [uploader]="uploader"
+                         class="py-5 mb-3 text-center font-medium-5 text-uppercase grey my-drop-zone">
+                      Drop trip-item foto hier
+                    </div>
+                    <input type="file" ng2FileSelect [uploader]="uploader" class="custom-file-input" accept="image/*">
                     <input type="text" name="imageUrl" formControlName="imageUrl" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.imageUrl">
                   </div>
                   <div class="form-group">

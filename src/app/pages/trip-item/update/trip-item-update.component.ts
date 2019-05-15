@@ -7,7 +7,9 @@ import {City} from '../../../../models/city';
 import {TripItemService} from '../../../services/trip-item.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GeographyService} from '../../../services/geography.service';
-import {Trip} from '../../../../models/trip';
+import { FileUploader } from 'ng2-file-upload';
+
+const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
   selector: 'app-trip-item-update',
@@ -76,13 +78,13 @@ export class TripItemUpdateComponent implements OnInit {
   }
 
   submitForm(tripItemUpdateForm: FormGroup) {
-    if (this.tripItemUpdateForm.valid) {
-      this.tripItemService.updateTripItem(this.tripItem).subscribe(
-        (response: any) => {
-          this.router.navigate(['/trip-item']);
-        }
-      )
-    }
+    // if (this.tripItemUpdateForm.valid) {
+    //   this.tripItemService.updateTripItem(this.tripItem).subscribe(
+    //     (response: any) => {
+    //       this.router.navigate(['/trip-item']);
+    //     }
+    //   )
+    // }
   }
 
 }

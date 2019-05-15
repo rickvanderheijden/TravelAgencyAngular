@@ -7,6 +7,7 @@ export class TripItem {
   public name?: String;
   public description?: String;
   public imageUrl?: String;
+  public imageBlob?: string | ArrayBuffer;
   public address?: Address;
   public date?: Date;
   public price?: number;
@@ -22,6 +23,7 @@ export class TripItem {
       this.price = model.price;
       this.date = new Date(model.date);
       this.imageUrl = model.imageUrl;
+      this.imageBlob = model.imageBlob;
     } else {
       this.date = new Date();
       this.address = new Address();

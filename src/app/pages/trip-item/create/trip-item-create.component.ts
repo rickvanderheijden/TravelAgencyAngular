@@ -7,7 +7,8 @@ import {GeographyService} from '../../../services/geography.service';
 import {Continent} from '../../../../models/Continent';
 import {Country} from '../../../../models/country';
 import {City} from '../../../../models/city';
-
+import {FileUploader} from 'ng2-file-upload';
+import swal from 'sweetalert2';
 @Component({
   selector: 'app-trip-item-create',
   templateUrl: './trip-item-create.component.html',
@@ -22,6 +23,11 @@ export class TripItemCreateComponent implements OnInit {
   continents: Array<Continent>;
   countries: Array<Country>;
   cities: Array<City>;
+  uploader: FileUploader = new FileUploader({
+    allowedFileType: ['image']
+  });
+  hasBaseDropZoneOver = false;
+  srcUrl: any;
   constructor(private tripItemService: TripItemService, private router: Router, private geographyService: GeographyService) {
     this.tripItemTypes = [{id: 1, name: 'OUTING'}, {id: 2, name: 'PRODUCT'}, {id: 3, name: 'HOTEL'}];
     this.tripItem = new TripItem();
@@ -57,10 +63,6 @@ export class TripItemCreateComponent implements OnInit {
     });
   }
 
-  CreateTripItem() {
-
-  }
-
   back() {
     this.router.navigate(['/trip-item']);
   }
@@ -73,5 +75,26 @@ export class TripItemCreateComponent implements OnInit {
         }
       )
     }
+  }
+
+
+  fileOverBase(e: any): void {
+    this.hasBaseDropZoneOver = e;
+  }
+
+  fileDropped(file: File[]) {
+    if (this.uploader.queue.length === 0) {
+      swal('Fout', 'Je mag alleen foto\'s uploaden', 'error');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (event.returnValue) {
+        this.tripItem.imageBlob = reader.result;
+        this.srcUrl = reader.result;
+      }
+      this.uploader.clearQueue();
+    };
+    reader.readAsDataURL(file[0]);
   }
 }
