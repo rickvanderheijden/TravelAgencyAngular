@@ -4,6 +4,7 @@ import {Travel} from '../../../models/travel';
 import {TripItem} from '../../../models/TripItem';
 import {AuthenticationService} from '../../auth/auth.service';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-trip-description',
@@ -24,7 +25,7 @@ export class TripDescriptionComponent implements OnInit {
   tripItemOut = new EventEmitter<TripItem>();
 
   loading = false;
-  constructor(private authenticationService: AuthenticationService, private modalService: BsModalService) {
+  constructor(private authenticationService: AuthenticationService, private modalService: BsModalService, private router: Router) {
   }
 
   ngOnInit() {
@@ -44,7 +45,7 @@ export class TripDescriptionComponent implements OnInit {
   }
 
   bookTravel() {
-    // TODO
+    this.router.navigateByUrl('/booktravel', { state: { travel: this.travel } });
   }
 
   openModal(template: TemplateRef<any>) {

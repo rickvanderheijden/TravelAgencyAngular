@@ -4,7 +4,7 @@ import { TripSummaryComponent } from './trip-summary.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {Trip} from '../../../models/trip';
 
-class TestTrip { image_url = 'TestImageUrl'; }
+class TestTrip { imageUrl = 'TestImageUrl'; }
 
 describe('TripSummaryComponent', () => {
   let component: TripSummaryComponent;
