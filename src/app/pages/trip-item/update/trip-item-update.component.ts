@@ -61,7 +61,7 @@ export class TripItemUpdateComponent implements OnInit {
     this.tripItemUpdateForm = new FormGroup({
       name: new FormControl(this.tripItem.name, [Validators.required]),
       description: new FormControl(this.tripItem.description, [ Validators.required]),
-      imageUrl: new FormControl(this.tripItem.imageUrl, [ Validators.required]),
+      imageBlob: new FormControl(this.tripItem.imageBlob, [ Validators.required]),
       price: new FormControl(this.tripItem.price, [ Validators.required]),
       tripItemType: new FormControl(this.tripItem.tripItemType, [Validators.required]),
       date: new FormControl(this.tripItem.date, [Validators.required]),
@@ -78,13 +78,16 @@ export class TripItemUpdateComponent implements OnInit {
   }
 
   submitForm(tripItemUpdateForm: FormGroup) {
-    // if (this.tripItemUpdateForm.valid) {
-    //   this.tripItemService.updateTripItem(this.tripItem).subscribe(
-    //     (response: any) => {
-    //       this.router.navigate(['/trip-item']);
-    //     }
-    //   )
-    // }
+    if (this.tripItemUpdateForm.valid) {
+      this.tripItemService.updateTripItem(this.tripItem).subscribe(
+        (response: any) => {
+          this.router.navigate(['/trip-item']);
+        }
+      )
+    }
   }
 
+  updateImageBlob(event: String | ArrayBuffer) {
+    this.tripItem.imageBlob =  event.toString();
+  }
 }

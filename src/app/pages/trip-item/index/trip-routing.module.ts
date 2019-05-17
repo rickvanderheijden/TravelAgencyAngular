@@ -9,6 +9,7 @@ import {TripItemUpdateModule} from '../update/trip-item-update.module';
 import {TripItemUpdateComponent} from '../update/trip-item-update.component';
 
 
+
 const routes: Routes = [
   {
     path: '',

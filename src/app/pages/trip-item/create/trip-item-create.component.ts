@@ -52,7 +52,6 @@ export class TripItemCreateComponent implements OnInit {
     this.tripItemCreateForm = new FormGroup({
       name: new FormControl(this.tripItem.name, [Validators.required]),
       description: new FormControl(this.tripItem.description, [ Validators.required]),
-      imageUrl: new FormControl(this.tripItem.imageUrl, [ Validators.required]),
       price: new FormControl(this.tripItem.price, [ Validators.required]),
       tripItemType: new FormControl(this.tripItem.tripItemType, [Validators.required]),
       date: new FormControl(this.tripItem.date, [Validators.required]),
@@ -76,25 +75,7 @@ export class TripItemCreateComponent implements OnInit {
       )
     }
   }
-
-
-  fileOverBase(e: any): void {
-    this.hasBaseDropZoneOver = e;
-  }
-
-  fileDropped(file: File[]) {
-    if (this.uploader.queue.length === 0) {
-      swal('Fout', 'Je mag alleen foto\'s uploaden', 'error');
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      if (event.returnValue) {
-        this.tripItem.imageBlob = reader.result;
-        this.srcUrl = reader.result;
-      }
-      this.uploader.clearQueue();
-    };
-    reader.readAsDataURL(file[0]);
+  updateImageBlob(event) {
+    console.log(event);
   }
 }

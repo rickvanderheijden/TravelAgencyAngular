@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {TripItemUpdateComponent} from './trip-item-update.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgSelectModule} from '@ng-select/ng-select';
+import {TripItemCreateModule} from '../create/trip-item-create.module';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import {NgSelectModule} from '@ng-select/ng-select';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    NgSelectModule
+    NgSelectModule,
+    TripItemCreateModule
   ],
   declarations: [
     TripItemUpdateComponent,
