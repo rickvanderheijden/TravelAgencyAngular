@@ -25,6 +25,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {UserModule} from './pages/user/index/user.module';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {TabsModule} from 'ngx-bootstrap';
+import {FileUploadModule} from 'ng2-file-upload';
 
 export function jwtOptionsFactory(tokenService) {
   return {
@@ -41,7 +42,8 @@ export function jwtOptionsFactory(tokenService) {
     AppComponent,
     FullLayoutComponent,
     AuthLoginComponent,
-    TopFiltersComponent
+    TopFiltersComponent,
+    // DropZoneComponent
   ],
   imports: [
     CommonModule,
@@ -68,12 +70,14 @@ export function jwtOptionsFactory(tokenService) {
       apiKey: 'AIzaSyC_xNfcNGLJdRMi229CJlat9nL-OkPj6d8'
     }),
     AgmDirectionModule,
+    FileUploadModule,
   ],
   providers: [
     TokenService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],
   exports: [
+    // DropZoneComponent
   ],
   bootstrap: [AppComponent]
 })

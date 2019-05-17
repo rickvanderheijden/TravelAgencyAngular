@@ -69,6 +69,12 @@ export class TripItemService {
   }
 
   updateTripItem(tripItem: TripItem) {
+    console.log(tripItem);
+    return this.http.put(environment.url + '/tripItems/' + tripItem.id, tripItem).pipe(
+      map((response: any) => {
+        console.log(response);
+      })
+    );
 
   }
 }
