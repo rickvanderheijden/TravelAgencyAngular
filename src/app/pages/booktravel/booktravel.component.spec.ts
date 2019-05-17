@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BookTravelComponent } from './booktravel.component';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
+import {RouterModule} from '@angular/router';
 
 describe('BookTravelComponent', () => {
   let component: BookTravelComponent;
@@ -13,6 +14,7 @@ describe('BookTravelComponent', () => {
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [],
       imports: [
+        RouterModule.forRoot([]),
         HttpClientModule
       ]
     })
