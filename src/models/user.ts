@@ -9,8 +9,8 @@ export class User {
     public firstname?: String;
     public lastname?: String;
     public emailAddress?: String;
-  public authorities: Array<Authority>;
-  public travelgroups: Array<Travelgroup>;
+    public authorities: Array<Authority>;
+    public travelgroups: Array<Travelgroup>;
 
     constructor(model?) {
         if (typeof model !== typeof undefined) {

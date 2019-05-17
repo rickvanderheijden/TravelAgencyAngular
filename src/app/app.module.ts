@@ -43,8 +43,6 @@ export function jwtOptionsFactory(tokenService) {
     FullLayoutComponent,
     AuthLoginComponent,
     TopFiltersComponent,
-    GroupComponent,
-    GroupDetailComponent,
   ],
   imports: [
     CommonModule,

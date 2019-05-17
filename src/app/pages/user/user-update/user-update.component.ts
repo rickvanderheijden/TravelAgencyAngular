@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service';
@@ -23,25 +23,8 @@ export class UserUpdateComponent implements OnInit {
     private userService: UserService,
     private authService: AuthenticationService,
     private route: ActivatedRoute
-  ) {
-    this.changePassword = false;
+  ) {  }
 
-    this.userService.isAdmin().subscribe( isAdmin => {
-      if (isAdmin) {
-        return this.userService.getById(route.snapshot.params.id).subscribe((data: any) => {
-          this.user = data;
-          this.setForm();
-          this.userId = route.snapshot.params.id;
-        });
-      } else {
-        return this.authService.getLoggedInUser().subscribe((data: any) => {
-          this.user = data;
-          this.setForm();
-          this.userId = route.snapshot.params.id;
-        });
-      }
-    });
-  }
   setForm() {
     this.userUpdateForm = new FormGroup({
       username: new FormControl(this.user.username, [Validators.minLength(4), Validators.required]),
@@ -52,7 +35,28 @@ export class UserUpdateComponent implements OnInit {
       password_repeat: new FormControl()
     });
   }
+
   ngOnInit() {
+    this.loading=true;
+    this.changePassword = false;
+
+    this.userService.isAdmin().subscribe( isAdmin => {
+      if (isAdmin) {
+        return this.userService.getById(this.route.snapshot.params.id).subscribe((data: any) => {
+          this.user = data;
+          this.setForm();
+          this.userId = this.route.snapshot.params.id;
+          this.loading = false;
+        });
+      } else {
+        return this.authService.getLoggedInUser().subscribe((data: any) => {
+          this.user = data;
+          this.setForm();
+          this.userId = this.route.snapshot.params.id;
+          this.loading = false;
+        });
+      }
+    });
   }
 
   submitForm(userUpdateForm) {
@@ -68,15 +72,15 @@ export class UserUpdateComponent implements OnInit {
         this.loading = true;
         this.userService.updateUser(this.user)
           .subscribe(response => {
-            swal({ title: 'Gelukt', text: 'Gebruiker succesvol geupdate', type: 'success' }).then(function () {
-              thiz.router.navigate(['/user/']);
+              swal({title: 'Gelukt', text: 'Gebruiker succesvol geupdate', type: 'success'}).then(function () {
+                thiz.router.navigate(['/user/']);
+              });
+              this.loading = false;
+            },
+            error => {
+              swal('Error', 'Er is iets fout gegaan', 'error');
+              this.loading = false;
             });
-            this.loading = false;
-          },
-          error => {
-            swal('Error', 'Er is iets fout gegaan', 'error');
-            this.loading = false;
-          });
       }
     }
   }

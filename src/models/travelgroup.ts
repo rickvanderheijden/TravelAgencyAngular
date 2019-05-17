@@ -5,7 +5,7 @@ export class Travelgroup {
   constructor(model) {
     if (model !== undefined) {
       this.id = model.id;
-      this.groupName = model.groupName;
+      this.groupName = model.name;
     }
   }
 }
