@@ -29,6 +29,7 @@ import {FileUploadModule} from 'ng2-file-upload';
 import {GroupDetailComponent } from './components/group-detail/group-detail.component';
 import {GroupComponent} from './components/group/group.component';
 import {ModalModule} from 'ngx-bootstrap';
+import { TravelSummaryComponent } from './components/travel-summary/travel-summary.component';
 
 export function jwtOptionsFactory(tokenService) {
   return {
@@ -82,7 +83,7 @@ export function jwtOptionsFactory(tokenService) {
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],
   exports: [
-    ModalModule
+    ModalModule,
   ],
   bootstrap: [AppComponent]
 })
