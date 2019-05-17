@@ -49,7 +49,6 @@ describe('AuthLoginComponent', function () {
     fixture.detectChanges();
   });
 
-  /*
   it('NgOnInit should made the user with empty fields', () => {
     component.ngOnInit();
     expect(component.auth.username).toBeUndefined();
@@ -60,7 +59,7 @@ describe('AuthLoginComponent', function () {
     expect(component.loginForm).toBeFalsy();
     expect(component.registerForm).toBeTruthy();
   });
-
+/*
   it('doLogin should call the login method on the authservice', () => {
     // spyOn(authService, 'login').and.returnValue('testtoken');
     // spyOn(component, 'doLogin').and.returnValue('testtoken');
