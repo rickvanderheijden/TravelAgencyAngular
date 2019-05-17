@@ -35,6 +35,7 @@
     "classlist.js": "1.1.20150312",
     "codacy-coverage": "^3.4.0",
     "core-js": "^2.5.7",
+    "events": "^3.0.0",
     "intl": "^1.2.5",
     "jquery": "^3.4.1",
     "mocha-lcov-reporter": "^1.3.0",
