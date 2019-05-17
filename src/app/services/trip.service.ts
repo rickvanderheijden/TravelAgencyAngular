@@ -102,4 +102,8 @@ export class TripService {
       })
     );
   }
+
+  getTripItems() {
+
+  }
 }

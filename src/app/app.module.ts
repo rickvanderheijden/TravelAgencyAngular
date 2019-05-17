@@ -24,6 +24,7 @@ import { AgmDirectionModule} from 'agm-direction';
 import {ToastrModule} from 'ngx-toastr';
 import {UserModule} from './pages/user/index/user.module';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
+import {TabsModule} from 'ngx-bootstrap';
 import {GroupDetailComponent } from './components/group-detail/group-detail.component';
 import {GroupComponent} from './components/group/group.component';
 import {ModalModule} from 'ngx-bootstrap';
@@ -58,6 +59,7 @@ export function jwtOptionsFactory(tokenService) {
     NgSelectModule,
     Ng2SmartTableModule,
     UserModule,
+    TabsModule.forRoot(),
     ModalModule.forRoot(),
     ToastrModule.forRoot(),
     SweetAlert2Module.forRoot(),

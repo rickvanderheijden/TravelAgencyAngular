@@ -62,4 +62,11 @@ app-root:empty ~ .page-loading {
 }
 
 .btn-primary, .btn-secondary{ color: #fff!important;}
+section {max-width: 1170px; margin: 0 auto;}
+
+.my-drop-zone {border: dotted 3px lightgray; background-color: #f5f7fa !important;}
+.nv-file-over { border: dotted 3px #0B486B; }
+.image-display-container{position: relative; max-width: 200px; padding: 0 10px;}
+.image-display-container img {width: 100%; height: auto;}
+.image-display-container span {position: absolute; top: -15px; right: 0;  color: #fff; background: #ff3d00; width: 30px; height: 30px; line-height: 30px; text-align: center; border-radius: 50%; cursor: pointer;}
 
