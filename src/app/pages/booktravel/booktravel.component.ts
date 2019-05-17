@@ -22,11 +22,10 @@ export class BookTravelComponent implements OnInit {
       .pipe(map(() => window.history.state))
 
     this.travelObservable.subscribe((value: Travel) => {
-      console.log(value);
+      this.travel = value;
     });
+  }
 
-    console.log(this.travelObservable);
-
-    console.log(this.travel.totalPrice);
+  finishFunction() {
   }
 }
