@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -11,18 +11,18 @@ import {Travel} from 'models/travel';
 })
 export class BookTravelComponent implements OnInit {
   travelObservable: Observable<Travel>;
-  travel: Travel;
   loading = false;
+  travel: Travel;
+
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loading = true;
-
     this.travelObservable = this.activatedRoute.paramMap
-      .pipe(map(() => window.history.state))
+      .pipe(map(() => window.history.state.travel));
 
     this.travelObservable.subscribe((value: Travel) => {
       this.travel = value;
+      console.log(this.travel);
     });
   }
 

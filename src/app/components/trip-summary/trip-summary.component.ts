@@ -13,7 +13,9 @@ export class TripSummaryComponent implements OnInit {
 
   @Output()
   tripId = new EventEmitter<number>();
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
