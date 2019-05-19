@@ -6,12 +6,12 @@ describe('GroupDetailComponent', () => {
   let component: GroupDetailComponent;
   let fixture: ComponentFixture<GroupDetailComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ GroupDetailComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GroupDetailComponent);
