@@ -76,6 +76,6 @@ export class TripItemCreateComponent implements OnInit {
     }
   }
   updateImageBlob(event) {
-    console.log(event);
+    this.tripItem.imageBlob =  event.toString();
   }
 }
