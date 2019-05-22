@@ -4,13 +4,15 @@ import { UserUpdateComponent } from './user-update.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {GroupComponent} from '../../../components/group/group.component';
+import {NgbAccordionModule, NgbModule, NgbPanel} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     Ng2SmartTableModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   declarations: [
     UserUpdateComponent,

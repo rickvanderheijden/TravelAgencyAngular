@@ -11,14 +11,20 @@
         </div>
         <div class="card-body">
           <div class="card-block">
-            <div *ngIf="!loading" style="display: inline-block; float: left; height: auto">
-              <table _ngcontent-c24="" class="table table-responsive-md text-center">
-                <tbody>
-                <tr *ngFor="let travelGroup of groups">
-                  <td>{{travelGroup.groupName}}</td>
-                </tr>
-                </tbody>
-              </table>
+            <div *ngIf="!loading">
+              <ngb-accordion activeIds="ngb-panel-0"
+              closeOthers="true">
+                <ngb-panel *ngFor="let travelgroups of groups" title='{{travelgroups.groupName}}'>
+                  <ng-template ngbPanelContent>
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
+                    aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                    sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
+                    craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+                    occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+                    labore sustainable VHS.
+                  </ng-template>
+                </ngb-panel>
+              </ngb-accordion>
             </div>
           </div>
         </div>

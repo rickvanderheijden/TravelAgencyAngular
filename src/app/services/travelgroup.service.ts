@@ -13,8 +13,12 @@ export class TravelgroupService {
 
   constructor(private http: HttpClient) { }
 
-  getTravelgroups(): Observable<Array<Travelgroup>> {
-    return this.http.get(environment.server + '/users/travelGroups').pipe(
+  /**
+   * Get TravelGroups by ID
+   * @param id
+   */
+  getTravelgroups(id): Observable<Array<Travelgroup>> {
+    return this.http.get(environment.server + '/users/travelGroups/' + id).pipe(
       map((response: Array<any>) => {
         const travelgroups: Array<Travelgroup> = [];
         response.forEach(function (travelgroup, index) {

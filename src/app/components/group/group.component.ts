@@ -21,13 +21,11 @@ export class GroupComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.travelgroupService.getTravelgroups().subscribe(
+    this.travelgroupService.getTravelgroups(this.user.id).subscribe(
       (response: any) => {
         this.groups = response;
         this.loading = false;
       }
     );
   }
-
-
 }
