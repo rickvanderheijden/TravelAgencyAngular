@@ -2,6 +2,7 @@ import { Component, AfterViewChecked } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AuthenticationService} from '../../auth/auth.service';
 import {User} from '../../../models/user';
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-navbar',
@@ -49,4 +50,11 @@ export class NavbarComponent implements AfterViewChecked {
     this.user = null;
   }
 
+  reloadHomePage() {
+    if (window.location.href == 'http://localhost:4200/') {
+      window.location.reload();
+    } else {
+      window.location.href = '/';
+    }
+  }
 }
