@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {catchError, map} from 'rxjs/operators';
 import swal from 'sweetalert2';
+import {User} from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,21 @@ export class TravelgroupService {
       swal('getTravelgroups', 'Er is iets niet goed gegaan.', 'error');
       throw new Error(err);
     }));
+  }
+
+  getUsers(id: number): Observable<Array<User>> {
+    return this.http.get(environment.server + '/travelgroups/users/id/' + id).pipe(
+      map((response: Array<any>) => {
+        const users: Array<User> = [];
+        response.forEach(function (user, index) {
+          users.push(new User(user));
+        });
+        return users;
+      }),
+      catchError(error => {
+        swal('Oops', 'Er is iets niet goed gegaan', 'error');
+        throw new Error(error);
+      })
+    );
   }
 }

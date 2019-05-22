@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../../models/user';
@@ -11,12 +11,13 @@ import swal from 'sweetalert2';
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   /**
    * Get All users
    */
-  getUsers() /*: Observable<Array<User>> */{
+  getUsers() /*: Observable<Array<User>> */ {
     return this.http.get(environment.server + '/users/all').pipe(
       tap(response => {
         // console.log(response);
@@ -77,7 +78,7 @@ export class UserService {
   }
 
   deleteUser(id: any): Observable<boolean> {
-   return this.http.delete(environment.url + 'users/delete' + id).pipe(
+    return this.http.delete(environment.url + 'users/delete' + id).pipe(
       map((response: any) => {
         return response.json();
       })
@@ -85,7 +86,7 @@ export class UserService {
   }
 
   updateUser(user: User) {
-    return this.http.post(environment.server + '/users/update' , user).pipe(
+    return this.http.post(environment.server + '/users/update', user).pipe(
       map((response: any) => {
         return new User(response);
       })
@@ -93,7 +94,7 @@ export class UserService {
   }
 
   createUser(user: User) {
-    return this.http.post(environment.server + '/users/create' , user).pipe(
+    return this.http.post(environment.server + '/users/create', user).pipe(
       map((response: any) => {
         return new User(response);
       })
@@ -106,7 +107,7 @@ export class UserService {
 
   isAdmin(): Observable<boolean> {
     return this.http.get(environment.server + '/users/is-admin').pipe(
-      map( (response: boolean) => {
+      map((response: boolean) => {
         return response;
       })
     );

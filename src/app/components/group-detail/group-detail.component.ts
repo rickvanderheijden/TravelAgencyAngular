@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Travelgroup} from '../../../models/travelgroup';
+import {User} from '../../../models/user';
+import {TravelgroupService} from '../../services/travelgroup.service';
 
 @Component({
   selector: 'app-group-detail',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupDetailComponent implements OnInit {
 
-  constructor() { }
+  @Input() travelGroup: Travelgroup;
 
-  ngOnInit() {
+  users: User;
+  loading = false;
+
+  constructor(private travelGroupService: TravelgroupService) {
   }
 
+  ngOnInit() {
+    this.loading = true;
+    this.travelGroupService.getUsers(this.travelGroup.id).subscribe(
+      (response: any) => {
+        this.users = response;
+        this.loading = false;
+        console.log(this.users);
+      }
+    )
+  }
 }

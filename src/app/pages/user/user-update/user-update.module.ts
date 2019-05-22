@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {GroupComponent} from '../../../components/group/group.component';
 import {NgbAccordionModule, NgbModule, NgbPanel} from '@ng-bootstrap/ng-bootstrap';
+import {GroupDetailComponent} from '../../../components/group-detail/group-detail.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import {NgbAccordionModule, NgbModule, NgbPanel} from '@ng-bootstrap/ng-bootstra
   declarations: [
     UserUpdateComponent,
     GroupComponent,
+    GroupDetailComponent,
   ]
 })
 export class UserUpdateModule { }
