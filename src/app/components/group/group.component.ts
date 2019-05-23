@@ -12,7 +12,7 @@ export class GroupComponent implements OnInit {
 
   @Input() user: User;
 
-  travelgroups: Travelgroup;
+  selectedTravelGroup: Travelgroup;
   groups: Travelgroup[];
   loading = false;
 

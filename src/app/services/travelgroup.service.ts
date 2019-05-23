@@ -34,7 +34,7 @@ export class TravelgroupService {
   }
 
   getUsers(id: number): Observable<Array<User>> {
-    return this.http.get(environment.server + '/travelgroups/users/id/' + id).pipe(
+    return this.http.get(environment.server + '/travelgroups/users/' + id).pipe(
       map((response: Array<any>) => {
         const users: Array<User> = [];
         response.forEach(function (user, index) {

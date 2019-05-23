@@ -23,8 +23,8 @@ export class GroupDetailComponent implements OnInit {
     this.travelGroupService.getUsers(this.travelGroup.id).subscribe(
       (response: any) => {
         this.users = response;
-        this.loading = false;
         console.log(this.users);
+        this.loading = false;
       }
     )
   }
