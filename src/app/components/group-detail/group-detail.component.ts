@@ -12,7 +12,7 @@ export class GroupDetailComponent implements OnInit {
 
   @Input() travelGroup: Travelgroup;
 
-  users: User;
+  users: User[];
   loading = false;
 
   constructor(private travelGroupService: TravelgroupService) {
@@ -23,7 +23,6 @@ export class GroupDetailComponent implements OnInit {
     this.travelGroupService.getUsers(this.travelGroup.id).subscribe(
       (response: any) => {
         this.users = response;
-        console.log(this.users);
         this.loading = false;
       }
     )

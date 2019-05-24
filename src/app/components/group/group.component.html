@@ -5,7 +5,11 @@
         <div class="card-header">
           <div class="row">
             <div class="col-sm-6">
-              <h4 class="card-title">Groepen</h4>
+              <h4 class="card-title">Groepen </h4>
+              <a href="javascript:;" routerLink="/group/create" class="btn btn-primary" type="submit">
+                <span>Groep aanmaken</span>
+                <i *ngIf="loading" class="ft-loader spinner right"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -13,9 +17,9 @@
           <div class="card-block">
             <div *ngIf="!loading">
               <ngb-accordion activeIds="ngb-panel-0" closeOthers="true">
-                <ngb-panel *ngFor="let travelGroup of groups" title='{{travelGroup.groupName}}' >
+                <ngb-panel *ngFor="let travelGroup of groups" title='{{travelGroup.groupName}}'>
                   <ng-template ngbPanelContent>
-                    <app-group-detail [travelGroup]="travelGroup" ></app-group-detail>
+                    <app-group-detail [travelGroup]="travelGroup"></app-group-detail>
                   </ng-template>
                 </ngb-panel>
               </ngb-accordion>

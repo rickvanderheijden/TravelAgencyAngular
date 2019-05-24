@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Travelgroup} from '../../../models/travelgroup';
 import {TravelgroupService} from '../../services/travelgroup.service';
 import {User} from '../../../models/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-group',
@@ -12,11 +13,10 @@ export class GroupComponent implements OnInit {
 
   @Input() user: User;
 
-  selectedTravelGroup: Travelgroup;
   groups: Travelgroup[];
   loading = false;
 
-  constructor(private travelgroupService: TravelgroupService) {
+  constructor(private router: Router, private travelgroupService: TravelgroupService) {
   }
 
   ngOnInit() {
