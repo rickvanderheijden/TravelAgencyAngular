@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ROUTES } from './sidebar-routes.config';
-import { RouteInfo } from "./sidebar.metadata";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute } from '@angular/router';
 
 declare var $: any;
 @Component({
