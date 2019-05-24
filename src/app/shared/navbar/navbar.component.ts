@@ -33,7 +33,9 @@ export class NavbarComponent implements AfterViewChecked {
 
   loggedIn() {
     if (sessionStorage.getItem('currentUser')) {
-      this.user = new User(JSON.parse(sessionStorage.getItem('currentUser')));
+      if (!this.user) {
+        this.user = new User(JSON.parse(sessionStorage.getItem('currentUser')));
+      }
       return true;
     } else {
       return false;
