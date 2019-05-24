@@ -48,4 +48,19 @@ export class TravelgroupService {
       })
     );
   }
+  /**
+   * Create a group
+   * @param group
+   */
+  createTravelGroup(group: Travelgroup ) {
+    return this.http.post(environment.server + '/travelgroups/createTravelGroup', group).pipe(
+      map(response => {
+        return new Travelgroup(response);
+      }),
+      catchError(error => {
+        swal('createTrip', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(error);
+      })
+    );
+  }
 }

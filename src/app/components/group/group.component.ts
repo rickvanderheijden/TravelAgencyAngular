@@ -16,6 +16,7 @@ export class GroupComponent implements OnInit {
   groups: Travelgroup[];
   loading = false;
 
+
   constructor(private router: Router, private travelgroupService: TravelgroupService) {
   }
 
@@ -27,5 +28,9 @@ export class GroupComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  createGroup() {
+    this.router.navigate(['/group/create/' + this.user.id])
   }
 }

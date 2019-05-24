@@ -1,11 +1,28 @@
+import {User} from './user';
+
 export class Travelgroup {
   public id?: number;
-  public groupName?: string;
+  public masterId?: number;
+  public name?: string;
+  public users?: Array<User>;
 
-  constructor(model) {
+  constructor(model?) {
     if (model !== undefined) {
       this.id = model.id;
-      this.groupName = model.name;
+      this.masterId = model.masterId;
+      this.name = model.name;
+      this.users = new Array<User>();
+      if (model.users !== undefined) {
+        for (const user of model.users) {
+          this.addUsers(new User(user));
+        }
+      }
+    }
+  }
+
+  private addUsers(user: User) {
+    if (user !== undefined) {
+      this.users.push(user);
     }
   }
 }
