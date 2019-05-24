@@ -16,7 +16,7 @@
         </div>
         <div class="card-body">
           <div class="card-block">
-            <form>
+            <form [formGroup]="tripCreateForm">
               <div class="form-group">
                 <label>Naam</label>
                 <input type="text" name="username" formControlName="name" class="form-control" [(ngModel)]="trip.name">

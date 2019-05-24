@@ -1,14 +1,19 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
 import {Trip} from '../../../models/trip';
 import {Travel} from '../../../models/travel';
 import {TripItem} from '../../../models/TripItem';
+import {AuthenticationService} from '../../auth/auth.service';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-trip-description',
   templateUrl: './trip-description.component.html',
   styleUrls: ['./trip-description.component.scss'],
 })
+
 export class TripDescriptionComponent implements OnInit {
+  public modalRef: BsModalRef;
 
   @Input()
   trip: Trip;
@@ -20,7 +25,7 @@ export class TripDescriptionComponent implements OnInit {
   tripItemOut = new EventEmitter<TripItem>();
 
   loading = false;
-  constructor() {
+  constructor(private authenticationService: AuthenticationService, private modalService: BsModalService, private router: Router) {
   }
 
   ngOnInit() {
@@ -40,6 +45,10 @@ export class TripDescriptionComponent implements OnInit {
   }
 
   bookTravel() {
-    // TODO
+    this.router.navigateByUrl('/booktravel', { state: { travel: this.travel } });
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template); // {3}
   }
 }

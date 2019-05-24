@@ -6,7 +6,6 @@ import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {catchError} from 'rxjs/internal/operators/catchError';
 import swal from 'sweetalert2';
-import {joinTestLogs} from 'protractor/built/util';
 
 @Injectable({
   providedIn: 'root'
@@ -67,5 +66,15 @@ export class TripItemService {
         // console.log(response);
       })
     );
+  }
+
+  updateTripItem(tripItem: TripItem) {
+    console.log(tripItem);
+    return this.http.put(environment.url + '/tripItems/' + tripItem.id, tripItem).pipe(
+      map((response: any) => {
+        console.log(response);
+      })
+    );
+
   }
 }
