@@ -70,7 +70,7 @@ export function jwtOptionsFactory(tokenService) {
       }
     }),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC_xNfcNGLJdRMi229CJlat9nL-OkPj6d8'
+      apiKey: 'AIzaSyBOfZ8iIVLx_0ndsNG1MyMkhvbm2T_h-o4'
     }),
     AgmDirectionModule,
     FileUploadModule,
