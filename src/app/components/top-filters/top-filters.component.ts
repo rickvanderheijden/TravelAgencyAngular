@@ -39,19 +39,6 @@ export class TopFiltersComponent implements OnInit {
     this.continent = null;
   }
 
-  checkIfNotAdmin() {
-    if (!sessionStorage.getItem('currentUser')) {
-      return true;
-    } else {
-      const user = new User(JSON.parse(sessionStorage.getItem('currentUser')));
-      if (user.isAdmin()) {
-        return false;
-      } else {
-        return true;
-      }
-    }
-  }
-
   doFilter() {
   }
 
