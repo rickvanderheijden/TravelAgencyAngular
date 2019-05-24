@@ -10,18 +10,31 @@ import {AgmDirectionModule} from 'agm-direction';
 import {TripDescriptionComponent} from '../../components/trip-description/trip-description.component';
 import {AgmCoreModule} from '@agm/core';
 import {TripItemOptionComponent} from '../../components/trip-item-option/trip-item-option.component';
+import {DestinationComponent} from '../../components/destination/destination.component';
+import {HotelOptionComponent} from '../../components/hotel-option/hotel-option.component';
+
 
 @NgModule({
   imports: [
     CommonModule,
     HomeRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC_xNfcNGLJdRMi229CJlat9nL-OkPj6d8'
+      apiKey: 'AIzaSyBOfZ8iIVLx_0ndsNG1MyMkhvbm2T_h-o4'
     }),
     AgmDirectionModule
   ],
   providers: [MapsComponent],
-  declarations: [HomeComponent, MapsComponent, TripComponent, TripListComponent, TripSummaryComponent, TripDescriptionComponent, TripItemOptionComponent],
+  declarations: [
+    HomeComponent,
+    MapsComponent,
+    TripComponent,
+    TripListComponent,
+    TripSummaryComponent,
+    TripDescriptionComponent,
+    TripItemOptionComponent,
+    DestinationComponent,
+    HotelOptionComponent
+  ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class HomeModule { }

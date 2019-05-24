@@ -30,6 +30,8 @@ import {GroupDetailComponent } from './components/group-detail/group-detail.comp
 import {GroupComponent} from './components/group/group.component';
 import {ModalModule} from 'ngx-bootstrap';
 import { TravelSummaryComponent } from './components/travel-summary/travel-summary.component';
+import { DestinationComponent } from './components/destination/destination.component';
+import { HotelOptionComponent } from './components/hotel-option/hotel-option.component';
 
 export function jwtOptionsFactory(tokenService) {
   return {
@@ -73,7 +75,7 @@ export function jwtOptionsFactory(tokenService) {
       }
     }),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC_xNfcNGLJdRMi229CJlat9nL-OkPj6d8'
+      apiKey: 'AIzaSyBOfZ8iIVLx_0ndsNG1MyMkhvbm2T_h-o4'
     }),
     AgmDirectionModule,
     FileUploadModule,

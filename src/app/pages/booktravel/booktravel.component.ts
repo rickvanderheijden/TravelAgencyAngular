@@ -26,6 +26,9 @@ export class BookTravelComponent implements OnInit {
     });
   }
 
+  backToTravelPage() {
+  }
+
   finishFunction() {
   }
 }

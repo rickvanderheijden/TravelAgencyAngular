@@ -5,6 +5,8 @@ import {TripItem} from '../../../models/TripItem';
 import {AuthenticationService} from '../../auth/auth.service';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {Router} from '@angular/router';
+import {forEach} from '@angular/router/src/utils/collection';
+import {Hotel} from '../../../models/hotel';
 
 @Component({
   selector: 'app-trip-description',
@@ -24,6 +26,9 @@ export class TripDescriptionComponent implements OnInit {
   @Output()
   tripItemOut = new EventEmitter<TripItem>();
 
+  @Output()
+  hotelOut = new EventEmitter<Hotel>();
+
   loading = false;
   constructor(private authenticationService: AuthenticationService, private modalService: BsModalService, private router: Router) {
   }
@@ -35,13 +40,41 @@ export class TripDescriptionComponent implements OnInit {
   }
 
   addTripItem(tripItem: TripItem) {
-    this.travel.addTripItem(tripItem);
+    let found = false;
+    for (const travelTripItem of this.travel.tripItems) {
+      if (travelTripItem.id === tripItem.id) {
+        found = true;
+        break;
+      }
+    }
 
+    if (!found) {
+      this.travel.addTripItem(tripItem);
+    }
   }
 
   removeTripItem(tripItem: TripItem) {
     this.travel.removeTripItem(tripItem);
     this.tripItemOut.emit(tripItem);
+  }
+
+  addHotel(hotel: Hotel) {
+    let found = false;
+    for (const travelHotel of this.travel.hotels) {
+      if (travelHotel.id === hotel.id) {
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) {
+      this.travel.addHotel(hotel);
+    }
+  }
+
+  removeHotel(hotel: Hotel) {
+    this.travel.removeHotel(hotel);
+    this.hotelOut.emit(hotel);
   }
 
   bookTravel() {

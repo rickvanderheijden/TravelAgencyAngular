@@ -18,7 +18,7 @@ export class MapsComponent implements OnInit {
 
   ngOnInit(): void {
     // Get current location or something?
-    this.org = 'Lageburchtweg 3, Uden';
+    this.org = 'Kerkstraat 56, Beek en Donk';
     this.dest = 'primera uden';
     this.waypoints = new Array();
 

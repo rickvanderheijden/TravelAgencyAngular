@@ -63,7 +63,7 @@ export class TripUpdateComponent implements OnInit {
       imageUrl: new FormControl(this.trip.imageUrl, [Validators.minLength(6), Validators.email, Validators.required]),
       totalPrice: new FormControl(this.trip.totalPrice, [Validators.minLength(5)]),
       discount: new FormControl(this.trip.discount),
-      tripItems: new FormControl(this.trip.tripItems)
+      // tripItems: new FormControl(this.trip.tripItems)
     });
   }
 
