@@ -12,7 +12,6 @@ import {AuthLoginComponent} from './auth/auth-login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { TopFiltersComponent } from './components/top-filters/top-filters.component';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 import {CommonModule} from '@angular/common';
@@ -29,9 +28,6 @@ import {FileUploadModule} from 'ng2-file-upload';
 import {GroupDetailComponent } from './components/group-detail/group-detail.component';
 import {GroupComponent} from './components/group/group.component';
 import {ModalModule} from 'ngx-bootstrap';
-import { TravelSummaryComponent } from './components/travel-summary/travel-summary.component';
-import { DestinationComponent } from './components/destination/destination.component';
-import { HotelOptionComponent } from './components/hotel-option/hotel-option.component';
 
 export function jwtOptionsFactory(tokenService) {
   return {
@@ -48,7 +44,6 @@ export function jwtOptionsFactory(tokenService) {
     AppComponent,
     FullLayoutComponent,
     AuthLoginComponent,
-    TopFiltersComponent,
     GroupComponent,
     GroupDetailComponent,
   ],

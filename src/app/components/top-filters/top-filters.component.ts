@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Country} from '../../../models/country';
+import {User} from '../../../models/user';
 
 @Component({
   selector: 'app-top-filters',

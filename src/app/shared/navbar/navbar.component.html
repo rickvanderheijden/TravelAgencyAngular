@@ -8,9 +8,9 @@
         <div class="navbar-container">
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
-              <p class="text-light" *ngIf="loggedIn">Welkom {{user.firstname}}</p>
-              <button class="btn btn-secondary color-light float-left clearfix" *ngIf="!loggedIn" routerLink="auth/login">Inloggen</button>
-                <ul class="navbar-nav" *ngIf="loggedIn">
+              <p class="text-light" *ngIf="loggedIn()">Welkom {{user.firstname}}</p>
+              <button class="btn btn-secondary color-light float-left clearfix" *ngIf="!loggedIn()" routerLink="auth/login">Inloggen</button>
+                <ul class="navbar-nav" *ngIf="loggedIn()">
                     <li class="nav-item" ngbDropdown [placement]="placement">
                         <a class="nav-link position-relative" id="dropdownBasic3"  ngbDropdownToggle>
                           <i class="fas fa-user fa-3x"></i>

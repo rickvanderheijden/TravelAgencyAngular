@@ -28,7 +28,7 @@ export class AuthenticationService {
   }
 
   checkToken() {
-    const token = localStorage.getItem(TOKEN_KEY);
+    const token = sessionStorage.getItem(TOKEN_KEY);
       if (token) {
         const isExpired = this.helper.isTokenExpired(token);
 
@@ -36,7 +36,7 @@ export class AuthenticationService {
           this.loggedInUser.next(this.user);
           this.authenticationState.next(true);
         } else {
-          localStorage.removeItem(TOKEN_KEY);
+          sessionStorage.removeItem(TOKEN_KEY);
           this.authenticationState.next(false);
         }
       }
@@ -49,6 +49,7 @@ export class AuthenticationService {
         tap( res => {
           this.storeToken(res['token']);
           this.authenticationState.next(true);
+          this.setCurrentUser();
         }),
         catchError(e => {
           swal('Oops', e.message, 'error');
@@ -70,8 +71,9 @@ export class AuthenticationService {
     );
   }
   logout() {
-    localStorage.removeItem(TOKEN_KEY);
+    sessionStorage.removeItem(TOKEN_KEY);
     this.authenticationState.next(false);
+    sessionStorage.removeItem('currentUser');
   }
 
   isAuthenticated() {
@@ -86,7 +88,7 @@ export class AuthenticationService {
   }
 
   tokenExpired() {
-    const token = localStorage.getItem(TOKEN_KEY);
+    const token = sessionStorage.getItem(TOKEN_KEY);
     if (token) {
       return this.helper.isTokenExpired(token);
     }
@@ -115,7 +117,14 @@ export class AuthenticationService {
 
 
   private storeToken(token: any) {
-    localStorage.setItem(TOKEN_KEY, token);
+    sessionStorage.setItem(TOKEN_KEY, token);
+  }
+
+  private setCurrentUser() {
+    this.getLoggedInUser().subscribe(response => {
+      const user = new User(response);
+      sessionStorage.setItem('currentUser', JSON.stringify(user));
+    });
   }
 
 }
