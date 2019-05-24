@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Country} from '../../../models/country';
+import {User} from '../../../models/user';
 
 @Component({
   selector: 'app-top-filters',
@@ -36,6 +37,19 @@ export class TopFiltersComponent implements OnInit {
     this.countries = [];
     this.country = null;
     this.continent = null;
+  }
+
+  checkIfNotAdmin() {
+    if (!sessionStorage.getItem('currentUser')) {
+      return true;
+    } else {
+      const user = new User(JSON.parse(sessionStorage.getItem('currentUser')));
+      if (user.isAdmin()) {
+        return false;
+      } else {
+        return true;
+      }
+    }
   }
 
   doFilter() {

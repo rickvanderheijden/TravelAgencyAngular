@@ -6,7 +6,7 @@ const TOKEN_KEY = 'access_token';
 
 describe('TokenService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
-  afterEach(() => {localStorage.removeItem(TOKEN_KEY)});
+  afterEach(() => {sessionStorage.removeItem(TOKEN_KEY)});
 
   it('should be created', () => {
     const service: TokenService = TestBed.get(TokenService);
@@ -15,7 +15,7 @@ describe('TokenService', () => {
 
   it('should get a token', fakeAsync(() => {
     const expected = 'testToken';
-    localStorage.setItem(TOKEN_KEY, 'testToken');
+    sessionStorage.setItem(TOKEN_KEY, 'testToken');
     const service: TokenService = TestBed.get(TokenService);
     service.getAsyncToken().then(result => {
       this.token = result;

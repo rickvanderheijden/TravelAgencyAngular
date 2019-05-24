@@ -26,14 +26,12 @@ export class AuthLoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authService.authenticationState.subscribe(response => {
-      if (response === true) {
-        this.router.navigate(['/']);
-      } else {
-        this.checkLoggedInUser = true;
-        this.auth = new User(undefined);
-      }
-    });
+    if (sessionStorage.getItem('currentUser')) {
+      this.router.navigate(['/']);
+    } else {
+      this.checkLoggedInUser = true;
+      this.auth = new User(undefined);
+    }
   }
 
   register() {
