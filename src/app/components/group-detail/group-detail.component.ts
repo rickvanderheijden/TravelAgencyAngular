@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Travelgroup} from '../../../models/travelgroup';
 import {User} from '../../../models/user';
-import {TravelgroupService} from '../../services/travelgroup.service';
+import {TravelGroupService} from '../../services/travelgroup.service';
 
 @Component({
   selector: 'app-group-detail',
@@ -15,7 +15,7 @@ export class GroupDetailComponent implements OnInit {
   users: User[];
   loading = false;
 
-  constructor(private travelGroupService: TravelgroupService) {
+  constructor(private travelGroupService: TravelGroupService) {
   }
 
   ngOnInit() {

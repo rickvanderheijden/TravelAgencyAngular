@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import {LocalDataSource, ViewCell} from 'ng2-smart-table';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
-import {TravelgroupService} from '../../../services/travelgroup.service';
+import {TravelGroupService} from '../../../services/travelgroup.service';
 import {Travelgroup} from '../../../../models/travelgroup';
 
 @Component({
@@ -32,7 +32,7 @@ export class GroupActionButtonsComponent implements ViewCell, OnInit {
 
   constructor (
     private router: Router,
-    private travelGroupService: TravelgroupService
+    private travelGroupService: TravelGroupService
   ) { }
 
   ngOnInit() {
@@ -49,7 +49,7 @@ export class GroupComponent implements OnInit {
   groups: Array<Travelgroup>;
   settings: any;
   source: LocalDataSource;
-  constructor(private service: TravelgroupService) {
+  constructor(private service: TravelGroupService) {
     this.settings = {
       columns: {
         id: {

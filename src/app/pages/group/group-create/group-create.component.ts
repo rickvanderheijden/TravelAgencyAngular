@@ -4,7 +4,7 @@ import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Travelgroup} from '../../../../models/travelgroup';
-import {TravelgroupService} from '../../../services/travelgroup.service';
+import {TravelGroupService} from '../../../services/travelgroup.service';
 import {User} from '../../../../models/user';
 import {UserService} from '../../../services/user.service';
 
@@ -22,7 +22,7 @@ export class GroupCreateComponent implements OnInit {
   masterUser: User;
 
   constructor(
-    private travelgroupService: TravelgroupService,
+    private travelgroupService: TravelGroupService,
     private userService: UserService,
     private router: Router,
     private location: Location,
