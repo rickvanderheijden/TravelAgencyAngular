@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Travel} from '../../../models/travel';
 import {Booking} from '../../../models/booking';
 import {BookableHotel} from '../../../models/bookablehotel';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-travel-summary',
@@ -46,7 +47,18 @@ export class TravelSummaryComponent implements OnInit {
     });
 
     if (indexToRemove !== -1) {
-      this.booking.tripItems.splice(indexToRemove, 1);
+      swal({
+        title: 'Weet je het zeker?',
+        text: 'Weet je zeker dat je het product van de reis wil verwijderen',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ja, verwijderen!',
+        cancelButtonText: 'Nee, product behouden'
+      }).then((result) => {
+        if (result.value) {
+          this.booking.tripItems.splice(indexToRemove, 1);
+        }
+      });
     }
   }
 

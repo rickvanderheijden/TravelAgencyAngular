@@ -17,4 +17,5 @@ export class BookableTripItem extends TripItem{
     super();
     this.amount = 1;
   }
+
 }
