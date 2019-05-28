@@ -8,6 +8,7 @@ import {TripItem} from '../../../models/TripItem';
 import {HttpClientModule} from '@angular/common/http';
 import {JwtModule} from '@auth0/angular-jwt';
 import {BsModalService, ModalModule} from 'ngx-bootstrap';
+import {RouterTestingModule} from '@angular/router/testing';
 
 class TestTrip { name = 'Test trip'; imageUrl = 'Image URL'; description = 'Description'; }
 class TestTravel { name = 'Test travel'; totalPrice = 1500; tripItems = new Array<TripItem>(); }
@@ -24,6 +25,7 @@ describe('TripDescriptionComponent', () => {
       imports: [
         HttpClientModule,
         ModalModule.forRoot(),
+        RouterTestingModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => { return 'testtoken'; }

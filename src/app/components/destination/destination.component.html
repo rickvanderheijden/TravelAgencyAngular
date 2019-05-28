@@ -1,0 +1,16 @@
+<div class="card" style="max-width: 1170px;">
+  <div class="card-content">
+    <div class="card-header">
+      <h4>{{destination.name}}</h4>
+      <p>{{destination.city.name}}</p>
+    </div>
+    <div class="card-body">
+      <div *ngIf="destination.hotel">
+        <app-hotel-option [hotel]="destination.hotel" ></app-hotel-option>
+      </div>
+      <div *ngFor="let tripItem of selectableTripItems">
+        <app-trip-item-option class="option" [tripItem]="tripItem" (tripItemOut)="addTripItem($event)"></app-trip-item-option>
+      </div>
+    </div>
+  </div>
+</div>

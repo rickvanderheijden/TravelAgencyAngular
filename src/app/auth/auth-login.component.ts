@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {User} from '../../models/user';
 import {AuthenticationService} from './auth.service';
@@ -17,6 +17,7 @@ export class AuthLoginComponent implements OnInit {
   loginError = false;
   loading = false;
   passwordConfirm: string;
+  checkLoggedInUser: boolean;
 
   constructor(
     private authService: AuthenticationService,
@@ -25,7 +26,12 @@ export class AuthLoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.auth = new User(undefined);
+    if (sessionStorage.getItem('currentUser')) {
+      this.router.navigate(['/']);
+    } else {
+      this.checkLoggedInUser = true;
+      this.auth = new User(undefined);
+    }
   }
 
   register() {
