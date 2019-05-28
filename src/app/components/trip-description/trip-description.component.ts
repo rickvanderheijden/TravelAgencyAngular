@@ -5,7 +5,6 @@ import {TripItem} from '../../../models/TripItem';
 import {AuthenticationService} from '../../auth/auth.service';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {Router} from '@angular/router';
-import {forEach} from '@angular/router/src/utils/collection';
 import {Hotel} from '../../../models/hotel';
 
 @Component({
@@ -86,7 +85,7 @@ export class TripDescriptionComponent implements OnInit {
   }
 
   didLoginSuccessful(loginSuccessful: boolean) {
-    if(loginSuccessful){
+    if (loginSuccessful){
       this.modalRef.hide();
       this.router.navigateByUrl('/booktravel', { state: { travel: this.travel } });
     }
