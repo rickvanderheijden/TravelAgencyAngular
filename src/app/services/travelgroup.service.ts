@@ -10,7 +10,7 @@ import {User} from '../../models/user';
 @Injectable({
   providedIn: 'root'
 })
-export class TravelgroupService {
+export class TravelGroupService {
 
   constructor(private http: HttpClient) { }
 

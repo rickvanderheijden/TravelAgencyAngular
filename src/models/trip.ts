@@ -1,4 +1,4 @@
-import {TripItem} from './TripItem';
+import {Destination} from './destination';
 
 export class Trip {
 
@@ -9,7 +9,7 @@ export class Trip {
   public totalPrice: number;
   public imageUrl: String;
   public discount: number;
-  public tripItems: TripItem[];
+  public destinations: Destination[];
 
   constructor(model?) {
     if (typeof model !== typeof undefined) {
@@ -20,7 +20,14 @@ export class Trip {
       this.totalPrice = model.totalPrice;
       this.imageUrl = model.imageUrl;
       this.discount = model.discount;
-      this.tripItems = model.tripItems;
+      this.destinations = model.destinations !== null ? model.destinations : new Array<Destination>();
     }
+  }
+
+  addDestination(destination: Destination) {
+    if (this.destinations.indexOf(destination) !== -1) {
+      this.destinations.push(destination);
+    }
+
   }
 }

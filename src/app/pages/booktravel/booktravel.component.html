@@ -1,0 +1,27 @@
+<section id="booktravel">
+
+  <aw-wizard>
+    <aw-wizard-step stepTitle="Overzicht van de reis">
+      <app-travel-summary [travel]="travel"></app-travel-summary>
+      <button type="button" class="btn btn-primary buttonmargin" (click)="backToTravelPage()">Terug naar reis</button>
+      <button type="button" class="btn btn-primary buttonmargin" awNextStep>Volgende stap</button>
+      <!--button type="button" [awGoToStep]="{stepIndex: 2}">Go directly to third Step </button-->
+    </aw-wizard-step>
+    <aw-wizard-step stepTitle="Voer gegevens in">
+      Content of Step 2
+      <button type="button" class="btn btn-primary buttonmargin" awPreviousStep>Ga terug naar overzicht</button>
+      <button type="button" class="btn btn-primary buttonmargin" awNextStep>Ga naar betaling</button>
+    </aw-wizard-step>
+    <aw-wizard-step stepTitle="Betaling">
+      Content of Step 3
+      <button type="button" class="btn btn-primary buttonmargin" awPreviousStep>Vorige step </button>
+      <button type="button" class="btn btn-primary buttonmargin" (click)="finishFunction()">Finish </button>
+    </aw-wizard-step>
+    <aw-wizard-step stepTitle="Bedankt">
+      Content of Step 4
+      <button type="button" class="btn btn-primary buttonmargin" awPreviousStep>Vorige step </button>
+      <button type="button" class="btn btn-primary buttonmargin" (click)="finishFunction()">Finish </button>
+    </aw-wizard-step>
+  </aw-wizard>
+
+</section>

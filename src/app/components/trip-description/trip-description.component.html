@@ -1,4 +1,4 @@
-<div _ngcontent-c7="" class="col-lg-4 col-md-12 col-sm-12">
+<div *ngIf="!loading" _ngcontent-c7="" class="col-lg-4 col-md-12 col-sm-12">
   <div _ngcontent-c7="" class="card" style="width: 1170px; height: auto; margin-left: -15px">
     <div _ngcontent-c7="" class="card-header">
       <h4 style="font-size: 30px" _ngcontent-c7="" class="card-title">{{trip.name}}</h4>
@@ -33,7 +33,7 @@
               </tbody>
             </table>
           </div>
-          <div class="row" style="margin-left: 0px; margin-right: 0px;">
+          <div class="row" style="margin-left: 0; margin-right: 0;">
             <table _ngcontent-c8="" class="table table-responsive-md" style="position: absolute; bottom: 30px; width: 21%">
               <thead _ngcontent-c8="">
               </thead>
@@ -57,11 +57,24 @@
             </table>
           </div>
           <div class="row">
-            <button class="btn btn-primary" style="position: absolute; bottom: 15px; right: 40px" (click)="bookTravel()">Boek deze reis</button>
-
+            <button *ngIf="!authenticationService.isAuthenticated()" class="btn btn-primary" style="position: absolute; bottom: 15px; right: 40px" (click)="openModal(template)">Login om te boeken</button>
+            <button *ngIf="authenticationService.isAuthenticated()"  class="btn btn-primary" style="position: absolute; bottom: 15px; right: 40px" (click)="bookTravel()">Boek deze reis</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Login</h4>
+    <button type="button" class="close pull-right"
+            aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    This is a modal.
+  </div>
+</ng-template>

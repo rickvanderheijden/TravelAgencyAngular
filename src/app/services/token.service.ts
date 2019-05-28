@@ -9,6 +9,6 @@ export class TokenService {
   constructor() { }
 
   async getAsyncToken() {
-    return localStorage.getItem(TOKEN_KEY);
+    return sessionStorage.getItem(TOKEN_KEY);
   }
 }

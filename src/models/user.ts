@@ -1,5 +1,5 @@
 import {Authority} from './authority';
-import {Travelgroup} from './travelgroup';
+import {TravelGroup} from './travelgroup';
 
 export class User {
 
@@ -20,15 +20,15 @@ export class User {
             this.lastname = model.lastname;
             this.emailAddress = model.emailAddress;
             this.authorities = new Array<Authority>();
-            this.travelgroups = new Array<Travelgroup>();
+            this.travelGroups = new Array<TravelGroup>();
             if ( model.authorities !== undefined ) {
                 for ( const authority of model.authorities ) {
                     this.addAuthority(new Authority(authority));
                 }
             }
-            if ( model.travelgroups !== undefined ) {
-               for ( const travelgroup of model.travelgroups ) {
-                 this.addTravelgroup(new Travelgroup(travelgroup));
+            if ( model.travelGroups !== undefined ) {
+               for ( const travelGroup of model.travelGroups ) {
+                 this.addTravelGroup(new TravelGroup(travelGroup));
                }
             }
         }
@@ -40,9 +40,9 @@ export class User {
         }
     }
 
-    public addTravelgroup(travelgroup: Travelgroup) {
-      if ( travelgroup !== undefined) {
-        this.travelgroups.push(travelgroup);
+    public addTravelGroup(travelGroup: TravelGroup) {
+      if ( travelGroup !== undefined) {
+        this.travelGroups.push(travelGroup);
       }
     }
 
@@ -56,4 +56,3 @@ export class User {
       return isAdmin;
     }
 }
-

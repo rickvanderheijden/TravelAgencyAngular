@@ -1,34 +1,35 @@
 <nav class="header-navbar navbar navbar-expand-lg navbar-dark bg-faded background-primary">
     <div class="container-fluid">
         <div class="navbar-header">
-          <img src="/assets/img/logo-white.png" class="width-150">
-
+          <a>
+            <img src="/assets/img/logo-white.png" class="width-150" (click)="reloadHomePage()">
+          </a>
         </div>
         <div class="navbar-container">
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
-              <p class="text-light" *ngIf="loggedIn">Welkom {{user.firstname}}</p>
-              <button class="btn btn-secondary color-light float-left clearfix" *ngIf="!loggedIn" routerLink="auth/login">Inloggen</button>
-                <ul class="navbar-nav" *ngIf="loggedIn">
+              <p class="text-light" *ngIf="loggedIn()">Welkom {{user.firstname}}</p>
+              <button class="btn btn-secondary color-light float-left clearfix" *ngIf="!loggedIn()" routerLink="auth/login">Inloggen</button>
+                <ul class="navbar-nav" *ngIf="loggedIn()">
                     <li class="nav-item" ngbDropdown [placement]="placement">
                         <a class="nav-link position-relative" id="dropdownBasic3"  ngbDropdownToggle>
                           <i class="fas fa-user fa-3x"></i>
                             <p class="d-none">User Settings</p>
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="text-left">
-                            <a class="dropdown-item py-1" href="javascript:;">
+                            <a class="dropdown-item py-1" href="javascript:;" *ngIf="user.isAdmin()">
                               <i class="fas fa-cogs mr-2"></i>
                                 <span>Settings</span>
                             </a>
-                            <a class="dropdown-item py-1" href="javascript:;" routerLink="/user">
+                            <a class="dropdown-item py-1" href="javascript:;" *ngIf="user.isAdmin()" routerLink="/user">
                               <i class="fas fa-users mr-2"></i>
                               <span>Users</span>
                             </a>
-                          <a class="dropdown-item py-1" href="javascript:;" routerLink="/trip">
+                          <a class="dropdown-item py-1" href="javascript:;" *ngIf="user.isAdmin()" routerLink="/trip">
                             <i class="fas fa-plane-departure mr-2"></i>
                             <span>Trips</span>
                           </a>
-                          <a class="dropdown-item py-1" href="javascript:;" routerLink="/trip-item">
+                          <a class="dropdown-item py-1" href="javascript:;" *ngIf="user.isAdmin()" routerLink="/trip-item">
                             <i class="fas fa-plane-departure mr-2"></i>
                             <span>Trip-items</span>
                           </a>
@@ -36,15 +37,10 @@
                               <i class="fas fa-users-cog mr-2"></i>
                                 <span>Edit Profile</span>
                             </a>
-
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="javascript:;" (click)="logout()">
+                            <a class="dropdown-item" href="javascript:;" (click)="logout()" routerLink="/">
                               <i class="fas fa-sign-out-alt mr-2"></i>
                                 <span>Uitloggen</span>
-                            </a>
-                            <a class="dropdown-item py-1" href="javascript:;" routerLink="/trip/create">
-                              <i class="ft-settings mr-2"></i>
-                              <span>Trip</span>
                             </a>
                         </div>
                     </li>

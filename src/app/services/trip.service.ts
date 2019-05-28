@@ -80,7 +80,7 @@ export class TripService {
    * Update a trip
    * @param trip
    */
-  updateTrip(trip: Trip ){
+  updateTrip(trip: Trip ) {
     return this.http.put(environment.server + '/trips/updateTrip', trip).pipe(
       map(response => {
         return new Trip(response);
@@ -102,5 +102,9 @@ export class TripService {
         // console.log(response);
       })
     );
+  }
+
+  getTripItems() {
+
   }
 }

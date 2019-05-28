@@ -12,7 +12,6 @@ import {AuthLoginComponent} from './auth/auth-login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { TopFiltersComponent } from './components/top-filters/top-filters.component';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 import {CommonModule} from '@angular/common';
@@ -24,6 +23,11 @@ import { AgmDirectionModule} from 'agm-direction';
 import {ToastrModule} from 'ngx-toastr';
 import {UserModule} from './pages/user/index/user.module';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
+import {TabsModule} from 'ngx-bootstrap';
+import {FileUploadModule} from 'ng2-file-upload';
+import {GroupDetailComponent } from './components/group-detail/group-detail.component';
+import {GroupComponent} from './components/group/group.component';
+import {ModalModule} from 'ngx-bootstrap';
 
 export function jwtOptionsFactory(tokenService) {
   return {
@@ -41,6 +45,8 @@ export function jwtOptionsFactory(tokenService) {
     FullLayoutComponent,
     AuthLoginComponent,
     TopFiltersComponent,
+    GroupComponent,
+    GroupDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +59,8 @@ export function jwtOptionsFactory(tokenService) {
     NgSelectModule,
     Ng2SmartTableModule,
     UserModule,
+    TabsModule.forRoot(),
+    ModalModule.forRoot(),
     ToastrModule.forRoot(),
     SweetAlert2Module.forRoot(),
     JwtModule.forRoot({
@@ -63,15 +71,17 @@ export function jwtOptionsFactory(tokenService) {
       }
     }),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC_xNfcNGLJdRMi229CJlat9nL-OkPj6d8'
+      apiKey: 'AIzaSyBOfZ8iIVLx_0ndsNG1MyMkhvbm2T_h-o4'
     }),
-    AgmDirectionModule
+    AgmDirectionModule,
+    FileUploadModule,
   ],
   providers: [
     TokenService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],
   exports: [
+    ModalModule,
   ],
   bootstrap: [AppComponent]
 })
