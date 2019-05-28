@@ -84,4 +84,11 @@ export class TripDescriptionComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template); // {3}
   }
+
+  didLoginSuccessful(loginSuccessful: boolean) {
+    if(loginSuccessful){
+      this.modalRef.hide();
+      this.router.navigateByUrl('/booktravel', { state: { travel: this.travel } });
+    }
+  }
 }
