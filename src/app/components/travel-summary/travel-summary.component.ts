@@ -56,7 +56,9 @@ export class TravelSummaryComponent implements OnInit {
 
     this.booking.tripItems.forEach(function(tripItem) {
       if (tripItem.id === tripItemId) {
-        tripItem.amount++;
+        if (tripItem.amount < tripItem.maxPersons) {
+          tripItem.amount++;
+        }
       }
     });
   }

@@ -8,9 +8,10 @@ export class TripItem {
   public description?: String;
   public imageBlob?: string | ArrayBuffer;
   public address?: Address;
-  public date?: Date;
   public price?: number;
-
+  public date?: Date;
+  public minPersons: number;
+  public maxPersons: number;
 
   constructor(model?) {
     if (typeof model !== typeof undefined) {
@@ -22,6 +23,8 @@ export class TripItem {
       this.price = model.price;
       this.date = new Date(model.date);
       this.imageBlob = model.imageBlob;
+      this.minPersons = model.minPersons;
+      this.maxPersons = model.maxPersons;
     } else {
       this.date = new Date();
       this.address = new Address();
