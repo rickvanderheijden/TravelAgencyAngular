@@ -51,12 +51,10 @@ export class TravelSummaryComponent implements OnInit {
   }
 
   increaseTripItemAmount(tripItemId: number) {
-    console.log('increaseTripItemAmount: ' + tripItemId);
-    console.log(this.booking.tripItems);
-
+    const numberOfTravelers = this.booking.numberOfTravelers;
     this.booking.tripItems.forEach(function(tripItem) {
       if (tripItem.id === tripItemId) {
-        if (tripItem.amount < tripItem.maxPersons) {
+        if (tripItem.amount < tripItem.maxPersons && tripItem.amount < numberOfTravelers) {
           tripItem.amount++;
         }
       }
