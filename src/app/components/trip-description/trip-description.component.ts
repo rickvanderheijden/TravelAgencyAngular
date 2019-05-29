@@ -36,6 +36,16 @@ export class TripDescriptionComponent implements OnInit {
     this.travel = new Travel();
     this.travel.trip = this.trip;
     this.travel.totalPrice = this.trip.totalPrice;
+    this.travel.hotels = new Array();
+
+    const toAdd = new Array<Hotel>();
+    this.trip.destinations.forEach(function (destination) {
+      toAdd.push(destination.hotel);
+    })
+
+    this.travel.hotels = toAdd;
+
+    console.log("ngOnInit: " + this.travel.hotels)
   }
 
   addTripItem(tripItem: TripItem) {

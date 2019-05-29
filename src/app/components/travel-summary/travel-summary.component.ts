@@ -28,6 +28,7 @@ export class TravelSummaryComponent implements OnInit {
 
     for (const hotel of this.travel.hotels) {
       const bookableHotel = new BookableHotel(hotel);
+      bookableHotel.amount = this.booking.numberOfTravelers;
       this.booking.hotels.push(bookableHotel);
     }
   }
