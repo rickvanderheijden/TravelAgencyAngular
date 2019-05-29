@@ -17,9 +17,9 @@
                             <p class="d-none">User Settings</p>
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="text-left">
-                            <a class="dropdown-item py-1" href="javascript:;" *ngIf="user.isAdmin()">
-                              <i class="fas fa-cogs mr-2"></i>
-                                <span>Settings</span>
+                            <a class="dropdown-item py-1" routerLink="destination" *ngIf="user.isAdmin()">
+                              <i class="fas fa-map-pin mr-2"></i>
+                                <span>Bestemmingen</span>
                             </a>
                             <a class="dropdown-item py-1" href="javascript:;" *ngIf="user.isAdmin()" routerLink="/user">
                               <i class="fas fa-users mr-2"></i>

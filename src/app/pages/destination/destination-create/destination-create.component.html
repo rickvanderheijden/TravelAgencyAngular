@@ -1,11 +1,11 @@
-<section id="trip-update">
+<section id="destination-create">
   <div class="row">
     <div class="col-sm-12">
-      <div class="card" *ngIf="!loading">
+      <div class="card">
         <div class="card-header">
           <div class="row">
             <div class="col-sm-6">
-              <h4 class="card-title">Trip aanpassen</h4>
+              <h4 class="card-title">Nieuwe Trip aanmaken</h4>
             </div>
             <div class="col-sm-6">
               <a class="btn btn-raised btn-grey float-sm-right" (click)="back()">
@@ -16,44 +16,35 @@
         </div>
         <div class="card-body">
           <div class="card-block">
-            <form [formGroup]="tripUpdateForm">
+            <form [formGroup]="destinationCreateForm">
               <div class="form-group">
                 <label>Naam</label>
-                <input type="text" name="username" formControlName="name" class="form-control" [(ngModel)]="trip.name">
+                <input type="text" name="username" formControlName="name" class="form-control" [(ngModel)]="destination.name">
               </div>
               <div class="form-group">
                 <label>Omschrijving</label>
-                <input type="text" name="description" formControlName="description" class="form-control" [(ngModel)]="trip.description">
+                <input type="text" name="description" formControlName="description" class="form-control" [(ngModel)]="destination.description">
               </div>
               <div class="form-group">
                 <label>Samenvatting</label>
-                <input type="text" name="summary" formControlName="summary" class="form-control" [(ngModel)]="trip.summary">
+                <input type="text" name="summary" formControlName="summary" class="form-control" [(ngModel)]="destination.summary">
               </div>
               <div class="form-group">
                 <label>Afbeelding URL</label>
-                <input type="text" name="imageUrl" formControlName="imageUrl" class="form-control" [(ngModel)]="trip.imageUrl">
+                <input type="text" name="imageUrl" formControlName="imageUrl" class="form-control" [(ngModel)]="destination.imageUrl">
               </div>
               <div class="form-group">
                 <label>Totaal prijs</label>
-                <input type="number" name="totalPrice" formControlName="totalPrice" class="form-control" [(ngModel)]="trip.totalPrice">
+                <input type="number" name="totalPrice" formControlName="totalPrice" class="form-control" [(ngModel)]="destination.totalPrice">
               </div>
               <div class="form-group">
                 <label>Korting</label>
-                <input type="number" name="discount" formControlName="discount" class="form-control" [(ngModel)]="trip.discount">
-              </div>
-              <div class="form-group">
-                <label>Trip Items</label>
-                <ng-select [items]="dbTripItems"
-                           formControlName="destinations"
-                            bindLabel="name"
-                           [multiple]="true"
-                            >
-                </ng-select>
+                <input type="number" name="discount" formControlName="discount" class="form-control" [(ngModel)]="destination.discount">
               </div>
               <div class="form-actions">
                 <div class="row">
                   <div class="col-12">
-                    <button type="submit" class="btn btn-primary" (click)="updateTrip()">
+                    <button type="submit" class="btn btn-primary" (click)="enterTrip()">
                       <span>Trip opslaan</span>
                       <i *ngIf="loading" class="ft-loader spinner right"></i>
                     </button>
@@ -67,4 +58,3 @@
     </div>
   </div>
 </section>
-

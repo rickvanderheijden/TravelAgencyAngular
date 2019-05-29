@@ -12,6 +12,7 @@ import {Home_ROUTES} from './shared/routes/home-layout.routes';
 import {Trip_ROUTES} from './shared/routes/trip-layout.routes';
 import {TripItem_ROUTES} from './shared/routes/trip-item-layout.routes';
 import {BookTravel_ROUTES} from './shared/routes/booktravel-layout.routes';
+import {Destination_ROUTES} from './shared/routes/destination-layout.routes';
 
 
 const appRoutes: Routes = [
@@ -33,6 +34,12 @@ const appRoutes: Routes = [
     path: 'trip',
     component: FullLayoutComponent,
     children: Trip_ROUTES,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'destination',
+    component: FullLayoutComponent,
+    children: Destination_ROUTES,
     canActivate: [AdminGuard]
   },
   {
