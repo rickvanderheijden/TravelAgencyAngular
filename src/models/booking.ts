@@ -9,7 +9,7 @@ export class Booking {
   public trip: Trip;
   public hotels: BookableHotel[];
   public tripItems: BookableTripItem[];
-  public totalPrice: number;
+  private totalPrice: number;
   public startDate: Date;
   public endDate: Date;
   public booked: boolean;
@@ -32,6 +32,24 @@ export class Booking {
       this.tripItems = new Array();
       this.hotels = new Array();
     }
+  }
+
+  getTotalPrice() {
+    let totalPriceBooking = this.numberOfTravelers * this.trip.totalPrice;
+
+    if (this.tripItems !== null) {
+      this.tripItems.forEach(function (tripItem) {
+        totalPriceBooking += tripItem.amount * tripItem.price;
+      });
+    }
+
+    if (this.hotels !== null) {
+      this.hotels.forEach(function (hotel) {
+        totalPriceBooking += hotel.amount * hotel.price;
+      });
+    }
+
+    return totalPriceBooking;
   }
 
   // public addTripItem(tripItem: TripItem) {
