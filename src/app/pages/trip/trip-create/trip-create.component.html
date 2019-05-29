@@ -1,7 +1,7 @@
 <section id="trip-create">
   <div class="row">
     <div class="col-sm-12">
-      <div class="card">
+      <div class="card" *ngIf="!loading">
         <div class="card-header">
           <div class="row">
             <div class="col-sm-6">
@@ -40,6 +40,15 @@
               <div class="form-group">
                 <label>Korting</label>
                 <input type="number" name="discount" formControlName="discount" class="form-control" [(ngModel)]="trip.discount">
+              </div>
+              <div class="form-group">
+                <label>Trip Items</label>
+                <ng-select [items]="tripItems"
+                           formControlName="tripItems"
+                           bindLabel="name"
+                           [multiple]="true"
+                           [(ngModel)]="trip.tripItems">
+                </ng-select>
               </div>
               <div class="form-actions">
                 <div class="row">
