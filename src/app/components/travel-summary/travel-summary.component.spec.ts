@@ -8,10 +8,11 @@ import {BookableTripItem} from '../../../models/bookabletripitem';
 import {Hotel} from '../../../models/hotel';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {Trip} from '../../../models/trip';
+import {BookableHotel} from '../../../models/bookablehotel';
 
 class TestTrip { name = 'Test trip'; imageUrl = 'Image URL'; description = 'Description'; }
 class TestTravel { name = 'Test travel'; totalPrice = 1500; trip = new Trip(new TestTrip()); tripItems = new Array<TripItem>(); hotels = new Array<Hotel>() }
-class TestBooking { tripItems = Array<BookableTripItem>(); };
+class TestBooking { tripItems = Array<BookableTripItem>(); hotels = Array<BookableHotel>(); };
 
 describe('TravelSummaryComponent', () => {
   let component: TravelSummaryComponent;

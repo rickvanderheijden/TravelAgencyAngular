@@ -9,8 +9,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {JwtModule} from '@auth0/angular-jwt';
 import {BsModalService, ModalModule} from 'ngx-bootstrap';
 import {RouterTestingModule} from '@angular/router/testing';
+import {Destination} from '../../../models/destination';
 
-class TestTrip { name = 'Test trip'; imageUrl = 'Image URL'; description = 'Description'; }
+class TestTrip { name = 'Test trip'; imageUrl = 'Image URL'; description = 'Description'; destinations = new Array<Destination>(); }
 class TestTravel { name = 'Test travel'; totalPrice = 1500; tripItems = new Array<TripItem>(); }
 
 describe('TripDescriptionComponent', () => {

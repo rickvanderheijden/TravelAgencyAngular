@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Travel} from '../../../models/travel';
 import {Booking} from '../../../models/booking';
 import {BookableHotel} from '../../../models/bookablehotel';
@@ -20,15 +20,15 @@ export class TravelSummaryComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.booking.trip = this.travel.trip;
     this.booking.tripItems = Object.assign([], this.travel.tripItems);
     for (const bookableTripItem of this.booking.tripItems) {
-      bookableTripItem.amount = 1;
+      bookableTripItem.amount = this.booking.numberOfTravelers;
     }
 
     for (const hotel of this.travel.hotels) {
       const bookableHotel = new BookableHotel(hotel);
-      console.log(bookableHotel);
-
+      bookableHotel.amount = this.booking.numberOfTravelers;
       this.booking.hotels.push(bookableHotel);
     }
   }
