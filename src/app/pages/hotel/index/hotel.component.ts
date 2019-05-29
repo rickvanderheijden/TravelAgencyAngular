@@ -1,29 +1,29 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {LocalDataSource, ViewCell} from 'ng2-smart-table';
-import {Destination} from '../../../../models/destination';
+import {Hotel} from '../../../../models/hotel';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 
-import {DestinationService} from '../../../services/destination.service';
+import {HotelService} from '../../../services/hotel.service';
 
 @Component({
-  selector: 'app-destination-actions',
+  selector: 'app-hotel-actions',
   template: `
     <div>
       <span>
-        <button class="btn btn-raised btn-success" routerLink="/destination/update/{{this.rowData.id}}">
+        <button class="btn btn-raised btn-success" routerLink="/hotel/update/{{this.rowData.id}}">
           <i class="ft-edit"></i>
         </button>
       </span>
       <span>
-        <button class="btn btn-raised btn-danger" (click)="deleteDestination()">
+        <button class="btn btn-raised btn-danger" (click)="deleteHotel()">
           <i class="ft-trash"></i>
         </button>
       </span>
     </div>
   `,
 })
-export class DestinationActionButtonsComponent implements ViewCell, OnInit {
+export class HotelActionButtonsComponent implements ViewCell, OnInit {
 
   loading = false;
   @Input() value: string | number;
@@ -36,56 +36,50 @@ export class DestinationActionButtonsComponent implements ViewCell, OnInit {
 
   constructor (
     private router: Router,
-    private destinationService: DestinationService
+    private hotelService: HotelService
   ) { }
 
   ngOnInit() {
 
   }
 
-  deleteDestination() {
-    this.destinationService.deleteDestination(this.rowData.id);
+  deleteHotel() {
+    this.hotelService.deleteHotel(this.rowData.id);
   }
 }
 
 @Component({
-  selector: 'app-destination',
-  templateUrl: './destination.component.html',
-  styleUrls: ['./destination.component.scss']
+  selector: 'app-hotel',
+  templateUrl: './hotel.component.html',
+  styleUrls: ['./hotel.component.scss']
 })
-export class DestinationComponent implements OnInit {
-  destinations: Array<Destination>;
+export class HotelComponent implements OnInit {
+  hotels: Array<Hotel>;
   settings: any;
   source: LocalDataSource;
-  constructor(private service: DestinationService) {
+  constructor(private service: HotelService) {
     this.settings = {
       columns: {
         id: {
           title: 'ID',
           sortDirection: 'desc',
         },
-        hotel: {
-          title: 'Hotel',
+        name: {
+          title: 'Naam',
+        },
+        address: {
+          title: 'Adres',
           valuePrepareFunction: (value) => {
-            return value !== null ? value.name : 'Geen';
+            return value !== null ? value.city.name + ' - ' + value.country.name : 'NB';
           }
         },
-        city: {
-          title: 'Stad',
+        price: {
+          title: 'prijs',
           type: 'text',
           filter: true,
           sort: true,
           valuePrepareFunction: (value) => {
-            return value.name;
-          }
-        },
-        tripItems: {
-          title: 'Aantal TripItems',
-          type: 'text',
-          filter: true,
-          sort: true,
-          valuePrepareFunction: (value) => {
-            return value.length;
+            return '&euro;' + value;
           }
         },
         actions: {
@@ -93,7 +87,7 @@ export class DestinationComponent implements OnInit {
           type: 'custom',
           filter: false,
           sort: false,
-          renderComponent: DestinationActionButtonsComponent
+          renderComponent: HotelActionButtonsComponent
         },
       },
       actions: {
@@ -108,7 +102,8 @@ export class DestinationComponent implements OnInit {
     };
 
     this.source = new LocalDataSource();
-    this.service.getDestinations().subscribe((data: any) => {
+    this.service.getHotels().subscribe((data: any) => {
+      console.log(data);
       this.source.load(data);
     });
   }

@@ -1,0 +1,70 @@
+<section id="hotel-update">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card" *ngIf="!loading">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4 class="card-title">Hotel aanpassen</h4>
+            </div>
+            <div class="col-sm-6">
+              <a class="btn btn-raised btn-grey float-sm-right" (click)="back()">
+                Terug
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-block">
+            <form [formGroup]="hotelUpdateForm">
+              <div class="form-group">
+                <label>Naam</label>
+                <input type="text" name="username" formControlName="name" class="form-control" [(ngModel)]="hotel.name">
+              </div>
+              <div class="form-group">
+                <label>Omschrijving</label>
+                <input type="text" name="description" formControlName="description" class="form-control" [(ngModel)]="hotel.description">
+              </div>
+              <div class="form-group">
+                <label>Samenvatting</label>
+                <input type="text" name="summary" formControlName="summary" class="form-control" [(ngModel)]="hotel.summary">
+              </div>
+              <div class="form-group">
+                <label>Afbeelding URL</label>
+                <input type="text" name="imageUrl" formControlName="imageUrl" class="form-control" [(ngModel)]="hotel.imageUrl">
+              </div>
+              <div class="form-group">
+                <label>Totaal prijs</label>
+                <input type="number" name="totalPrice" formControlName="totalPrice" class="form-control" [(ngModel)]="hotel.totalPrice">
+              </div>
+              <div class="form-group">
+                <label>Korting</label>
+                <input type="number" name="discount" formControlName="discount" class="form-control" [(ngModel)]="hotel.discount">
+              </div>
+              <div class="form-group">
+                <label>Hotel Items</label>
+                <ng-select [items]="dbHotelItems"
+                           formControlName="hotels"
+                            bindLabel="name"
+                           [multiple]="true"
+                            >
+                </ng-select>
+              </div>
+              <div class="form-actions">
+                <div class="row">
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary" (click)="updateHotel()">
+                      <span>Hotel opslaan</span>
+                      <i *ngIf="loading" class="ft-loader spinner right"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

@@ -19,6 +19,8 @@ export class Hotel {
       this.imageBlob = model.imageBlob;
       this.address = model.address;
       this.date = model.date;
+    } else {
+      this.address = new Address()
     }
   }
 }
