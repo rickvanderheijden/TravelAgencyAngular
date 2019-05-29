@@ -22,7 +22,7 @@ export class TravelSummaryComponent implements OnInit {
   ngOnInit() {
     this.booking.tripItems = Object.assign([], this.travel.tripItems);
     for (const bookableTripItem of this.booking.tripItems) {
-      bookableTripItem.amount = 1;
+      bookableTripItem.amount = this.booking.numberOfTravelers;
     }
 
     for (const hotel of this.travel.hotels) {
