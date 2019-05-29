@@ -15,14 +15,14 @@
         <img _ngcontent-c7="" alt="Generic placeholder image" class="media-object round-media" src="assets/img/elements/01.png" style="height: 75px;">
       </td>
       <td _ngcontent-c7="">{{travel.trip.name}}</td>
-      <td _ngcontent-c7="">{{travel.trip.totalPrice}}</td>
+      <td _ngcontent-c7="">€ {{travel.trip.totalPrice}}</td>
       <td _ngcontent-c7="">{{booking.numberOfTravelers}}
         <div _ngcontent-c7="" class="btn-group ml-1">
           <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" href="javascript:void(0)">-</a>
           <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" href="javascript:void(0)">+</a>
         </div>
       </td>
-      <td _ngcontent-c7="">$19.94</td>
+      <td _ngcontent-c7="">€ {{travel.trip.totalPrice}} * {{booking.numberOfTravelers}}</td>
       <td _ngcontent-c7="">
         <a _ngcontent-c7="" class="danger" data-original-title="" title="">
           <i _ngcontent-c7="" class="ft-trash font-medium-3"></i>
@@ -55,14 +55,14 @@
         <img _ngcontent-c7="" alt="Generic placeholder image" class="media-object round-media" src="assets/img/elements/07.png" style="height: 75px;">
       </td>
       <td _ngcontent-c7="">{{bookableTripItem.name}}</td>
-      <td _ngcontent-c7="">{{bookableTripItem.price}}</td>
+      <td _ngcontent-c7="">€ {{bookableTripItem.price}}</td>
       <td _ngcontent-c7="">{{bookableTripItem.amount}}
         <div _ngcontent-c7="" class="btn-group ml-1">
           <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" (click)="decreaseTripItemAmount(bookableTripItem.id)">-</a>
           <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" (click)="increaseTripItemAmount(bookableTripItem.id)">+</a>
         </div>
       </td>
-      <td _ngcontent-c7="">{{bookableTripItem.price * bookableTripItem.amount}}</td>
+      <td _ngcontent-c7="">€ {{bookableTripItem.price * bookableTripItem.amount}}</td>
       <td _ngcontent-c7="">
         <a _ngcontent-c7="" class="danger" data-original-title="" title="">
           <i _ngcontent-c7="" class="ft-trash font-medium-3"></i>
