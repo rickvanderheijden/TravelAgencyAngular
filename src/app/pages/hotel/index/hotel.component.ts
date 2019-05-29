@@ -79,7 +79,7 @@ export class HotelComponent implements OnInit {
           filter: true,
           sort: true,
           valuePrepareFunction: (value) => {
-            return '&euro;' + value;
+            return '€' + value;
           }
         },
         actions: {
