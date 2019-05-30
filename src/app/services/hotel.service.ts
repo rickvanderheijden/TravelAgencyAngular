@@ -71,4 +71,19 @@ export class HotelService {
       })
     );
   }
+
+  getHotelsByCity(name: any) {
+    return this.http.get(environment.server + '/hotels/city/' + name).pipe(
+      map((response: Array<any>) => {
+        const hotels: Array<Hotel> = [];
+        response.forEach(function (hotel, index) {
+          hotels.push(new Hotel(hotel));
+        });
+        return hotels;
+      }),
+      catchError(err => {
+        swal('getHotels', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(err);
+      }));
+  }
 }
