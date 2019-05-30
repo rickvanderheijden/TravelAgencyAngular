@@ -16,7 +16,6 @@
         </div>
         <div class="card-body" *ngIf="loaded">
           <div class="card-block">
-            {{hotelCreateForm.value | json}}
             <form [formGroup]="hotelCreateForm">
               <div class="form-group">
                 <label>Naam</label>
@@ -27,17 +26,18 @@
                 <input type="text" name="description" formControlName="description" class="form-control" >
               </div>
               <div class="form-group">
-                <label>Prijs-</label>
+                <label>Prijs</label>
                 <input type="text" name="price" formControlName="price" class="form-control" >
               </div>
               <div class="form-group">
-                <label>Afbeelding : TODO</label>
-                <input type="text" name="imageBlob" formControlName="imageBlob" class="form-control">
+                <label>Afbeelding</label>
+                <app-drop-zone [srcUrl]="hotel.imageBlob" (imageBlob)="updateImageBlob($event)"></app-drop-zone>
+                <input type="text" name="imageBlob" formControlName="imageBlob" class="form-control" [hidden]="true">
               </div>
               <div class="form-group">
                 <label>Datum</label>
                 <input class="form-control m-1" data-placement="top" data-title="Date Opened" data-toggle="tooltip"
-                       data-trigger="hover" name="dateFrom" type="date" formControlName="date" placeholder="date">
+                       data-trigger="hover" name="dateFrom" type="date" formControlName="date" >
               </div>
 
               <div [formGroup]="addressForm">
@@ -52,10 +52,9 @@
                 <div [formGroup]="countryForm">
                   <div class="form-group">
                     <label>Land</label>
-                    {{countries[1] | json}}
                     <ng-select name="country" placeholder="land" [items]="countries" bindValue="name"
                                formControlName="name" [clearable]="true" class="m-1" bindLabel="name"
-                    (change)="getCities($event)">
+                    (change)="getCities($event)" (clear)="clearCountryAndCity()">
                     </ng-select>
                   </div>
                 </div>
@@ -73,7 +72,7 @@
               <div class="form-actions">
                 <div class="row">
                   <div class="col-12">
-                    <button type="submit" class="btn btn-primary" (click)="enterHotel()">
+                    <button type="submit" class="btn btn-primary" (click)="enterHotel()" [disabled]="!hotelCreateForm.valid">
                       <span>Hotel opslaan</span>
                       <i *ngIf="loading" class="ft-loader spinner right"></i>
                     </button>

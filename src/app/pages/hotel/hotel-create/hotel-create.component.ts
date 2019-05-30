@@ -43,10 +43,10 @@ export class HotelCreateComponent implements OnInit {
       });
       this.hotel = new Hotel();
       this.countryForm = this.formBuilder.group({
-        name: this.formBuilder.control(this.hotel.address.country.name)
+        name: this.formBuilder.control(this.hotel.address.country.name, [Validators.required])
       });
       this.cityForm = this.formBuilder.group({
-        name: this.formBuilder.control(this.hotel.address.city.name)
+        name: this.formBuilder.control(this.hotel.address.city.name, [Validators.required])
       }, );
       this.cityForm.get('name').disable();
       this.addressForm = this.formBuilder.group({
@@ -90,6 +90,20 @@ export class HotelCreateComponent implements OnInit {
         this.cityForm.get('name').enable();
       });
     }
-    console.log(event);
+  }
+
+  updateImageBlob(event) {
+    this.hotelCreateForm.get('imageBlob').setValue(event)
+  }
+  clearCountryAndCity() {
+    this.cities = null;
+    const city = this.cityName;
+    city.disable();
+    city.setValue(null);
+    this.countryForm.get('name').setValue(null);
+  }
+
+  get cityName() {
+    return this.cityForm.get('name');
   }
 }

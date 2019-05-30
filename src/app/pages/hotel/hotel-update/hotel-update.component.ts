@@ -1,11 +1,12 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HotelService} from '../../../services/hotel.service';
 import {Hotel} from '../../../../models/hotel';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {TripItem} from '../../../../models/TripItem';
 import {TripItemService} from '../../../services/trip-item.service';
+import {NgOption} from '@ng-select/ng-select';
+import {City} from '../../../../models/city';
+import {GeographyService} from '../../../services/geography.service';
 
 @Component({
   selector: 'app-hotel-update',
@@ -14,16 +15,19 @@ import {TripItemService} from '../../../services/trip-item.service';
 })
 export class HotelUpdateComponent implements OnInit {
   hotelUpdateForm: FormGroup;
+  addressForm: FormGroup;
+  cityForm: FormGroup;
+  countryForm: FormGroup;
   hotel: Hotel;
-  hotelId: any;
   loading = false;
-  dbTripItems: Array<TripItem>;
-  selectedTripItems: Array<any>;
+  countries: NgOption[];
+  private loaded = false;
+  private cities: City[];
 
   constructor(
     private hotelService: HotelService,
-    private tripItemService: TripItemService,
     private route: ActivatedRoute,
+    private geoService: GeographyService,
     private router: Router,
     private formBuilder: FormBuilder
   ) {
@@ -31,20 +35,26 @@ export class HotelUpdateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loading = true;
-    this.tripItemService.getTripItems().subscribe((hotelItems: any) => {
-      this.dbTripItems = hotelItems;
+    this.countries = new Array<NgOption>();
+    this.geoService.getAllCountries().subscribe((countries: Array<any>) => {
+      countries.forEach((country, index) => {
+        if (country.cities.length) {
+          this.countries.push({name: country.name});
+        }
+      });
       this.hotelService.getById(this.route.snapshot.params.id).subscribe((data: any) => {
         this.hotel = new Hotel(data);
-        this.hotelId = this.route.snapshot.params.id;
         this.setForm();
         this.loading = false;
       });
+
     });
   }
 
   updateHotel() {
-    if (this.hotel) {
+    this.hotel = new Hotel(this.hotelUpdateForm.value);
+    this.hotel.id = this.route.snapshot.params.id;
+    if (this.hotelUpdateForm.valid) {
       this.hotelService.updateHotel(this.hotel).subscribe(
         (response: any) => {
           this.back();
@@ -57,32 +67,55 @@ export class HotelUpdateComponent implements OnInit {
   }
 
   setForm() {
-    this.hotelUpdateForm = new FormGroup({
-      name: new FormControl(this.hotel.name, [Validators.minLength(4), Validators.required]),
-      imageBlob: new FormControl(this.hotel.imageBlob),
-      address: new FormControl(this.hotel.address),
-      description: new FormControl(this.hotel.description)
 
-    });
-    this.formBuilder.group(this.hotelUpdateForm);
+  this.countryForm = this.formBuilder.group({
+    name: this.formBuilder.control(this.hotel.address.country.name, [Validators.required])
+  });
+  this.cityForm = this.formBuilder.group({
+    name: this.formBuilder.control(this.hotel.address.city.name,  [Validators.required])
+  }, );
+  this.addressForm = this.formBuilder.group({
+    addressLine: this.formBuilder.control(this.hotel.address.addressLine, [Validators.required]),
+    zipCode: this.formBuilder.control(this.hotel.address.zipCode, [Validators.required]),
+    city: this.cityForm,
+    country: this.countryForm
+  });
+  this.hotelUpdateForm = this.formBuilder.group({
+    id: this.formBuilder.control({ value: this.hotel.id, disabled: true}, [ Validators.required] ),
+    name: this.formBuilder.control(this.hotel.name, [ Validators.required] ),
+    description: this.formBuilder.control(this.hotel.description, [ Validators.required] ),
+    price: this.formBuilder.control(this.hotel.price, [ Validators.required] ),
+    date: this.formBuilder.control(this.hotel.date, [ Validators.required] ),
+    imageBlob: this.formBuilder.control(this.hotel.imageBlob, [ Validators.required] ),
+    address: this.addressForm,
+  });
+    this.loaded = true;
 
   }
 
-  get desinations() {
-    return this.formBuilder.group({
-      hotelName: '',
-      hotelItems: this.formBuilder.array([this.hotelItems])
-    });
+  updateImageBlob(event) {
+    this.hotelUpdateForm.get('imageBlob').setValue(event)
   }
 
-  get hotelItems() {
-    return this.formBuilder.group({
-      hotelItemName: ''
-    });
+  getCities(event) {
+    this.cities = new Array();
+    if (event !== undefined) {
+      this.geoService.getCitiesByCountryName(event.name).subscribe((cities: Array<City>) => {
+        this.cities = cities;
+        this.cityForm.get('name').enable();
+      });
+    }
   }
 
-  addHotel() {
-    (this.hotelUpdateForm.get('hotels') as FormArray).push(this.hotelItems);
+  clearCountryAndCity() {
+    this.cities = null;
+    const city = this.cityName;
+    city.disable();
+    city.setValue(null);
+    this.countryForm.get('name').setValue(null);
   }
 
+  get cityName() {
+    return this.cityForm.get('name');
+  }
 }
