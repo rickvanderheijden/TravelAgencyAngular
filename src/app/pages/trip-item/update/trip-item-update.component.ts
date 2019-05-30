@@ -63,6 +63,8 @@ export class TripItemUpdateComponent implements OnInit {
       description: new FormControl(this.tripItem.description, [ Validators.required]),
       imageBlob: new FormControl(this.tripItem.imageBlob, [ Validators.required]),
       price: new FormControl(this.tripItem.price, [ Validators.required]),
+      minPersons: new FormControl(this.tripItem.minPersons, [ Validators.required]),
+      maxPersons: new FormControl(this.tripItem.maxPersons, [ Validators.required]),
       tripItemType: new FormControl(this.tripItem.tripItemType, [Validators.required]),
       date: new FormControl(this.tripItem.date, [Validators.required]),
       address: new FormControl(this.tripItem.address.addressLine, [Validators.required]),

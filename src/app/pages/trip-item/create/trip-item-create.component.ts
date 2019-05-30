@@ -53,6 +53,8 @@ export class TripItemCreateComponent implements OnInit {
       name: new FormControl(this.tripItem.name, [Validators.required]),
       description: new FormControl(this.tripItem.description, [ Validators.required]),
       price: new FormControl(this.tripItem.price, [ Validators.required]),
+      minPersons: new FormControl(this.tripItem.minPersons, [ Validators.required]),
+      maxPersons: new FormControl(this.tripItem.maxPersons, [ Validators.required]),
       tripItemType: new FormControl(this.tripItem.tripItemType, [Validators.required]),
       date: new FormControl(this.tripItem.date, [Validators.required]),
       address: new FormControl(this.tripItem.address.addressLine, [Validators.required]),

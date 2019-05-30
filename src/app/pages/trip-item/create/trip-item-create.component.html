@@ -33,6 +33,14 @@
                     <input type="tel" name="name" formControlName="price" autocomplete="off"  class="form-control" [(ngModel)]="tripItem.price">
                   </div>
                   <div class="form-group">
+                    <label>Minimaal personen</label>
+                    <input type="number" name="minPersons" formControlName="minPersons" class="form-control" [(ngModel)]="tripItem.minPersons">
+                  </div>
+                  <div class="form-group">
+                    <label>Maximaal personen</label>
+                    <input type="number" name="maxPersons" formControlName="maxPersons" class="form-control" [(ngModel)]="tripItem.maxPersons">
+                  </div>
+                  <div class="form-group">
                     <label>Foto</label>
                     <app-drop-zone [srcUrl]="tripItem.imageBlob" (imageBlob)="updateImageBlob($event)" ></app-drop-zone>
                   </div>
