@@ -5,7 +5,7 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Travelgroup} from '../../../../models/travelgroup';
-import {TravelgroupService} from '../../../services/travelgroup.service';
+import {TravelGroupService} from '../../../services/travelgroup.service';
 
 class TestGroups {
   getGroups(): Observable<Array<Travelgroup>> {
@@ -20,7 +20,7 @@ describe('GroupComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ GroupComponent ],
-      providers: [{provide: TravelgroupService, useValue: new TestGroups()}],
+      providers: [{provide: TravelGroupService, useValue: new TestGroups()}],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
         HttpClientModule

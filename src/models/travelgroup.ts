@@ -14,15 +14,15 @@ export class Travelgroup {
       this.users = new Array<User>();
       if (model.users !== undefined) {
         for (const user of model.users) {
-          this.addUsers(new User(user));
+          this.users.push(new User(user));
         }
       }
     }
   }
-
-  private addUsers(user: User) {
-    if (user !== undefined) {
-      this.users.push(user);
-    }
-  }
+  //
+  // private addUsers(user: User) {
+  //   if (user !== undefined) {
+  //     this.users.push(user);
+  //   }
+  // }
 }

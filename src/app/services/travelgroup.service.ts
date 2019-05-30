@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Travelgroup} from '../../models/travelgroup';
 import {HttpClient} from '@angular/common/http';
@@ -6,13 +6,15 @@ import {environment} from '../../environments/environment';
 import {catchError, map} from 'rxjs/operators';
 import swal from 'sweetalert2';
 import {User} from '../../models/user';
+import {error} from 'selenium-webdriver';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TravelGroupService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   /**
    * Get TravelGroups by ID
@@ -26,11 +28,11 @@ export class TravelGroupService {
           travelgroups.push(new Travelgroup(travelgroup));
         });
         return travelgroups;
-    }),
-    catchError(err => {
-      swal('getTravelgroups', 'Er is iets niet goed gegaan.', 'error');
-      throw new Error(err);
-    }));
+      }),
+      catchError(err => {
+        swal('getTravelgroups', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(err);
+      }));
   }
 
   getUsers(id: number): Observable<Array<User>> {
@@ -48,19 +50,29 @@ export class TravelGroupService {
       })
     );
   }
+
   /**
    * Create a group
    * @param group
    */
-  createTravelGroup(group: Travelgroup ) {
-    return this.http.post(environment.server + '/travelgroups/createTravelGroup', group).pipe(
+  createTravelGroup(group: Travelgroup) {
+    this.http.post(environment.server + '/travelgroups/createTravelGroup', group).pipe(
       map(response => {
-        return new Travelgroup(response);
       }),
       catchError(error => {
         swal('createTrip', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(error);
       })
     );
+    group.users.forEach(function (user) {
+      this.http.post(environment.server + '/addUser/' + user.id, group).pipe(
+        map(response => {
+        }),
+        catchError(error => {
+          swal('addUsers', 'Er is iets niet goed gegaan.', 'error');
+          throw new Error(error);
+        })
+      );
+    })
   }
 }

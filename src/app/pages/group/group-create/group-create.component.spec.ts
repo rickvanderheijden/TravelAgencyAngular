@@ -1,31 +1,31 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TripCreateComponent } from './trip-create.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {Trip} from '../../../../models/trip';
 import {Observable, of} from 'rxjs';
-import {TripService} from '../../../services/trip.service';
+import {Travelgroup} from '../../../../models/travelgroup';
+import {GroupCreateComponent} from './group-create.component';
+import {TravelGroupService} from '../../../services/travelgroup.service';
 
 class DummyComponent {
 }
 
-class TestTrip {
-  createTrip(trip: Trip): Observable<Trip> {
-    return of(new Trip);
+class TestGroup {
+  createGroup(travelGroup: Travelgroup): Observable<Travelgroup> {
+    return of(new Travelgroup);
   }
 }
 
 
-describe('TripCreateComponent', () => {
-  let component: TripCreateComponent;
-  let fixture: ComponentFixture<TripCreateComponent>;
+describe('GroupCreateComponent', () => {
+  let component: GroupCreateComponent;
+  let fixture: ComponentFixture<GroupCreateComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ TripCreateComponent ],
+      declarations: [ GroupCreateComponent ],
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [{provide: TripService, useValue: new TestTrip()}],
+      providers: [{provide: TravelGroupService, useValue: new TestGroup()}],
       imports: [ RouterTestingModule.withRoutes([
           { path: '', component: DummyComponent }
         ]),
@@ -35,7 +35,7 @@ describe('TripCreateComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TripCreateComponent);
+    fixture = TestBed.createComponent(GroupCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
