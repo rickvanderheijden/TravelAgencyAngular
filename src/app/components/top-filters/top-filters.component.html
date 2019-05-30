@@ -4,7 +4,7 @@
       <div class="col-6">
         <div class="row">
           <div class="col-12">
-            <h5 class="text-light">Waar wil je Naartoe?</h5>
+            <h5 class="text-light" style="margin-left: 6px;">Waar wil je Naartoe?</h5>
           </div>
           <div class="col-12">
             <ng-select  name="continent" placeholder="Continent" [items]="continents" bindLabel="name" bindValue="name"
@@ -22,7 +22,7 @@
       <div class="col-6">
         <div class="row">
           <div class="col-12">
-            <h5 class="text-light">Wanneer?</h5>
+            <h5 class="text-light" style="margin-left: 6px;">Wanneer?</h5>
           </div>
           <div class="col-12">
             <input class="form-control m-1" data-placement="top" data-title="Date Opened" data-toggle="tooltip"
@@ -37,7 +37,7 @@
     </div>
     <div class="row">
       <div class="col-12 ">
-        <button class="btn btn-full btn-primary align-content-center valign-bottom" (click)="doFilter()"> {{countries ? countries.length > 0 ? countries.length: "600"  : "600"}} reizen <i class="fa fa-chevron-right"></i> </button>
+        <button class="btn btn-full btn-primary align-content-center valign-bottom" (click)="doFilter()" style="margin-left: 6px;"> {{countries ? countries.length > 0 ? countries.length: "600"  : "600"}} reizen <i class="fa fa-chevron-right"></i> </button>
       </div>
     </div>
   </div>

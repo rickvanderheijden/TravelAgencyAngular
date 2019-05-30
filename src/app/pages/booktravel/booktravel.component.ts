@@ -22,8 +22,10 @@ export class BookTravelComponent implements OnInit {
 
     this.travelObservable.subscribe((value: Travel) => {
       this.travel = value;
-      console.log(this.travel);
     });
+  }
+
+  backToTravelPage() {
   }
 
   finishFunction() {

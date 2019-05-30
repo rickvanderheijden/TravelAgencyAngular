@@ -1,8 +1,6 @@
 import { Component, AfterViewChecked } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {AuthenticationService} from '../../auth/auth.service';
 import {User} from '../../../models/user';
-import * as $ from 'jquery';
 
 @Component({
     selector: 'app-navbar',
@@ -15,21 +13,10 @@ export class NavbarComponent implements AfterViewChecked {
     toggleClass = 'ft-maximize';
     placement = 'bottom-right';
     public isCollapsed = true;
-    loggedIn = false;
     user: User = null;
 
 
   constructor(private authService: AuthenticationService) {
-    this.authService.authenticationState.subscribe(response => {
-      if (response === true) {
-        this.authService.getLoggedInUser().subscribe(
-          user => {
-            this.user = new User(user);
-            this.loggedIn = true;
-          }
-        );
-      }
-    });
   }
 
   ngAfterViewChecked() {
@@ -44,14 +31,25 @@ export class NavbarComponent implements AfterViewChecked {
         }
     }
 
+  loggedIn() {
+    if (sessionStorage.getItem('currentUser')) {
+      if (!this.user) {
+        this.user = new User(JSON.parse(sessionStorage.getItem('currentUser')));
+      }
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   logout() {
     this.authService.logout();
-    this.loggedIn = false;
     this.user = null;
+    this.reloadHomePage();
   }
 
   reloadHomePage() {
-    if (window.location.href == 'http://localhost:4200/') {
+    if (window.location.href === 'http://localhost:4200/') {
       window.location.reload();
     } else {
       window.location.href = '/';

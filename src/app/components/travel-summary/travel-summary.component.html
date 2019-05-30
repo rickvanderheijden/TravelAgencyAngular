@@ -1,69 +1,66 @@
-<p>
-  travelsummary works!
-  {{travel.totalPrice}}
-</p>
+<table _ngcontent-c7="" class="table table-responsive-md text-center">
+  <thead _ngcontent-c7="">
+    <tr _ngcontent-c7="">
+      <th _ngcontent-c7=""></th>
+      <th _ngcontent-c7=""></th>
+      <th _ngcontent-c7="">Prijs</th>
+      <th _ngcontent-c7="">Aantal personen</th>
+      <th _ngcontent-c7="">Bedrag</th>
+    </tr>
+  </thead>
+  <tbody _ngcontent-c7="">
+    <tr _ngcontent-c7="">
+      <td _ngcontent-c7="">
+        <img _ngcontent-c7="" alt="" class="rounded" src="{{travel.trip.imageUrl}}" style="height: 90px; width: 90px; object-fit: cover;">
+      </td>
+      <td _ngcontent-c7="">{{booking.trip.name}}</td>
+      <td _ngcontent-c7="">€ {{booking.trip.totalPrice}}</td>
+      <td _ngcontent-c7="">{{booking.numberOfTravelers}}
+        <div _ngcontent-c7="" class="btn-group ml-1">
+          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" href="javascript:void(0)">-</a>
+          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" href="javascript:void(0)">+</a>
+        </div>
+      </td>
+      <td _ngcontent-c7="">€ {{booking.trip.totalPrice * booking.numberOfTravelers}}</td>
+    </tr>
 
-<!--<table _ngcontent-c7="" class="table table-responsive-md text-center">-->
-<!--  <thead _ngcontent-c7="">-->
-<!--    <tr _ngcontent-c7="">-->
-<!--      <th _ngcontent-c7="">Image</th>-->
-<!--      <th _ngcontent-c7="">Product</th>-->
-<!--      <th _ngcontent-c7="">Price</th>-->
-<!--      <th _ngcontent-c7="">Quantity</th>-->
-<!--      <th _ngcontent-c7="">Amount</th>-->
-<!--      <th _ngcontent-c7="">Delete</th>-->
-<!--    </tr>-->
-<!--  </thead>-->
-<!--  <tbody _ngcontent-c7="">-->
-<!--    <tr _ngcontent-c7="">-->
-<!--      <td _ngcontent-c7="">-->
-<!--        <img _ngcontent-c7="" alt="Generic placeholder image" class="media-object round-media" src="assets/img/elements/01.png" style="height: 75px;">-->
-<!--      </td>-->
-<!--      <td _ngcontent-c7="">Product 1</td>-->
-<!--      <td _ngcontent-c7="">$9.97</td>-->
-<!--      <td _ngcontent-c7=""> 2-->
-<!--        <div _ngcontent-c7="" class="btn-group ml-1">-->
-<!--          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" href="javascript:void(0)">-</a>-->
-<!--          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" href="javascript:void(0)">+</a>-->
-<!--        </div>-->
-<!--      </td>-->
-<!--      <td _ngcontent-c7="">$19.94</td>-->
-<!--      <td _ngcontent-c7="">-->
-<!--        <a _ngcontent-c7="" class="danger" data-original-title="" title="">-->
-<!--          <i _ngcontent-c7="" class="ft-trash font-medium-3"></i>-->
-<!--        </a>-->
-<!--      </td>-->
-<!--    </tr>-->
+    <tr _ngcontent-c7="" *ngFor="let hotel of booking.hotels">
+      <td _ngcontent-c7="">
+        <img _ngcontent-c7="" alt="" class="rounded" src="{{hotel.imageBlob}}" style="height: 90px; width: 90px; object-fit: cover;">
+      </td>
+      <td _ngcontent-c7="">{{hotel.name}}</td>
+      <td _ngcontent-c7="">€ {{hotel.price}}</td>
+      <td _ngcontent-c7="">{{hotel.amount}}
+        <div _ngcontent-c7="" class="btn-group ml-1">
+          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" href="javascript:void(0)">-</a>
+          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" href="javascript:void(0)">+</a>
+        </div>
+      </td>
+      <td _ngcontent-c7="">€ {{hotel.price * hotel.amount}}</td>
+      <td _ngcontent-c7=""></td>
+    </tr>
 
-<!--    <tr _ngcontent-c7="" *ngFor="let tripItem of travel.tripItems">-->
-<!--      <td _ngcontent-c7="">-->
-<!--        <img _ngcontent-c7="" alt="Generic placeholder image" class="media-object round-media" src="assets/img/elements/07.png" style="height: 75px;">-->
-<!--      </td>-->
-<!--      <td _ngcontent-c7="">{{tripItem.description}}</td>-->
-<!--      <td _ngcontent-c7="">{{tripItem.price}}</td>-->
-<!--      <td _ngcontent-c7=""> 2-->
-<!--        <div _ngcontent-c7="" class="btn-group ml-1">-->
-<!--          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" href="javascript:void(0)">-</a>-->
-<!--          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" href="javascript:void(0)">+</a>-->
-<!--        </div>-->
-<!--      </td>-->
-<!--      <td _ngcontent-c7="">$12.00</td>-->
-<!--      <td _ngcontent-c7="">-->
-<!--        <a _ngcontent-c7="" class="danger" data-original-title="" title="">-->
-<!--          <i _ngcontent-c7="" class="ft-trash font-medium-3"></i>-->
-<!--        </a>-->
-<!--      </td>-->
-<!--    </tr>-->
+    <tr _ngcontent-c7="" *ngFor="let bookableTripItem of booking.tripItems">
+      <td _ngcontent-c7="">
+        <img _ngcontent-c7="" alt="" class="rounded" src="{{bookableTripItem.imageBlob}}" style="height: 90px; width: 90px; object-fit: cover;">
+      </td>
+      <td _ngcontent-c7="">{{bookableTripItem.name}}</td>
+      <td _ngcontent-c7="">€ {{bookableTripItem.price}}</td>
+      <td _ngcontent-c7="">{{bookableTripItem.amount}}
+        <div _ngcontent-c7="" class="btn-group ml-1">
+          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" (click)="decreaseTripItemAmount(bookableTripItem.id)">-</a>
+          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" (click)="increaseTripItemAmount(bookableTripItem.id)">+</a>
+        </div>
+      </td>
+      <td _ngcontent-c7="">€ {{bookableTripItem.price * bookableTripItem.amount}}</td>
+    </tr>
 
-<!--    <tr _ngcontent-c7="">-->
-<!--      <td _ngcontent-c7=""></td>-->
-<!--      <td _ngcontent-c7=""></td>-->
-<!--      <td _ngcontent-c7=""></td>-->
-<!--      <td _ngcontent-c7=""></td>-->
-<!--      <td _ngcontent-c7=""></td>-->
-<!--      <td _ngcontent-c7="">-->
-<!--        <button _ngcontent-c7="" class="btn btn-success btn-raised">Continue</button>-->
-<!--      </td>-->
-<!--    </tr>-->
-<!--  </tbody>-->
-<!--</table>-->
+    <tr _ngcontent-c7="">
+      <td _ngcontent-c7=""></td>
+      <td _ngcontent-c7=""></td>
+      <td _ngcontent-c7=""></td>
+      <td _ngcontent-c7=""></td>
+      <td _ngcontent-c7="" style="font-weight: 600;">€ {{booking.getTotalPrice()}}</td>
+    </tr>
+  </tbody>
+</table>

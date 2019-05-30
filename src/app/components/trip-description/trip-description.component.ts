@@ -5,6 +5,7 @@ import {TripItem} from '../../../models/TripItem';
 import {AuthenticationService} from '../../auth/auth.service';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {Router} from '@angular/router';
+import {Hotel} from '../../../models/hotel';
 
 @Component({
   selector: 'app-trip-description',
@@ -24,6 +25,9 @@ export class TripDescriptionComponent implements OnInit {
   @Output()
   tripItemOut = new EventEmitter<TripItem>();
 
+  @Output()
+  hotelOut = new EventEmitter<Hotel>();
+
   loading = false;
   constructor(private authenticationService: AuthenticationService, private modalService: BsModalService, private router: Router) {
   }
@@ -32,16 +36,54 @@ export class TripDescriptionComponent implements OnInit {
     this.travel = new Travel();
     this.travel.trip = this.trip;
     this.travel.totalPrice = this.trip.totalPrice;
+    this.travel.hotels = new Array();
+
+    const toAdd = new Array<Hotel>();
+    this.trip.destinations.forEach(function (destination) {
+      toAdd.push(destination.hotel);
+    })
+
+    this.travel.hotels = toAdd;
+
+    console.log("ngOnInit: " + this.travel.hotels)
   }
 
   addTripItem(tripItem: TripItem) {
-    this.travel.addTripItem(tripItem);
+    let found = false;
+    for (const travelTripItem of this.travel.tripItems) {
+      if (travelTripItem.id === tripItem.id) {
+        found = true;
+        break;
+      }
+    }
 
+    if (!found) {
+      this.travel.addTripItem(tripItem);
+    }
   }
 
   removeTripItem(tripItem: TripItem) {
     this.travel.removeTripItem(tripItem);
     this.tripItemOut.emit(tripItem);
+  }
+
+  addHotel(hotel: Hotel) {
+    let found = false;
+    for (const travelHotel of this.travel.hotels) {
+      if (travelHotel.id === hotel.id) {
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) {
+      this.travel.addHotel(hotel);
+    }
+  }
+
+  removeHotel(hotel: Hotel) {
+    this.travel.removeHotel(hotel);
+    this.hotelOut.emit(hotel);
   }
 
   bookTravel() {
@@ -50,5 +92,12 @@ export class TripDescriptionComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template); // {3}
+  }
+
+  didLoginSuccessful(loginSuccessful: boolean) {
+    if (loginSuccessful){
+      this.modalRef.hide();
+      this.router.navigateByUrl('/booktravel', { state: { travel: this.travel } });
+    }
   }
 }

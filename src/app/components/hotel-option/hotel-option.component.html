@@ -1,0 +1,20 @@
+<div class="card horizontal">
+  <div class="card-content d-flex justify-content-between">
+    <div class="card-img width-25-per" [style.backgroundImage]="'url(' + (hotel?.imageBlob != null ? hotel?.imageBlob : '') +')'">
+    </div>
+    <div class="card-body" width-75-per>
+      <div class="px-3 d-flex align-items-start flex-column" style="width: 100%">
+        <h4 style="font-size: 30px" class="card-title">{{hotel?.name}}</h4>
+        <p class="card-text">{{hotel?.description}}</p>
+        <div class="row" style="height: 50px; width: 104%">
+          <div class="col-6">
+            <p style="font-size: 30px">€ {{hotel?.price}}</p>
+          </div>
+<!--          <div class="col-6" style="text-align: right;">-->
+<!--            <button class="btn btn-primary" (click)="addTripItem(tripItem)">Voeg toe aan mijn reis</button>-->
+<!--          </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
