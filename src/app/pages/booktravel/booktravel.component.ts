@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -17,6 +17,7 @@ export class BookTravelComponent implements OnInit {
   loading = false;
   travel: Travel;
   booking: Booking = null;
+  paymentStepEnabled: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute) { }
 
@@ -37,5 +38,9 @@ export class BookTravelComponent implements OnInit {
 
   pushBooking() {
     this.booking = this.travelSummaryComponent.getBooking();
+  }
+
+  enablePaymentStep(enabled: boolean) {
+    this.paymentStepEnabled = enabled;
   }
 }

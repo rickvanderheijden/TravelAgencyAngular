@@ -55,11 +55,8 @@
       </div>
     </div>
   </div>
-
-
   <br><br>
   <H4>Gegevens medereizigers</H4>
-
   <div formArrayName="travelers"
     *ngFor="let traveler of bookingTravelerInformationForm.get('travelers')['controls'] ; let i = index;">
       <div [formGroupName]="i">
@@ -79,23 +76,4 @@
         </div>
       </div>
   </div>
-
-
-<!--  <div [formGroup]="travelersForm">-->
-<!--    <div class="row">-->
-<!--      <div class="col-6">-->
-<!--        <div class="form-group">-->
-<!--          <label>Voornaam</label>-->
-<!--          <input type="text" formControlName="firstName" class="form-control">-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="col-6">-->
-<!--        <div class="form-group">-->
-<!--          <label>Achternaam</label>-->
-<!--          <input type="text" formControlName="lastName" class="form-control">-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-
 </form>

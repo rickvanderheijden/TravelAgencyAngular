@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {City} from '../../../models/city';
 import {GeographyService} from '../../services/geography.service';
 import {Country} from '../../../models/country';
@@ -16,6 +16,9 @@ export class BookingTravelerInformationComponent implements OnInit {
 
   @Input()
   booking: Booking;
+
+  @Output()
+  formValid = new EventEmitter<boolean>();
 
   bookingTravelerInformationForm: FormGroup;
   addressForm: FormGroup;
@@ -43,6 +46,9 @@ export class BookingTravelerInformationComponent implements OnInit {
       });
 
       this.setForm();
+
+      this.bookingTravelerInformationForm.statusChanges
+        .subscribe(() => { this.formValid.emit(this.bookingTravelerInformationForm.valid); });
 
       this.loaded = true;
     });
