@@ -17,7 +17,6 @@ export class TopFiltersComponent implements OnInit {
   countries: Array<Country>;
   country: Country;
   continent: Continent;
-  trips: Array<Trip>;
   till: any;
   from: any;
   geoService: GeographyService;
@@ -32,6 +31,8 @@ export class TopFiltersComponent implements OnInit {
     this.geoService = geoService;
     this.tripService = tripService;
 
+    this.clearAll();
+
     this.geoService.getAllContinents().subscribe((continents: any) => {
       this.continents = continents;
     })
@@ -43,12 +44,12 @@ export class TopFiltersComponent implements OnInit {
 
   getCountries(continent) {
     this.searchDTO.continent = continent;
-    this.tripService.searchTrips(this.searchDTO).subscribe((trips: any) => {
-      this.trips = trips;
-    })
+    this.searchDTO.country = null;
+    this.clearAll();
 
-    console.log('=======trips= continent===');
-    console.log(this.trips);
+    this.tripService.searchTrips(this.searchDTO).subscribe((trips: any) => {
+      this.foundTrips.emit(trips);
+    })
 
     this.geoService.getCountriesByContinentName(continent).subscribe((countries: any) => {
       this.countries = countries;
@@ -58,11 +59,8 @@ export class TopFiltersComponent implements OnInit {
   getTrips(country) {
     this.searchDTO.country = country;
     this.tripService.searchTrips(this.searchDTO).subscribe((trips: any) => {
-      this.trips = trips;
+      this.foundTrips.emit(trips);
     });
-
-    console.log('=======trips= country===');
-    console.log(this.trips);
   }
 
 
