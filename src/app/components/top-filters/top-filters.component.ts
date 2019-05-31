@@ -39,6 +39,7 @@ export class TopFiltersComponent implements OnInit {
     })
 
     this.tripService.getTrips().subscribe((trips: any) => {
+      this.foundTrips.emit(trips);
       this.trips = trips;
     })
   }
