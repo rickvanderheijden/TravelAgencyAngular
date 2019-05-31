@@ -6,6 +6,7 @@ import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {catchError} from 'rxjs/internal/operators/catchError';
 import swal from 'sweetalert2';
+import {Hotel} from '../../models/hotel';
 
 @Injectable({
   providedIn: 'root'
@@ -75,5 +76,20 @@ export class TripItemService {
       })
     );
 
+  }
+
+  getTripItemsByCity(name: any) {
+    return this.http.get(environment.server + '/tripItems/city/' + name).pipe(
+      map((response: Array<any>) => {
+        const tripItems: Array<TripItem> = [];
+        response.forEach(function (tripItem, index) {
+          tripItems.push(new TripItem(tripItem));
+        });
+        return tripItems;
+      }),
+      catchError(err => {
+        swal('gettripItemsByCity', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(err);
+      }));
   }
 }
