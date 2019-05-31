@@ -59,7 +59,14 @@ export class GroupCreateComponent implements OnInit {
   submitForm() {
     this.travelgroup.masterId = this.userId;
     if (this.travelgroup) {
-      this.travelGroupService.createTravelGroup(this.travelgroup)
+      this.travelGroupService.createTravelGroup(this.travelgroup).subscribe(
+        (response: any) => {
+        console.log(response);
+      });
+const self = this
+      this.travelgroup.users.forEach(function (user) {
+        self.travelGroupService.addUser(self.travelgroup, user.id).subscribe()
+      })
       // this.back()
     }
   }

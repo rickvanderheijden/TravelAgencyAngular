@@ -6,12 +6,13 @@ import {environment} from '../../environments/environment';
 import {catchError, map} from 'rxjs/operators';
 import swal from 'sweetalert2';
 import {User} from '../../models/user';
-import {error} from 'selenium-webdriver';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TravelGroupService {
+
+  travelGroup: Travelgroup;
 
   constructor(private http: HttpClient) {
   }
@@ -56,27 +57,26 @@ export class TravelGroupService {
    * @param group
    */
   createTravelGroup(group: Travelgroup) {
-    const httpClient = this.http;
-    console.log(group)
-    this.http.post(environment.server + '/travelgroups/createTravelGroup', group).pipe(
+    return this.http.post(environment.server + '/travelgroups/createTravelGroup', group).pipe(
       map(response => {
-        console.log(response);
+        return new Travelgroup(response);
       }),
       catchError(error => {
         swal('createTrip', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(error);
       })
     );
-    group.users.forEach(function (user) {
-      httpClient.post(environment.server + '/travelgroups/addUser/' + user.id, group).pipe(
+  }
+
+  addUser(group: Travelgroup, id) {
+      return this.http.post(environment.server + '/travelgroups/addUser/' + id, group).pipe(
         map(response => {
-          console.log(response);
+          return true;
         }),
         catchError(error => {
           swal('addUsers', 'Er is iets niet goed gegaan.', 'error');
           throw new Error(error);
         })
       );
-    })
   }
 }
