@@ -61,4 +61,20 @@ export class GeographyService {
         throw new Error(err);
       }));
   }
+
+  getCitiesByCountryName(name: any) {
+    return this.http.get(environment.server + '/geo/getCitiesByCountryName/' + name).pipe(
+      map((response: Array<any>) => {
+        const cities: Array<City> = [];
+        response.forEach(function (city, index) {
+          cities.push(new City(city));
+        });
+        return cities;
+      }),
+      catchError(err => {
+        swal('getCityByCountryName', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(err);
+      }));
+
+  }
 }

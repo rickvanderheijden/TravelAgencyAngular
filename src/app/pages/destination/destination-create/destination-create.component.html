@@ -1,0 +1,78 @@
+<section id="destination-create">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4 class="card-title">Nieuwe Bestemming aanmaken</h4>
+            </div>
+            <div class="col-sm-6">
+              <a class="btn btn-raised btn-grey float-sm-right" (click)="back()">
+                Terug
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body" *ngIf="loaded">
+          <div class="card-block">
+            <form [formGroup]="destinationCreateForm">
+              {{destinationCreateForm.value | json}}
+              <div class="form-group">
+                <label>Naam</label>
+                <input type="text" name="name" formControlName="name" class="form-control">
+              </div>
+
+                <div class="form-group">
+                  <label>Stad</label>
+                  <ng-select name="city" placeholder="Stad" [items]="cities"
+                             formControlName="city" [clearable]="true" class="m-1" bindLabel="name"
+                             (change)="getHotelsAndTripItems($event)">
+                  </ng-select>
+                </div>
+                <div class="form-group">
+                  <label>Hotel</label>
+                  <ng-select placeholder="Hotel"
+                             [items]="hotels"
+                             bindLabel="name"
+                             formControlName="hotel"
+                             [clearable]="true"
+                             class="m-1">
+                  </ng-select>
+                </div>
+                <div class="form-group">
+                  <label>Trip Items</label>
+                  <ng-select placeholder="Trip Items"
+                             [items]="tripItems"
+                             bindLabel="name"
+                             formControlName="tripItems"
+                             [clearable]="true"
+                             class="m-1"
+                              [multiple]="true">
+                    <ng-template ng-label-tmp let-item="item">
+                      <img height="30" width="30" [src]="item.imageBlob"/>
+                      <span >{{item.name}}</span>
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                      <img height="30 " width="30" [src]="item.imageBlob"/>
+                      <span [ngOptionHighlight]="search">{{item.name}}</span>
+                    </ng-template>
+                  </ng-select>
+                </div>
+              <div class="form-actions">
+                <div class="row">
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary" (click)="createDestination()" [disabled]="!destinationCreateForm.valid">
+                      <span>Hotel opslaan</span>
+                      <i *ngIf="loading" class="ft-loader spinner right"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

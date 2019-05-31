@@ -7,9 +7,6 @@ import {City} from '../../../../models/city';
 import {TripItemService} from '../../../services/trip-item.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GeographyService} from '../../../services/geography.service';
-import { FileUploader } from 'ng2-file-upload';
-
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
   selector: 'app-trip-item-update',

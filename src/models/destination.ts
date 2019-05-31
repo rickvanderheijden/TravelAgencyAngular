@@ -17,6 +17,10 @@ export class Destination {
       this.city = model.city;
       this.hotel = model.hotel;
       this.tripItems = model.tripItems !== null ? model.tripItems : new Array<TripItem>();
+    } else {
+      this.city = new City();
+      this.hotel = new Hotel();
+      this.tripItems = new Array<TripItem>();
     }
   }
 

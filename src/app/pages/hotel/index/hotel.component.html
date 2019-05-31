@@ -1,0 +1,27 @@
+<section id="hotel">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4 class="card-title">Hotels</h4>
+            </div>
+            <div class="col-sm-6">
+              <a routerLink="/hotel/create" class="btn btn-primary float-sm-right">
+                Nieuw Hotel
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-block">
+            <div class="overflow-x">
+              <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
