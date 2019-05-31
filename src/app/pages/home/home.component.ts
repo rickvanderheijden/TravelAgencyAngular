@@ -28,4 +28,8 @@ export class HomeComponent implements OnInit {
   onTripIdChanged(id: number) {
     this.tripId = id;
   }
+
+  setTrips(event: Array<Trip>) {
+    this.trips = event;
+  }
 }

@@ -5,6 +5,7 @@ import {environment} from '../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import swal from 'sweetalert2';
 import {Observable} from 'rxjs';
+import {SearchTripDTO} from '../../models/searchTripDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -105,5 +106,20 @@ export class TripService {
 
   getTripItems() {
 
+  }
+
+  searchTrips(searchDTO: SearchTripDTO): Observable<Array<Trip>> {
+    return this.http.post(environment.url + '/trips/searchTrips', searchDTO).pipe(
+      map((response: Array<any>) => {
+        const trips: Array<Trip> = [];
+        response.forEach(function (trip, index) {
+          trips.push(new Trip(trip));
+        });
+        return trips;
+      }),
+      catchError(err => {
+        swal('getTrips', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(err);
+      }));
   }
 }

@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Country} from '../../../models/country';
-import {User} from '../../../models/user';
+import {Trip} from '../../../models/trip';
+import {TripService} from '../../services/trip.service';
+import {GeographyService} from '../../services/geography.service';
+import {Continent} from '../../../models/Continent';
+import {SearchTripDTO} from '../../../models/searchTripDTO';
 
 @Component({
   selector: 'app-top-filters',
@@ -9,16 +13,28 @@ import {User} from '../../../models/user';
 })
 export class TopFiltersComponent implements OnInit {
 
-  continents: Array<any>;
+  continents: Array<Continent>;
   countries: Array<Country>;
   country: Country;
-  continent: any;
+  continent: Continent;
+  trips: Array<Trip>;
   till: any;
   from: any;
+  geoService: GeographyService;
+  tripService: TripService;
+  searchDTO: SearchTripDTO;
 
-  constructor( ) {
-    this.continents = [];
-    this.continents.push({name: 'Azie'}, {name: 'Oceanie'}, {name: 'Afrika'}, {name: 'Europa'}, {name: 'Noord-Amerika'}, {name: 'Zuid-Amerika'} );
+  @Output()
+  foundTrips = new EventEmitter<Array<Trip>>();
+
+  constructor( tripService: TripService, geoService: GeographyService) {
+    this.searchDTO = new SearchTripDTO();
+    this.geoService = geoService;
+    this.tripService = tripService;
+
+    this.geoService.getAllContinents().subscribe((continents: any) => {
+      this.continents = continents;
+    })
   }
 
   ngOnInit() {
@@ -26,10 +42,27 @@ export class TopFiltersComponent implements OnInit {
 
 
   getCountries(continent) {
-    // TODO: request countries by selected continent
-    this.countries = new Array<Country>();
-    this.countries.push(new Country({name: 'Nederland', continent: 'europa', cities:  ['Rotterdam', 'Amsterdam']}));
-    this.countries.push(new Country({name: 'Belgine', continent: 'europa', cities:  ['Brussel', 'Antwerpen']}));
+    this.searchDTO.continent = continent;
+    this.tripService.searchTrips(this.searchDTO).subscribe((trips: any) => {
+      this.trips = trips;
+    })
+
+    console.log('=======trips= continent===');
+    console.log(this.trips);
+
+    this.geoService.getCountriesByContinentName(continent).subscribe((countries: any) => {
+      this.countries = countries;
+    });
+  }
+
+  getTrips(country) {
+    this.searchDTO.country = country;
+    this.tripService.searchTrips(this.searchDTO).subscribe((trips: any) => {
+      this.trips = trips;
+    });
+
+    console.log('=======trips= country===');
+    console.log(this.trips);
   }
 
 

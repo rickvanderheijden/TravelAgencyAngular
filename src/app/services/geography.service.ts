@@ -77,4 +77,19 @@ export class GeographyService {
       }));
 
   }
+
+  getCountriesByContinentName(name: any) {
+    return this.http.get(environment.server + '/geo/getCountryByContinent/' + name).pipe(
+      map((response: Array<any>) => {
+        const countries: Array<Country> = [];
+        response.forEach(function (country, index) {
+          countries.push(new Country(country));
+        });
+        return countries;
+      }),
+      catchError(err => {
+        swal('getCountriesByContinentName', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(err);
+      }));
+  }
 }

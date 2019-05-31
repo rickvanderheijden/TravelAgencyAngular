@@ -14,7 +14,7 @@
           </div>
           <div class="col-12">
             <ng-select name="country" placeholder="land" [items]="countries" bindLabel="name" bindValue="name"
-                       [(ngModel)]="country" [clearable]="true" class="m-1" >
+                       [(ngModel)]="country" [clearable]="true" (change)="getTrips(country)" class="m-1" >
             </ng-select>
           </div>
         </div>
