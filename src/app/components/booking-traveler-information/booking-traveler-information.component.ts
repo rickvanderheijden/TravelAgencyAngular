@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {City} from '../../../models/city';
 import {GeographyService} from '../../services/geography.service';
 import {Country} from '../../../models/country';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {User} from '../../../models/user';
+import {Booking} from '../../../models/booking';
 
 @Component({
   selector: 'app-booking-traveler-information',
@@ -12,10 +13,16 @@ import {User} from '../../../models/user';
   styleUrls: ['./booking-traveler-information.component.scss']
 })
 export class BookingTravelerInformationComponent implements OnInit {
+
+  @Input()
+  booking: Booking;
+
   bookingTravelerInformationForm: FormGroup;
   addressForm: FormGroup;
   cityForm: FormGroup;
   countryForm: FormGroup;
+  travelersForm: FormGroup;
+  travelers: FormArray;
   loaded = false;
   loading = false;
   countries: Country[];
@@ -63,10 +70,6 @@ export class BookingTravelerInformationComponent implements OnInit {
     return this.cityForm.get('name');
   }
 
-  enterBookingTravelerInformation() {
-    //TODO
-  }
-
   private setForm() {
     this.countryForm = this.formBuilder.group({
       name: this.formBuilder.control(this.currentUser.address.country.name, [Validators.required])
@@ -78,7 +81,6 @@ export class BookingTravelerInformationComponent implements OnInit {
 
     this.cityForm.get('name').disable();
 
-    console.log("ddr");
     this.addressForm = this.formBuilder.group({
       addressLine: this.formBuilder.control(this.currentUser.address.addressLine, [Validators.required]),
       zipCode: this.formBuilder.control(this.currentUser.address.zipCode, [Validators.required]),
@@ -86,10 +88,32 @@ export class BookingTravelerInformationComponent implements OnInit {
       country: this.countryForm
     });
 
+    this.travelersForm = this.formBuilder.group({
+      firstName: this.formBuilder.control('', [ Validators.required] ),
+      lastName: this.formBuilder.control('', [ Validators.required] ),
+    });
+
     this.bookingTravelerInformationForm = this.formBuilder.group({
       firstName: this.formBuilder.control(this.currentUser.firstName, [ Validators.required] ),
       lastName: this.formBuilder.control(this.currentUser.lastName, [ Validators.required] ),
       address: this.addressForm,
+      travelers: this.formBuilder.array([])
     });
+
+    for (let i = 0; i < this.booking.numberOfTravelers - 1; i++) {
+      this.addTraveler();
+    }
+  }
+
+  private createTraveler(): FormGroup {
+    return this.formBuilder.group({
+      firstName: this.formBuilder.control('', [ Validators.required] ),
+      lastName: this.formBuilder.control('', [ Validators.required] ),
+    });
+  }
+
+  private addTraveler(): void {
+    this.travelers = this.bookingTravelerInformationForm.get('travelers') as FormArray;
+    this.travelers.push(this.createTraveler());
   }
 }

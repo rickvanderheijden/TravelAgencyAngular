@@ -1,8 +1,10 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Travel} from 'models/travel';
+import {Booking} from '../../../models/booking';
+import {TravelSummaryComponent} from '../../components/travel-summary/travel-summary.component';
 
 @Component({
   selector: 'app-booktravel',
@@ -10,9 +12,11 @@ import {Travel} from 'models/travel';
   styleUrls: ['./booktravel.component.scss']
 })
 export class BookTravelComponent implements OnInit {
+  @ViewChild(TravelSummaryComponent) travelSummaryComponent;
   travelObservable: Observable<Travel>;
   loading = false;
   travel: Travel;
+  booking: Booking = null;
 
   constructor(private activatedRoute: ActivatedRoute) { }
 
@@ -29,5 +33,9 @@ export class BookTravelComponent implements OnInit {
   }
 
   finishFunction() {
+  }
+
+  pushBooking() {
+    this.booking = this.travelSummaryComponent.getBooking();
   }
 }

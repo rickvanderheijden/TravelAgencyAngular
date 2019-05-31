@@ -1,8 +1,9 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Travel} from '../../../models/travel';
 import {Booking} from '../../../models/booking';
 import {BookableHotel} from '../../../models/bookablehotel';
 import swal from 'sweetalert2';
+import {Hotel} from '../../../models/hotel';
 
 @Component({
   selector: 'app-travel-summary',
@@ -71,5 +72,9 @@ export class TravelSummaryComponent implements OnInit {
         }
       }
     });
+  }
+
+  getBooking() {
+    return this.booking;
   }
 }

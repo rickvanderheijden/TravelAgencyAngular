@@ -28,7 +28,7 @@ export class Booking {
       this.booked = model.booked;
       this.paid = model.paid;
     } else {
-      this.numberOfTravelers = 2;
+      this.numberOfTravelers = 4;
       this.tripItems = new Array();
       this.hotels = new Array();
     }

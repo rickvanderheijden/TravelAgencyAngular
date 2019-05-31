@@ -50,9 +50,6 @@ export class GeographyService {
   getAllCountries(): Observable<Array<Country>> {
     return this.http.get(environment.server + '/geo/getCountries').pipe(
       map((response: Array<any>) => {
-
-        console.log(response);
-
         const countries: Array<Country> = [];
         response.forEach(function (country, index) {
           countries.push(new Country(country));

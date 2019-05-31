@@ -4,11 +4,11 @@
     <aw-wizard-step stepTitle="Overzicht van de reis">
       <app-travel-summary [travel]="travel"></app-travel-summary>
       <button type="button" class="btn btn-primary buttonmargin" (click)="backToTravelPage()">Terug naar reis</button>
-      <button type="button" class="btn btn-primary buttonmargin" awNextStep>Volgende stap</button>
+      <button type="button" class="btn btn-primary buttonmargin" awNextStep (click)="pushBooking()">Volgende stap</button>
       <!--button type="button" [awGoToStep]="{stepIndex: 2}">Go directly to third Step </button-->
     </aw-wizard-step>
-    <aw-wizard-step stepTitle="Voer gegevens in">
-      <app-booking-traveler-information></app-booking-traveler-information>
+    <aw-wizard-step stepTitle="Voer gegevens in" style="margin-top: 40px">
+      <app-booking-traveler-information *ngIf="booking" [booking]="booking"></app-booking-traveler-information>
       <button type="button" class="btn btn-primary buttonmargin" awPreviousStep>Ga terug naar overzicht</button>
       <button type="button" class="btn btn-primary buttonmargin" awNextStep>Ga naar betaling</button>
     </aw-wizard-step>
