@@ -56,8 +56,11 @@ export class TravelGroupService {
    * @param group
    */
   createTravelGroup(group: Travelgroup) {
+    const httpClient = this.http;
+    console.log(group)
     this.http.post(environment.server + '/travelgroups/createTravelGroup', group).pipe(
       map(response => {
+        console.log(response);
       }),
       catchError(error => {
         swal('createTrip', 'Er is iets niet goed gegaan.', 'error');
@@ -65,8 +68,9 @@ export class TravelGroupService {
       })
     );
     group.users.forEach(function (user) {
-      this.http.post(environment.server + '/addUser/' + user.id, group).pipe(
+      httpClient.post(environment.server + '/travelgroups/addUser/' + user.id, group).pipe(
         map(response => {
+          console.log(response);
         }),
         catchError(error => {
           swal('addUsers', 'Er is iets niet goed gegaan.', 'error');

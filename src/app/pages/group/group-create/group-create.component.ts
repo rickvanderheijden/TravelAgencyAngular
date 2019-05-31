@@ -60,7 +60,7 @@ export class GroupCreateComponent implements OnInit {
     this.travelgroup.masterId = this.userId;
     if (this.travelgroup) {
       this.travelGroupService.createTravelGroup(this.travelgroup)
-      this.back()
+      // this.back()
     }
   }
 
