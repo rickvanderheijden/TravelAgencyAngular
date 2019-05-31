@@ -1,0 +1,53 @@
+<form *ngIf="loaded" [formGroup]="bookingTravelerInformationForm">
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label>Voornaam</label>
+        <input type="text" formControlName="firstName" class="form-control">
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label>Achternaam</label>
+        <input type="text" formControlName="lastName" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div [formGroup]="addressForm">
+    <div class="form-group">
+      <label>Straat en huisnummer</label>
+      <input type="text" name="addressline" formControlName="addressLine" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Postcode</label>
+      <input type="text" name="zipcode" formControlName="zipCode" class="form-control">
+    </div>
+    <div [formGroup]="countryForm">
+      <div class="form-group">
+        <label>Land</label>
+        <ng-select name="country" placeholder="land" [items]="countries" bindValue="name"
+                   formControlName="name" [clearable]="true" class="m-1" bindLabel="name"
+                   (change)="getCities($event)" (clear)="clearCountryAndCity()">
+        </ng-select>
+      </div>
+    </div>
+    <div [formGroup]="cityForm">
+      <div class="form-group">
+        <label>Stad</label>
+        <ng-select name="city" placeholder="Stad" [items]="cities" bindValue="name"
+                   formControlName="name" [clearable]="true" class="m-1" bindLabel="name">
+        </ng-select>
+      </div>
+    </div>
+  </div>
+  <div class="form-actions">
+    <div class="row">
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary" (click)="enterBookingTravelerInformation()" [disabled]="!bookingTravelerInformationForm.valid">
+          <span>Hotel opslaan</span>
+          <i *ngIf="loading" class="ft-loader spinner right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

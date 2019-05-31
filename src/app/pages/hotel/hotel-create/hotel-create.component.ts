@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { HotelService} from '../../../services/hotel.service';
 import {Hotel} from '../../../../models/hotel';
 import {Router} from '@angular/router';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Country} from '../../../../models/country';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GeographyService} from '../../../services/geography.service';
-import {NgOption} from '@ng-select/ng-select';
 import {City} from '../../../../models/city';
+import {Country} from '../../../../models/country';
 
 @Component({
   selector: 'app-hotel-create',
@@ -20,13 +19,13 @@ export class HotelCreateComponent implements OnInit {
   countryForm: FormGroup;
   hotel: Hotel;
   loading = false;
-  countries: NgOption[];
+  countries: Country[];
   private loaded = false;
   private cities: City[];
 
   constructor(
     private hotelService: HotelService,
-    private geoService: GeographyService,
+    private geographyService: GeographyService,
     private router: Router,
     private formBuilder: FormBuilder
   ) {
@@ -34,9 +33,9 @@ export class HotelCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.countries = new Array<NgOption>();
-    this.geoService.getAllCountries().subscribe((countries: Array<any>) => {
-      countries.forEach((country, index) => {
+    this.countries = new Array();
+    this.geographyService.getAllCountries().subscribe((countries: Array<any>) => {
+      countries.forEach((country) => {
         if (country.cities.length) {
           this.countries.push({name: country.name});
         }
@@ -85,7 +84,7 @@ export class HotelCreateComponent implements OnInit {
   getCities(event: any) {
     this.cities = new Array();
     if (event !== undefined) {
-      this.geoService.getCitiesByCountryName(event.name).subscribe((cities: Array<City>) => {
+      this.geographyService.getCitiesByCountryName(event.name).subscribe((cities: Array<City>) => {
         this.cities = cities;
         this.cityForm.get('name').enable();
       });
@@ -95,6 +94,7 @@ export class HotelCreateComponent implements OnInit {
   updateImageBlob(event) {
     this.hotelCreateForm.get('imageBlob').setValue(event)
   }
+
   clearCountryAndCity() {
     this.cities = null;
     const city = this.cityName;

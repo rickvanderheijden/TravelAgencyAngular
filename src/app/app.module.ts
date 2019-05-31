@@ -28,6 +28,7 @@ import {FileUploadModule} from 'ng2-file-upload';
 import {GroupDetailComponent } from './components/group-detail/group-detail.component';
 import {GroupComponent} from './components/group/group.component';
 import {ModalModule} from 'ngx-bootstrap';
+import { BookingTravelerInformationComponent } from './components/booking-traveler-information/booking-traveler-information.component';
 
 export function jwtOptionsFactory(tokenService) {
   return {
