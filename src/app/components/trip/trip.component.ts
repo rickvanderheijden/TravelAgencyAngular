@@ -6,7 +6,7 @@ import {Travel} from '../../../models/travel';
 import {TripDescriptionComponent} from '../trip-description/trip-description.component';
 import {Destination} from '../../../models/destination';
 import {DestinationComponent} from '../destination/destination.component';
-import {Hotel} from '../../../models/hotel';
+import {SelectedItemCardComponent} from '../selected-item-card/selected-item-card.component';
 
 @Component({
   selector: 'app-trip',
@@ -16,6 +16,7 @@ import {Hotel} from '../../../models/hotel';
 export class TripComponent implements OnInit {
 
   @ViewChild(TripDescriptionComponent) tripDescriptionComponent;
+  @ViewChild(SelectedItemCardComponent) selectedItemCardComponent;
   @ViewChildren(DestinationComponent) destinationComponents: QueryList<DestinationComponent>;
 
   @Input()
@@ -44,6 +45,7 @@ export class TripComponent implements OnInit {
   }
 
   addTripItem(tripItem: TripItem) {
-    this.tripDescriptionComponent.addTripItem(tripItem);
+    // this.tripDescriptionComponent.addTripItem(tripItem);
+    this.selectedItemCardComponent.addTripItem(tripItem);
   }
 }

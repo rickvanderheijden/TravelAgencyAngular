@@ -1,7 +1,14 @@
 <div *ngIf="!loading" style="display: inline-block; position: absolute; float: left; height: auto">
-  <app-trip-description [trip]="trip" [travel]="travel" (tripItemOut)="removeTripItem($event)" style="display: inline-block"></app-trip-description>
+  <div class="row" style="max-width:1200px; margin-right: 0px;">
+    <div class="col-8">
+      <app-trip-description [trip]="trip"></app-trip-description>
 
-  <div *ngFor="let destination of destinations">
-    <app-destination [destination]="destination" (tripItemOut)="addTripItem($event)"></app-destination>
+      <div *ngFor="let destination of destinations">
+        <app-destination [destination]="destination" (tripItemOut)="addTripItem($event)"></app-destination>
+      </div>
+    </div>
+    <div class="col-4">
+        <app-selected-item-card [trip]="trip" [travel]="travel" (tripItemOut)="removeTripItem($event)"></app-selected-item-card>
+    </div>
   </div>
 </div>
