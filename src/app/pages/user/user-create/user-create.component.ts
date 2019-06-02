@@ -38,7 +38,7 @@ export class UserCreateComponent implements OnInit {
     this.userCreateForm = new FormGroup({
       username: new FormControl(this.user.username, [Validators.minLength(4), Validators.required]),
       firstName: new FormControl(this.user.firstName),
-      lastname: new FormControl(this.user.lastName),
+      lastName: new FormControl(this.user.lastName),
       emailAddress: new FormControl(this.user.emailAddress, [Validators.minLength(6), Validators.email, Validators.required]),
       password: new FormControl([Validators.minLength(5)]),
       authorities: new FormControl(this.authority)

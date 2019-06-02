@@ -1,9 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Travel} from '../../../models/travel';
-import {Booking} from '../../../models/booking';
-import {BookableHotel} from '../../../models/bookablehotel';
 import swal from 'sweetalert2';
-import {Hotel} from '../../../models/hotel';
+import {BookingItem} from '../../../models/bookingitem';
+import {Booking} from '../../../models/booking';
 
 @Component({
   selector: 'app-travel-summary',
@@ -15,32 +14,40 @@ export class TravelSummaryComponent implements OnInit {
   @Input()
   travel: Travel;
 
-  booking: Booking = new Booking();
+  private booking: Booking = new Booking();
+  loading = false;
 
   constructor() {
   }
 
   ngOnInit() {
-    this.booking.trip = this.travel.trip;
-    this.booking.tripItems = Object.assign([], this.travel.tripItems);
-    for (const bookableTripItem of this.booking.tripItems) {
-      bookableTripItem.amount = this.booking.numberOfTravelers;
-    }
 
-    for (const hotel of this.travel.hotels) {
-      const bookableHotel = new BookableHotel(hotel);
-      bookableHotel.amount = this.booking.numberOfTravelers;
-      this.booking.hotels.push(bookableHotel);
-    }
+    //TODO: SAVE THE BOOKING!!!! Otherwise no Id is known
+
+    this.loading = true;
+    console.log('ngOnInit');
+    console.log(this.travel);
+    this.booking.setPropertiesFromTravel(this.travel);
+
+    // this.booking.bookingItems.forEach(function (bookingItem) {
+    //   bookingItem.numberOfAttendees = this.booking.numberOfTravelers;
+    // });
+
+    console.log(this.booking);
+
+    this.loading = false;
   }
 
-  decreaseTripItemAmount(tripItemId: number) {
+  decreaseBookItemAttendees(bookingItem: BookingItem) {
+    console.log('decreaseBookItemAttendees: :' + bookingItem);
+    if (typeof bookingItem === typeof undefined) { return; }
+
     let indexToRemove = -1;
 
-    this.booking.tripItems.forEach(function(tripItem, index) {
-      if (tripItem.id === tripItemId) {
-        if (tripItem.amount > 1) {
-          tripItem.amount--;
+    this.booking.bookingItems.forEach(function(foundBookingItem, index) {
+      if (foundBookingItem === bookingItem) {
+        if (foundBookingItem.numberOfAttendees > 1) {
+          foundBookingItem.numberOfAttendees--;
         } else {
           indexToRemove = index;
         }
@@ -57,18 +64,23 @@ export class TravelSummaryComponent implements OnInit {
         cancelButtonText: 'Nee, product behouden'
       }).then((result) => {
         if (result.value) {
-          this.booking.tripItems.splice(indexToRemove, 1);
+          this.booking.bookingItems.splice(indexToRemove, 1);
         }
       });
     }
   }
 
-  increaseTripItemAmount(tripItemId: number) {
+  increaseBookingItemAttendees(bookingItem: BookingItem) {
+    console.log('increaseBookingItemAttendees: :' + bookingItem);
+    if (typeof bookingItem === typeof undefined) { return; }
+
     const numberOfTravelers = this.booking.numberOfTravelers;
-    this.booking.tripItems.forEach(function(tripItem) {
-      if (tripItem.id === tripItemId) {
-        if (tripItem.amount < tripItem.maxPersons && tripItem.amount < numberOfTravelers) {
-          tripItem.amount++;
+    this.booking.bookingItems.forEach((foundBookingItem) => {
+      if (foundBookingItem === bookingItem) {
+        if (
+          foundBookingItem.numberOfAttendees < 4 &&  // TODO: Remove hardcoded value
+          foundBookingItem.numberOfAttendees < numberOfTravelers) {
+          foundBookingItem.numberOfAttendees++;
         }
       }
     });
@@ -77,4 +89,21 @@ export class TravelSummaryComponent implements OnInit {
   getBooking() {
     return this.booking;
   }
+
+  getTripItem(tripItemId: number) {
+    const foundTripItem = this.travel.tripItems.find(function(tripItem) {
+      return tripItem.id === tripItemId;
+    });
+
+    return foundTripItem;
+  }
+
+  getHotel(hotelId: number) {
+    const foundHotel = this.travel.hotels.find(function(hotel) {
+      return hotel.id === hotelId;
+    });
+
+    return foundHotel;
+  }
+
 }

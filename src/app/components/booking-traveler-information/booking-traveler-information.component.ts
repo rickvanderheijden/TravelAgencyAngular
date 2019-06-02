@@ -122,4 +122,8 @@ export class BookingTravelerInformationComponent implements OnInit {
     this.travelers = this.bookingTravelerInformationForm.get('travelers') as FormArray;
     this.travelers.push(this.createTraveler());
   }
+
+  getFormValues() {
+    return this.bookingTravelerInformationForm.value;
+  }
 }

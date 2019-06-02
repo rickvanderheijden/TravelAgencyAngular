@@ -1,72 +1,77 @@
-import {Trip} from './trip';
-import {BookableHotel} from './bookablehotel';
-import {BookableTripItem} from './bookabletripitem';
+import {BookingItem} from './bookingitem';
+import {Travel} from './travel';
+import {BookingItemType} from './bookingitemtype';
+import {User} from './user';
 
 export class Booking {
 
   public id: number;
+  public tripId: number;
+  public basePrice: number;
+  public booker: User;
   public numberOfTravelers: number;
-  public trip: Trip;
-  public hotels: BookableHotel[];
-  public tripItems: BookableTripItem[];
-  private totalPrice: number;
-  public startDate: Date;
-  public endDate: Date;
-  public booked: boolean;
-  public paid: boolean;
+  public bookingItems: BookingItem[];
 
   constructor(model?) {
     if (typeof model !== typeof undefined) {
       this.id = model.id;
+      this.tripId = model.tripId;
+      this.basePrice = model.basePrice;
+      this.booker = model.booker;
       this.numberOfTravelers = model.numberOfTravelers;
-      this.trip = model.trip;
-      this.hotels = model.hotels;
-      this.tripItems = model.tripItems;
-      this.totalPrice = model.totalPrice;
-      this.startDate = model.startDate;
-      this.endDate = model.endDate;
-      this.booked = model.booked;
-      this.paid = model.paid;
-    } else {
-      this.numberOfTravelers = 4;
-      this.tripItems = new Array();
-      this.hotels = new Array();
+      this.bookingItems = model.bookingItems;
     }
   }
 
+  setPropertiesFromTravel(travel: Travel) {
+    this.bookingItems = new Array();
+    this.tripId = travel.trip.id;
+    this.basePrice = travel.trip.totalPrice;
+
+    this.numberOfTravelers = 4; //TODO Do not set to fixed value
+
+    const bookingItemsToAdd = new Array<BookingItem>();
+
+    travel.tripItems.forEach((tripItem) => {
+      console.log('tripItemsForEach');
+      const bookingItemType = new BookingItemType();
+      bookingItemType.type = 'TripItem';
+
+      const bookingItem = new BookingItem();
+      bookingItem.type = bookingItemType;
+      bookingItem.itemId = tripItem.id;
+      bookingItem.description = tripItem.description;
+      bookingItem.price = tripItem.price;
+      bookingItem.numberOfAttendees = this.numberOfTravelers;
+      bookingItemsToAdd.push(bookingItem);
+    });
+
+    travel.hotels.forEach((hotel) => {
+      console.log('hotelsForEach');
+      const bookingItemType = new BookingItemType();
+      bookingItemType.type = 'Hotel';
+
+      const bookingItem = new BookingItem();
+      bookingItem.type = bookingItemType;
+      bookingItem.itemId = hotel.id;
+      bookingItem.description = hotel.description;
+      bookingItem.price = hotel.price;
+      bookingItem.numberOfAttendees = this.numberOfTravelers;
+      bookingItemsToAdd.push(bookingItem);
+    });
+
+    this.bookingItems = bookingItemsToAdd;
+  }
+
   getTotalPrice() {
-    let totalPriceBooking = this.numberOfTravelers * this.trip.totalPrice;
+    let totalPriceBooking = this.numberOfTravelers * this.basePrice;
 
-    if (this.tripItems !== null) {
-      this.tripItems.forEach(function (tripItem) {
-        totalPriceBooking += tripItem.amount * tripItem.price;
-      });
-    }
-
-    if (this.hotels !== null) {
-      this.hotels.forEach(function (hotel) {
-        totalPriceBooking += hotel.amount * hotel.price;
+    if (this.bookingItems !== null) {
+      this.bookingItems.forEach(function (bookingItem) {
+        totalPriceBooking += bookingItem.numberOfAttendees * bookingItem.price;
       });
     }
 
     return totalPriceBooking;
   }
-
-  // public addTripItem(tripItem: TripItem) {
-  //   if (typeof tripItem !== 'undefined') {
-  //     if (this.tripItems.indexOf(tripItem) === -1) {
-  //       this.tripItems.push(tripItem);
-  //       this.totalPrice = this.totalPrice + tripItem.price;
-  //     }
-  //   }
-  // }
-  //
-  // public removeTripItem(tripItem: TripItem) {
-  //   if ( tripItem !== undefined) {
-  //     if (this.tripItems.indexOf(tripItem) !== -1) {
-  //       this.tripItems.splice(this.tripItems.indexOf(tripItem), 1);
-  //       this.totalPrice = this.totalPrice - tripItem.price;
-  //     }
-  //   }
-  // }
 }

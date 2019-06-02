@@ -6,8 +6,8 @@ export class Travel {
 
   public id: number;
   public trip: Trip;
-  public hotels: Hotel[];
-  public tripItems: TripItem[];
+  public hotels: Hotel[] = new Array();
+  public tripItems: TripItem[] = new Array();
   public totalPrice: number;
 
   constructor(model?) {
@@ -17,9 +17,6 @@ export class Travel {
       this.hotels = model.hotels;
       this.tripItems = model.tripItems;
       this.totalPrice = model.totalPrice;
-    } else {
-      this.hotels = new Array();
-      this.tripItems = new Array();
     }
   }
 

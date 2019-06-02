@@ -102,8 +102,4 @@ export class TripService {
       })
     );
   }
-
-  getTripItems() {
-
-  }
 }
