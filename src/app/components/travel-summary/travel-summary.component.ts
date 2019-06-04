@@ -14,7 +14,7 @@ export class TravelSummaryComponent implements OnInit {
   @Input()
   travel: Travel;
 
-  private booking: Booking = new Booking();
+  booking: Booking = new Booking();
   loading = false;
 
   constructor() {
