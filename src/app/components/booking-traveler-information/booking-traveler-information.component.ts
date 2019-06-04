@@ -36,6 +36,7 @@ export class BookingTravelerInformationComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = new User(JSON.parse(sessionStorage.getItem('currentUser')));
+    console.log(this.currentUser);
 
     this.countries = new Array<Country>();
     this.geographyService.getAllCountries().subscribe((countries: Array<Country >) => {
