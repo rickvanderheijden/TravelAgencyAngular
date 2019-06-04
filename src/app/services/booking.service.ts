@@ -34,7 +34,7 @@ export class BookingService {
    * @param booking
    */
   createBooking(booking: Booking) {
-    return this.http.post(environment.server + '/bookings/createBooking', booking).pipe(
+    return this.http.post(environment.server + '/bookings', booking).pipe(
       map(response => {
         return new Booking(response);
       }),
@@ -50,7 +50,7 @@ export class BookingService {
    * @param trip
    */
   updateBooking(booking: Booking) {
-    return this.http.put(environment.server + '/bookings/updateBooking', booking).pipe(
+    return this.http.put(environment.server + '/bookings', booking).pipe(
       map(response => {
         return new Booking(response);
       }),

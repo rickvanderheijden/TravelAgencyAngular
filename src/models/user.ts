@@ -9,7 +9,6 @@ export class User {
     public password?: String;
     public firstName?: String;
     public lastName?: String;
-    public address?: Address;
     public emailAddress?: String;
     public authorities: Array<Authority>;
     public travelGroups: Array<TravelGroup>;
@@ -20,7 +19,6 @@ export class User {
             this.username = model.username;
             this.firstName = model.firstName;
             this.lastName = model.lastName;
-            this.address = (model.address == null) ? new Address() : new Address(model.address);
             this.emailAddress = model.emailAddress;
             this.authorities = new Array<Authority>();
             this.travelGroups = new Array<TravelGroup>();
@@ -35,7 +33,6 @@ export class User {
                }
             }
         } else {
-          this.address = new Address();
           this.authorities = new Array<Authority>();
           this.travelGroups = new Array<TravelGroup>();
         }

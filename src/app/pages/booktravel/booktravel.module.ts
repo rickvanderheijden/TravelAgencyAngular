@@ -7,6 +7,7 @@ import {TravelSummaryComponent} from '../../components/travel-summary/travel-sum
 import {BookingTravelerInformationComponent} from '../../components/booking-traveler-information/booking-traveler-information.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgSelectModule} from '@ng-select/ng-select';
+import {BookingInvoiceComponent} from '../../components/booking-invoice/booking-invoice.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
     NgSelectModule
   ],
   providers: [],
-  declarations: [BookTravelComponent, TravelSummaryComponent, BookingTravelerInformationComponent],
+  declarations: [BookTravelComponent, TravelSummaryComponent, BookingTravelerInformationComponent, BookingInvoiceComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class BookTravelModule { }

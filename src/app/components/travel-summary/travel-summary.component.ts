@@ -21,25 +21,16 @@ export class TravelSummaryComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    //TODO: SAVE THE BOOKING!!!! Otherwise no Id is known
-
     this.loading = true;
-    console.log('ngOnInit');
-    console.log(this.travel);
     this.booking.setPropertiesFromTravel(this.travel);
 
     // this.booking.bookingItems.forEach(function (bookingItem) {
     //   bookingItem.numberOfAttendees = this.booking.numberOfTravelers;
-    // });
-
-    console.log(this.booking);
 
     this.loading = false;
   }
 
   decreaseBookItemAttendees(bookingItem: BookingItem) {
-    console.log('decreaseBookItemAttendees: :' + bookingItem);
     if (typeof bookingItem === typeof undefined) { return; }
 
     let indexToRemove = -1;
@@ -71,7 +62,6 @@ export class TravelSummaryComponent implements OnInit {
   }
 
   increaseBookingItemAttendees(bookingItem: BookingItem) {
-    console.log('increaseBookingItemAttendees: :' + bookingItem);
     if (typeof bookingItem === typeof undefined) { return; }
 
     const numberOfTravelers = this.booking.numberOfTravelers;
@@ -87,6 +77,7 @@ export class TravelSummaryComponent implements OnInit {
   }
 
   getBooking() {
+    this.booking.bookingDate = new Date();
     return this.booking;
   }
 

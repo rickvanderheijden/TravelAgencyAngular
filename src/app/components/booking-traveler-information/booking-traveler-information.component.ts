@@ -78,18 +78,18 @@ export class BookingTravelerInformationComponent implements OnInit {
 
   private setForm() {
     this.countryForm = this.formBuilder.group({
-      name: this.formBuilder.control(this.currentUser.address.country.name, [Validators.required])
+      name: this.formBuilder.control(this.booking.address.country.name, [Validators.required])
     });
 
     this.cityForm = this.formBuilder.group({
-      name: this.formBuilder.control(this.currentUser.address.city.name, [Validators.required])
+      name: this.formBuilder.control(this.booking.address.city.name, [Validators.required])
     }, );
 
     this.cityForm.get('name').disable();
 
     this.addressForm = this.formBuilder.group({
-      addressLine: this.formBuilder.control(this.currentUser.address.addressLine, [Validators.required]),
-      zipCode: this.formBuilder.control(this.currentUser.address.zipCode, [Validators.required]),
+      addressLine: this.formBuilder.control(this.booking.address.addressLine, [Validators.required]),
+      zipCode: this.formBuilder.control(this.booking.address.zipCode, [Validators.required]),
       city: this.cityForm,
       country: this.countryForm
     });

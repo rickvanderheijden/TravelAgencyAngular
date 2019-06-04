@@ -7,6 +7,7 @@ import {TravelSummaryComponent} from '../../components/travel-summary/travel-sum
 import {BookingTravelerInformationComponent} from '../../components/booking-traveler-information/booking-traveler-information.component';
 import {User} from '../../../models/user';
 import {Booking} from '../../../models/booking';
+import {BookingService} from '../../services/booking.service';
 
 @Component({
   selector: 'app-booktravel',
@@ -22,7 +23,7 @@ export class BookTravelComponent implements OnInit {
   booking: Booking = null;
   paymentStepEnabled = false;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute, private bookingService: BookingService ) { }
 
   ngOnInit() {
     this.travelObservable = this.activatedRoute.paramMap
@@ -45,11 +46,13 @@ export class BookTravelComponent implements OnInit {
 
   pushTravelInformation() {
     const travelerInformation = this.bookingTravelerInformationComponent.getFormValues();
-    this.booking.numberOfTravelers = travelerInformation.travelers;
+    this.booking.numberOfTravelers = travelerInformation.travelers.length;
 
     const booker = new User(JSON.parse(sessionStorage.getItem('currentUser')));
-    booker.address = travelerInformation.address;
     this.booking.booker = booker;
+    this.booking.address = travelerInformation.address;
+
+    this.bookingService.createBooking(this.booking).subscribe(response => this.booking = response);
   }
 
   enablePaymentStep(enabled: boolean) {

@@ -25,7 +25,7 @@
     </tr>
 
     <ng-container *ngFor="let bookingItem of booking.bookingItems">
-      <tr _ngcontent-c7="" *ngIf="bookingItem.type.type == 'Hotel'">
+      <tr _ngcontent-c7="" *ngIf="bookingItem.bookingItemType == 'HOTEL'">
         <td _ngcontent-c7="">
           <img _ngcontent-c7="" alt="" class="rounded" src="{{getHotel(bookingItem.itemId).imageBlob}}" style="height: 90px; width: 90px; object-fit: cover;">
         </td>
@@ -42,7 +42,7 @@
     </ng-container>
 
     <ng-container *ngFor="let bookingItem of booking.bookingItems">
-      <tr _ngcontent-c7="" *ngIf="bookingItem.type.type == 'TripItem'">
+      <tr _ngcontent-c7="" *ngIf="bookingItem.bookingItemType == 'TRIPITEM'">
         <td _ngcontent-c7="">
           <img _ngcontent-c7="" alt="" class="rounded" src="{{getTripItem(bookingItem.itemId).imageBlob}}" style="height: 90px; width: 90px; object-fit: cover;">
         </td>

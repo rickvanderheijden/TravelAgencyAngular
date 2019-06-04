@@ -1,8 +1,6 @@
-import {BookingItemType} from './bookingitemtype';
-
 export class BookingItem {
   public id: number;
-  public type: BookingItemType;
+  public bookingItemType: String;
   public itemId: number;
   public description: String;
   public numberOfAttendees: number;
@@ -11,9 +9,10 @@ export class BookingItem {
   constructor(model?) {
     if (typeof model !== typeof undefined) {
       this.id = model.id;
-      this.type = model.type;
+      this.bookingItemType = model.type;
       this.itemId = model.itemId;
       this.description = model.description;
+      this.numberOfAttendees = model.numberOfAttendees;
       this.price = model.price;
     }
   }

@@ -1,7 +1,7 @@
 import {BookingItem} from './bookingitem';
 import {Travel} from './travel';
-import {BookingItemType} from './bookingitemtype';
 import {User} from './user';
+import {Address} from './Address';
 
 export class Booking {
 
@@ -9,8 +9,12 @@ export class Booking {
   public tripId: number;
   public basePrice: number;
   public booker: User;
+  public address: Address;
   public numberOfTravelers: number;
   public bookingItems: BookingItem[];
+  public booked: boolean;
+  public paid: boolean;
+  public bookingDate: Date;
 
   constructor(model?) {
     if (typeof model !== typeof undefined) {
@@ -18,8 +22,15 @@ export class Booking {
       this.tripId = model.tripId;
       this.basePrice = model.basePrice;
       this.booker = model.booker;
+      this.address = model.address;
       this.numberOfTravelers = model.numberOfTravelers;
       this.bookingItems = model.bookingItems;
+      this.booked = model.booked;
+      this.paid = model.paid;
+      this.bookingDate = model.bookingDate;
+    } else {
+      this.address = new Address();
+      this.bookingDate = new Date();
     }
   }
 
@@ -33,12 +44,8 @@ export class Booking {
     const bookingItemsToAdd = new Array<BookingItem>();
 
     travel.tripItems.forEach((tripItem) => {
-      console.log('tripItemsForEach');
-      const bookingItemType = new BookingItemType();
-      bookingItemType.type = 'TripItem';
-
       const bookingItem = new BookingItem();
-      bookingItem.type = bookingItemType;
+      bookingItem.bookingItemType = 'TRIPITEM';
       bookingItem.itemId = tripItem.id;
       bookingItem.description = tripItem.description;
       bookingItem.price = tripItem.price;
@@ -47,12 +54,8 @@ export class Booking {
     });
 
     travel.hotels.forEach((hotel) => {
-      console.log('hotelsForEach');
-      const bookingItemType = new BookingItemType();
-      bookingItemType.type = 'Hotel';
-
       const bookingItem = new BookingItem();
-      bookingItem.type = bookingItemType;
+      bookingItem.bookingItemType = 'HOTEL';
       bookingItem.itemId = hotel.id;
       bookingItem.description = hotel.description;
       bookingItem.price = hotel.price;
