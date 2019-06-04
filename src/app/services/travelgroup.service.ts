@@ -57,12 +57,13 @@ export class TravelGroupService {
    * @param group
    */
   createTravelGroup(group: Travelgroup) {
+    console.log(group);
     return this.http.post(environment.server + '/travelgroups/createTravelGroup', group).pipe(
       map(response => {
         return new Travelgroup(response);
       }),
       catchError(error => {
-        swal('createTrip', 'Er is iets niet goed gegaan.', 'error');
+        swal('createTravelGroup', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(error);
       })
     );

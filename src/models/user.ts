@@ -10,7 +10,7 @@ export class User {
     public lastname?: String;
     public emailAddress?: String;
     public authorities: Array<Authority>;
-    public travelGroups?: Array<Travelgroup>;
+    public travelGroups?: Travelgroup[];
 
     constructor(model?) {
         if (typeof model !== typeof undefined) {

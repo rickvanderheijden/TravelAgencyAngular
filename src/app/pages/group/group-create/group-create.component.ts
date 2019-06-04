@@ -7,7 +7,6 @@ import {Travelgroup} from '../../../../models/travelgroup';
 import {TravelGroupService} from '../../../services/travelgroup.service';
 import {User} from '../../../../models/user';
 import {UserService} from '../../../services/user.service';
-import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-group-create',
@@ -45,7 +44,7 @@ export class GroupCreateComponent implements OnInit {
       }
     );
     this.masterUser = new User(JSON.parse(sessionStorage.getItem('currentUser')));
-    this.travelgroup.users.push(this.masterUser)
+    this.travelgroup.users.push(this.masterUser);
     this.loading = false;
   }
 
@@ -58,16 +57,13 @@ export class GroupCreateComponent implements OnInit {
 
   submitForm() {
     this.travelgroup.masterId = this.userId;
+    const self = this;
     if (this.travelgroup) {
       this.travelGroupService.createTravelGroup(this.travelgroup).subscribe(
         (response: any) => {
-        console.log(response);
-      });
-const self = this
-      this.travelgroup.users.forEach(function (user) {
-        self.travelGroupService.addUser(self.travelgroup, user.id).subscribe()
-      })
-      // this.back()
+          console.log(response);
+          self.travelgroup = response;
+        });
     }
   }
 
