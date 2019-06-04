@@ -9,7 +9,7 @@
           <div class="col-12">
             <ng-select  name="continent" placeholder="Continent" [items]="continents" bindLabel="name" bindValue="name"
                         [(ngModel)]="continent"  [clearable]="true" (change)="getCountries(continent)"
-                        (clear)="clearAll()" class="m-1">
+                         class="m-1">
             </ng-select>
           </div>
           <div class="col-12">

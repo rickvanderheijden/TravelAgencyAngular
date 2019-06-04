@@ -15,9 +15,11 @@ export class TopFiltersComponent implements OnInit {
 
   continents: Array<Continent>;
   countries: Array<Country>;
-  country: Country;
-  continent: Continent;
+  allCountries: Array<Country>;
+  country: String;
+  continent: String;
   trips: Array<Trip>;
+  allTrips: Array<Trip>;
   till: any;
   from: any;
   geoService: GeographyService;
@@ -31,16 +33,22 @@ export class TopFiltersComponent implements OnInit {
     this.searchDTO = new SearchTripDTO();
     this.geoService = geoService;
     this.tripService = tripService;
-
-    this.clearAll();
-
+    this.country = null;
+    this.continent = null;
+    
     this.geoService.getAllContinents().subscribe((continents: any) => {
       this.continents = continents;
     })
 
+    this.geoService.getAllCountries().subscribe((countries: any) => {
+      this.countries = countries;
+      this.allCountries = countries;
+    });
+
     this.tripService.getTrips().subscribe((trips: any) => {
       this.foundTrips.emit(trips);
       this.trips = trips;
+      this.allTrips = trips;
     })
   }
 
@@ -49,33 +57,51 @@ export class TopFiltersComponent implements OnInit {
 
 
   getCountries(continent) {
+    this.continent = continent;
     this.searchDTO.continent = continent;
-    this.searchDTO.country = null;
-    this.clearAll();
+    if (this.country != null) {
+      this.searchDTO.country = this.country;
+    } else {
+      this.searchDTO.country = null;
+    }
 
-    this.tripService.searchTrips(this.searchDTO).subscribe((trips: any) => {
-      this.trips = trips;
-      this.foundTrips.emit(trips);
-    })
+    if (this.continent !== null) {
+      this.tripService.searchTrips(this.searchDTO).subscribe((trips: any) => {
+        this.trips = trips;
+        this.foundTrips.emit(trips);
+      })
+    } else if (this.country !== null) {
+      this.countries = this.allCountries;
+      this.tripService.searchTrips(this.searchDTO).subscribe((trips: any) => {
+        this.trips = trips;
+        this.foundTrips.emit(trips);
+      });
+    } else {
+      this.countries = this.allCountries;
+      this.trips = this.allTrips;
+      this.foundTrips.emit(this.allTrips);
+    }
 
-    this.geoService.getCountriesByContinentName(continent).subscribe((countries: any) => {
-      this.countries = countries;
-    });
+    if (continent !== null) {
+      this.geoService.getCountriesByContinentName(continent).subscribe((countries: any) => {
+        this.countries = countries;
+      });
+    }
   }
 
   getTrips(country) {
+    this.country = country;
     this.searchDTO.country = country;
-    this.tripService.searchTrips(this.searchDTO).subscribe((trips: any) => {
-      this.trips = trips;
-      this.foundTrips.emit(trips);
-    });
-  }
 
-
-  clearAll() {
-    this.countries = [];
-    this.country = null;
-    this.continent = null;
+    if (this.country != null) {
+      this.tripService.searchTrips(this.searchDTO).subscribe((trips: any) => {
+        this.trips = trips;
+        this.foundTrips.emit(trips);
+      });
+    } else {
+      this.trips = this.allTrips;
+      this.foundTrips.emit(this.allTrips);
+    }
   }
 
   doFilter() {
