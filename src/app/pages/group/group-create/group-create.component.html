@@ -45,18 +45,11 @@
                             </tr>
                             </thead>
                             <tbody _ngcontent-c11="">
-                            <tr _ngcontent-c11="">
-                              <td _ngcontent-c11="">John</td>
-                              <td _ngcontent-c11="">Carter</td>
+                            <tr _ngcontent-c11="" *ngFor="let userR of travelgroup.users">
+                              <td _ngcontent-c11="">{{userR.firstname}}</td>
+                              <td _ngcontent-c11="">{{userR.lastname}}</td>
                               <td _ngcontent-c11="">
-                                <a _ngcontent-c11="" class="info p-0" data-original-title="" title="">
-                                  <i _ngcontent-c11="" class="ft-user font-medium-3 mr-2">
-                                  </i>
-                                </a>
-                                <a _ngcontent-c11="" class="success p-0" data-original-title="" title="">
-                                  <i _ngcontent-c11="" class="ft-edit-2 font-medium-3 mr-2"></i>
-                                </a>
-                                <a _ngcontent-c11="" class="danger p-0" data-original-title="" title="">
+                                <a _ngcontent-c11="" class="danger p-0" data-original-title="" title="" (click)="removeUser(userR.id)">
                                   <i _ngcontent-c11="" class="ft-x font-medium-3 mr-2"></i>
                                 </a>
                               </td>

@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Travelgroup} from '../../../../models/travelgroup';
 import {TravelGroupService} from '../../../services/travelgroup.service';
+import swal from 'sweetalert2';
 import {User} from '../../../../models/user';
 import {UserService} from '../../../services/user.service';
 
@@ -63,6 +64,7 @@ export class GroupCreateComponent implements OnInit {
         (response: any) => {
           console.log(response);
           self.travelgroup = response;
+          this.back();
         });
     }
   }
@@ -79,6 +81,17 @@ export class GroupCreateComponent implements OnInit {
     } else {
       this.travelgroup.users.push(this.user);
       console.log('User added');
+    }
+  }
+
+  removeUser(userId: number) {
+
+    this.user = this.users.find(userR => userR.id === userId);
+    if (this.travelgroup.users.find(user => user.id === this.user.id)) {
+      this.travelgroup.users.splice(this.travelgroup.users.indexOf(this.user), 1);
+      console.log('User removed');
+    } else {
+      console.log('User not found!!');
     }
   }
 }
