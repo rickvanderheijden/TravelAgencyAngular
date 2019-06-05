@@ -3,7 +3,7 @@ import {LocalDataSource, ViewCell} from 'ng2-smart-table';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 import {TravelGroupService} from '../../../services/travelgroup.service';
-import {Travelgroup} from '../../../../models/travelgroup';
+import {TravelGroup} from '../../../../models/travelGroup';
 
 @Component({
   selector: 'app-group-actions',
@@ -46,7 +46,7 @@ export class GroupActionButtonsComponent implements ViewCell, OnInit {
   styleUrls: ['./group.component.scss']
 })
 export class GroupComponent implements OnInit {
-  groups: Array<Travelgroup>;
+  groups: Array<TravelGroup>;
   settings: any;
   source: LocalDataSource;
   constructor(private service: TravelGroupService) {

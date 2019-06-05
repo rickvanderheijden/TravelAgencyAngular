@@ -4,12 +4,12 @@ import { GroupComponent } from './group.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {Travelgroup} from '../../../../models/travelgroup';
+import {TravelGroup} from '../../../../models/travelGroup';
 import {TravelGroupService} from '../../../services/travelgroup.service';
 
 class TestGroups {
-  getGroups(): Observable<Array<Travelgroup>> {
-    return of(new Array<Travelgroup>())
+  getGroups(): Observable<Array<TravelGroup>> {
+    return of(new Array<TravelGroup>())
   }
 }
 

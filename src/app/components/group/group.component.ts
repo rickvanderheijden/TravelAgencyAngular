@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Travelgroup} from '../../../models/travelgroup';
+import {TravelGroup} from '../../../models/travelGroup';
 import {TravelGroupService} from '../../services/travelgroup.service';
 import {User} from '../../../models/user';
 import {Router} from '@angular/router';
@@ -13,7 +13,7 @@ export class GroupComponent implements OnInit {
 
   @Input() user: User;
 
-  groups: Travelgroup[];
+  groups: TravelGroup[];
   loading = false;
 
 

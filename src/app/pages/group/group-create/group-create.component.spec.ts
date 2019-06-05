@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {Travelgroup} from '../../../../models/travelgroup';
+import {TravelGroup} from '../../../../models/travelGroup';
 import {GroupCreateComponent} from './group-create.component';
 import {TravelGroupService} from '../../../services/travelgroup.service';
 
@@ -11,8 +11,8 @@ class DummyComponent {
 }
 
 class TestGroup {
-  createGroup(travelGroup: Travelgroup): Observable<Travelgroup> {
-    return of(new Travelgroup);
+  createGroup(travelGroup: TravelGroup): Observable<TravelGroup> {
+    return of(new TravelGroup);
   }
 }
 

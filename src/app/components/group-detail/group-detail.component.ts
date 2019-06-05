@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Travelgroup} from '../../../models/travelgroup';
+import {TravelGroup} from '../../../models/travelGroup';
 import {User} from '../../../models/user';
 import {TravelGroupService} from '../../services/travelgroup.service';
 
@@ -10,7 +10,7 @@ import {TravelGroupService} from '../../services/travelgroup.service';
 })
 export class GroupDetailComponent implements OnInit {
 
-  @Input() travelGroup: Travelgroup;
+  @Input() travelGroup: TravelGroup;
 
   users: User[];
   loading = false;

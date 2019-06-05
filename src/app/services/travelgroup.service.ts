@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Travelgroup} from '../../models/travelgroup';
+import {TravelGroup} from '../../models/travelGroup';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {catchError, map} from 'rxjs/operators';
@@ -12,7 +12,7 @@ import {User} from '../../models/user';
 })
 export class TravelGroupService {
 
-  travelGroup: Travelgroup;
+  travelGroup: TravelGroup;
 
   constructor(private http: HttpClient) {
   }
@@ -21,12 +21,12 @@ export class TravelGroupService {
    * Get TravelGroups by ID
    * @param id
    */
-  getTravelgroups(id): Observable<Array<Travelgroup>> {
+  getTravelgroups(id): Observable<Array<TravelGroup>> {
     return this.http.get(environment.server + '/users/travelGroups/' + id).pipe(
       map((response: Array<any>) => {
-        const travelgroups: Array<Travelgroup> = [];
+        const travelgroups: Array<TravelGroup> = [];
         response.forEach(function (travelgroup, index) {
-          travelgroups.push(new Travelgroup(travelgroup));
+          travelgroups.push(new TravelGroup(travelgroup));
         });
         return travelgroups;
       }),
@@ -56,11 +56,11 @@ export class TravelGroupService {
    * Create a group
    * @param group
    */
-  createTravelGroup(group: Travelgroup) {
+  createTravelGroup(group: TravelGroup) {
     console.log(group);
     return this.http.post(environment.server + '/travelgroups/createTravelGroup', group).pipe(
       map(response => {
-        return new Travelgroup(response);
+        return new TravelGroup(response);
       }),
       catchError(error => {
         swal('createTravelGroup', 'Er is iets niet goed gegaan.', 'error');
@@ -69,7 +69,7 @@ export class TravelGroupService {
     );
   }
 
-  addUser(group: Travelgroup, id) {
+  addUser(group: TravelGroup, id) {
       return this.http.post(environment.server + '/travelgroups/addUser/' + id, group).pipe(
         map(response => {
           return true;

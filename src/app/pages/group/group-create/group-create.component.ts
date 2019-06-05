@@ -3,7 +3,7 @@ import {Location} from '@angular/common';
 
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Travelgroup} from '../../../../models/travelgroup';
+import {TravelGroup} from '../../../../models/travelGroup';
 import {TravelGroupService} from '../../../services/travelgroup.service';
 import swal from 'sweetalert2';
 import {User} from '../../../../models/user';
@@ -16,7 +16,7 @@ import {UserService} from '../../../services/user.service';
 })
 export class GroupCreateComponent implements OnInit {
   groupCreateForm: FormGroup;
-  travelgroup: Travelgroup;
+  travelgroup: TravelGroup;
   loading = false;
 
   userId;
@@ -31,7 +31,7 @@ export class GroupCreateComponent implements OnInit {
     private router: Router,
     private location: Location,
     private route: ActivatedRoute) {
-    this.travelgroup = new Travelgroup();
+    this.travelgroup = new TravelGroup();
     this.users = new Array<User>();
   }
 

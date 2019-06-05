@@ -1,6 +1,6 @@
 import {User} from './user';
 
-export class Travelgroup {
+export class TravelGroup {
   public id?: number;
   public masterId?: number;
   public name?: string;
