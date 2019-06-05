@@ -39,8 +39,6 @@ export class Booking {
     this.tripId = travel.trip.id;
     this.basePrice = travel.trip.totalPrice;
 
-    this.numberOfTravelers = 4; //TODO Do not set to fixed value
-
     const bookingItemsToAdd = new Array<BookingItem>();
 
     travel.tripItems.forEach((tripItem) => {

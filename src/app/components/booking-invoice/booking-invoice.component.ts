@@ -10,13 +10,15 @@ export class BookingInvoiceComponent implements OnInit {
 
   @Input()
   booking: Booking;
+
+  @Input()
+  name: String;
+
   loading = true;
 
   constructor() { }
 
   ngOnInit() {
-    console.log('BookingInvoiceComponent::ngOnInit');
-    console.log(this.booking);
     this.loading = false;
   }
 
