@@ -60,15 +60,15 @@
                   <div class="form-group">
                     <div class="col-md-12">
                       <input type="text" class="form-control" id="registerFirstname" placeholder="Voornaam" required
-                             name="firstname" [(ngModel)]="auth.firstname" #authFirstname="ngModel"
-                             [ngClass]="authFirstname.valid ? 'is-valid' : authFirstname.pristine ? (registerError ? 'is-invalid' : '') : 'is-invalid'">
+                             name="firstName" [(ngModel)]="auth.firstName" #authFirstName="ngModel"
+                             [ngClass]="authFirstName.valid ? 'is-valid' : authFirstName.pristine ? (registerError ? 'is-invalid' : '') : 'is-invalid'">
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-md-12">
                       <input type="text" class="form-control" id="registerLastname" placeholder="Achternaam" required
-                             name="lastname" [(ngModel)]="auth.lastname" #authLastname="ngModel"
-                             [ngClass]="authLastname.valid ? 'is-valid': authLastname.pristine ? (registerError ? 'is-invalid' : '') : 'is-invalid'">
+                             name="lastName" [(ngModel)]="auth.lastName" #authLastName="ngModel"
+                             [ngClass]="authLastName.valid ? 'is-valid': authLastName.pristine ? (registerError ? 'is-invalid' : '') : 'is-invalid'">
                     </div>
                   </div>
                   <div class="form-group">

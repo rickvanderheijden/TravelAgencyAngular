@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Travel} from '../../../models/travel';
-import {Booking} from '../../../models/booking';
-import {BookableHotel} from '../../../models/bookablehotel';
 import swal from 'sweetalert2';
+import {BookingItem} from '../../../models/bookingitem';
+import {Booking} from '../../../models/booking';
 
 @Component({
   selector: 'app-travel-summary',
@@ -15,31 +15,30 @@ export class TravelSummaryComponent implements OnInit {
   travel: Travel;
 
   booking: Booking = new Booking();
+  loading = false;
 
   constructor() {
   }
 
   ngOnInit() {
-    this.booking.tripItems = Object.assign([], this.travel.tripItems);
-    for (const bookableTripItem of this.booking.tripItems) {
-      bookableTripItem.amount = 1;
-    }
+    this.loading = true;
+    this.booking.setPropertiesFromTravel(this.travel);
 
-    for (const hotel of this.travel.hotels) {
-      const bookableHotel = new BookableHotel(hotel);
-      console.log(bookableHotel);
+    // this.booking.bookingItems.forEach(function (bookingItem) {
+    //   bookingItem.numberOfAttendees = this.booking.numberOfTravelers;
 
-      this.booking.hotels.push(bookableHotel);
-    }
+    this.loading = false;
   }
 
-  decreaseTripItemAmount(tripItemId: number) {
+  decreaseBookItemAttendees(bookingItem: BookingItem) {
+    if (typeof bookingItem === typeof undefined) { return; }
+
     let indexToRemove = -1;
 
-    this.booking.tripItems.forEach(function(tripItem, index) {
-      if (tripItem.id === tripItemId) {
-        if (tripItem.amount > 1) {
-          tripItem.amount--;
+    this.booking.bookingItems.forEach(function(foundBookingItem, index) {
+      if (foundBookingItem === bookingItem) {
+        if (foundBookingItem.numberOfAttendees > 1) {
+          foundBookingItem.numberOfAttendees--;
         } else {
           indexToRemove = index;
         }
@@ -56,20 +55,46 @@ export class TravelSummaryComponent implements OnInit {
         cancelButtonText: 'Nee, product behouden'
       }).then((result) => {
         if (result.value) {
-          this.booking.tripItems.splice(indexToRemove, 1);
+          this.booking.bookingItems.splice(indexToRemove, 1);
         }
       });
     }
   }
 
-  increaseTripItemAmount(tripItemId: number) {
-    console.log('increaseTripItemAmount: ' + tripItemId);
-    console.log(this.booking.tripItems);
+  increaseBookingItemAttendees(bookingItem: BookingItem) {
+    if (typeof bookingItem === typeof undefined) { return; }
 
-    this.booking.tripItems.forEach(function(tripItem) {
-      if (tripItem.id === tripItemId) {
-        tripItem.amount++;
+    const numberOfTravelers = this.booking.numberOfTravelers;
+    this.booking.bookingItems.forEach((foundBookingItem) => {
+      if (foundBookingItem === bookingItem) {
+        if (
+          foundBookingItem.numberOfAttendees < 4 &&  // TODO: Remove hardcoded value
+          foundBookingItem.numberOfAttendees < numberOfTravelers) {
+          foundBookingItem.numberOfAttendees++;
+        }
       }
     });
   }
+
+  getBooking() {
+    this.booking.bookingDate = new Date();
+    return this.booking;
+  }
+
+  getTripItem(tripItemId: number) {
+    const foundTripItem = this.travel.tripItems.find(function(tripItem) {
+      return tripItem.id === tripItemId;
+    });
+
+    return foundTripItem;
+  }
+
+  getHotel(hotelId: number) {
+    const foundHotel = this.travel.hotels.find(function(hotel) {
+      return hotel.id === hotelId;
+    });
+
+    return foundHotel;
+  }
+
 }
