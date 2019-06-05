@@ -36,8 +36,6 @@ export class BookingTravelerInformationComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = new User(JSON.parse(sessionStorage.getItem('currentUser')));
-    console.log(this.currentUser);
-
     this.countries = new Array<Country>();
     this.geographyService.getAllCountries().subscribe((countries: Array<Country >) => {
       countries.forEach((country) => {
@@ -101,8 +99,8 @@ export class BookingTravelerInformationComponent implements OnInit {
     });
 
     this.bookingTravelerInformationForm = this.formBuilder.group({
-      firstName: this.formBuilder.control(this.currentUser.firstName, [ Validators.required] ),
-      lastName: this.formBuilder.control(this.currentUser.lastName, [ Validators.required] ),
+      firstName: this.formBuilder.control({value: this.currentUser.firstName, disabled: true}, [ Validators.required] ),
+      lastName: this.formBuilder.control({ value: this.currentUser.lastName, disabled: true}, [ Validators.required] ),
       address: this.addressForm,
       travelers: this.formBuilder.array([])
     });

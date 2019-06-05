@@ -21,6 +21,7 @@ export class BookTravelComponent implements OnInit {
   loading = false;
   travel: Travel;
   booking: Booking = null;
+  savedBooking: Booking = null;
   paymentStepEnabled = false;
 
   constructor(private activatedRoute: ActivatedRoute, private bookingService: BookingService ) { }
@@ -52,7 +53,9 @@ export class BookTravelComponent implements OnInit {
     this.booking.booker = booker;
     this.booking.address = travelerInformation.address;
 
-    this.bookingService.createBooking(this.booking).subscribe(response => this.booking = response);
+    this.bookingService.createBooking(this.booking).subscribe(response => this.savedBooking = new Booking(response));
+
+    console.log(this.savedBooking);
   }
 
   enablePaymentStep(enabled: boolean) {
