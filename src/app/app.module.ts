@@ -28,6 +28,7 @@ import {FileUploadModule} from 'ng2-file-upload';
 import {GroupDetailComponent } from './components/group-detail/group-detail.component';
 import {GroupComponent} from './components/group/group.component';
 import {ModalModule} from 'ngx-bootstrap';
+import {HomeModule} from './pages/home/home.module';
 
 export function jwtOptionsFactory(tokenService) {
   return {
@@ -74,6 +75,7 @@ export function jwtOptionsFactory(tokenService) {
     }),
     AgmDirectionModule,
     FileUploadModule,
+    HomeModule,
   ],
   providers: [
     TokenService,
