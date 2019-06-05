@@ -10,8 +10,9 @@ export class TripItem {
   public address?: Address;
   public price?: number;
   public date?: Date;
-  public minPersons: number;
-  public maxPersons: number;
+  public minimumNumberOfAttendees: number;
+  public maximumNumberOfAttendees: number;
+  public numberOfAttendees: number;
 
   constructor(model?) {
     if (typeof model !== typeof undefined) {
@@ -23,8 +24,9 @@ export class TripItem {
       this.price = model.price;
       this.date = new Date(model.date);
       this.imageBlob = model.imageBlob;
-      this.minPersons = model.minPersons;
-      this.maxPersons = model.maxPersons;
+      this.minimumNumberOfAttendees = model.minimumNumberOfAttendees;
+      this.maximumNumberOfAttendees = model.maximumNumberOfAttendees;
+      this.numberOfAttendees = model.numberOfAttendees;
     } else {
       this.date = new Date();
       this.address = new Address();

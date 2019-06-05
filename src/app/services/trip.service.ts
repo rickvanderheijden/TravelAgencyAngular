@@ -107,7 +107,11 @@ export class TripService {
   getTripItems() {
 
   }
-
+  
+    /**
+   * Search trips
+   * @param SearchTripDTO
+   */
   searchTrips(searchDTO: SearchTripDTO): Observable<Array<Trip>> {
     return this.http.post(environment.url + '/trips/searchTrips', searchDTO).pipe(
       map((response: Array<any>) => {
@@ -124,4 +128,5 @@ export class TripService {
         throw new Error(err);
       }));
   }
+
 }

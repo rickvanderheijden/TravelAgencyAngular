@@ -45,8 +45,8 @@ export class UserUpdateComponent implements OnInit {
   setForm() {
     this.userUpdateForm = new FormGroup({
       username: new FormControl(this.user.username, [Validators.minLength(4), Validators.required]),
-      firstname: new FormControl(this.user.firstname),
-      lastname: new FormControl(this.user.lastname),
+      firstName: new FormControl(this.user.firstName),
+      lastName: new FormControl(this.user.lastName),
       emailAddress: new FormControl(this.user.emailAddress, [Validators.minLength(6), Validators.email, Validators.required]),
       password: new FormControl([Validators.minLength(5)]),
       password_repeat: new FormControl()
