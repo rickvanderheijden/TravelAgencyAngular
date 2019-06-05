@@ -1,4 +1,4 @@
-<section _ngcontent-c7="" class="invoice-template" *ngIf="booking.id">
+<section _ngcontent-c7="" class="invoice-template" *ngIf="!loading">
   <div _ngcontent-c7="" class="card">
     <div _ngcontent-c7="" class="card-body p-3">
       <div _ngcontent-c7="" class="card-block" id="invoice-template">
@@ -46,37 +46,20 @@
                 <thead _ngcontent-c7="">
                 <tr _ngcontent-c7="">
                   <th _ngcontent-c7="">#</th>
-                  <th _ngcontent-c7="">Item &amp; Description</th>
-                  <th _ngcontent-c7="" class="text-right">Rate</th>
-                  <th _ngcontent-c7="" class="text-right">Hours</th>
+                  <th _ngcontent-c7="">Item en beschrijving</th>
+                  <th _ngcontent-c7="" class="text-right">Prijs per persoon</th>
+                  <th _ngcontent-c7="" class="text-right">Aantal</th>
                   <th _ngcontent-c7="" class="text-right">Amount</th>
                 </tr>
                 </thead>
                 <tbody _ngcontent-c7="">
-                <tr _ngcontent-c7="">
+                <tr _ngcontent-c7="" *ngFor="let bookingItem of booking.bookingItems">
                   <th _ngcontent-c7="" scope="row">1</th>
-                  <td _ngcontent-c7=""><p _ngcontent-c7="">Create PSD for mobile APP</p>
-                    <p _ngcontent-c7="" class="text-muted">Simply dummy text of the printing and typesetting
-                      industry.</p></td>
-                  <td _ngcontent-c7="" class="text-right">$ 20.00/hr</td>
-                  <td _ngcontent-c7="" class="text-right">120</td>
-                  <td _ngcontent-c7="" class="text-right">$ 2400.00</td>
-                </tr>
-                <tr _ngcontent-c7="">
-                  <th _ngcontent-c7="" scope="row">2</th>
-                  <td _ngcontent-c7=""><p _ngcontent-c7="">iOS Application Development</p>
-                    <p _ngcontent-c7="" class="text-muted">Pellentesque maximus feugiat lorem at cursus.</p></td>
-                  <td _ngcontent-c7="" class="text-right">$ 25.00/hr</td>
-                  <td _ngcontent-c7="" class="text-right">260</td>
-                  <td _ngcontent-c7="" class="text-right">$ 6500.00</td>
-                </tr>
-                <tr _ngcontent-c7="">
-                  <th _ngcontent-c7="" scope="row">3</th>
-                  <td _ngcontent-c7=""><p _ngcontent-c7="">WordPress Template Development</p>
-                    <p _ngcontent-c7="" class="text-muted">Vestibulum euismod est eu elit convallis.</p></td>
-                  <td _ngcontent-c7="" class="text-right">$ 20.00/hr</td>
-                  <td _ngcontent-c7="" class="text-right">300</td>
-                  <td _ngcontent-c7="" class="text-right">$ 6000.00</td>
+                  <td _ngcontent-c7=""><p _ngcontent-c7="">{{bookingItem.name}}</p>
+                    <p _ngcontent-c7="" class="text-muted"></p></td>
+                  <td _ngcontent-c7="" class="text-right">€ {{bookingItem.price}}</td>
+                  <td _ngcontent-c7="" class="text-right">{{bookingItem.numberOfAttendees}}</td>
+                  <td _ngcontent-c7="" class="text-right">€ {{bookingItem.price * bookingItem.numberOfAttendees}}</td>
                 </tr>
                 </tbody>
               </table>
@@ -115,40 +98,27 @@
                 <table _ngcontent-c7="" class="table">
                   <tbody _ngcontent-c7="">
                   <tr _ngcontent-c7="">
-                    <td _ngcontent-c7="">Sub Total</td>
-                    <td _ngcontent-c7="" class="text-right">$ 14,900.00</td>
+                    <td _ngcontent-c7="" class="text-bold-800">Totaal</td>
+                    <td _ngcontent-c7="" class="text-bold-800 text-right">€ {{booking.getTotalPrice()}}</td>
                   </tr>
                   <tr _ngcontent-c7="">
-                    <td _ngcontent-c7="">TAX (12%)</td>
-                    <td _ngcontent-c7="" class="text-right">$ 1,788.00</td>
-                  </tr>
-                  <tr _ngcontent-c7="">
-                    <td _ngcontent-c7="" class="text-bold-800">Total</td>
-                    <td _ngcontent-c7="" class="text-bold-800 text-right"> $ 16,688.00</td>
-                  </tr>
-                  <tr _ngcontent-c7="">
-                    <td _ngcontent-c7="">Payment Made</td>
-                    <td _ngcontent-c7="" class="pink text-right">(-) $ 4,688.00</td>
+                    <td _ngcontent-c7="">Al betaald</td>
+                    <td _ngcontent-c7="" class="pink text-right">(-) € 0.00</td>
                   </tr>
                   <tr _ngcontent-c7="" class="bg-grey bg-lighten-4">
-                    <td _ngcontent-c7="" class="text-bold-800">Balance Due</td>
-                    <td _ngcontent-c7="" class="text-bold-800 text-right">$ 12,000.00</td>
+                    <td _ngcontent-c7="" class="text-bold-800">Nog te betalen</td>
+                    <td _ngcontent-c7="" class="text-bold-800 text-right">€ {{booking.getTotalPrice()}}</td>
                   </tr>
                   </tbody>
                 </table>
               </div>
-              <div _ngcontent-c7="" class="text-center"><p _ngcontent-c7="">Authorized person</p><img
-                _ngcontent-c7="" alt="signature" class="width-250" src="assets/img/pages/signature-scan.png"><h6
-                _ngcontent-c7="">Amanda Orton</h6>
-                <p _ngcontent-c7="" class="text-muted">Managing Director</p></div>
             </div>
           </div>
         </div>
         <div _ngcontent-c7="" id="invoice-footer">
           <div _ngcontent-c7="" class="row">
-            <div _ngcontent-c7="" class="col-md-9 col-sm-12"><h6 _ngcontent-c7="">Terms &amp; Condition</h6>
-              <p _ngcontent-c7="">You know, being a test pilot isn't always the healthiest business in the world.
-                We predict too much for the next year and yet far too little for the next 10.</p></div>
+            <div _ngcontent-c7="" class="col-md-9 col-sm-12"><h6 _ngcontent-c7=""></h6>
+              <p _ngcontent-c7="">I hate traveling, no traveler ever said.</p></div>
             <div _ngcontent-c7="" class="col-md-3 col-sm-12 text-center">
               <button _ngcontent-c7="" class="btn btn-primary btn-raised my-1" type="button"><i _ngcontent-c7=""
                                                                                                 class="fa fa-paper-plane-o"></i>

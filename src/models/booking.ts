@@ -47,6 +47,7 @@ export class Booking {
       const bookingItem = new BookingItem();
       bookingItem.bookingItemType = 'TRIPITEM';
       bookingItem.itemId = tripItem.id;
+      bookingItem.name = tripItem.name;
       bookingItem.description = tripItem.description;
       bookingItem.price = tripItem.price;
       bookingItem.numberOfAttendees = this.numberOfTravelers;
@@ -57,6 +58,7 @@ export class Booking {
       const bookingItem = new BookingItem();
       bookingItem.bookingItemType = 'HOTEL';
       bookingItem.itemId = hotel.id;
+      bookingItem.name = hotel.name;
       bookingItem.description = hotel.description;
       bookingItem.price = hotel.price;
       bookingItem.numberOfAttendees = this.numberOfTravelers;
