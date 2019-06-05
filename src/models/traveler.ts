@@ -7,8 +7,8 @@ export class Traveler {
     constructor(model?) {
         if (typeof model !== typeof undefined) {
             this.id = model.id;
-            this.firstName = model.firstname;
-            this.lastName = model.lastname;
+            this.firstName = model.firstName;
+            this.lastName = model.lastName;
         }
     }
 }

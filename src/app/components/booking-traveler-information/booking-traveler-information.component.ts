@@ -101,8 +101,8 @@ export class BookingTravelerInformationComponent implements OnInit {
     });
 
     this.bookingTravelerInformationForm = this.formBuilder.group({
-      firstName: this.formBuilder.control(this.currentUser.firstname, [ Validators.required] ),
-      lastName: this.formBuilder.control(this.currentUser.lastname, [ Validators.required] ),
+      firstName: this.formBuilder.control(this.currentUser.firstName, [ Validators.required] ),
+      lastName: this.formBuilder.control(this.currentUser.lastName, [ Validators.required] ),
       address: this.addressForm,
       travelers: this.formBuilder.array([])
     });

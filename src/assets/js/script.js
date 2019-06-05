@@ -9,7 +9,6 @@ $( window ).scroll(function() {
 
   var heightOfSelected = null;
   var heightOfScreen = $( window ).scrollTop();
-  console.log(heightOfScreen);
 
   if($('.selected-item-card').length){
     if(startHeightOfDiv == null) {

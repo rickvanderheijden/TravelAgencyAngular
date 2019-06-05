@@ -7,8 +7,8 @@ export class User {
     public id?: number;
     public username?: String;
     public password?: String;
-    public firstname?: String;
-    public lastname?: String;
+    public firstName?: String;
+    public lastName?: String;
     public emailAddress?: String;
     public authorities: Array<Authority>;
     public travelGroups: Array<TravelGroup>;
@@ -17,8 +17,8 @@ export class User {
         if (typeof model !== typeof undefined) {
             this.id = model.id;
             this.username = model.username;
-            this.firstname = model.firstname;
-            this.lastname = model.lastname;
+            this.firstName = model.firstName;
+            this.lastName = model.lastName;
             this.emailAddress = model.emailAddress;
             this.authorities = new Array<Authority>();
             this.travelGroups = new Array<TravelGroup>();
