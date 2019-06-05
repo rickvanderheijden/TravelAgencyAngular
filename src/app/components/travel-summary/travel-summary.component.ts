@@ -22,11 +22,8 @@ export class TravelSummaryComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.booking.numberOfTravelers = 2;
     this.booking.setPropertiesFromTravel(this.travel);
-
-    // this.booking.bookingItems.forEach(function (bookingItem) {
-    //   bookingItem.numberOfAttendees = this.booking.numberOfTravelers;
-
     this.loading = false;
   }
 

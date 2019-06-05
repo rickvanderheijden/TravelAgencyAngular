@@ -15,7 +15,7 @@
       </button>
     </aw-wizard-step>
     <aw-wizard-step stepTitle="Betaling">
-    <app-booking-invoice *ngIf="savedBooking" [booking]="savedBooking"></app-booking-invoice>
+    <app-booking-invoice *ngIf="savedBooking" [name]="travel.trip.name"  [booking]="savedBooking"></app-booking-invoice>
       <button type="button" class="btn btn-primary buttonmargin" awPreviousStep>Vorige step</button>
       <button type="button" class="btn btn-primary buttonmargin" (click)="finishFunction()">Finish</button>
     </aw-wizard-step>

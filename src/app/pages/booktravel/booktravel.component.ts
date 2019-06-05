@@ -54,8 +54,6 @@ export class BookTravelComponent implements OnInit {
     this.booking.address = travelerInformation.address;
 
     this.bookingService.createBooking(this.booking).subscribe(response => this.savedBooking = new Booking(response));
-
-    console.log(this.savedBooking);
   }
 
   enablePaymentStep(enabled: boolean) {

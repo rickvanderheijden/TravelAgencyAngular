@@ -18,8 +18,8 @@
             ORDER</h2>
             <p _ngcontent-c7="" class="pb-3"># SAO-{{("00000" + booking.id).slice(-6)}}</p>
             <ul _ngcontent-c7="" class="px-0 list-unstyled">
-              <li _ngcontent-c7="">Balance Due</li>
-              <li _ngcontent-c7="" class="lead text-bold-800">$ 12,000.00</li>
+              <li _ngcontent-c7=""></li>
+              <li _ngcontent-c7="" class="lead text-bold-800"></li>
             </ul>
           </div>
         </div>
@@ -52,6 +52,16 @@
                   <th _ngcontent-c7="" class="text-right">Amount</th>
                 </tr>
                 </thead>
+                <tbody _ngcontent-c7="">
+                <tr _ngcontent-c7="">
+                  <th _ngcontent-c7="" scope="row">1</th>
+                  <td _ngcontent-c7=""><p _ngcontent-c7="">{{name}}</p>
+                    <p _ngcontent-c7="" class="text-muted"></p></td>
+                  <td _ngcontent-c7="" class="text-right">€ {{booking.basePrice}}</td>
+                  <td _ngcontent-c7="" class="text-right">{{booking.numberOfTravelers}}</td>
+                  <td _ngcontent-c7="" class="text-right">€ {{booking.basePrice * booking.numberOfTravelers}}</td>
+                </tr>
+                </tbody>
                 <tbody _ngcontent-c7="">
                 <tr _ngcontent-c7="" *ngFor="let bookingItem of booking.bookingItems">
                   <th _ngcontent-c7="" scope="row">1</th>
