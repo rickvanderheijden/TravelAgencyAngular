@@ -9,6 +9,7 @@ export class Hotel {
   public imageBlob: String;
   public address: Address;
   public date: Date;
+  public numberOfGuests: number;
 
   constructor(model?) {
     if (typeof model !== typeof undefined) {
@@ -19,6 +20,7 @@ export class Hotel {
       this.imageBlob = model.imageBlob;
       this.address = model.address;
       this.date = new Date(model.date);
+      this.numberOfGuests = model.numberOfGuests;
     } else {
       this.address = new Address()
     }

@@ -15,7 +15,6 @@ import {HotelOptionComponent} from '../../components/hotel-option/hotel-option.c
 import {TopFiltersComponent} from '../../components/top-filters/top-filters.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgSelectModule} from '@ng-select/ng-select';
-import {AppModule} from '../../app.module';
 import {LoginFormComponent} from '../../components/login-form/login-form.component';
 
 @NgModule({

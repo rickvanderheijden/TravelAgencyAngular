@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {JWT_OPTIONS, JwtHelperService} from '@auth0/angular-jwt';
+import {HttpClient} from '@angular/common/http';
+import {JwtHelperService} from '@auth0/angular-jwt';
 import {catchError, map, tap} from 'rxjs/operators';
 import {User} from '../../models/user';
 import swal from 'sweetalert2';
@@ -102,7 +102,8 @@ export class AuthenticationService {
         this.loggedInUser.next(user);
         return user;
       }),
-      catchError(error => {throw new Error(error)})
+      catchError(
+        error => {console.log(error.message); throw new Error(error)})
     );
   }
 

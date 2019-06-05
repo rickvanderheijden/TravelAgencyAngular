@@ -86,10 +86,10 @@ export class UserComponent implements OnInit {
           title: 'ID',
           sortDirection: 'desc',
         },
-        firstname: {
+        firstName: {
           title: 'Voornaam',
         },
-        lastname: {
+        lastName: {
           title: 'Achternaam',
         },
         emailAddress: {

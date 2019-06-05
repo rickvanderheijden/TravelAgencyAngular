@@ -9,17 +9,10 @@ export class Continent {
 
 
   constructor(model?) {
-    const self = this;
     if (typeof model !== typeof undefined) {
       this.id = model.id;
       this.name = model.name;
-      this.countries = new Array<Country>();
-
-      if (model.countries !== null) {
-        model.countries.forEach(function (country, index) {
-          self.countries.push(new Country(country));
-        })
-      }
+      this.countries = model.countries;
     }
   }
 
