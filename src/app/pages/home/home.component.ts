@@ -17,15 +17,14 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.tripId = null;
-    this.tripService.getTrips().subscribe(
-      (response: any) => {
-       this.trips = response;
-       this.loading = false;
-      }
-    );
+    this.loading = false; 
   }
 
   onTripIdChanged(id: number) {
     this.tripId = id;
+  }
+
+  setTrips(event: Array<Trip>) {
+    this.trips = event;
   }
 }

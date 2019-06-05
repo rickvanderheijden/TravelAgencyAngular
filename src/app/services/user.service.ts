@@ -87,7 +87,9 @@ export class UserService {
   updateUser(user: User) {
     return this.http.post(environment.server + '/users/update' , user).pipe(
       map((response: any) => {
-        return new User(response);
+        const updated_user = new User(response);
+        this.checkForCurrentUserUpdate(updated_user);
+        return updated_user;
       })
     );
   }
@@ -110,5 +112,12 @@ export class UserService {
         return response;
       })
     );
+  }
+
+  checkForCurrentUserUpdate(updated_user) {
+    const current_user = new User(JSON.parse(sessionStorage.getItem('currentUser')));
+    if (updated_user.id === current_user.id) {
+      sessionStorage.setItem('currentUser', JSON.stringify(updated_user));
+    }
   }
 }
