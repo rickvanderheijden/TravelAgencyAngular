@@ -2,7 +2,7 @@ import {Component, OnInit, TemplateRef} from '@angular/core';
 import {TripService} from '../../../services/trip.service';
 import {Trip} from '../../../../models/trip';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TripItem} from '../../../../models/TripItem';
 import {TripItemService} from '../../../services/trip-item.service';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
@@ -17,14 +17,15 @@ export class TripUpdateComponent implements OnInit {
   trip: Trip;
   tripId: any;
   loading = false;
-  tripItems: Array<TripItem>;
+  dbTripItems: Array<TripItem>;
   selectedTripItems: Array<any>;
 
   constructor(
     private tripService: TripService,
     private tripItemService: TripItemService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) {
 
   }
@@ -32,7 +33,7 @@ export class TripUpdateComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.tripItemService.getTripItems().subscribe((tripItems: any) => {
-      this.tripItems = tripItems;
+      this.dbTripItems = tripItems;
       this.tripService.getById(this.route.snapshot.params.id).subscribe((data: any) => {
         this.trip = new Trip(data);
         this.tripId = this.route.snapshot.params.id;
@@ -63,8 +64,28 @@ export class TripUpdateComponent implements OnInit {
       imageUrl: new FormControl(this.trip.imageUrl, [Validators.minLength(6), Validators.email, Validators.required]),
       totalPrice: new FormControl(this.trip.totalPrice, [Validators.minLength(5)]),
       discount: new FormControl(this.trip.discount),
-      // tripItems: new FormControl(this.trip.tripItems)
+      destinations: this.formBuilder.array([this.desinations])
+
     });
+    this.formBuilder.group(this.tripUpdateForm);
+
+  }
+
+  get desinations() {
+    return this.formBuilder.group({
+      destinationName: '',
+      tripItems: this.formBuilder.array([this.tripItems])
+    });
+  }
+
+  get tripItems() {
+    return this.formBuilder.group({
+      tripItemName: ''
+    });
+  }
+
+  addDestination() {
+    (this.tripUpdateForm.get('destinations') as FormArray).push(this.tripItems);
   }
 
 }

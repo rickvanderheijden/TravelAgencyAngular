@@ -1,5 +1,5 @@
 <div *ngIf="srcUrl" class="image-display-container">
-  <img  [src]="srcUrl" alt="src"> <span (click)="srcUrl = null">x</span>
+  <img  [src]="srcUrl" alt="src"> <span (click)="removeImageInHtml()">x</span>
 </div>
 <div ng2FileDrop
      *ngIf="!srcUrl"
@@ -8,6 +8,6 @@
      (fileOver)="fileOverBase($event)"
      [uploader]="uploader"
      class="py-5 mb-3 text-center font-medium-5 text-uppercase grey my-drop-zone">
-  Drop trip-item foto hier
+  Drop foto hier
 </div>
 <input type="file" ng2FileSelect [uploader]="uploader" class="custom-file-input" accept="image/*">

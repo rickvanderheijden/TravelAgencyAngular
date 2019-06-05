@@ -8,7 +8,7 @@
         <div class="navbar-container">
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
-              <p class="text-light" *ngIf="loggedIn()">Welkom {{user.firstname}}</p>
+              <p class="text-light" *ngIf="loggedIn()">Welkom {{user.firstName}}</p>
               <button class="btn btn-secondary color-light float-left clearfix" *ngIf="!loggedIn()" routerLink="auth/login">Inloggen</button>
                 <ul class="navbar-nav" *ngIf="loggedIn()">
                     <li class="nav-item" ngbDropdown [placement]="placement">
@@ -17,9 +17,13 @@
                             <p class="d-none">User Settings</p>
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="text-left">
-                            <a class="dropdown-item py-1" href="javascript:;" *ngIf="user.isAdmin()">
-                              <i class="fas fa-cogs mr-2"></i>
-                                <span>Settings</span>
+                          <a class="dropdown-item py-1" routerLink="/hotel" *ngIf="user.isAdmin()">
+                            <i class="fas fa-hotel mr-2"></i>
+                            <span>Hotels</span>
+                          </a>
+                            <a class="dropdown-item py-1" routerLink="destination" *ngIf="user.isAdmin()">
+                              <i class="fas fa-map-pin mr-2"></i>
+                                <span>Bestemmingen</span>
                             </a>
                             <a class="dropdown-item py-1" href="javascript:;" *ngIf="user.isAdmin()" routerLink="/user">
                               <i class="fas fa-users mr-2"></i>

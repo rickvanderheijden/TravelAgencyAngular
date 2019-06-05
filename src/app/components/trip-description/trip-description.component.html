@@ -23,7 +23,7 @@
               <tbody _ngcontent-c8="">
                 <tr _ngcontent-c8="" *ngFor="let tripItem of travel.tripItems">
                   <td _ngcontent-c8="">{{tripItem.name}}</td>
-                  <td _ngcontent-c8="">{{tripItem.price}}</td>
+                  <td _ngcontent-c8="">€ {{tripItem.price}}</td>
                   <td _ngcontent-c8="">
                     <a _ngcontent-c8="" class="danger" data-original-title="" title="">
                       <i _ngcontent-c8="" class="ft-trash font-medium-3" (click)="removeTripItem(tripItem)"></i>
@@ -43,7 +43,7 @@
                   <b _ngcontent-c8="">Totale prijs</b>
                 </td>
                 <td _ngcontent-c8="">
-                  <b _ngcontent-c8="">{{travel.totalPrice}}</b>
+                  <b _ngcontent-c8="">€ {{travel.totalPrice}}</b>
                 </td>
                 <td _ngcontent-c8=""></td>
               </tr>
@@ -75,6 +75,6 @@
     </button>
   </div>
   <div class="modal-body">
-    This is a modal.
+   <app-login-form (loginSuccessful)="didLoginSuccessful($event)"></app-login-form>
   </div>
 </ng-template>

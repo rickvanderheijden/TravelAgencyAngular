@@ -43,11 +43,10 @@
               </div>
               <div class="form-group">
                 <label>Trip Items</label>
-                <ng-select [items]="tripItems"
-                           formControlName="tripItems"
+                <ng-select [items]="dbTripItems"
+                           formControlName="destinations"
                             bindLabel="name"
                            [multiple]="true"
-                           [(ngModel)]="trip.destinations"
                             >
                 </ng-select>
               </div>

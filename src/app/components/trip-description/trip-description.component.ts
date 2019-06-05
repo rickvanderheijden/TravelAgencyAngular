@@ -5,7 +5,6 @@ import {TripItem} from '../../../models/TripItem';
 import {AuthenticationService} from '../../auth/auth.service';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {Router} from '@angular/router';
-import {forEach} from '@angular/router/src/utils/collection';
 import {Hotel} from '../../../models/hotel';
 
 @Component({
@@ -37,6 +36,16 @@ export class TripDescriptionComponent implements OnInit {
     this.travel = new Travel();
     this.travel.trip = this.trip;
     this.travel.totalPrice = this.trip.totalPrice;
+    this.travel.hotels = new Array();
+
+    const hotelsToAdd = new Array<Hotel>();
+    this.trip.destinations.forEach(function (destination) {
+      if (destination.hotel !== null) {
+        hotelsToAdd.push(destination.hotel);
+      }
+    });
+
+    this.travel.hotels = hotelsToAdd;
   }
 
   addTripItem(tripItem: TripItem) {
@@ -83,5 +92,12 @@ export class TripDescriptionComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template); // {3}
+  }
+
+  didLoginSuccessful(loginSuccessful: boolean) {
+    if (loginSuccessful){
+      this.modalRef.hide();
+      this.router.navigateByUrl('/booktravel', { state: { travel: this.travel } });
+    }
   }
 }

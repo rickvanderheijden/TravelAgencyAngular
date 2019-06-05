@@ -46,4 +46,8 @@ export class DropZoneComponent implements OnInit {
 
   }
 
+  removeImageInHtml() {
+    this.srcUrl = null;
+    this.imageBlob.emit(null);
+  }
 }
