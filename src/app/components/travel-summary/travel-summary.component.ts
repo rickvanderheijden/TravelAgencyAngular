@@ -3,6 +3,7 @@ import {Travel} from '../../../models/travel';
 import swal from 'sweetalert2';
 import {BookingItem} from '../../../models/bookingitem';
 import {Booking} from '../../../models/booking';
+import {HotelService} from '../../services/hotel.service';
 
 @Component({
   selector: 'app-travel-summary',
@@ -17,7 +18,7 @@ export class TravelSummaryComponent implements OnInit {
   booking: Booking = new Booking();
   loading = false;
 
-  constructor() {
+  constructor(private hotelService: HotelService) {
   }
 
   ngOnInit() {
@@ -27,12 +28,14 @@ export class TravelSummaryComponent implements OnInit {
     this.loading = false;
   }
 
-  decreaseBookItemAttendees(bookingItem: BookingItem) {
-    if (typeof bookingItem === typeof undefined) { return; }
+  decreaseBookingItemAttendees(bookingItem: BookingItem) {
+    if (typeof bookingItem === typeof undefined) {
+      return;
+    }
 
     let indexToRemove = -1;
 
-    this.booking.bookingItems.forEach(function(foundBookingItem, index) {
+    this.booking.bookingItems.forEach(function (foundBookingItem, index) {
       if (foundBookingItem === bookingItem) {
         if (foundBookingItem.numberOfAttendees > 1) {
           foundBookingItem.numberOfAttendees--;
@@ -59,7 +62,9 @@ export class TravelSummaryComponent implements OnInit {
   }
 
   increaseBookingItemAttendees(bookingItem: BookingItem) {
-    if (typeof bookingItem === typeof undefined) { return; }
+    if (typeof bookingItem === typeof undefined) {
+      return;
+    }
 
     const numberOfTravelers = this.booking.numberOfTravelers;
     this.booking.bookingItems.forEach((foundBookingItem) => {
@@ -79,7 +84,7 @@ export class TravelSummaryComponent implements OnInit {
   }
 
   getTripItem(tripItemId: number) {
-    const foundTripItem = this.travel.tripItems.find(function(tripItem) {
+    const foundTripItem = this.travel.tripItems.find(function (tripItem) {
       return tripItem.id === tripItemId;
     });
 
@@ -87,11 +92,49 @@ export class TravelSummaryComponent implements OnInit {
   }
 
   getHotel(hotelId: number) {
-    const foundHotel = this.travel.hotels.find(function(hotel) {
+    const foundHotel = this.travel.hotels.find(function (hotel) {
       return hotel.id === hotelId;
     });
 
     return foundHotel;
   }
 
+  decreaseNumberOfTravelers() {
+    if (this.booking.numberOfTravelers > this.travel.trip.minPersons) {
+      this.booking.numberOfTravelers--;
+
+      const self = this;
+      this.booking.bookingItems.forEach(function (bookingItem) {
+        if (bookingItem.bookingItemType === 'HOTEL') {
+          self.decreaseBookingItemAttendees(bookingItem);
+        }
+      });
+    }
+  }
+
+  async increaseNumberOfTravelers() {
+    let availability = this.travel.trip.maxPersons;
+    const self = this;
+
+    for (const hotel of this.travel.hotels) {
+      await self.getHotelAvailability(hotel.id).then(hotelAvailability => {
+        if (hotelAvailability < availability) {
+          availability = hotelAvailability;
+        }
+      });
+    }
+
+    if (this.booking.numberOfTravelers < availability) {
+      this.booking.numberOfTravelers++;
+      this.booking.bookingItems.forEach(function (bookingItem) {
+        if (bookingItem.bookingItemType === 'HOTEL') {
+          self.increaseBookingItemAttendees(bookingItem);
+        }
+      });
+    }
+  }
+
+  async getHotelAvailability(hotelId: number) {
+    return await this.hotelService.getAvailability(hotelId);
+  }
 }

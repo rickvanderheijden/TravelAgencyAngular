@@ -85,4 +85,16 @@ export class HotelService {
         throw new Error(err);
       }));
   }
+
+  async getAvailability(id: number): Promise<number> {
+    try {
+      const response = await this.http
+        .get(environment.server + '/hotels/getAvailability/' + id)
+        .toPromise();
+      return response as number;
+    } catch (error) {
+        swal('getAvailability', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(error);
+    }
+  }
 }
