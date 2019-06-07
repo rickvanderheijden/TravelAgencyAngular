@@ -67,7 +67,6 @@ export class HotelService {
   deleteHotel(id: number) {
     return this.http.delete(environment.url + '/hotels/' + id ).pipe(
       map( (response: any) => {
-        console.log(response);
       })
     );
   }

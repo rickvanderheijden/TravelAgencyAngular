@@ -14,47 +14,55 @@
             </div>
           </div>
         </div>
-        <div class="card-body">
+        <div class="card-body" *ngIf="loaded">
           <div class="card-block">
             <form [formGroup]="destinationUpdateForm">
               <div class="form-group">
                 <label>Naam</label>
-                <input type="text" name="username" formControlName="name" class="form-control" [(ngModel)]="destination.name">
+                <input type="text" name="name" formControlName="name" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <label>Stad</label>
+                <ng-select name="city" placeholder="Stad" [items]="cities"
+                           formControlName="city" [clearable]="true" class="m-1" bindLabel="name"
+                           (change)="getHotelsAndTripItems($event)">
+                </ng-select>
               </div>
               <div class="form-group">
-                <label>Omschrijving</label>
-                <input type="text" name="description" formControlName="description" class="form-control" [(ngModel)]="destination.description">
+                <label>Hotel</label>
+                <ng-select placeholder="Hotel"
+                           [items]="hotels"
+                           bindLabel="name"
+                           formControlName="hotel"
+                           [clearable]="true"
+                           class="m-1">
+                </ng-select>
               </div>
               <div class="form-group">
-                <label>Samenvatting</label>
-                <input type="text" name="summary" formControlName="summary" class="form-control" [(ngModel)]="destination.summary">
-              </div>
-              <div class="form-group">
-                <label>Afbeelding URL</label>
-                <input type="text" name="imageUrl" formControlName="imageUrl" class="form-control" [(ngModel)]="destination.imageUrl">
-              </div>
-              <div class="form-group">
-                <label>Totaal prijs</label>
-                <input type="number" name="totalPrice" formControlName="totalPrice" class="form-control" [(ngModel)]="destination.totalPrice">
-              </div>
-              <div class="form-group">
-                <label>Korting</label>
-                <input type="number" name="discount" formControlName="discount" class="form-control" [(ngModel)]="destination.discount">
-              </div>
-              <div class="form-group">
-                <label>Destination Items</label>
-                <ng-select [items]="dbDestinationItems"
-                           formControlName="destinations"
-                            bindLabel="name"
-                           [multiple]="true"
-                            >
+                <label>Trip Items</label>
+                <ng-select placeholder="Trip Items"
+                           [items]="tripItems"
+                           bindLabel="name"
+                           formControlName="tripItems"
+                           [clearable]="true"
+                           class="m-1"
+                           [multiple]="true">
+                  <ng-template ng-label-tmp let-item="item">
+                    <img height="30" width="30" [src]="item.imageBlob" style="margin-right: 5px"/>
+                    <span >{{item.name}}</span>
+                  </ng-template>
+                  <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                    <img height="30 " width="30" [src]="item.imageBlob" style="margin-right: 5px"/>
+                    <span [ngOptionHighlight]="search">{{item.name}}</span>
+                  </ng-template>
                 </ng-select>
               </div>
               <div class="form-actions">
                 <div class="row">
                   <div class="col-12">
-                    <button type="submit" class="btn btn-primary" (click)="updateDestination()">
-                      <span>Destination opslaan</span>
+                    <button type="submit" class="btn btn-primary" (click)="updateDestination()" [disabled]="!destinationUpdateForm.valid">
+                      <span>Bestemming opslaan</span>
                       <i *ngIf="loading" class="ft-loader spinner right"></i>
                     </button>
                   </div>

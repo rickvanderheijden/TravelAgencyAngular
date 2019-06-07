@@ -5,18 +5,19 @@ import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 
 import {DestinationService} from '../../../services/destination.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-destination-actions',
   template: `
     <div>
       <span>
-        <button class="btn btn-raised btn-success" routerLink="/destination/update/{{this.rowData.id}}">
+        <button class="btn btn-raised btn-success" routerLink="/destination/update/{{rowData.id}}">
           <i class="ft-edit"></i>
         </button>
       </span>
       <span>
-        <button class="btn btn-raised btn-danger" (click)="deleteDestination()">
+        <button class="btn btn-raised btn-danger" (click)="deleteDestination(rowData.id)">
           <i class="ft-trash"></i>
         </button>
       </span>
@@ -43,8 +44,21 @@ export class DestinationActionButtonsComponent implements ViewCell, OnInit {
 
   }
 
-  deleteDestination() {
-    this.destinationService.deleteDestination(this.rowData.id);
+  deleteDestination(id) {
+    swal({
+      title: 'Weet je het zeker?',
+      text: 'Weet je zeker dat je de bestemming wil verwijderen',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ja, verwijderen!',
+      cancelButtonText: 'Nee, bestemming behouden'
+    }).then((result) => {
+      if (result.value) {
+        this.destinationService.deleteDestination(id).subscribe((response: any) => {
+          location.reload();
+        });
+      }
+    });
   }
 }
 
