@@ -98,17 +98,4 @@ export class HotelService {
         throw new Error(error);
     }
   }
-
-  // getAvailability(id: number) {
-  //   return this.http.get(environment.server + '/hotels/getAvailability/' + id).pipe(
-  //     map(response => {
-  //       console.log(response);
-  //       return response;
-  //     }),
-  //     catchError(error => {
-  //       swal('getAvailability', 'Er is iets niet goed gegaan.', 'error');
-  //       throw new Error(error);
-  //     })
-  //   );
-  // }
 }
