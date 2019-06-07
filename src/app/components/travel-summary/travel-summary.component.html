@@ -17,8 +17,8 @@
       <td _ngcontent-c7="">€ {{travel.trip.totalPrice}}</td>
       <td _ngcontent-c7="">{{booking.numberOfTravelers}}
         <div _ngcontent-c7="" class="btn-group ml-1">
-          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" href="javascript:void(0)">-</a>
-          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" href="javascript:void(0)">+</a>
+          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" (click)="decreaseNumberOfTravelers()">-</a>
+          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" (click)="increaseNumberOfTravelers()">+</a>
         </div>
       </td>
       <td _ngcontent-c7="">€ {{travel.trip.totalPrice * booking.numberOfTravelers}}</td>
@@ -33,8 +33,8 @@
         <td _ngcontent-c7="">€ {{bookingItem.price}}</td>
         <td _ngcontent-c7="">{{bookingItem.numberOfAttendees}}
           <div _ngcontent-c7="" class="btn-group ml-1">
-            <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" href="javascript:void(0)">-</a>
-            <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" href="javascript:void(0)">+</a>
+            <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" style="visibility: hidden" href="javascript:void(0)">-</a>
+            <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" style="visibility: hidden" href="javascript:void(0)">+</a>
           </div>
         </td>
         <td _ngcontent-c7="">€ {{bookingItem.price * bookingItem.numberOfAttendees}}</td>
@@ -50,7 +50,7 @@
         <td _ngcontent-c7="">€ {{bookingItem.price}}</td>
         <td _ngcontent-c7="">{{bookingItem.numberOfAttendees}}
           <div _ngcontent-c7="" class="btn-group ml-1">
-            <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" (click)="decreaseBookItemAttendees(bookingItem)">-</a>
+            <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" (click)="decreaseBookingItemAttendees(bookingItem)">-</a>
             <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" (click)="increaseBookingItemAttendees(bookingItem)">+</a>
           </div>
         </td>

@@ -5,6 +5,7 @@ import {environment} from '../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import swal from 'sweetalert2';
 import {Observable} from 'rxjs';
+import {User} from '../../models/user';
 import {SearchTripDTO} from '../../models/searchTripDTO';
 
 @Injectable({

@@ -1,5 +1,5 @@
 import {Authority} from './authority';
-import {TravelGroup} from './travelgroup';
+import {TravelGroup} from './travelGroup';
 import {Address} from './Address';
 
 export class User {
@@ -60,4 +60,3 @@ export class User {
       return isAdmin;
     }
 }
-

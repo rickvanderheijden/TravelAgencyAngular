@@ -34,6 +34,15 @@ export class SelectedItemCardComponent implements OnInit {
     this.travel = new Travel();
     this.travel.trip = this.trip;
     this.travel.totalPrice = this.trip.totalPrice;
+
+    // Hotel are static for now. Add them to travel.
+    const hotels = this.travel.hotels;
+    this.travel.trip.destinations.forEach(function(destination) {
+      if (destination.hotel !== null) {
+        hotels.push(destination.hotel);
+      }
+    });
+
   }
   addTripItem(tripItem: TripItem) {
     let found = false;
@@ -55,6 +64,8 @@ export class SelectedItemCardComponent implements OnInit {
   }
 
   bookTravel() {
+    console.log('bookTravel');
+    console.log(this.travel);
     this.router.navigateByUrl('/booktravel', { state: { travel: this.travel } });
   }
 

@@ -1,3 +1,32 @@
-<p>
-  group works!
-</p>
+<section id="user-groups">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4 class="card-title">Groepen </h4>
+              <button class="btn btn-primary" (click)="createGroup()">
+                <span>Groep aanmaken</span>
+                <i *ngIf="loading" class="ft-loader spinner right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-block">
+            <div *ngIf="!loading">
+              <ngb-accordion activeIds="ngb-panel-0" closeOthers="true">
+                <ngb-panel *ngFor="let travelGroup of groups" title='{{travelGroup.name}}'>
+                  <ng-template ngbPanelContent>
+                    <app-group-detail [travelGroup]="travelGroup"></app-group-detail>
+                  </ng-template>
+                </ngb-panel>
+              </ngb-accordion>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

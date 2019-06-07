@@ -105,7 +105,7 @@ export class BookingTravelerInformationComponent implements OnInit {
       travelers: this.formBuilder.array([])
     });
 
-    for (let i = 0; i < this.booking.numberOfTravelers - 1; i++) {
+    for (let i = 1; i < this.booking.numberOfTravelers; i++) {
       this.addTraveler();
     }
   }

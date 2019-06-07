@@ -15,14 +15,17 @@ import {BookingService} from '../../services/booking.service';
   styleUrls: ['./booktravel.component.scss']
 })
 export class BookTravelComponent implements OnInit {
+
   @ViewChild(TravelSummaryComponent) travelSummaryComponent;
   @ViewChild(BookingTravelerInformationComponent) bookingTravelerInformationComponent;
+
   travelObservable: Observable<Travel>;
   loading = false;
   travel: Travel;
   booking: Booking = null;
   savedBooking: Booking = null;
   paymentStepEnabled = false;
+  paymentStepSucceeded = false;
 
   constructor(private activatedRoute: ActivatedRoute, private bookingService: BookingService ) { }
 
@@ -47,8 +50,6 @@ export class BookTravelComponent implements OnInit {
 
   pushTravelInformation() {
     const travelerInformation = this.bookingTravelerInformationComponent.getFormValues();
-    this.booking.numberOfTravelers = travelerInformation.travelers.length;
-
     const booker = new User(JSON.parse(sessionStorage.getItem('currentUser')));
     this.booking.booker = booker;
     this.booking.address = travelerInformation.address;
@@ -58,5 +59,9 @@ export class BookTravelComponent implements OnInit {
 
   enablePaymentStep(enabled: boolean) {
     this.paymentStepEnabled = enabled;
+  }
+
+  pay() {
+
   }
 }

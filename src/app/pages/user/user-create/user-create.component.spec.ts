@@ -51,8 +51,4 @@ describe('UserCreateComponent', () => {
     component.authorities = auth;
     fixture.detectChanges();
   });
-
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
 });
