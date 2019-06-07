@@ -30,13 +30,12 @@
 
       <li class="list-group-item flex-column">
         <div class="row">
-          <div class="col-6"></div>
-          <div class="col-6 text-xl-right">
+          <div class="col-12 text-xl-right" style="padding-right: 10px;">
             <span *ngIf="!authenticationService.isAuthenticated()" class="btn btn-primary"
-                  style="cursor:pointer;" (click)="openModal(template)">Login om te boeken
+                  style="cursor:pointer; margin-bottom: 0px" (click)="openModal(template)">Login om te boeken
             </span>
             <span *ngIf="authenticationService.isAuthenticated()" class="btn btn-primary"
-                  style="cursor:pointer;" (click)="bookTravel()">Boek deze reis
+                  style="cursor:pointer; margin-bottom: 0px" (click)="bookTravel()">Boek deze reis
             </span>
           </div>
         </div>
