@@ -8,6 +8,8 @@ import {BookingTravelerInformationComponent} from '../../components/booking-trav
 import {User} from '../../../models/user';
 import {Booking} from '../../../models/booking';
 import {BookingService} from '../../services/booking.service';
+import {Payment} from '../../../models/Payment';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-booktravel',
@@ -63,5 +65,14 @@ export class BookTravelComponent implements OnInit {
 
   pay() {
 
+  }
+
+  paymentOut(payment: Payment) {
+    console.log(payment);
+    swal('Succes', 'Betaling geslaagd!', 'success');
+    this.bookingService.getById(payment.booking.id).subscribe((booking: Booking) => {
+      this.savedBooking = booking;
+      this.paymentStepSucceeded = true;
+    })
   }
 }
