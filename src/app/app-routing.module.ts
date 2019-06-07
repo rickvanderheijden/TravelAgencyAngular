@@ -11,14 +11,21 @@ import {User_ROUTES} from './shared/routes/user-layout.routes';
 import {Home_ROUTES} from './shared/routes/home-layout.routes';
 import {Trip_ROUTES} from './shared/routes/trip-layout.routes';
 import {TripItem_ROUTES} from './shared/routes/trip-item-layout.routes';
+import {Group_ROUTES} from './shared/routes/group-layout.routes';
 import {BookTravel_ROUTES} from './shared/routes/booktravel-layout.routes';
 import {Destination_ROUTES} from './shared/routes/destination-layout.routes';
 import {Hotel_ROUTES} from './shared/routes/hotel-layout.routes';
 
 
+
 const appRoutes: Routes = [
   {
     path: 'auth/login', component: AuthLoginComponent
+  },
+  {
+    path: 'group',
+    component: FullLayoutComponent,
+    children: Group_ROUTES,
   },
   {
     path: '',

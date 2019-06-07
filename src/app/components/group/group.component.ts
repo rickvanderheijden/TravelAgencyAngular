@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {TravelGroup} from '../../../models/travelGroup';
+import {TravelGroupService} from '../../services/travelgroup.service';
+import {User} from '../../../models/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-group',
@@ -7,9 +11,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupComponent implements OnInit {
 
-  constructor() { }
+  @Input() user: User;
 
-  ngOnInit() {
+  groups: TravelGroup[];
+  loading = false;
+
+
+  constructor(private router: Router, private travelgroupService: TravelGroupService) {
   }
 
+  ngOnInit() {
+    this.loading = true;
+    this.travelgroupService.getTravelgroups(this.user.id).subscribe(
+      (response: any) => {
+        this.groups = response;
+        this.loading = false;
+      }
+    );
+  }
+
+  createGroup() {
+    this.router.navigate(['/group/create/' + this.user.id])
+  }
 }
