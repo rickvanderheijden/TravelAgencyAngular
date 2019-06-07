@@ -35,7 +35,7 @@ export class TopFiltersComponent implements OnInit {
     this.tripService = tripService;
     this.country = null;
     this.continent = null;
-    
+
     this.geoService.getAllContinents().subscribe((continents: any) => {
       this.continents = continents;
     })
@@ -79,7 +79,7 @@ export class TopFiltersComponent implements OnInit {
     } else {
       this.countries = this.allCountries;
       this.trips = this.allTrips;
-      this.foundTrips.emit(this.allTrips);
+      this.foundTrips.emit(this.trips);
     }
 
     if (continent !== null) {
@@ -100,20 +100,20 @@ export class TopFiltersComponent implements OnInit {
       });
     } else {
       this.trips = this.allTrips;
-      this.foundTrips.emit(this.allTrips);
+      this.foundTrips.emit(this.trips);
     }
   }
 
   onKeydown(event) {
     if (event.key === 'Enter') {
       if (event.target.value) {
-        this.tripService.searchTripsByName(event.target.value).subscribe((trips: any) => {
+        this.tripService.searchTripsByKyeWord(event.target.value).subscribe((trips: any) => {
           this.trips = trips;
           this.foundTrips.emit(trips);
         })
       } else {
         this.trips = this.allTrips;
-        this.foundTrips.emit(this.allTrips);
+        this.foundTrips.emit(this.trips);
       }
     }
   }
