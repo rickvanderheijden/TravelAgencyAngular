@@ -15,14 +15,17 @@ import {BookingService} from '../../services/booking.service';
   styleUrls: ['./booktravel.component.scss']
 })
 export class BookTravelComponent implements OnInit {
+
   @ViewChild(TravelSummaryComponent) travelSummaryComponent;
   @ViewChild(BookingTravelerInformationComponent) bookingTravelerInformationComponent;
+
   travelObservable: Observable<Travel>;
   loading = false;
   travel: Travel;
   booking: Booking = null;
   savedBooking: Booking = null;
   paymentStepEnabled = false;
+  paymentStepSucceeded = false;
 
   constructor(private activatedRoute: ActivatedRoute, private bookingService: BookingService ) { }
 
@@ -56,5 +59,9 @@ export class BookTravelComponent implements OnInit {
 
   enablePaymentStep(enabled: boolean) {
     this.paymentStepEnabled = enabled;
+  }
+
+  pay() {
+
   }
 }

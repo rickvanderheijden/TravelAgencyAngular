@@ -44,17 +44,15 @@
 
   </div>
 </div>
-<div>
-
-  <ng-template #template>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Login</h4>
-      <button type="button" class="close pull-right"
-              aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <app-login-form (loginSuccessful)="didLoginSuccessful($event)"></app-login-form>
-    </div>
-  </ng-template>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Login</h4>
+    <button type="button" class="close pull-right"
+            aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-login-form (loginSuccessful)="didLoginSuccessful($event)"></app-login-form>
+  </div>
+</ng-template>
