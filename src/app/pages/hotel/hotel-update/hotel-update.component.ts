@@ -44,7 +44,7 @@ export class HotelUpdateComponent implements OnInit {
       });
       this.hotelService.getById(this.route.snapshot.params.id).subscribe((data: any) => {
         this.hotel = new Hotel(data);
-        this.setForm();
+          this.setForm();
         this.loading = false;
       });
 
