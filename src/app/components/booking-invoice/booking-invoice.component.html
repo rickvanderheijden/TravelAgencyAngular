@@ -24,7 +24,7 @@
           </div>
         </div>
         <div _ngcontent-c7="" class="row pt-2" id="invoice-customer-details">
-          <div _ngcontent-c7="" class="col-sm-12 text-left"><p _ngcontent-c7="" class="text-muted">Bill To</p>
+          <div _ngcontent-c7="" class="col-sm-12 text-left"><p _ngcontent-c7="" class="text-muted">Klantgegevens</p>
           </div>
           <div _ngcontent-c7="" class="col-md-6 col-sm-12  text-center text-md-left">
             <ul _ngcontent-c7="" class="px-0 list-unstyled">
@@ -36,8 +36,8 @@
           </div>
           <div _ngcontent-c7="" class="col-md-6 col-sm-12 text-center text-md-right"><p _ngcontent-c7=""><span
             _ngcontent-c7="" class="text-muted">Order datum :</span> {{booking.bookingDate | date: 'd MMM y'}}</p>
-            <p _ngcontent-c7=""><span _ngcontent-c7="" class="text-muted">Terms :</span> Due on Receipt</p>
-            <p _ngcontent-c7=""><span _ngcontent-c7="" class="text-muted">Due Date :</span> 10/05/2016</p></div>
+            <p _ngcontent-c7=""><span _ngcontent-c7="" class="text-muted"></span></p>
+            <p _ngcontent-c7=""><span _ngcontent-c7="" class="text-muted"></span></p></div>
         </div>
         <div _ngcontent-c7="" class="pt-2" id="invoice-items-details">
           <div _ngcontent-c7="" class="row">
@@ -56,17 +56,17 @@
                 <tr _ngcontent-c7="">
                   <th _ngcontent-c7="" scope="row">1</th>
                   <td _ngcontent-c7=""><p _ngcontent-c7="">{{name}}</p>
-                    <p _ngcontent-c7="" class="text-muted"></p></td>
+                    <p _ngcontent-c7="" class="text-muted">hier komt de datum</p></td>
                   <td _ngcontent-c7="" class="text-right">€ {{booking.basePrice}}</td>
                   <td _ngcontent-c7="" class="text-right">{{booking.numberOfTravelers}}</td>
                   <td _ngcontent-c7="" class="text-right">€ {{booking.basePrice * booking.numberOfTravelers}}</td>
                 </tr>
                 </tbody>
                 <tbody _ngcontent-c7="">
-                <tr _ngcontent-c7="" *ngFor="let bookingItem of booking.bookingItems">
-                  <th _ngcontent-c7="" scope="row">1</th>
+                <tr _ngcontent-c7="" *ngFor="let bookingItem of booking.bookingItems; let i = index;">
+                  <th _ngcontent-c7="" scope="row">{{i+2}}</th>
                   <td _ngcontent-c7=""><p _ngcontent-c7="">{{bookingItem.name}}</p>
-                    <p _ngcontent-c7="" class="text-muted"></p></td>
+                    <p _ngcontent-c7="" class="text-muted">hier komt de datum</p></td>
                   <td _ngcontent-c7="" class="text-right">€ {{bookingItem.price}}</td>
                   <td _ngcontent-c7="" class="text-right">{{bookingItem.numberOfAttendees}}</td>
                   <td _ngcontent-c7="" class="text-right">€ {{bookingItem.price * bookingItem.numberOfAttendees}}</td>
@@ -76,34 +76,33 @@
             </div>
           </div>
           <div _ngcontent-c7="" class="row">
-            <div _ngcontent-c7="" class="col-md-6 col-sm-12 text-left"><p _ngcontent-c7="" class="lead">Payment
-              Methods:</p>
+            <div _ngcontent-c7="" class="col-md-6 col-sm-12 text-left"><p _ngcontent-c7="" class="lead"></p>
               <div _ngcontent-c7="" class="row">
                 <div _ngcontent-c7="" class="col-12">
                   <table _ngcontent-c7="" class="table table-borderless table-sm">
                     <tbody _ngcontent-c7="">
                     <tr _ngcontent-c7="">
-                      <td _ngcontent-c7="">Bank name:</td>
-                      <td _ngcontent-c7="" class="text-right">ABC Bank, USA</td>
+                      <td _ngcontent-c7=""></td>
+                      <td _ngcontent-c7="" class="text-right"></td>
                     </tr>
                     <tr _ngcontent-c7="">
-                      <td _ngcontent-c7="">Acc name:</td>
-                      <td _ngcontent-c7="" class="text-right">Amanda Orton</td>
+                      <td _ngcontent-c7=""></td>
+                      <td _ngcontent-c7="" class="text-right"></td>
                     </tr>
                     <tr _ngcontent-c7="">
-                      <td _ngcontent-c7="">IBAN:</td>
-                      <td _ngcontent-c7="" class="text-right">FGS165461646546AA</td>
+                      <td _ngcontent-c7=""></td>
+                      <td _ngcontent-c7="" class="text-right"></td>
                     </tr>
                     <tr _ngcontent-c7="">
-                      <td _ngcontent-c7="">SWIFT code:</td>
-                      <td _ngcontent-c7="" class="text-right">BTNPP34</td>
+                      <td _ngcontent-c7=""></td>
+                      <td _ngcontent-c7="" class="text-right"></td>
                     </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
-            <div _ngcontent-c7="" class="col-md-6 col-sm-12"><p _ngcontent-c7="" class="lead">Total due</p>
+            <div _ngcontent-c7="" class="col-md-6 col-sm-12"><p _ngcontent-c7="" class="lead">Totaal te voldoen</p>
               <div _ngcontent-c7="" class="table-responsive">
                 <table _ngcontent-c7="" class="table">
                   <tbody _ngcontent-c7="">
@@ -128,12 +127,8 @@
         <div _ngcontent-c7="" id="invoice-footer">
           <div _ngcontent-c7="" class="row">
             <div _ngcontent-c7="" class="col-md-9 col-sm-12"><h6 _ngcontent-c7=""></h6>
-              <p _ngcontent-c7="">I hate traveling, no traveler ever said.</p></div>
+              <p _ngcontent-c7="">"I hate traveling, no traveler ever said..."</p></div>
             <div _ngcontent-c7="" class="col-md-3 col-sm-12 text-center">
-              <button _ngcontent-c7="" class="btn btn-primary btn-raised my-1" type="button"><i _ngcontent-c7=""
-                                                                                                class="fa fa-paper-plane-o"></i>
-                Send Invoice
-              </button>
             </div>
           </div>
         </div>

@@ -47,8 +47,6 @@ export class BookTravelComponent implements OnInit {
 
   pushTravelInformation() {
     const travelerInformation = this.bookingTravelerInformationComponent.getFormValues();
-    this.booking.numberOfTravelers = travelerInformation.travelers.length;
-
     const booker = new User(JSON.parse(sessionStorage.getItem('currentUser')));
     this.booking.booker = booker;
     this.booking.address = travelerInformation.address;

@@ -16,13 +16,13 @@
     </aw-wizard-step>
     <aw-wizard-step stepTitle="Betaling">
     <app-booking-invoice *ngIf="savedBooking" [name]="travel.trip.name"  [booking]="savedBooking"></app-booking-invoice>
-      <button type="button" class="btn btn-primary buttonmargin" awPreviousStep>Vorige step</button>
-      <button type="button" class="btn btn-primary buttonmargin" (click)="finishFunction()">Finish</button>
+      <button type="button" class="btn btn-primary buttonmargin" awPreviousStep>Ga terug naar gegevens</button>
+      <button type="button" class="btn btn-primary buttonmargin" (click)="finishFunction()">Betalen</button>
     </aw-wizard-step>
     <aw-wizard-step stepTitle="Bedankt">
       Content of Step 4
-      <button type="button" class="btn btn-primary buttonmargin" awPreviousStep>Vorige step</button>
-      <button type="button" class="btn btn-primary buttonmargin" (click)="finishFunction()">Finish</button>
+<!--      <button type="button" class="btn btn-primary buttonmargin" awPreviousStep>Vorige stap</button>-->
+      <button type="button" class="btn btn-primary buttonmargin" (click)="finishFunction()">Ga terug naar homepage</button>
     </aw-wizard-step>
   </aw-wizard>
 
