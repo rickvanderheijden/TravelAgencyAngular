@@ -38,8 +38,4 @@ describe('UserUpdateComponent', () => {
     component.user = new User();
     fixture.detectChanges();
   });
-
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
 });
