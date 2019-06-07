@@ -58,7 +58,6 @@ export class DestinationUpdateComponent implements OnInit {
 
   updateDestination() {
     this.destination = new Destination(this.destinationUpdateForm.value);
-    console.log('🚢', this.destination);
     if (this.destination) {
       this.destinationService.updateDestination(this.destination).subscribe(
         (response: any) => {
@@ -96,7 +95,6 @@ export class DestinationUpdateComponent implements OnInit {
     this.tripItems = new Array<TripItem>();
     this.destinationUpdateForm.get('hotel').setValue(null);
     this.destinationUpdateForm.get('tripItems').setValue(null);
-    console.log(event);
     if (event !== undefined) {
       this.hotelService.getHotelsByCity(event.name).subscribe((hotels: Array<Hotel>) => {
         this.hotels = hotels;
