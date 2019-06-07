@@ -5,18 +5,19 @@ import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 
 import {HotelService} from '../../../services/hotel.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-hotel-actions',
   template: `
     <div>
       <span>
-        <button class="btn btn-raised btn-success" routerLink="/hotel/update/{{this.rowData.id}}">
+        <button class="btn btn-raised btn-success" routerLink="/hotel/update/{{rowData.id}}">
           <i class="ft-edit"></i>
         </button>
       </span>
       <span>
-        <button class="btn btn-raised btn-danger" (click)="deleteHotel()">
+        <button class="btn btn-raised btn-danger" (click)="deleteHotel(rowData.id)">
           <i class="ft-trash"></i>
         </button>
       </span>
@@ -43,8 +44,22 @@ export class HotelActionButtonsComponent implements ViewCell, OnInit {
 
   }
 
-  deleteHotel() {
-    this.hotelService.deleteHotel(this.rowData.id);
+  deleteHotel(id) {
+    swal({
+      title: 'Weet je het zeker?',
+      text: 'Weet je zeker dat je het hotel wil verwijderen',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ja, verwijderen!',
+      cancelButtonText: 'Nee, Hotel behouden'
+    }).then((result) => {
+      if (result.value) {
+        this.hotelService.deleteHotel(id).subscribe((response: any) => {
+            location.reload();
+        });
+      }
+    });
+
   }
 }
 
@@ -109,7 +124,6 @@ export class HotelComponent implements OnInit {
 
     this.source = new LocalDataSource();
     this.service.getHotels().subscribe((data: any) => {
-      console.log(data);
       this.source.load(data);
     });
   }
@@ -117,4 +131,7 @@ export class HotelComponent implements OnInit {
   ngOnInit() {
   }
 
+  delete(event) {
+    console.log('hoi', event);
+  }
 }

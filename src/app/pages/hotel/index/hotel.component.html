@@ -17,7 +17,7 @@
         <div class="card-body">
           <div class="card-block">
             <div class="overflow-x">
-              <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+              <ng2-smart-table [settings]="settings" [source]="source" (delete)="delete($event)"></ng2-smart-table>
             </div>
           </div>
         </div>
