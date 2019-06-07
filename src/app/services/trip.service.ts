@@ -129,4 +129,22 @@ export class TripService {
       }));
   }
 
+  searchTripsByName(name: String): Observable<Array<Trip>> {
+    return this.http.post(environment.url + '/trips/searchTripsName', name).pipe(
+      map((response: Array<any>) => {
+        const trips: Array<Trip> = [];
+        if (response !== null) {
+          response.forEach(function (trip, index) {
+            trips.push(new Trip(trip));
+          })
+        }
+        return trips;
+      }),
+      catchError(err => {
+        swal('getTrips', 'Er is iets niet goed gegaan', 'error');
+        throw new Error(err);
+      })
+    )
+  }
+
 }

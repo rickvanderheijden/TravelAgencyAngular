@@ -104,6 +104,20 @@ export class TopFiltersComponent implements OnInit {
     }
   }
 
+  onKeydown(event) {
+    if (event.key === 'Enter') {
+      if (event.target.value) {
+        this.tripService.searchTripsByName(event.target.value).subscribe((trips: any) => {
+          this.trips = trips;
+          this.foundTrips.emit(trips);
+        })
+      } else {
+        this.trips = this.allTrips;
+        this.foundTrips.emit(this.allTrips);
+      }
+    }
+  }
+
   doFilter() {
   }
 
