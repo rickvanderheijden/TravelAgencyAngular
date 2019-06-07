@@ -131,7 +131,7 @@ export class TripService {
   }
 
   searchTripsByKyeWord(name: String): Observable<Array<Trip>> {
-    return this.http.post(environment.url + '/trips/searchTripsName', name).pipe(
+    return this.http.post(environment.url + '/trips/searchTripByKeyword', name).pipe(
       map((response: Array<any>) => {
         const trips: Array<Trip> = [];
         if (response !== null) {
