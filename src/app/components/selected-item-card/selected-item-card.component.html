@@ -5,11 +5,11 @@
   <div class="card-content">
     <h5 class="m-2">Samenstelling reis</h5>
     <ul class="list-group">
-      <div *ngFor="let destination of travel.trip.destinations">
-        <li class="list-group-item list-group-item-action flex-column" *ngIf="destination.hotel">
+      <div *ngFor="let hotel of travel.hotels">
+        <li class="list-group-item list-group-item-action flex-column" *ngIf="hotel">
           <div class="row">
-            <div class="col-8">{{destination.hotel?.name}}</div>
-            <div class="col-4 text-xl-right">€ {{destination.hotel?.price}}</div>
+            <div class="col-8">{{hotel?.name}}</div>
+            <div class="col-4 text-xl-right">€ {{hotel?.price}}</div>
           </div>
         </li>
       </div>
