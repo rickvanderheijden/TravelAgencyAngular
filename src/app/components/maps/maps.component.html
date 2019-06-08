@@ -1,14 +1,14 @@
-<agm-map
-  [latitude]="latitude"
-  [longitude]="longitude"
-  [zoomControl]="false"
-  [streetViewControl]="false"
-  [scrollwheel]="false"
-  [mapDraggable]="false"
+<agm-map *ngIf="!loading"
+         [latitude]="latitude"
+         [longitude]="longitude"
+         [zoomControl]="false"
+         [streetViewControl]="false"
+         [scrollwheel]="false"
+         [mapDraggable]="false"
+         [zoom]="zoom"
 >
-  <agm-direction
-    [origin]="origin"
-    [destination]="destination"
-    [waypoints]="waypoints">
+  <agm-direction *ngIf="!loading"
+                 [origin]="origin"
+                 [destination]="destination">
   </agm-direction>
 </agm-map>
