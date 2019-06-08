@@ -98,6 +98,8 @@ export class TopFiltersComponent implements OnInit {
         this.trips = trips;
         this.foundTrips.emit(trips);
       });
+    } else if(this.continent !== null) {
+      this.getCountries(this.continent);
     } else {
       this.trips = this.allTrips;
       this.foundTrips.emit(this.trips);
@@ -106,8 +108,12 @@ export class TopFiltersComponent implements OnInit {
 
   onKeydown(event) {
     if (event.key === 'Enter') {
+      this.continent = null;
+      this.country = null;
+      this.countries = this.allCountries;
+
       if (event.target.value) {
-        this.tripService.searchTripsByKyeWord(event.target.value).subscribe((trips: any) => {
+        this.tripService.searchTripsByKeyWord(event.target.value).subscribe((trips: any) => {
           this.trips = trips;
           this.foundTrips.emit(trips);
         })

@@ -130,8 +130,8 @@ export class TripService {
       }));
   }
 
-  searchTripsByKyeWord(name: String): Observable<Array<Trip>> {
-    return this.http.post(environment.url + '/trips/searchTripByKeyword', name).pipe(
+  searchTripsByKeyWord(name: String): Observable<Array<Trip>> {
+    return this.http.post(environment.url + '/trips/searchTripsByKeyword', name).pipe(
       map((response: Array<any>) => {
         const trips: Array<Trip> = [];
         if (response !== null) {
