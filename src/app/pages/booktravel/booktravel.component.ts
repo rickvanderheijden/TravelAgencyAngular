@@ -67,7 +67,7 @@ export class BookTravelComponent implements OnInit {
 
   paymentOut(payment: Payment) {
     swal('Succes', 'Betaling geslaagd!', 'success');
-    this.bookingService.getById(payment.booking.id).subscribe((booking: Booking) => {
+    this.bookingService.getById(payment.bookingId).subscribe((booking: Booking) => {
       this.savedBooking = booking;
       this.paymentStepSucceeded = true;
       this.wizard.navigation.goToNextStep();

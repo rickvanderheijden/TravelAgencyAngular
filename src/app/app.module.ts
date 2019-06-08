@@ -27,7 +27,6 @@ import {TabsModule} from 'ngx-bootstrap';
 import {FileUploadModule} from 'ng2-file-upload';
 import {ModalModule} from 'ngx-bootstrap';
 import {HomeModule} from './pages/home/home.module';
-
 export function jwtOptionsFactory(tokenService) {
   return {
     tokenGetter: () => {
@@ -78,7 +77,7 @@ export function jwtOptionsFactory(tokenService) {
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],
   exports: [
-    ModalModule,
+    ModalModule
   ],
   bootstrap: [AppComponent]
 })

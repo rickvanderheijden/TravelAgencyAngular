@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../../../models/user';
 import {UserService} from '../../services/user.service';
 import swal from 'sweetalert2';
+import {BookingService} from '../../services/booking.service';
+import {Booking} from '../../../models/booking';
 
 @Component({
   selector: 'app-profile',
@@ -22,10 +24,17 @@ export class ProfileComponent implements OnInit {
   showGroupSection = false;
   showTripsSection = false;
   showBookingSection = false;
-  constructor(private userService: UserService) { }
+
+  bookings: Booking[];
+  constructor(private userService: UserService, private bookingService: BookingService) { }
 
   ngOnInit() {
-    this.user = new User(JSON.parse(sessionStorage.getItem('currentUser')));
+
+    this.bookingService.getAllByToken().subscribe((response: Booking[]) => {
+      this.bookings = response;
+      this.user = new User(JSON.parse(sessionStorage.getItem('currentUser')));
+    });
+
   }
 
   saveUser() {

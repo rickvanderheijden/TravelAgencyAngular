@@ -1,9 +1,9 @@
-<section id="user-profile">
+<section id="user-profile" *ngIf="user">
   <div class="row">
     <div class="col-12">
       <div class="card profile-with-cover">
         <div class="card-img-top img-fluid bg-cover height-300"
-             style="background: url('assets/img/photos/14.jpg') 50%;">
+             style="background: url('assets/img/photos/15.jpg') 50%;">
         </div>
         <div class="media profil-cover-details row">
           <div class="col-5">
@@ -72,18 +72,15 @@
   </div>
 </section><!---->
 <!--// Persoonlijke info sectie-->
-<section id="about" class="ng-star-inserted" *ngIf="showUserInformationSection">
-  <div class="row">
-    <div class="col-12">
-      <div class="content-header">Persoonlijke informatie</div>
-    </div>
-  </div>
+<section id="about" class="ng-star-inserted" *ngIf="showUserInformationSection && user">
   <div class="row">
     <div class="col-sm-12">
       <div class="card">
+        <div class="card-header">
+          <h5>Persoonlijke informatie</h5>
+        </div>
         <div class="card-content">
           <div class="card-body">
-            <hr>
             <div class="row">
               <div class="col-12 col-md-6 col-lg-4">
                 <ul class="no-list-style">
@@ -142,7 +139,6 @@
                 </ul>
               </div>
             </div>
-            <hr>
           </div>
         </div>
       </div>
@@ -151,17 +147,14 @@
 </section>
 <section id="groups" class="ng-star-inserted" *ngIf="showGroupSection">
   <div class="row">
-    <div class="col-12">
-      <div class="content-header">Groepen</div>
-    </div>
-  </div>
-  <div class="row">
     <div class="col-sm-12">
       <div class="card">
+        <div class="card-header">
+          <h5>Groepen</h5>
+        </div>
         <div class="card-content">
           <div class="card-body">
-            <hr>
-            <app-group [user]="user"></app-group>
+            <app-group [user]="user" *ngIf="user"></app-group>
           </div>
         </div>
       </div>
@@ -170,16 +163,14 @@
 </section>
 <section id="trips" class="ng-star-inserted" *ngIf="showTripsSection">
   <div class="row">
-    <div class="col-12">
-      <div class="content-header">Reizen</div>
-    </div>
-  </div>
-  <div class="row">
     <div class="col-sm-12">
       <div class="card">
+        <div class="card-header">
+          <h5>Reizen</h5>
+        </div>
         <div class="card-content">
           <div class="card-body">
-            <hr>
+
           </div>
         </div>
       </div>
@@ -188,16 +179,14 @@
 </section>
 <section id="bookings" class="ng-star-inserted" *ngIf="showBookingSection">
   <div class="row">
-    <div class="col-12">
-      <div class="content-header">Boekingen</div>
-    </div>
-  </div>
-  <div class="row">
     <div class="col-sm-12">
       <div class="card">
+        <div class="card-header">
+          <h5>Boekingen</h5>
+        </div>
         <div class="card-content">
           <div class="card-body">
-            <hr>
+            <app-bookings [bookings]="bookings" *ngIf="bookings"></app-bookings>
           </div>
         </div>
       </div>

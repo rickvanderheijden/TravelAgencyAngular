@@ -5,9 +5,11 @@ import {ProfileRoutingModule} from './profile-routing.module';
 import {FormsModule} from '@angular/forms';
 import {CollapseModule} from 'ngx-bootstrap';
 import {UserUpdateModule} from '../user/user-update/user-update.module';
+import {BookingsComponent} from '../../components/bookings/bookings.component';
+import {BookedItemComponent} from '../../components/bookings/booked-item/booked-item.component';
 
 @NgModule({
-  declarations: [ProfileComponent],
+  declarations: [ProfileComponent, BookingsComponent, BookedItemComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,
