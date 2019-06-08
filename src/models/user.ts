@@ -62,8 +62,4 @@ export class User {
     getFullName() {
       return this.firstName + ' ' + this.lastName;
     }
-
-    getFirstName() {
-      return this.firstName;
-    }
 }
