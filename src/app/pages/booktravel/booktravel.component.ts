@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Travel} from 'models/travel';
@@ -31,7 +31,7 @@ export class BookTravelComponent implements OnInit {
   paymentStepEnabled = false;
   paymentStepSucceeded = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private bookingService: BookingService ) { }
+  constructor(private activatedRoute: ActivatedRoute, private bookingService: BookingService, private router: Router) { }
 
   ngOnInit() {
     this.travelObservable = this.activatedRoute.paramMap
@@ -46,6 +46,7 @@ export class BookTravelComponent implements OnInit {
   }
 
   finishFunction() {
+    this.router.navigate(['/']);
   }
 
   pushBooking() {

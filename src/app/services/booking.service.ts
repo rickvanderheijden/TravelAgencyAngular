@@ -91,4 +91,19 @@ export class BookingService {
       })
     );
   }
+
+  getBookings(): Observable<Array<Booking>> {
+    return this.http.get(environment.server + '/bookings').pipe(
+      map((response: Array<any>) => {
+        const bookings: Array<Booking> = [];
+        response.forEach(function (booking, index) {
+          bookings.push(new Booking(booking));
+        });
+        return bookings;
+      }),
+      catchError(err => {
+        swal('getBookings', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(err);
+      }));
+  }
 }

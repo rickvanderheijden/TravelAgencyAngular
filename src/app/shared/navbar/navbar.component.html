@@ -17,6 +17,10 @@
                             <p class="d-none">User Settings</p>
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="text-left">
+                          <a class="dropdown-item py-1" routerLink="/bookings" *ngIf="user.isAdmin()">
+                            <i class="fas fa-hotel mr-2"></i>
+                            <span>Boekingen</span>
+                          </a>
                           <a class="dropdown-item py-1" routerLink="/hotel" *ngIf="user.isAdmin()">
                             <i class="fas fa-hotel mr-2"></i>
                             <span>Hotels</span>
