@@ -15,7 +15,7 @@
       </button>
     </aw-wizard-step>
     <aw-wizard-step stepTitle="Betaling">
-      <app-payment></app-payment>
+      <app-payment *ngIf="savedBooking" [booking]="savedBooking" (paymentOut)="paymentOut($event)"></app-payment>
       <button type="button" class="btn btn-primary buttonmargin" awPreviousStep>Ga terug naar gegevens</button>
       <button type="button" class="btn btn-primary buttonmargin" awNextStep [disabled]="!paymentStepSucceeded">Volgende stap
       </button>

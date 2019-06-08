@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {AuthenticationService} from '../../auth/auth.service';
 import {Router} from '@angular/router';
@@ -6,6 +6,7 @@ import {Travel} from '../../../models/travel';
 import {TripItem} from '../../../models/TripItem';
 import {Trip} from '../../../models/trip';
 import {Hotel} from '../../../models/hotel';
+import {MapsComponent} from '../maps/maps.component';
 
 @Component({
   selector: 'app-selected-item-card',
@@ -13,6 +14,8 @@ import {Hotel} from '../../../models/hotel';
   styleUrls: ['./selected-item-card.component.scss']
 })
 export class SelectedItemCardComponent implements OnInit {
+
+  @ViewChild(MapsComponent) mapsComponent;
 
   public modalRef: BsModalRef;
 
@@ -34,6 +37,21 @@ export class SelectedItemCardComponent implements OnInit {
     this.travel = new Travel();
     this.travel.trip = this.trip;
     this.travel.totalPrice = this.trip.totalPrice;
+
+    if (this.travel.trip.destinations.length >= 2) {
+      const firstDestination = this.travel.trip.destinations[0].city.name;
+      const lastDestination = this.travel.trip.destinations[this.travel.trip.destinations.length - 1].city.name;
+      this.mapsComponent.setDirection(firstDestination, lastDestination)
+    }
+
+    if (this.travel.trip.destinations.length === 1) {
+      const destination = this.travel.trip.destinations[0].city.name;
+      this.mapsComponent.setDirection(destination, destination);
+      this.mapsComponent.setZoom(1000);
+    }
+
+    // TODO: Add waypoints
+
 
     // Hotel are static for now. Add them to travel.
     const hotels = this.travel.hotels;
