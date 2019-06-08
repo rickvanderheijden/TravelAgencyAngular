@@ -1,0 +1,206 @@
+<section id="user-profile">
+  <div class="row">
+    <div class="col-12">
+      <div class="card profile-with-cover">
+        <div class="card-img-top img-fluid bg-cover height-300"
+             style="background: url('assets/img/photos/14.jpg') 50%;">
+        </div>
+        <div class="media profil-cover-details row">
+          <div class="col-5">
+            <div class="align-self-start halfway-fab pl-3 pt-2">
+              <div class="text-left"><h3 class="card-title white">{{user.firstName}}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="align-self-center halfway-fab text-center"><a
+              class="profile-image"><img
+              alt="Card image" class="rounded-circle img-border gradient-summer width-100"
+              src="assets/img/portrait/avatars/avatar-08.png"></a></div>
+          </div>
+          <div class="col-5"></div>
+        </div>
+        <div class="profile-cover-buttons" *ngIf="userUpdated">
+          <div class="media-body halfway-fab align-self-end">
+            <div class="text-right d-none d-sm-none d-md-none d-lg-block">
+              <button class="btn btn-success btn-raised mr-3" type="button" (click)="saveChanges()"><i class="fas fa-save"></i> Opslaan</button>
+            </div>
+        </div>
+        </div>
+        <div class="profile-section">
+          <div class="row">
+            <div class="col-lg-5 col-md-5 ">
+              <ul class="profile-menu no-list-style">
+                <li>
+                  <a class="primary font-medium-2 font-weight-600" (click)="showSection('about')">
+                    <strong *ngIf="showUserInformationSection">Persoonlijke informatie</strong>
+                    <span *ngIf="!showUserInformationSection">Persoonlijke informatie</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="primary font-medium-2 font-weight-600" (click)="showSection('groups')">
+                    <strong *ngIf="showGroupSection">Groepen</strong>
+                    <span *ngIf="!showGroupSection">Groepen</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-lg-2 col-md-2 text-center">
+              <span class="font-medium-2 text-uppercase">{{user.firstName}}</span>
+<!--              <p class="grey font-small-2">Ninja Developer</p>-->
+            </div>
+            <div class="col-lg-5 col-md-5">
+              <ul class="profile-menu no-list-style">
+                <li>
+                  <a class="primary font-medium-2 font-weight-600" (click)="showSection('trips')">
+                    <strong *ngIf="showTripsSection">Reizen</strong>
+                    <span *ngIf="!showTripsSection">Reizen</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="primary font-medium-2 font-weight-600" (click)="showSection('bookings')">
+                    <strong *ngIf="showBookingSection">Boekingen</strong>
+                    <span *ngIf="!showBookingSection">Boekingen</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!---->
+<!--// Persoonlijke info sectie-->
+<section id="about" class="ng-star-inserted" *ngIf="showUserInformationSection">
+  <div class="row">
+    <div class="col-12">
+      <div class="content-header">Persoonlijke informatie</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <hr>
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary">
+                      <i class="ft-user font-small-3"></i>Voornaam:
+                       <a><i class="ft-edit-2 font-small-3" (click)="toggleEditFirstName()"></i></a>
+                    </span>
+                    <a class="d-block overflow-hidden" *ngIf="!editFirstName">{{user.firstName}}</a>
+                    <span class="d-block overflow-hidden" *ngIf="editFirstName">
+                      <input type="text" [(ngModel)]="user.firstName">
+                      <span class="btn btn-primary" (click)="saveUser()"> <i class="fas fa-save"></i> </span>
+                    </span>
+                  </li>
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary">
+                      <i class="ft-mail font-small-3"></i> Email:
+                      <a><i class="ft-edit-2 font-small-3" (click)="toggleEditEmail()"></i></a>
+                    </span>
+                    <a class="d-block overflow-hidden" *ngIf="!editEmailAddress">{{user.emailAddress}}</a>
+                    <span class="d-block overflow-hidden" *ngIf="editEmailAddress">
+                      <input type="text" [(ngModel)]="user.emailAddress">
+                      <span class="btn btn-primary" (click)="saveUser()"> <i class="fas fa-save"></i> </span>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary">
+                      <i class="ft-user font-small-3"></i> Achternaam:
+                       <a><i class="ft-edit-2 font-small-3" (click)="toggleEditLastName()"></i></a>
+                    </span>
+                    <a class="d-block overflow-hidden" *ngIf="!editLastName">{{user.lastName}}</a>
+                    <span class="d-block overflow-hidden" *ngIf="editLastName">
+                      <input type="text" [(ngModel)]="user.lastName">
+                      <span class="btn btn-primary" (click)="saveUser()"> <i class="fas fa-save"></i> </span>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <ul class="no-list-style">
+                  <li class="mb-2">
+                    <span class="text-bold-500 primary">
+                      <i class="ft-user font-small-3"></i> Username:
+                      <a><i class="ft-edit-2 font-small-3" (click)="toggleEditUsername()"></i></a>
+                    </span>
+                    <a class="d-block overflow-hidden" *ngIf="!editUsername">{{user.username}}</a>
+                    <span class="d-block overflow-hidden" *ngIf="editUsername">
+                      <input type="text" [(ngModel)]="user.username">
+                      <span class="btn btn-primary" (click)="saveUser()"> <i class="fas fa-save"></i> </span>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="groups" class="ng-star-inserted" *ngIf="showGroupSection">
+  <div class="row">
+    <div class="col-12">
+      <div class="content-header">Groepen</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <hr>
+            <app-group [user]="user"></app-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="trips" class="ng-star-inserted" *ngIf="showTripsSection">
+  <div class="row">
+    <div class="col-12">
+      <div class="content-header">Reizen</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="bookings" class="ng-star-inserted" *ngIf="showBookingSection">
+  <div class="row">
+    <div class="col-12">
+      <div class="content-header">Boekingen</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
