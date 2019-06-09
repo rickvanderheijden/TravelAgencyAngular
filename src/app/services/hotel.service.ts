@@ -67,7 +67,6 @@ export class HotelService {
   deleteHotel(id: number) {
     return this.http.delete(environment.url + '/hotels/' + id ).pipe(
       map( (response: any) => {
-        console.log(response);
       })
     );
   }
@@ -85,5 +84,17 @@ export class HotelService {
         swal('getHotels', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(err);
       }));
+  }
+
+  async getAvailability(id: number): Promise<number> {
+    try {
+      const response = await this.http
+        .get(environment.server + '/hotels/getAvailability/' + id)
+        .toPromise();
+      return response as number;
+    } catch (error) {
+        swal('getAvailability', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(error);
+    }
   }
 }

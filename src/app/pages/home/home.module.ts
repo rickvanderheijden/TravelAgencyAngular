@@ -15,8 +15,8 @@ import {HotelOptionComponent} from '../../components/hotel-option/hotel-option.c
 import {TopFiltersComponent} from '../../components/top-filters/top-filters.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgSelectModule} from '@ng-select/ng-select';
-import {AppModule} from '../../app.module';
 import {LoginFormComponent} from '../../components/login-form/login-form.component';
+import {SelectedItemCardComponent} from '../../components/selected-item-card/selected-item-card.component';
 
 @NgModule({
   imports: [
@@ -42,8 +42,14 @@ import {LoginFormComponent} from '../../components/login-form/login-form.compone
     DestinationComponent,
     HotelOptionComponent,
     TopFiltersComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    SelectedItemCardComponent
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  exports: [
+    MapsComponent,
+    LoginFormComponent,
+    SelectedItemCardComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeModule { }

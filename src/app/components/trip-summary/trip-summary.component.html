@@ -2,19 +2,23 @@
   <div class="card-content d-flex justify-content-between">
     <div class="card-img width-25-per" [style.backgroundImage]="'url(' + trip.imageUrl +')'">
     </div>
-    <div class="card-body" width-75-per>
-        <div class="px-3 d-flex align-items-start flex-column" style="width: 100%">
-          <h4 style="font-size: 30px" class="card-title">{{trip.name}}</h4>
-          <p class="card-text">{{trip.summary}}</p>
+    <div class="card-body width-75-per">
+      <div class="px-3 d-flex align-items-start flex-column" style="width: 100%">
+        <h4 class="card-title">{{trip.name}}</h4>
+        <div class="row">
+          <div class="col-8">
+            <p class="card-text">{{trip.summary}}</p>
+          </div>
+          <div class="col-4" style="padding-right: 5px;">
+            <p style="font-size: 30px; text-align: right;">€ {{trip.totalPrice}}</p>
+          </div>
           <div class="row" style="height: 50px; width: 104%">
-            <div class="col-6">
-              <p style="font-size: 30px">€ {{trip.totalPrice}}</p>
-            </div>
-            <div class="col-6" style="text-align: right;">
+            <div class="col-12" style="text-align: right;">
               <a class="btn btn-primary" (click)="loadTrip(trip.id)">Bekijk deze reis</a>
             </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
 </div>

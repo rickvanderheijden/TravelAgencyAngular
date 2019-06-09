@@ -4,15 +4,17 @@ import { TravelSummaryComponent } from './travel-summary.component';
 import {TripItem} from '../../../models/TripItem';
 import {Travel} from '../../../models/travel';
 import {Booking} from '../../../models/booking';
-import {BookableTripItem} from '../../../models/bookabletripitem';
 import {Hotel} from '../../../models/hotel';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {Trip} from '../../../models/trip';
-import {BookableHotel} from '../../../models/bookablehotel';
+import {HotelService} from '../../services/hotel.service';
 
 class TestTrip { name = 'Test trip'; imageUrl = 'Image URL'; description = 'Description'; }
 class TestTravel { name = 'Test travel'; totalPrice = 1500; trip = new Trip(new TestTrip()); tripItems = new Array<TripItem>(); hotels = new Array<Hotel>() }
-class TestBooking { tripItems = Array<BookableTripItem>(); hotels = Array<BookableHotel>(); };
+class TestBooking { tripItems = Array<TripItem>(); hotels = Array<Hotel>(); };
+
+class MockHotelService {
+}
 
 describe('TravelSummaryComponent', () => {
   let component: TravelSummaryComponent;
@@ -22,6 +24,7 @@ describe('TravelSummaryComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ TravelSummaryComponent ],
       schemas: [NO_ERRORS_SCHEMA],
+      providers: [{provide: HotelService, useValue: new MockHotelService}],
     })
     .compileComponents();
   });

@@ -36,13 +36,13 @@ export class UserCreateComponent implements OnInit {
   }
 
   setForm() {
-    this.userCreateForm = this.formBuilder.group({
-      username: this.formBuilder.control(this.user.username, [Validators.minLength(4), Validators.required]),
-      firstname: this.formBuilder.control(this.user.firstname),
-      lastname: this.formBuilder.control(this.user.lastname),
-      emailAddress: this.formBuilder.control(this.user.emailAddress, [Validators.minLength(6), Validators.email, Validators.required]),
-      password: this.formBuilder.control([Validators.minLength(4)]),
-      authorities: this.formBuilder.control(this.authority)
+    this.userCreateForm = new FormGroup({
+      username: new FormControl(this.user.username, [Validators.minLength(4), Validators.required]),
+      firstName: new FormControl(this.user.firstName),
+      lastName: new FormControl(this.user.lastName),
+      emailAddress: new FormControl(this.user.emailAddress, [Validators.minLength(6), Validators.email, Validators.required]),
+      password: new FormControl([Validators.minLength(5)]),
+      authorities: new FormControl(this.authority)
 
     });
   }

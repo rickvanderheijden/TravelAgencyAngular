@@ -81,7 +81,6 @@ export class DestinationCreateComponent implements OnInit {
 
   createDestination() {
     this.destination = new Destination(this.destinationCreateForm.value);
-    console.log(this.destination);
     if (this.destinationCreateForm.valid) {
       this.destinationService.createDestination(this.destination).subscribe((response: any) => {
         this.router.navigate(['/destination']);

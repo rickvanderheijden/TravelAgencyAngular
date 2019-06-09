@@ -30,7 +30,7 @@ export class UserUpdateComponent implements OnInit {
 
     this.userService.isAdmin().subscribe( isAdmin => {
       if (isAdmin) {
-        return this.userService.getById(route.snapshot.params.id).subscribe((data: any) => {
+        return this.userService.getById(this.route.snapshot.params.id).subscribe((data: any) => {
           this.user = data;
           this.setForm();
           this.userId = route.snapshot.params.id;
@@ -47,8 +47,8 @@ export class UserUpdateComponent implements OnInit {
   setForm() {
     this.userUpdateForm = this.formBuilder.group({
       username: this.formBuilder.control(this.user.username, [Validators.minLength(4), Validators.required]),
-      firstname: this.formBuilder.control(this.user.firstname),
-      lastname: this.formBuilder.control(this.user.lastname),
+      firstName: this.formBuilder.control(this.user.firstName),
+      lastName: this.formBuilder.control(this.user.lastName),
       emailAddress: this.formBuilder.control(this.user.emailAddress, [Validators.minLength(6), Validators.email, Validators.required]),
       password: this.formBuilder.control([Validators.minLength(5)]),
       password_repeat: this.formBuilder.control
@@ -73,15 +73,15 @@ export class UserUpdateComponent implements OnInit {
         this.user.password = this.password;
         this.userService.updateUser(this.user)
           .subscribe(response => {
-            swal({ title: 'Gelukt', text: 'Gebruiker succesvol geupdate', type: 'success' }).then(function () {
-              thiz.router.navigate(['/user/']);
+              swal({title: 'Gelukt', text: 'Gebruiker succesvol geupdate', type: 'success'}).then(function () {
+                thiz.router.navigate(['/user/']);
+              });
+              this.loading = false;
+            },
+            error => {
+              swal('Error', 'Er is iets fout gegaan', 'error');
+              this.loading = false;
             });
-            this.loading = false;
-          },
-          error => {
-            swal('Error', 'Er is iets fout gegaan', 'error');
-            this.loading = false;
-          });
       }
     }
   }

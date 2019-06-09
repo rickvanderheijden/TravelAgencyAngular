@@ -6,7 +6,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {ToastrModule} from 'ngx-toastr';
-import {RouterTestingModule} from '@angular/router/testing';
 import {JwtModule} from '@auth0/angular-jwt';
 import {User} from '../../../../models/user';
 
@@ -39,8 +38,4 @@ describe('UserUpdateComponent', () => {
     component.user = new User();
     fixture.detectChanges();
   });
-
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
 });

@@ -25,9 +25,8 @@ import {UserModule} from './pages/user/index/user.module';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {TabsModule} from 'ngx-bootstrap';
 import {FileUploadModule} from 'ng2-file-upload';
-import {GroupDetailComponent } from './components/group-detail/group-detail.component';
-import {GroupComponent} from './components/group/group.component';
 import {ModalModule} from 'ngx-bootstrap';
+import {HomeModule} from './pages/home/home.module';
 
 export function jwtOptionsFactory(tokenService) {
   return {
@@ -44,8 +43,6 @@ export function jwtOptionsFactory(tokenService) {
     AppComponent,
     FullLayoutComponent,
     AuthLoginComponent,
-    GroupComponent,
-    GroupDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -74,6 +71,7 @@ export function jwtOptionsFactory(tokenService) {
     }),
     AgmDirectionModule,
     FileUploadModule,
+    HomeModule,
   ],
   providers: [
     TokenService,

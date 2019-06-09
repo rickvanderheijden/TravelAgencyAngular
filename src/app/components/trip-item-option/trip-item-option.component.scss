@@ -1,6 +1,7 @@
 .card-img {
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .card.horizontal {
@@ -17,10 +18,7 @@
 }
 
 .card-text {
-  height:6em;
-  overflow: hidden;
-  width: 75ch;
-  margin-bottom: 50px;
+  height: 7em;
 }
 
 .card {
