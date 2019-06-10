@@ -15,7 +15,7 @@
           </div>
         </div>
         <div class="card-body">
-<!--          {{tripItemUpdateForm.value | json}}-->
+          {{tripItemUpdateForm.value | json}}
           <div class="card-block">
             <form [formGroup]="tripItemUpdateForm" (ngSubmit)="submitForm()">
               <ngb-tabset>
@@ -31,15 +31,19 @@
                     </div>
                     <div class="form-group">
                       <label>Prijs</label>
-                      <input type="tel" name="name" formControlName="price" autocomplete="off"  class="form-control">
+                      <input type="number" name="price" formControlName="price" autocomplete="off"  class="form-control">
                     </div>
                     <div class="form-group">
-                      <label>Minimaal personen</label>
-                      <input type="number" name="minPersons" formControlName="minPersons" class="form-control">
+                      <label>Minimaal deelnemers</label>
+                      <input type="number" name="minimumNumberOfAttendees" formControlName="minimumNumberOfAttendees" class="form-control">
                     </div>
                     <div class="form-group">
-                      <label>Maximaal personen</label>
-                      <input type="number" name="maxPersons" formControlName="maxPersons" class="form-control">
+                      <label>Maximaal deelnemers</label>
+                      <input type="number" name="maximumNumberOfAttendees" formControlName="maximumNumberOfAttendees" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Aantal deelnemers</label>
+                      <input type="number" name="numberOfAttendees" formControlName="numberOfAttendees" class="form-control">
                     </div>
                     <div class="form-group">
                       <label>Foto</label>
