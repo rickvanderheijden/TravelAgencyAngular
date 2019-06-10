@@ -5,6 +5,7 @@ import {catchError, map, tap} from 'rxjs/operators';
 import swal from 'sweetalert2';
 import {Observable} from 'rxjs';
 import {Booking} from '../../models/booking';
+import {Hotel} from '../../models/hotel';
 
 @Injectable({
   providedIn: 'root'
@@ -71,5 +72,38 @@ export class BookingService {
         // console.log(response);
       })
     );
+  }
+  /**
+   * get Bookings by logged in users token
+   */
+  getAllByToken(): Observable<Array<Booking>> {
+    return this.http.get(environment.server + '/bookings/token' ).pipe(
+      map((response: Array<any>) => {
+        const bookings: Array<Booking> = [];
+        response.forEach(function (boooking, index) {
+          bookings.push(new Booking(boooking));
+        });
+        return bookings;
+      }),
+      catchError(error => {
+        swal('getAllByToken', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(error);
+      })
+    );
+  }
+
+  getBookings(): Observable<Array<Booking>> {
+    return this.http.get(environment.server + '/bookings').pipe(
+      map((response: Array<any>) => {
+        const bookings: Array<Booking> = [];
+        response.forEach(function (booking, index) {
+          bookings.push(new Booking(booking));
+        });
+        return bookings;
+      }),
+      catchError(err => {
+        swal('getBookings', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(err);
+      }));
   }
 }

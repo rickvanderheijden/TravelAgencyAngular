@@ -29,4 +29,15 @@ export class PaymentService {
       })
     );
   }
+
+  /**
+   *get Payments by Token
+   */
+  getPaymentsByToken() {
+    return this.http.get(environment.url + '/payments/token').pipe(
+      map( response => {
+        console.log(response);
+      })
+    );
+  }
 }

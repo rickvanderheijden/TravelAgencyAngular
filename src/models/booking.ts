@@ -2,6 +2,7 @@ import {BookingItem} from './bookingitem';
 import {Travel} from './travel';
 import {User} from './user';
 import {Address} from './Address';
+import {Payment} from './Payment';
 
 export class Booking {
 
@@ -12,6 +13,7 @@ export class Booking {
   public address: Address;
   public numberOfTravelers: number;
   public bookingItems: BookingItem[];
+  public payments: Payment[];
   public booked: boolean;
   public paid: boolean;
   public bookingDate: Date;
@@ -25,6 +27,7 @@ export class Booking {
       this.address = model.address;
       this.numberOfTravelers = model.numberOfTravelers;
       this.bookingItems = model.bookingItems;
+      this.payments = model.payments;
       this.booked = model.booked;
       this.paid = model.paid;
       this.bookingDate = model.bookingDate;

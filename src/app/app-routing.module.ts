@@ -15,6 +15,8 @@ import {Group_ROUTES} from './shared/routes/group-layout.routes';
 import {BookTravel_ROUTES} from './shared/routes/booktravel-layout.routes';
 import {Destination_ROUTES} from './shared/routes/destination-layout.routes';
 import {Hotel_ROUTES} from './shared/routes/hotel-layout.routes';
+import {Profile_ROUTES} from './shared/routes/profile-layout.routes';
+import {Booking_ROUTES} from './shared/routes/booking-layout.routes';
 
 
 
@@ -36,6 +38,12 @@ const appRoutes: Routes = [
     path: 'user',
     component: FullLayoutComponent,
     children: User_ROUTES,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'user-profile',
+    component: FullLayoutComponent,
+    children: Profile_ROUTES,
     canActivate: [AuthGuardService]
   },
   {
@@ -66,6 +74,12 @@ const appRoutes: Routes = [
     path: 'booktravel',
     component: FullLayoutComponent,
     children: BookTravel_ROUTES,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'bookings',
+    component: FullLayoutComponent,
+    children: Booking_ROUTES,
     canActivate: [AuthGuardService]
   },
   { path: '**', redirectTo: '' },
