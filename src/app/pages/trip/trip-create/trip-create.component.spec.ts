@@ -6,6 +6,9 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {Trip} from '../../../../models/trip';
 import {Observable, of} from 'rxjs';
 import {TripService} from '../../../services/trip.service';
+import {HttpClient} from '@angular/common/http';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ReactiveFormsModule} from '@angular/forms';
 
 class DummyComponent {
 }
@@ -25,8 +28,8 @@ describe('TripCreateComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ TripCreateComponent ],
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [{provide: TripService, useValue: new TestTrip()}],
-      imports: [ RouterTestingModule.withRoutes([
+      providers: [{provide: TripService, useValue: new TestTrip()}, HttpClient],
+      imports: [HttpClientTestingModule, ReactiveFormsModule, RouterTestingModule.withRoutes([
           { path: '', component: DummyComponent }
         ]),
       ]
