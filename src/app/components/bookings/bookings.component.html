@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-4">
       <ul class="list-group">
-        <a class="list-group-item"
+        <a [class]="booking.id == selectedBooking?.id ? 'list-group-item active' : 'list-group-item'"
            *ngFor="let booking of bookings"
            (click)="showBookingInfo(booking)">
           Boeking: {{booking.bookingDate | date}}

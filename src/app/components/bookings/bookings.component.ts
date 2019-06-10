@@ -24,8 +24,6 @@ export class BookingsComponent implements OnInit {
   }
 
   showBookingInfo(booking: Booking) {
-
-    console.log(booking);
     if (this.selectedBooking !== null) {
       if (this.selectedBooking.id !== booking.id) {
         this.tripService.getById(booking.tripId).subscribe((trip: Trip) => {
