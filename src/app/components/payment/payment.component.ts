@@ -31,7 +31,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
   constructor(private formBuilder: FormBuilder, private paymentService: PaymentService) {
     this.payment = new Payment();
-    this.payment.user = new User(JSON.parse(sessionStorage.getItem('currentUser')));
+    this.payment.userId = JSON.parse(sessionStorage.getItem('currentUser')).id;
 
   }
 
@@ -89,21 +89,23 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     if (this.showCreditCardForm) {
       this.payment.method = 'CREDITCARD';
       this.paymentService.createPayment(this.payment).subscribe((payment: Payment) => {
+        console.log(payment);
         this.paymentOut.emit(payment);
       });
     } else if(this.showPayPalForm) {
       this.payment.method = 'PAYPAL';
       this.paymentService.createPayment(this.payment).subscribe((payment: Payment) => {
+        console.log(payment);
         this.paymentOut.emit(payment);
       });
     } else {
-      this.payment.method = 'BANK_TRANSDER';
+      this.payment.method = 'BANK_TRANSFER';
       this.paymentOut.emit(this.payment);
     }
   }
 
   ngAfterViewInit(): void {
-    this.payment.booking = this.booking;
+    this.payment.bookingId = this.booking.id;
     this.payment.amount = this.booking.getTotalPrice();
     this.setForms();
   }
