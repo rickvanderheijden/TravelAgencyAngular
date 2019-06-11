@@ -1,6 +1,7 @@
 import { Component, AfterViewChecked } from '@angular/core';
 import {AuthenticationService} from '../../auth/auth.service';
 import {User} from '../../../models/user';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-navbar',
@@ -16,7 +17,7 @@ export class NavbarComponent implements AfterViewChecked {
     user: User = null;
 
 
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: AuthenticationService, private router: Router) {
   }
 
   ngAfterViewChecked() {

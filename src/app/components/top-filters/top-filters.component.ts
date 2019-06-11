@@ -102,6 +102,40 @@ export class TopFiltersComponent implements OnInit {
     }
   }
 
+  getTripsFrom(from) {
+    if (from) {
+      this.searchDTO.from = from;
+    } else {
+      this.searchDTO.from = null;
+    }
+    if (this.searchDTO.emptySearch()) {
+      this.trips = this.allTrips;
+      this.foundTrips.emit(this.trips);
+    } else {
+      this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
+        this.trips = trips;
+        this.foundTrips.emit(trips);
+      });
+    }
+  }
+
+  getTripsTo(to) {
+    if (to) {
+      this.searchDTO.to = to;
+    } else {
+      this.searchDTO.to = null;
+    }
+    if (this.searchDTO.emptySearch()) {
+      this.trips = this.allTrips;
+      this.foundTrips.emit(this.trips);
+    } else {
+      this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
+        this.trips = trips;
+        this.foundTrips.emit(trips);
+      });
+    }
+  }
+
   onKeydown(event) {
     if (event.key === 'Enter') {
       if (event.target.value) {
@@ -129,6 +163,8 @@ export class TopFiltersComponent implements OnInit {
     this.searchDTO.country = null;
     this.searchDTO.continent = null;
     this.searchDTO.keyword = null;
+    this.searchDTO.from = null;
+    this.searchDTO.to = null;
   }
 
 }

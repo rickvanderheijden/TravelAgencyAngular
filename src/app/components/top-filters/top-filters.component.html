@@ -26,11 +26,11 @@
           </div>
           <div class="col-12">
             <input class="form-control m-1" data-placement="top" data-title="Date Opened" data-toggle="tooltip"
-                   data-trigger="hover" id="dateFrom" name="dateFrom" type="date" [(ngModel)]="from" placeholder="van">
+                   data-trigger="hover" id="dateFrom" name="dateFrom" type="date" [(ngModel)]="from" placeholder="van" (change)="getTripsFrom(from)">
           </div>
           <div class="col-12">
             <input class="form-control m-1" data-placement="top" data-title="Date Opened"
-                   data-toggle="tooltip" data-trigger="hover" id="dateTill" name="dateTill" type="date" [(ngModel)]="till">
+                   data-toggle="tooltip" data-trigger="hover" id="dateTill" name="dateTill" type="date" [(ngModel)]="till" (change)="getTripsTo(till)">
           </div>
         </div>
       </div>
