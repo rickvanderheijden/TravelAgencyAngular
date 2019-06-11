@@ -82,3 +82,4 @@ section {max-width: 1170px; margin: 0 auto;}
   font-size: 20px;
   line-height: 50px;
 }
+.accordion .card-header{background: #e7e7e7;}

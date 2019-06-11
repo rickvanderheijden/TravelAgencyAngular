@@ -18,6 +18,9 @@ import {MatTabsModule} from '@angular/material';
     NgbModule,
     MatTabsModule
   ],
+  exports: [
+    GroupComponent
+  ],
   declarations: [
     UserUpdateComponent,
     GroupComponent,

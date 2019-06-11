@@ -1,6 +1,5 @@
 import {Authority} from './authority';
 import {TravelGroup} from './travelGroup';
-import {Address} from './Address';
 
 export class User {
 
@@ -58,5 +57,9 @@ export class User {
         }
       });
       return isAdmin;
+    }
+
+    getFullName() {
+      return this.firstName + ' ' + this.lastName;
     }
 }

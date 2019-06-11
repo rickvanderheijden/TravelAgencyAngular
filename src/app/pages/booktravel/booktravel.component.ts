@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Travel} from 'models/travel';
@@ -10,6 +10,7 @@ import {Booking} from '../../../models/booking';
 import {BookingService} from '../../services/booking.service';
 import {Payment} from '../../../models/Payment';
 import swal from 'sweetalert2';
+import {WizardComponent} from 'angular-archwizard';
 
 @Component({
   selector: 'app-booktravel',
@@ -20,6 +21,7 @@ export class BookTravelComponent implements OnInit {
 
   @ViewChild(TravelSummaryComponent) travelSummaryComponent;
   @ViewChild(BookingTravelerInformationComponent) bookingTravelerInformationComponent;
+  @ViewChild(WizardComponent) public wizard: WizardComponent;
 
   travelObservable: Observable<Travel>;
   loading = false;
@@ -29,7 +31,7 @@ export class BookTravelComponent implements OnInit {
   paymentStepEnabled = false;
   paymentStepSucceeded = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private bookingService: BookingService ) { }
+  constructor(private activatedRoute: ActivatedRoute, private bookingService: BookingService, private router: Router) { }
 
   ngOnInit() {
     this.travelObservable = this.activatedRoute.paramMap
@@ -44,6 +46,7 @@ export class BookTravelComponent implements OnInit {
   }
 
   finishFunction() {
+    this.router.navigate(['/']);
   }
 
   pushBooking() {
@@ -63,16 +66,12 @@ export class BookTravelComponent implements OnInit {
     this.paymentStepEnabled = enabled;
   }
 
-  pay() {
-
-  }
-
   paymentOut(payment: Payment) {
-    console.log(payment);
     swal('Succes', 'Betaling geslaagd!', 'success');
-    this.bookingService.getById(payment.booking.id).subscribe((booking: Booking) => {
+    this.bookingService.getById(payment.bookingId).subscribe((booking: Booking) => {
       this.savedBooking = booking;
       this.paymentStepSucceeded = true;
-    })
+      this.wizard.navigation.goToNextStep();
+    });
   }
 }

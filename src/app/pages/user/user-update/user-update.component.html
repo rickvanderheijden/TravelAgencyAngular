@@ -1,92 +1,85 @@
 <section id="user-update">
-  <mat-tab-group style="position: sticky !important">
-    <mat-tab label="Profiel" style="position: sticky !important">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="card">
-            <div class="card-header">
-              <div class="row">
-                <div class="col-sm-6">
-                  <h4 class="card-title">Gebruiker aanpassen</h4>
-                </div>
-                <div class="col-sm-6">
-                  <a (click)="back()" class="btn btn-raised btn-grey float-sm-right">
-                    Terug
-                  </a>
-                </div>
-              </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4 class="card-title">Gebruiker aanpassen</h4>
             </div>
-            <div class="card-body">
-              <div class="card-block">
-                <form (ngSubmit)="submitForm(userUpdateForm)" *ngIf="user != null" [formGroup]="userUpdateForm"
-                      novalidate>
-                  <div class="form-group">
-                    <label>Gebruikersnaam</label>
-                    <input [(ngModel)]="user.username" autocomplete="off" class="form-control"
-                           formControlName="username"
-                           name="username" type="text">
-                  </div>
-                  <div class="form-group">
-                    <label>Voornaam</label>
-                    <input [(ngModel)]="user.firstName" class="form-control" formControlName="firstname"
-                           name="firstname"
-                           type="text">
-                  </div>
-                  <div class="form-group">
-                    <label>Achternaam</label>
-                    <input [(ngModel)]="user.lastName" class="form-control" formControlName="lastname" name="lastname"
-                           type="text">
-                  </div>
-
-                  <div class="form-group">
-                    <label>Email</label>
-                    <input [(ngModel)]="user.emailAddress" class="form-control" formControlName="emailAddress"
-                           name="email"
-                           type="email">
-                  </div>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input (change)="toggleCheckbox($event)" class="form-check-input" id="changePassword"
-                             name="changePassword"
-                             type="checkbox">
-                      <span>Wachtwoord aanpassen?</span>
-                    </label>
-                  </div>
-
-                  <div *ngIf="changePassword" class="form-group">
-                    <div class="password">
-                      <label>Wachtwoord</label>
-                      <input [(ngModel)]="user.password" class="form-control" formControlName="password" name="password"
-                             type="password">
-                    </div>
-                    <div class="password-repeat">
-                      <label>Bevestigen Wachtwoord</label>
-                      <input class="form-control" formControlName="password_repeat" name="password_repeat"
-                             type="password" validateEqual="password">
-                    </div>
-                  </div>
-
-                  <div class="form-actions">
-                    <div class="row">
-                      <div class="col-12">
-                        <button [disabled]="!userUpdateForm.valid" class="btn btn-primary" type="submit">
-                          <span>Gebruiker opslaan</span>
-                          <i *ngIf="loading" class="ft-loader spinner right"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
+            <div class="col-sm-6">
+              <a (click)="back()" class="btn btn-raised btn-grey float-sm-right">
+                Terug
+              </a>
             </div>
           </div>
         </div>
+        <div class="card-body">
+          <div class="card-block">
+            <form (ngSubmit)="submitForm(userUpdateForm)" *ngIf="user != null" [formGroup]="userUpdateForm"
+                  novalidate>
+              <div class="form-group">
+                <label>Gebruikersnaam</label>
+                <input [(ngModel)]="user.username" autocomplete="off" class="form-control"
+                       formControlName="username"
+                       name="username" type="text">
+              </div>
+              <div class="form-group">
+                <label>Voornaam</label>
+                <input [(ngModel)]="user.firstName" class="form-control" formControlName="firstname"
+                       name="firstname"
+                       type="text">
+              </div>
+              <div class="form-group">
+                <label>Achternaam</label>
+                <input [(ngModel)]="user.lastName" class="form-control" formControlName="lastname" name="lastname"
+                       type="text">
+              </div>
+
+              <div class="form-group">
+                <label>Email</label>
+                <input [(ngModel)]="user.emailAddress" class="form-control" formControlName="emailAddress"
+                       name="email"
+                       type="email">
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input (change)="toggleCheckbox($event)" class="form-check-input" id="changePassword"
+                         name="changePassword"
+                         type="checkbox">
+                  <span>Wachtwoord aanpassen?</span>
+                </label>
+              </div>
+
+              <div *ngIf="changePassword" class="form-group">
+                <div class="password">
+                  <label>Wachtwoord</label>
+                  <input [(ngModel)]="user.password" class="form-control" formControlName="password" name="password"
+                         type="password">
+                </div>
+                <div class="password-repeat">
+                  <label>Bevestigen Wachtwoord</label>
+                  <input class="form-control" formControlName="password_repeat" name="password_repeat"
+                         type="password" validateEqual="password">
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <div class="row">
+                  <div class="col-12">
+                    <button [disabled]="!userUpdateForm.valid" class="btn btn-primary" type="submit">
+                      <span>Gebruiker opslaan</span>
+                      <i *ngIf="loading" class="ft-loader spinner right"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-    </mat-tab>
-    <mat-tab label="Groepen" style="position: sticky !important">
-      <div *ngIf="loading!=true">
-        <app-group [user]="user"></app-group>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+    </div>
+  </div>
+
+
 </section>
