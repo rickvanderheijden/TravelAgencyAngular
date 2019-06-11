@@ -110,8 +110,6 @@ export class TripService {
    * @param SearchTripDTO
    */
     searchTripsByKeywordAndCountryOrContinent(searchDTO: SearchTripDTO): Observable<Array<Trip>> {
-      console.log('=======');
-      console.log(searchDTO);
     return this.http.post(environment.url + '/trips/searchTripsByKeywordAndCountryOrContinent', searchDTO).pipe(
       map((response: Array<any>) => {
         const trips: Array<Trip> = [];
