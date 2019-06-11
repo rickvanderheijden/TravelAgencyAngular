@@ -46,6 +46,7 @@ export class GroupCreateComponent implements OnInit {
     );
     this.masterUser = new User(JSON.parse(sessionStorage.getItem('currentUser')));
     this.travelgroup.users.push(this.masterUser);
+    this.removeUser(this.masterUser.id);
     this.loading = false;
   }
 
@@ -80,15 +81,19 @@ export class GroupCreateComponent implements OnInit {
       console.log('User already added');
     } else {
       this.travelgroup.users.push(this.user);
+      this.users.splice(this.users.indexOf(this.user), 1);
+      console.log(this.users);
       console.log('User added');
     }
   }
 
   removeUser(userId: number) {
 
-    this.user = this.users.find(userR => userR.id === userId);
+    this.user = this.travelgroup.users.find(userR => userR.id === userId);
     if (this.travelgroup.users.find(user => user.id === this.user.id)) {
       this.travelgroup.users.splice(this.travelgroup.users.indexOf(this.user), 1);
+      this.users.push(this.user);
+      console.log(this.users);
       console.log('User removed');
     } else {
       console.log('User not found!!');
