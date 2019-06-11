@@ -130,7 +130,7 @@ export class TripService {
       }));
   }
 
-  searchTripsByKeyWord(name: String): Observable<Array<Trip>> {
+  searchTripsByKeyword(name: String): Observable<Array<Trip>> {
     return this.http.post(environment.url + '/trips/searchTripsByKeyword', name).pipe(
       map((response: Array<any>) => {
         const trips: Array<Trip> = [];
@@ -142,7 +142,7 @@ export class TripService {
         return trips;
       }),
       catchError(err => {
-        swal('searchTripsByKyeWord', 'Er is iets niet goed gegaan', 'error');
+        swal('searchTripsByKeyword', 'Er is iets niet goed gegaan', 'error');
         throw new Error(err);
       })
     )
