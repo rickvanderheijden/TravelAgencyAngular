@@ -4,6 +4,7 @@ export class SearchTripDTO {
   public country: String;
   public from: String;
   public to: String;
+  public keyword: String;
 
   constructor(model?) {
     if (typeof model !== typeof undefined) {
@@ -11,6 +12,11 @@ export class SearchTripDTO {
       this.country = model.country;
       this.from = model.from;
       this.to = model.to;
+      this.keyword = model.keyword;
     }
+  }
+
+  emptySearch() {
+    return (this.keyword == null && this.continent == null && this.country == null);
   }
 }

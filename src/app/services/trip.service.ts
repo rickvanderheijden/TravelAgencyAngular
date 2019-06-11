@@ -105,16 +105,12 @@ export class TripService {
     );
   }
 
-  getTripItems() {
-
-  }
-  
     /**
    * Search trips
    * @param SearchTripDTO
    */
-  searchTrips(searchDTO: SearchTripDTO): Observable<Array<Trip>> {
-    return this.http.post(environment.url + '/trips/searchTrips', searchDTO).pipe(
+    searchTripsByKeywordAndCountryOrContinent(searchDTO: SearchTripDTO): Observable<Array<Trip>> {
+    return this.http.post(environment.url + '/trips/searchTripsByKeywordAndCountryOrContinent', searchDTO).pipe(
       map((response: Array<any>) => {
         const trips: Array<Trip> = [];
         if (response !== null) {
@@ -128,24 +124,6 @@ export class TripService {
         swal('getTrips', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(err);
       }));
-  }
-
-  searchTripsByKeyword(name: String): Observable<Array<Trip>> {
-    return this.http.post(environment.url + '/trips/searchTripsByKeyword', name).pipe(
-      map((response: Array<any>) => {
-        const trips: Array<Trip> = [];
-        if (response !== null) {
-          response.forEach(function (trip, index) {
-            trips.push(new Trip(trip));
-          })
-        }
-        return trips;
-      }),
-      catchError(err => {
-        swal('searchTripsByKeyword', 'Er is iets niet goed gegaan', 'error');
-        throw new Error(err);
-      })
-    )
   }
 
 }
