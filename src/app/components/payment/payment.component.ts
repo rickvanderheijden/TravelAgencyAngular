@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, AfterViewInit} from '@angular/core';
 import * as $ from 'jquery';
 import {Payment} from '../../../models/Payment';
-import {User} from '../../../models/user';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Booking} from '../../../models/booking';
 import {PaymentService} from '../../services/payment.service';
@@ -89,13 +88,11 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     if (this.showCreditCardForm) {
       this.payment.method = 'CREDITCARD';
       this.paymentService.createPayment(this.payment).subscribe((payment: Payment) => {
-        console.log(payment);
         this.paymentOut.emit(payment);
       });
     } else if(this.showPayPalForm) {
       this.payment.method = 'PAYPAL';
       this.paymentService.createPayment(this.payment).subscribe((payment: Payment) => {
-        console.log(payment);
         this.paymentOut.emit(payment);
       });
     } else {

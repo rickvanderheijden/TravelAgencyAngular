@@ -11,8 +11,8 @@ export class Payment {
     if (typeof model !== typeof undefined) {
       this.id = model.id;
       this.method = model.method;
-      this.userId = model.user;
-      this.bookingId = model.booking;
+      this.userId = model.userId;
+      this.bookingId = model.bookingId;
       this.amount = model.amount;
     }
   }
