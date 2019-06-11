@@ -13,7 +13,7 @@ export class Destination {
   constructor(model?) {
     if (typeof model !== typeof undefined) {
       this.id = model.id;
-      this.name = model.name;
+      this.name = model.city.name;
       this.city = model.city;
       this.hotel = model.hotel;
       this.tripItems = model.tripItems !== null ? model.tripItems : new Array<TripItem>();

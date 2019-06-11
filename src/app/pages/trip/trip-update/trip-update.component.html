@@ -19,34 +19,42 @@
             <form [formGroup]="tripUpdateForm">
               <div class="form-group">
                 <label>Naam</label>
-                <input type="text" name="username" formControlName="name" class="form-control" [(ngModel)]="trip.name">
+                <input type="text" name="username" formControlName="name" class="form-control">
               </div>
               <div class="form-group">
                 <label>Omschrijving</label>
-                <input type="text" name="description" formControlName="description" class="form-control" [(ngModel)]="trip.description">
+                <input type="text" name="description" formControlName="description" class="form-control">
               </div>
               <div class="form-group">
                 <label>Samenvatting</label>
-                <input type="text" name="summary" formControlName="summary" class="form-control" [(ngModel)]="trip.summary">
+                <input type="text" name="summary" formControlName="summary" class="form-control">
               </div>
               <div class="form-group">
                 <label>Afbeelding URL</label>
-                <input type="text" name="imageUrl" formControlName="imageUrl" class="form-control" [(ngModel)]="trip.imageUrl">
+                <input type="text" name="imageUrl" formControlName="imageUrl" class="form-control">
               </div>
               <div class="form-group">
                 <label>Totaal prijs</label>
-                <input type="number" name="totalPrice" formControlName="totalPrice" class="form-control" [(ngModel)]="trip.totalPrice">
+                <input type="number" name="totalPrice" formControlName="totalPrice" class="form-control">
               </div>
               <div class="form-group">
                 <label>Korting</label>
-                <input type="number" name="discount" formControlName="discount" class="form-control" [(ngModel)]="trip.discount">
+                <input type="number" name="discount" formControlName="discount" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Minimaal personen</label>
+                <input type="number" name="minPersons" formControlName="minPersons" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Maximaal personen</label>
+                <input type="number" name="maxPersons" formControlName="maxPersons" class="form-control">
               </div>
               <div class="form-group">
                 <label>Trip Items</label>
-                <ng-select [items]="dbTripItems"
+                <ng-select [items]="dbDestination"
                            formControlName="destinations"
                             bindLabel="name"
-                           [multiple]="true"
+                           [multiple]="false"
                             >
                 </ng-select>
               </div>
