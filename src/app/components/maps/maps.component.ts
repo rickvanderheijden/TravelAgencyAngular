@@ -7,24 +7,22 @@ import {Component, OnInit} from '@angular/core';
 })
 
 export class MapsComponent implements OnInit {
-    latitude= 45.678418;
-    longitude= 7.809007;
-    origin;
-    destination;
-    org;
-    dest;
-    waypoints: object[];
-    travelMode: string;
+  loading = true;
+  latitude = 45.678418;
+  longitude = 7.809007;
+  origin;
+  destination;
+  zoom = 50;
+  waypoints: object[];
+  travelMode: string;
 
   ngOnInit(): void {
-    // Get current location or something?
-    this.org = 'Lageburchtweg 3, Uden';
-    this.dest = 'primera uden';
     this.waypoints = new Array();
+    this.loading = false;
+  }
 
-    // For testing purposes
-    this.setDirection(this.org, this.dest);
-    this.addWaypoint('Pianostraat 7, Uden', true);
+  setZoom(value: number) {
+    this.zoom = value;
   }
 
   setDirection(org: any, dest: any): void {

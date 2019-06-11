@@ -1,66 +1,14 @@
-<div _ngcontent-c7="" class="col-lg-4 col-md-12 col-sm-12">
-  <div _ngcontent-c7="" class="card" style="width: 1170px; height: auto; margin-left: -15px">
-    <div _ngcontent-c7="" class="card-header">
-      <h4 style="font-size: 30px" _ngcontent-c7="" class="card-title">{{trip.name}}</h4>
-      <!--h6 _ngcontent-c7="" class="card-subtitle text-muted">Support card subtitle</h6-->
+<div *ngIf="!loading">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">{{trip.name}}</h4>
     </div>
-    <div _ngcontent-c7="" class="card-content">
+    <div class="card-content">
       <div>
-        <img _ngcontent-c7="" style="width: 100%" src="{{trip.imageUrl}}">
+        <img style="width: 100%" [src]="trip.imageUrl" [alt]="trip.name" >
       </div>
       <div class="row" style="margin: 20px; width: 100%">
-        <div class = "w-75">
-        <p _ngcontent-c7="" style="margin-right: 40px">{{trip.description}}</p>
-        </div>
-        <div style="width: 21%; margin-right: 30px; background-color: #bbbbbb">
-          <div class="row" style="margin-left: 0px; margin-right: 0px;">
-            <app-maps style="width: 100%; height: 100%"></app-maps>
-          </div>
-          <div class="row" style="margin-left: 0px; margin-right: 0px;">
-            <table _ngcontent-c8="" class="table table-responsive-md">
-              <thead _ngcontent-c8="">
-              </thead>
-              <tbody _ngcontent-c8="">
-                <tr _ngcontent-c8="" *ngFor="let tripItem of travel.tripItems">
-                  <td _ngcontent-c8="">{{tripItem.name}}</td>
-                  <td _ngcontent-c8="">{{tripItem.price}}</td>
-                  <td _ngcontent-c8="">
-                    <a _ngcontent-c8="" class="danger" data-original-title="" title="">
-                      <i _ngcontent-c8="" class="ft-trash font-medium-3" (click)="removeTripItem(tripItem)"></i>
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="row" style="margin-left: 0px; margin-right: 0px;">
-            <table _ngcontent-c8="" class="table table-responsive-md" style="position: absolute; bottom: 30px; width: 21%">
-              <thead _ngcontent-c8="">
-              </thead>
-              <tbody _ngcontent-c8="">
-              <tr _ngcontent-c8="">
-                <td _ngcontent-c8="">
-                  <b _ngcontent-c8="">Totale prijs</b>
-                </td>
-                <td _ngcontent-c8="">
-                  <b _ngcontent-c8="">{{travel.totalPrice}}</b>
-                </td>
-                <td _ngcontent-c8=""></td>
-              </tr>
-              <tr _ngcontent-c8="">
-                <td _ngcontent-c8=""></td>
-                <td _ngcontent-c8=""></td>
-                <td _ngcontent-c8="">
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="row">
-            <button class="btn btn-primary" style="position: absolute; bottom: 15px; right: 40px" (click)="bookTravel()">Boek deze reis</button>
-
-          </div>
-        </div>
+        <p style="margin-right: 40px">{{trip.description}}</p>
       </div>
     </div>
   </div>

@@ -1,5 +1,8 @@
 <section id="homepage">
 <!--  <app-maps></app-maps>-->
+  <div class="sidebar background-secondary">
+    <app-top-filters (foundTrips)="setTrips($event)"></app-top-filters>
+  </div>
   <div *ngIf="loading" class="spinner">
     <i class="fa fa-spinner fa-spin"></i>
   </div>

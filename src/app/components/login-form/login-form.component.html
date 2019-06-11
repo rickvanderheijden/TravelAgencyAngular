@@ -1,0 +1,23 @@
+<form #loginForm="ngForm" (ngSubmit)="doLogin(loginForm.value, loginForm.valid)" novalidate>
+  <p>Login met je gebruikersnaam en wachtwoord.</p>
+  <div class="form-group">
+    <div class="col-md-12">
+      <input type="text" class="form-control"  placeholder="Gebruikersnaam" required name="username"
+             [(ngModel)]="user.username" #authUsername="ngModel"
+             [ngClass]="authUsername.valid ? 'is-valid': authUsername.pristine ? (loginError ? 'is-invalid' : '') : 'is-invalid'">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-12">
+      <input type="password" class="form-control" id="password" placeholder="Wachtwoord" required minlength="4" name="authPassword" [(ngModel)]="user.password" #authPassword="ngModel" [ngClass]="authPassword.valid ? 'is-valid': authPassword.pristine ? (loginError ? 'is-invalid' : '') : 'is-invalid'">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-12">
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.valid" [ngClass]="loading ? 'has-icon-right' : ''">
+        <span>Inloggen</span>
+        <i *ngIf="loading" class="ft-loader spinner"></i>
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,69 @@
+<table *ngIf="!loading" _ngcontent-c7="" class="table table-responsive-md text-center">
+  <thead _ngcontent-c7="">
+    <tr _ngcontent-c7="">
+      <th _ngcontent-c7=""></th>
+      <th _ngcontent-c7=""></th>
+      <th _ngcontent-c7="">Prijs</th>
+      <th _ngcontent-c7="">Aantal personen</th>
+      <th _ngcontent-c7="">Bedrag</th>
+    </tr>
+  </thead>
+  <tbody _ngcontent-c7="">
+    <tr _ngcontent-c7="">
+      <td _ngcontent-c7="">
+        <img _ngcontent-c7="" alt="" class="rounded" src="{{travel.trip.imageUrl}}" style="height: 90px; width: 90px; object-fit: cover;">
+      </td>
+      <td _ngcontent-c7="">{{travel.trip.name}}</td>
+      <td _ngcontent-c7="">€ {{travel.trip.totalPrice}}</td>
+      <td _ngcontent-c7="">{{booking.numberOfTravelers}}
+        <div _ngcontent-c7="" class="btn-group ml-1">
+          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" (click)="decreaseNumberOfTravelers()">-</a>
+          <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" (click)="increaseNumberOfTravelers()">+</a>
+        </div>
+      </td>
+      <td _ngcontent-c7="">€ {{travel.trip.totalPrice * booking.numberOfTravelers}}</td>
+    </tr>
+
+    <ng-container *ngFor="let bookingItem of booking.bookingItems">
+      <tr _ngcontent-c7="" *ngIf="bookingItem.bookingItemType == 'HOTEL'">
+        <td _ngcontent-c7="">
+          <img _ngcontent-c7="" alt="" class="rounded" src="{{getHotel(bookingItem.itemId).imageBlob}}" style="height: 90px; width: 90px; object-fit: cover;">
+        </td>
+        <td _ngcontent-c7="">{{getHotel(bookingItem.itemId).name}}</td>
+        <td _ngcontent-c7="">€ {{bookingItem.price}}</td>
+        <td _ngcontent-c7="">{{bookingItem.numberOfAttendees}}
+          <div _ngcontent-c7="" class="btn-group ml-1">
+            <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" style="visibility: hidden" href="javascript:void(0)">-</a>
+            <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" style="visibility: hidden" href="javascript:void(0)">+</a>
+          </div>
+        </td>
+        <td _ngcontent-c7="">€ {{bookingItem.price * bookingItem.numberOfAttendees}}</td>
+      </tr>
+    </ng-container>
+
+    <ng-container *ngFor="let bookingItem of booking.bookingItems">
+      <tr _ngcontent-c7="" *ngIf="bookingItem.bookingItemType == 'TRIPITEM'">
+        <td _ngcontent-c7="">
+          <img _ngcontent-c7="" alt="" class="rounded" src="{{getTripItem(bookingItem.itemId).imageBlob}}" style="height: 90px; width: 90px; object-fit: cover;">
+        </td>
+        <td _ngcontent-c7="">{{getTripItem(bookingItem.itemId).name}}</td>
+        <td _ngcontent-c7="">€ {{bookingItem.price}}</td>
+        <td _ngcontent-c7="">{{bookingItem.numberOfAttendees}}
+          <div _ngcontent-c7="" class="btn-group ml-1">
+            <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" (click)="decreaseBookingItemAttendees(bookingItem)">-</a>
+            <a _ngcontent-c7="" class="bg-info px-1 py-1 white font-medium-5" (click)="increaseBookingItemAttendees(bookingItem)">+</a>
+          </div>
+        </td>
+        <td _ngcontent-c7="">€ {{bookingItem.price * bookingItem.numberOfAttendees}}</td>
+      </tr>
+    </ng-container>
+
+    <tr _ngcontent-c7="">
+      <td _ngcontent-c7=""></td>
+      <td _ngcontent-c7=""></td>
+      <td _ngcontent-c7=""></td>
+      <td _ngcontent-c7=""></td>
+      <td _ngcontent-c7="" style="font-weight: 600;">€ {{booking.getTotalPrice()}}</td>
+    </tr>
+  </tbody>
+</table>

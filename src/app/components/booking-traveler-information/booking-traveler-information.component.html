@@ -1,0 +1,77 @@
+<form *ngIf="loaded" [formGroup]="bookingTravelerInformationForm">
+  <H4>Gegevens hoofdaanmelder</H4>
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label>Voornaam</label>
+        <input type="text" formControlName="firstName" class="form-control">
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label>Achternaam</label>
+        <input type="text" formControlName="lastName" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div [formGroup]="addressForm">
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label>Straat en huisnummer</label>
+          <input type="text" name="addressline" formControlName="addressLine" class="form-control">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label>Postcode</label>
+          <input type="text" name="zipcode" formControlName="zipCode" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div [formGroup]="countryForm">
+          <div class="form-group">
+            <label>Land</label>
+            <ng-select name="country" placeholder="land" [items]="countries" bindValue="name"
+                       formControlName="name" [clearable]="true" class="m-1" bindLabel="name"
+                       (change)="getCities($event)" (clear)="clearCountryAndCity()">
+            </ng-select>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div [formGroup]="cityForm">
+          <div class="form-group">
+            <label>Stad</label>
+            <ng-select name="city" placeholder="Stad" [items]="cities" bindValue="name"
+                       formControlName="name" [clearable]="true" class="m-1" bindLabel="name">
+            </ng-select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <H4>Gegevens medereizigers</H4>
+  <div formArrayName="travelers"
+    *ngFor="let traveler of bookingTravelerInformationForm.get('travelers')['controls'] ; let i = index;">
+      <div [formGroupName]="i">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label>Voornaam</label>
+              <input type="text" formControlName="firstName" class="form-control travellersInput FristName">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label>Achternaam</label>
+              <input type="text" formControlName="lastName" class="form-control travellersInput">
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</form>

@@ -1,0 +1,138 @@
+<section class="invoice-template" *ngIf="!loading">
+  <div class="card">
+    <div class="card-body p-3">
+      <div class="card-block" id="invoice-template">
+        <div class="row" id="invoice-company-details">
+          <div class="col-md-6 col-sm-12 text-center text-md-left">
+            <img alt="company logo" class="mb-2" height="120" src="assets/img/logo.png">
+            <ul class="px-0 list-unstyled">
+              <li class="text-bold-800">Scrum Air - Travel In Sprints</li>
+              <li>Rachelsmolen 1</li>
+              <li>5612 MA Eindhoven</li>
+              <li>Nederland</li>
+            </ul>
+          </div>
+          <div class="col-md-6 col-sm-12 text-center text-md-right">
+            <h2>ORDER</h2>
+            <p class="pb-3"># SAO-{{("00000" + booking.id).slice(-6)}}</p>
+            <ul class="px-0 list-unstyled">
+              <li></li>
+              <li class="lead text-bold-800"></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row pt-2" id="invoice-customer-details">
+          <div class="col-sm-12 text-left"><p class="text-muted">Klantgegevens</p>
+          </div>
+          <div class="col-md-6 col-sm-12  text-center text-md-left">
+            <ul class="px-0 list-unstyled">
+              <li class="text-bold-800">{{booking.booker.firstName}} {{booking.booker.lastName}}</li>
+              <li>{{booking.address.addressLine}}</li>
+              <li>{{booking.address.zipCode}} {{booking.address.city.name}}</li>
+              <li>{{booking.address.country.name}}</li>
+            </ul>
+          </div>
+          <div class="col-md-6 col-sm-12 text-center text-md-right"><p><span
+            class="text-muted">Order datum :</span> {{booking.bookingDate | date: 'd MMM y'}}</p>
+            <p><span class="text-muted"></span></p>
+            <p><span class="text-muted"></span></p></div>
+        </div>
+        <div class="pt-2" id="invoice-items-details">
+          <div class="row">
+            <div class="table-responsive col-sm-12">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Item en beschrijving</th>
+                  <th class="text-right">Prijs per persoon</th>
+                  <th class="text-right">Aantal</th>
+                  <th class="text-right">Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td><p>{{name}}</p>
+                    <p class="text-muted">hier komt de datum</p></td>
+                  <td class="text-right">€ {{booking.basePrice}}</td>
+                  <td class="text-right">{{booking.numberOfTravelers}}</td>
+                  <td class="text-right">€ {{booking.basePrice * booking.numberOfTravelers}}</td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr *ngFor="let bookingItem of booking.bookingItems; let i = index;">
+                  <th scope="row">{{i+2}}</th>
+                  <td><p>{{bookingItem.name}}</p>
+                    <p class="text-muted">hier komt de datum</p></td>
+                  <td class="text-right">€ {{bookingItem.price}}</td>
+                  <td class="text-right">{{bookingItem.numberOfAttendees}}</td>
+                  <td class="text-right">€ {{bookingItem.price * bookingItem.numberOfAttendees}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12 text-left"><p class="lead"></p>
+              <div class="row">
+                <div class="col-12">
+                  <table class="table table-borderless table-sm">
+                    <tbody>
+                    <tr>
+                      <td></td>
+                      <td class="text-right"></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td class="text-right"></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td class="text-right"></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td class="text-right"></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12"><p class="lead">Totaal te voldoen</p>
+              <div class="table-responsive">
+                <table class="table">
+                  <tbody>
+                  <tr>
+                    <td class="text-bold-800">Totaal</td>
+                    <td class="text-bold-800 text-right">€ {{booking.getTotalPrice()}}</td>
+                  </tr>
+                  <tr>
+                    <td>Al betaald</td>
+                    <td class="pink text-right" *ngIf="!booking.paid">(-) € 0.00</td>
+                    <td class="green text-right" *ngIf="booking.paid"> € {{booking.getTotalPrice()}}</td>
+                  </tr>
+                  <tr class="bg-grey bg-lighten-4">
+                    <td class="text-bold-800">Nog te betalen</td>
+                    <td class="text-bold-800 text-right" *ngIf="!booking.paid">€ {{booking.getTotalPrice()}}</td>
+                    <td class="text-bold-800 text-right" *ngIf="booking.paid">€ 0.00</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="invoice-footer">
+          <div class="row">
+            <div class="col-md-9 col-sm-12"><h6></h6>
+              <p>"I hate traveling, no traveler ever said..."</p></div>
+            <div class="col-md-3 col-sm-12 text-center">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

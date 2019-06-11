@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../../models/user';
 import {Authority} from '../../../../models/authority';
 import {UserService} from '../../../services/user.service';
@@ -17,8 +17,9 @@ export class UserCreateComponent implements OnInit {
   user: User;
   authorities: Array<Authority>;
   authority: Authority;
+  password: String;
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder) {
     this.user = new User();
     this.userService.getAuthorities().subscribe(
       (authoritiesResponse: Array<any>) => {
@@ -37,8 +38,8 @@ export class UserCreateComponent implements OnInit {
   setForm() {
     this.userCreateForm = new FormGroup({
       username: new FormControl(this.user.username, [Validators.minLength(4), Validators.required]),
-      firstname: new FormControl(this.user.firstname),
-      lastname: new FormControl(this.user.lastname),
+      firstName: new FormControl(this.user.firstName),
+      lastName: new FormControl(this.user.lastName),
       emailAddress: new FormControl(this.user.emailAddress, [Validators.minLength(6), Validators.email, Validators.required]),
       password: new FormControl([Validators.minLength(5)]),
       authorities: new FormControl(this.authority)
@@ -46,7 +47,9 @@ export class UserCreateComponent implements OnInit {
     });
   }
 
-  submitForm(userCreateForm: FormGroup) {
+  submitForm() {
+    this.password = this.user.password;
+    this.user = new User(this.userCreateForm.value);
     this.user.authorities = new Array<Authority>();
 
     for ( const authority of this.authorities) {
@@ -54,7 +57,7 @@ export class UserCreateComponent implements OnInit {
         this.user.addAuthority(authority);
       }
     }
-
+    this.user.password = this.password
     if (this.userCreateForm.valid) {
         this.userService.createUser(this.user).subscribe(
           (response: any) => {

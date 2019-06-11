@@ -1,0 +1,123 @@
+<div class="card">
+  <div class="card-content">
+    <div class="row" style="padding: 20px">
+      <div class="col-4">
+        <div class="payment-method creditcard" (click)="selectMethod('creditcard')">
+          <p class="logo">
+            <img src="assets/img/payment/visa-mastercard.png" alt="visa-mastercard">
+          </p>
+          <p>
+            Betalen met creditcard
+          </p>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="payment-method paypal" (click)="selectMethod('paypal')">
+          <p class="logo">
+            <img src="assets/img/payment/logo-paypal.png" alt="visa">
+          </p>
+          <p>
+            Betalen met paypal
+          </p>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="payment-method bankTransfer" (click)="selectMethod('bankTransfer')">
+           <p class="logo">
+           <i class="fas fa-money-check fa-4x"></i>
+          </p>
+          <p>
+            Betalen per bankoverschrijving
+          </p>
+
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showCreditCardForm && booking">
+
+      <form [formGroup]="creditCardForm" (ngSubmit)="doPayment(creditCardForm)">
+        <div class="form-group">
+          <label>KaartHouder</label>
+          <input type="text" formControlName="cardHolder" class="form-control">
+        </div>
+        <div class="row">
+          <div class="col-10">
+            <div class="form-group">
+              <label>KaartNummer</label>
+              <input type="number" formControlName="cardNumber" class="form-control" >
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label>CCV</label>
+              <input type="number" formControlName="ccv" class="form-control" >
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Bedrag</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">€</span>
+            </div>
+            <input type="number" formControlName="amount" class="form-control" [disabled]="true" >
+            <div class="input-group-append">
+              <span class="input-group-text">.00</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" [disabled]="!creditCardForm.valid" >Betalen</button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="showPayPalForm && booking">
+      <form [formGroup]="paypalForm" (ngSubmit)="doPayment(paypalForm)">
+        <div class="form-group">
+          <label>Naam</label>
+          <input type="text" formControlName="name" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>E-Mail</label>
+          <input type="email" formControlName="email" class="form-control" >
+        </div>
+        <div class="form-group">
+          <label>Bedrag</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">€</span>
+            </div>
+            <input type="number" formControlName="amount" class="form-control" [disabled]="true" >
+            <div class="input-group-append">
+              <span class="input-group-text">.00</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" [disabled]="!paypalForm.valid" >Betalen</button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="showBankTransferForm && booking">
+      <form [formGroup]="bankTransferForm" (ngSubmit)="doPayment(bankTransferForm)">
+        <div class="form-group">
+          <label>Bedrag</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">€</span>
+            </div>
+            <input type="number" formControlName="amount" class="form-control" [disabled]="true" >
+            <div class="input-group-append">
+              <span class="input-group-text">.00</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit"  class="btn btn-primary">Later betalen</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
