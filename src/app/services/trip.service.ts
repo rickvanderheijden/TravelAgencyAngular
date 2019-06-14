@@ -105,16 +105,12 @@ export class TripService {
     );
   }
 
-  getTripItems() {
-
-  }
-  
     /**
    * Search trips
    * @param SearchTripDTO
    */
-  searchTrips(searchDTO: SearchTripDTO): Observable<Array<Trip>> {
-    return this.http.post(environment.url + '/trips/searchTrips', searchDTO).pipe(
+    searchTripsByKeywordAndCountryOrContinent(searchDTO: SearchTripDTO): Observable<Array<Trip>> {
+    return this.http.post(environment.url + '/trips/searchTripsByKeywordAndCountryOrContinent', searchDTO).pipe(
       map((response: Array<any>) => {
         const trips: Array<Trip> = [];
         if (response !== null) {
