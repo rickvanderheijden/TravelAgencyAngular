@@ -3,7 +3,7 @@ import { TripService} from '../../../services/trip.service';
 
 import {Trip} from '../../../../models/trip';
 import {Router} from '@angular/router';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TripItem} from '../../../../models/TripItem';
 import {TripItemService} from '../../../services/trip-item.service';
 import {Destination} from '../../../../models/destination';
@@ -44,6 +44,8 @@ export class TripCreateComponent implements OnInit {
 
   enterTrip() {
     this.trip = new Trip(this.tripCreateForm.value);
+
+    console.log(this.trip, this.tripCreateForm.value);
     if (this.tripCreateForm.valid) {
       this.tripService.createTrip(this.trip).subscribe(
         (response: any) => {
@@ -57,31 +59,22 @@ export class TripCreateComponent implements OnInit {
   }
 
   setForm() {
-    this.tripCreateForm = this.formBuilder.group({
-      name: this.formBuilder.control(this.trip.name, [Validators.minLength(4), Validators.required]),
-      description: this.formBuilder.control(this.trip.description),
-      summary: this.formBuilder.control(this.trip.summary),
-      imageUrl: this.formBuilder.control(this.trip.imageUrl, [Validators.minLength(6), Validators.email, Validators.required]),
-      totalPrice: this.formBuilder.control(this.trip.totalPrice, [Validators.minLength(5)]),
-      discount: this.formBuilder.control(this.trip.discount),
-      destinations: this.formBuilder.array([this.dbDestinations])
-    });
+    this.tripCreateForm = this.formBuilder.group(({
+      name: this.formBuilder.control('',  Validators.required),
+      description: this.formBuilder.control('', Validators.required),
+      availableFrom: this.formBuilder.control('', Validators.required),
+      availableTo: this.formBuilder.control('', Validators.required),
+      summary: this.formBuilder.control('', Validators.required),
+      imageBlob: this.formBuilder.control('',  Validators.required),
+      totalPrice: this.formBuilder.control( '', Validators.required),
+      discount: this.formBuilder.control(''),
+      minimumNumberOfTravelers: this.formBuilder.control('' ,  Validators.required),
+      maximumNumberOfTravelers: this.formBuilder.control('',  Validators.required),
+      destinations: this.formBuilder.control('', Validators.required)
+    }));
   }
-
-  // get destinations() {
-  //   return this.formBuilder.group({
-  //     destinationName: '',
-  //     tripItems: this.formBuilder.array([this.tripItems])
-  //   });
-  // }
-
-  // get tripItems() {
-  //   return this.formBuilder.group({
-  //     tripItemName: ''
-  //   });
-  // }
-
-  // addDestination() {
-  //   (this.tripCreateForm.get('destinations') as FormArray).push(this.tripItems);
-  // }
+  updateImageBlob(event) {
+    this.trip.imageBlob = event.toString();
+    this.tripCreateForm.get('imageBlob').setValue(event.toString());
+  }
 }
