@@ -61,7 +61,7 @@ export class TripCreateComponent implements OnInit {
       name: this.formBuilder.control(this.trip.name, [Validators.minLength(4), Validators.required]),
       description: this.formBuilder.control(this.trip.description),
       summary: this.formBuilder.control(this.trip.summary),
-      imageUrl: this.formBuilder.control(this.trip.imageUrl, [Validators.minLength(6), Validators.email, Validators.required]),
+      imageUrl: this.formBuilder.control(this.trip.imageUrl, [Validators.minLength(6), Validators.required]),
       totalPrice: this.formBuilder.control(this.trip.totalPrice, [Validators.minLength(5)]),
       discount: this.formBuilder.control(this.trip.discount),
       destinations: this.formBuilder.array([this.dbDestinations])
