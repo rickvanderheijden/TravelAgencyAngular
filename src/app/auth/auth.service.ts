@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {catchError, map, tap} from 'rxjs/operators';
 import {User} from '../../models/user';
@@ -52,7 +52,7 @@ export class AuthenticationService {
           this.setCurrentUser();
         }),
         catchError(e => {
-          swal('Oops', e.message, 'error');
+          swal('Oops', 'Ongeldige inloggegevens', 'error');
           throw new Error(e);
         })
       );
