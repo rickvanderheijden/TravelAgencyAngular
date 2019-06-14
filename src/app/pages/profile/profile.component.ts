@@ -5,6 +5,7 @@ import swal from 'sweetalert2';
 import {BookingService} from '../../services/booking.service';
 import {Booking} from '../../../models/booking';
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -26,14 +27,17 @@ export class ProfileComponent implements OnInit {
   showBookingSection = false;
 
   bookings: Booking[];
+  editAvatar = false;
+  avatars: String[];
   constructor(private userService: UserService, private bookingService: BookingService) { }
 
   ngOnInit() {
-
+    this.avatars = ['avatar-01.png', 'avatar-02.png', 'avatar-03.png', 'avatar-04.png', 'avatar-05.png', 'avatar-06.png', 'avatar-07.png', 'avatar-08.png', 'avatar-09.png', 'avatar-10.png'];
     this.bookingService.getAllByToken().subscribe((response: Booking[]) => {
       this.bookings = response;
       this.user = new User(JSON.parse(sessionStorage.getItem('currentUser')));
     });
+
 
   }
 
@@ -86,5 +90,12 @@ export class ProfileComponent implements OnInit {
     this.showGroupSection = section === 'groups';
     this.showTripsSection = section === 'trips';
     this.showBookingSection = section === 'bookings';
+  }
+
+  setAvatar(avatar: String) {
+    this.user.avatar = avatar;
+    this.userUpdated = true;
+    this.editAvatar = false;
+
   }
 }
