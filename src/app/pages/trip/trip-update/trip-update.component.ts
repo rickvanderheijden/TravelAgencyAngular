@@ -73,33 +73,22 @@ export class TripUpdateComponent implements OnInit {
 
   setForm() {
     this.tripUpdateForm = this.formBuilder.group(({
-      name: this.formBuilder.control(this.trip.name, [Validators.minLength(4), Validators.required]),
-      description: this.formBuilder.control(this.trip.description),
-      summary: this.formBuilder.control(this.trip.summary),
-      imageUrl: this.formBuilder.control(this.trip.imageUrl, [Validators.minLength(6), Validators.email, Validators.required]),
-      totalPrice: this.formBuilder.control(this.trip.totalPrice, [Validators.minLength(5)]),
+      name: this.formBuilder.control(this.trip.name,  Validators.required),
+      description: this.formBuilder.control(this.trip.description, Validators.required),
+      availableFrom: this.formBuilder.control(this.trip.availableFrom, Validators.required),
+      availableTo: this.formBuilder.control(this.trip.availableTo, Validators.required),
+      summary: this.formBuilder.control(this.trip.summary, Validators.required),
+      imageBlob: this.formBuilder.control(this.trip.imageBlob,  Validators.required),
+      totalPrice: this.formBuilder.control( this.trip.totalPrice, Validators.required),
       discount: this.formBuilder.control(this.trip.discount),
-      minimumNumberOfTravelers: this.formBuilder.control(this.trip.minimumNumberOfTravelers, [ Validators.required]),
-      maximumNumberOfTravelers: this.formBuilder.control(this.trip.maximumNumberOfTravelers, [ Validators.required]),
-      destinations: this.formBuilder.array([this.dbDestination])
+      minimumNumberOfTravelers: this.formBuilder.control(this.trip.minimumNumberOfTravelers ,  Validators.required),
+      maximumNumberOfTravelers: this.formBuilder.control(this.trip.maximumNumberOfTravelers,  Validators.required),
+      destinations: this.formBuilder.control(this.trip.destinations, Validators.required)
     }));
   }
 
-  // get destinations() {
-  //   return this.formBuilder.group({
-  //     destinationName: null,
-  //     tripItems: this.formBuilder.control([this.tripItems])
-  //   });
-  // }
-  //
-  // get tripItems() {
-  //   return this.formBuilder.group({
-  //     tripItemName: null
-  //   });
-  // }
-  //
-  // addDestination() {
-  //   (this.tripUpdateForm.get('destinations') as FormArray).push(this.tripItems);
-  // }
-
+  updateImageBlob(event) {
+    this.trip.imageBlob = event.toString();
+    this.tripUpdateForm.get('imageBlob').setValue(event.toString());
+  }
 }
