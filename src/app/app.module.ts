@@ -27,6 +27,7 @@ import {TabsModule} from 'ngx-bootstrap';
 import {FileUploadModule} from 'ng2-file-upload';
 import {ModalModule} from 'ngx-bootstrap';
 import {HomeModule} from './pages/home/home.module';
+
 export function jwtOptionsFactory(tokenService) {
   return {
     tokenGetter: () => {
