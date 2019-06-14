@@ -100,7 +100,7 @@ export class TravelSummaryComponent implements OnInit {
   }
 
   decreaseNumberOfTravelers() {
-    if (this.booking.numberOfTravelers > this.travel.trip.minPersons) {
+    if (this.booking.numberOfTravelers > this.travel.trip.minimumNumberOfTravelers) {
       this.booking.numberOfTravelers--;
 
       const self = this;
@@ -113,7 +113,7 @@ export class TravelSummaryComponent implements OnInit {
   }
 
   async increaseNumberOfTravelers() {
-    let availability = this.travel.trip.maxPersons;
+    let availability = this.travel.trip.maximumNumberOfTravelers;
     const self = this;
 
     for (const hotel of this.travel.hotels) {

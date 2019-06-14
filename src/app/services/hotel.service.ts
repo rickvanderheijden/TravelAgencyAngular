@@ -14,7 +14,7 @@ export class HotelService {
   constructor(private http: HttpClient) { }
 
   updateHotel(hotel: Hotel) {
-    return this.http.put(environment.server + '/hotels/' + hotel.id, hotel).pipe(
+    return this.http.put(environment.server + '/hotels/', hotel).pipe(
       map(response => {
         return new Hotel(response);
       }),

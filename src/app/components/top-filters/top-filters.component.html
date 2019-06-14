@@ -26,18 +26,25 @@
           </div>
           <div class="col-12">
             <input class="form-control m-1" data-placement="top" data-title="Date Opened" data-toggle="tooltip"
-                   data-trigger="hover" id="dateFrom" name="dateFrom" type="date" [(ngModel)]="from" placeholder="van">
+                   data-trigger="hover" id="dateFrom" name="dateFrom" type="date" [(ngModel)]="from" placeholder="van" (change)="getTripsFrom(from)">
           </div>
           <div class="col-12">
             <input class="form-control m-1" data-placement="top" data-title="Date Opened"
-                   data-toggle="tooltip" data-trigger="hover" id="dateTill" name="dateTill" type="date" [(ngModel)]="till">
+                   data-toggle="tooltip" data-trigger="hover" id="dateTill" name="dateTill" type="date" [(ngModel)]="till" (change)="getTripsTo(till)">
           </div>
         </div>
       </div>
     </div>
     <div class="row">
+      <div class="col-12">
+        <div style="margin: 6px; width: 100%">
+          <input class="form-control" type="search" id="search6" (keydown)="onKeydown($event)" placeholder="Search" aria-label="Search" mdbInput>
+        </div>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-12 ">
-        <button class="btn btn-full btn-primary align-content-center valign-bottom" (click)="doFilter()" style="margin-left: 6px;"> {{trips?.length}} {{trips?.length  == 1 ? "reis" : "reizen"}} <i class="fa fa-chevron-right"></i> </button>
+        <label class="align-content-center valign-bottom" style="color: white; margin-left: 6px"> {{trips?.length}} {{trips?.length  == 1 ? "reis" : "reizen"}} </label>
       </div>
     </div>
   </div>
