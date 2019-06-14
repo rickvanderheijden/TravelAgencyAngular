@@ -44,8 +44,7 @@
     </div>
     <div class="row">
       <div class="col-12 ">
-        <h5  *ngIf="trips" class="align-content-center valign-bottom mt-2 text-bold-400" style="color: white; margin-left: 6px;"> {{trips?.length}} {{trips?.length  == 1 ? "reis" : "reizen"}} gevonden </h5>
-        <h5  *ngIf="!trips" class="align-content-center valign-bottom mt-2 text-bold-400" style="color: white; margin-left: 6px;"> Filter hier op reizen</h5>
+        <button class="btn btn-primary" *ngIf="trips" (click)="showSearchResult()">Toon {{trips.length}} {{trips.length == 1 ? 'reis' : 'reizen'}}</button>
       </div>
     </div>
   </div>

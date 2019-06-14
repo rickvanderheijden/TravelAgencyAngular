@@ -68,11 +68,9 @@ export class TopFiltersComponent implements OnInit {
     if (this.searchDTO.emptySearch()) {
       this.countries = this.allCountries;
       this.trips = this.allTrips;
-      this.foundTrips.emit(this.trips);
     } else {
       this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
         this.trips = trips;
-        this.foundTrips.emit(this.trips);
       })
     }
 
@@ -92,18 +90,15 @@ export class TopFiltersComponent implements OnInit {
     if (this.country != null) {
       this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
         this.trips = trips;
-        this.foundTrips.emit(trips);
       });
     } else if (this.continent !== null) {
       this.getCountries(this.continent);
     } else if (this.searchDTO.keyword !== null) {
       this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
         this.trips = trips;
-        this.foundTrips.emit(trips);
       });
     } else {
       this.trips = this.allTrips;
-      this.foundTrips.emit(this.trips);
     }
   }
 
@@ -115,11 +110,9 @@ export class TopFiltersComponent implements OnInit {
     }
     if (this.searchDTO.emptySearch()) {
       this.trips = this.allTrips;
-      this.foundTrips.emit(this.trips);
     } else {
       this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
         this.trips = trips;
-        this.foundTrips.emit(trips);
       });
     }
   }
@@ -136,32 +129,28 @@ export class TopFiltersComponent implements OnInit {
     } else {
       this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
         this.trips = trips;
-        this.foundTrips.emit(trips);
       });
     }
   }
 
   onKeydown(event) {
-    if (event.key === 'Enter') {
+    // if (event.key === 'Enter') {
       if (event.target.value) {
         this.searchDTO.keyword = event.target.value;
         this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
           this.trips = trips;
-          this.foundTrips.emit(trips);
         })
       } else {
         this.searchDTO.keyword = null;
         if (this.searchDTO.emptySearch()) {
           this.trips = this.allTrips;
-          this.foundTrips.emit(this.trips);
         } else {
           this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
             this.trips = trips;
-            this.foundTrips.emit(trips);
           })
         }
       }
-    }
+    // }
   }
 
   setSearchDto() {
@@ -170,6 +159,11 @@ export class TopFiltersComponent implements OnInit {
     this.searchDTO.keyword = null;
     this.searchDTO.from = null;
     this.searchDTO.to = null;
+  }
+
+  showSearchResult() {
+
+    this.foundTrips.emit(this.trips);
   }
 
 }
