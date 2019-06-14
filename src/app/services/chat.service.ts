@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {User} from '../../models/user';
 import {environment} from '../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import swal from 'sweetalert2';
+import {Message} from '../../models/message';
+import {TravelGroup} from '../../models/travelGroup';
+import {Booking} from '../../models/booking';
 
 @Injectable({
   providedIn: 'root'
@@ -15,16 +17,38 @@ export class ChatService {
   }
 
   /**
-   * Get all messages from user
+   * Get all message to travelgroup
+   * @param emailAddress
    */
-  getUsers() /*: Observable<Array<User>> */ {
-    return this.http.get(environment.server + '/users/all').pipe(
-      tap(response => {
-        // console.log(response);
-        // return new Array(new User(response));
+  getByTravelGroup(id): Observable<Array<Message>> {
+    return this.http.get(environment.server + '/messages/travelgroup/' + id).pipe(
+      map((response: Array<any>) => {
+        const messages: Array<Message> = [];
+        response.forEach(function (message, index) {
+          messages.push(new Message(message));
+        });
+        return messages;
       }),
       catchError(err => {
-        swal('Oops!!', 'Er ging iets niet helemaal je van hetje', 'error');
+        swal('getMessages', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(err);
+      }));
+  }
+
+  /**
+   * Get all messages from user
+   */
+  getByUser(id): Observable<Array<Message>> {
+    return this.http.get(environment.server + '/messages/userfrom/' + id).pipe(
+      map((response: Array<any>) => {
+        const messages: Array<Message> = [];
+        response.forEach(function (message, index) {
+          messages.push(new Message(message));
+        });
+        return messages;
+      }),
+      catchError(err => {
+        swal('getMessages', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(err);
       }));
   }
@@ -33,31 +57,35 @@ export class ChatService {
    * Get all messages to user
    * @param id
    */
-  getById(id): Observable<User> {
-    return this.http.get(environment.server + '/users/id/' + id).pipe(
-      map((response: any) => {
-        return new User(response);
+  getToUser(id): Observable<Array<Message>> {
+    return this.http.get(environment.server + '/messages/userto/' + id).pipe(
+      map((response: Array<any>) => {
+        const messages: Array<Message> = [];
+        response.forEach(function (message, index) {
+          messages.push(new Message(message));
+        });
+        return messages;
       }),
-      catchError(error => {
-        swal('Oops', 'Er is iets nie goed gegaan', 'error');
-        throw new Error(error);
-      })
-    );
+      catchError(err => {
+        swal('getMessages', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(err);
+      }));
   }
 
   /**
-   * Get all message to travelgroup
-   * @param emailAddress
+   * Send message
+   * @param Message
    */
-  getByEmailAddress(emailAddress) {
-    this.http.get(environment.server + '/users/' + emailAddress).pipe(
-      tap(response => {
-        // console.log(response);
+  createMessage(message: Message) {
+    return this.http.post(environment.server + '/messages/message', message).pipe(
+      map(response => {
+        return new Message(message);
       }),
       catchError(error => {
-        swal('Oops', 'Er is iets nie goed gegaan', 'error');
+        swal('createMessage', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(error);
       })
     );
   }
 }
+
