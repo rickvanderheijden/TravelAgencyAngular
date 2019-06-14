@@ -36,28 +36,23 @@ export class UserCreateComponent implements OnInit {
   }
 
   setForm() {
-    this.userCreateForm = new FormGroup({
-      username: new FormControl(this.user.username, [Validators.minLength(4), Validators.required]),
-      firstName: new FormControl(this.user.firstName),
-      lastName: new FormControl(this.user.lastName),
-      emailAddress: new FormControl(this.user.emailAddress, [Validators.minLength(6), Validators.email, Validators.required]),
-      password: new FormControl([Validators.minLength(5)]),
-      authorities: new FormControl(this.authority)
+    this.userCreateForm = this.formBuilder.group({
+      username: this.formBuilder.control('' , [Validators.minLength(4), Validators.required]),
+      firstName: this.formBuilder.control('', [Validators.minLength(1), Validators.required]),
+      lastName: this.formBuilder.control('', [Validators.minLength(1), Validators.required]),
+      emailAddress: this.formBuilder.control('', [Validators.minLength(6), Validators.email, Validators.required]),
+      password: this.formBuilder.control('',[Validators.minLength(4)]),
+      authorities: this.formBuilder.control(this.authority)
 
     });
   }
 
   submitForm() {
-    this.password = this.user.password;
     this.user = new User(this.userCreateForm.value);
-    this.user.authorities = new Array<Authority>();
+    this.user.password = this.userCreateForm.get('password').value;
 
-    for ( const authority of this.authorities) {
-      if (authority.id === this.authority) {
-        this.user.addAuthority(authority);
-      }
-    }
-    this.user.password = this.password
+    this.user.authorities = new Array<Authority>();
+    this.user.addAuthority(this.userCreateForm.get('authorities').value);
     if (this.userCreateForm.valid) {
         this.userService.createUser(this.user).subscribe(
           (response: any) => {

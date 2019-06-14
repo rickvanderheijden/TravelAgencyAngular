@@ -77,10 +77,10 @@ export class UserService {
     );
   }
 
-  deleteUser(id: any): Observable<boolean> {
-    return this.http.delete(environment.url + 'users/delete' + id).pipe(
+  deleteUser(id: any) {
+    return this.http.delete(environment.url + '/users/delete/' + id).pipe(
       map((response: any) => {
-        return response.json();
+        // return response.json();
       })
     );
   }
