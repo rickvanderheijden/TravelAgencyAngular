@@ -44,14 +44,16 @@
                   <input type="password" name="password" formControlName="password"  class="form-control" [(ngModel)]="user.password">
                 </div>
               </div>
-              <ng-select [items]="authorities"
-                         formControlName="authorities"
-                         bindLabel="name"
-                         bindValue="id"
-                         [multiple]="false"
-                         [(ngModel)]="authority">
-              </ng-select>
-
+              <div class="form-group">
+                <label>Wachtwoord</label>
+                  <ng-select [items]="authorities"
+                             formControlName="authorities"
+                             bindLabel="name"
+                             bindValue="id"
+                             [multiple]="false"
+                             [(ngModel)]="authority">
+                  </ng-select>
+            </div>
               <div class="form-actions">
                 <div class="row">
                   <div class="col-12">

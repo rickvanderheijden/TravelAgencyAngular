@@ -58,6 +58,7 @@ export class DestinationUpdateComponent implements OnInit {
 
   updateDestination() {
     this.destination = new Destination(this.destinationUpdateForm.value);
+    console.log(this.destination)
     if (this.destination) {
       this.destinationService.updateDestination(this.destination).subscribe(
         (response: any) => {
