@@ -92,5 +92,16 @@ export class GeographyService {
         throw new Error(err);
       }));
   }
+
+  getCountryByCityName(name: any) {
+    return this.http.get(environment.server + '/geo/getCountryByCityName/' + name).pipe(
+      map((response: any) => {
+        return new Country(response);
+      }),
+      catchError(err => {
+        swal('getCountryByCityName', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(err);
+      }));
+  }
 }
 ;
