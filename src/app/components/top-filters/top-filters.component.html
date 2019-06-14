@@ -44,7 +44,8 @@
     </div>
     <div class="row">
       <div class="col-12 ">
-        <label class="align-content-center valign-bottom" style="color: white; margin-left: 6px"> {{trips?.length}} {{trips?.length  == 1 ? "reis" : "reizen"}} </label>
+        <h5  *ngIf="trips" class="align-content-center valign-bottom mt-2 text-bold-400" style="color: white; margin-left: 6px;"> {{trips?.length}} {{trips?.length  == 1 ? "reis" : "reizen"}} gevonden </h5>
+        <h5  *ngIf="!trips" class="align-content-center valign-bottom mt-2 text-bold-400" style="color: white; margin-left: 6px;"> Filter hier op reizen</h5>
       </div>
     </div>
   </div>
