@@ -4,7 +4,7 @@
       <div class="col-6">
         <div class="row">
           <div class="col-12">
-            <h5 class="text-light" style="margin-left: 6px;">Waar wil je Naartoe?</h5>
+            <h5 class="text-light" style="margin-left: 6px;">Waar wil je naartoe?</h5>
           </div>
           <div class="col-12">
             <ng-select  name="continent" placeholder="Continent" [items]="continents" bindLabel="name" bindValue="name"
@@ -13,7 +13,7 @@
             </ng-select>
           </div>
           <div class="col-12">
-            <ng-select name="country" placeholder="land" [items]="countries" bindLabel="name" bindValue="name"
+            <ng-select name="country" placeholder="Land" [items]="countries" bindLabel="name" bindValue="name"
                        [(ngModel)]="country" [clearable]="true" (change)="getTrips(country)" class="m-1" >
             </ng-select>
           </div>
@@ -38,7 +38,7 @@
     <div class="row">
       <div class="col-12">
         <div style="margin: 6px; width: 100%">
-          <input class="form-control" type="search" id="search6" (keydown)="onKeydown($event)" placeholder="Search" aria-label="Search" mdbInput>
+          <input class="form-control" type="search" id="search6" (keydown)="onKeydown($event)" placeholder="Zoeken" aria-label="Search" mdbInput>
         </div>
       </div>
     </div>
