@@ -44,7 +44,7 @@ export class SelectedItemCardComponent implements OnInit {
     if (destinationLength >= 2) {
       const firstDestination = this.travel.trip.destinations[0].city.name;
       const lastDestination = this.travel.trip.destinations[destinationLength - 1].city.name;
-      this.mapsComponent.setDirection(firstDestination, lastDestination)
+      this.mapsComponent.setDirection(firstDestination, lastDestination);
 
       if (destinationLength > 2) {
         for (let index = 1; index < (destinationLength - 1); index++) {

@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.tripId = null;
-    this.loading = false; 
+    this.loading = false;
   }
 
   onTripIdChanged(id: number) {
