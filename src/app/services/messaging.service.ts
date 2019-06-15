@@ -15,8 +15,9 @@ export class MessagingService {
     const stompConfig: StompConfig = {
       url: socketUrl,
       headers: {
-        login: '',
-        passcode: ''
+        login: sessionStorage.getItem('access_token'),
+        passcode: sessionStorage.getItem('access_token'),
+        token: sessionStorage.getItem('access_token'),
       },
       heartbeat_in: 0,
       heartbeat_out: 20000,
