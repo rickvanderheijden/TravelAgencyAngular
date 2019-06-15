@@ -48,10 +48,9 @@ describe('MapsComponent', function () {
     component.setDirection(null, null);
     expect(component.origin).toBe(null);
     expect(component.destination).toBe(null);
-
     component.setDirection({lat: 51.66083, lng: 5.61944}, {lat: 51.6482102, lng: 5.6771949});
-    expect(component.origin).toEqual({lat: 51.66083, lng: 5.61944});
-    expect(component.destination).toEqual({lat: 51.6482102, lng: 5.6771949});
+    expect(component.origin).toEqual(Object({ lat: 51.66083, lng: 5.61944 }));
+    expect(component.destination).toEqual(Object({ lat: 51.6482102, lng: 5.6771949 }));
   });
 
   it('addWaypoint should add a waypoint to the waypoints array', () => {
