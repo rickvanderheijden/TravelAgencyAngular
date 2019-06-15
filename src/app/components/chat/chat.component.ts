@@ -60,7 +60,7 @@ export class ChatComponent implements OnInit {
       }
     )
     this.chatForm = this.formBuilder.group({
-      message: this.formBuilder.control('', Validators.required)
+      message: this.formBuilder.control('', [Validators.required, Validators.maxLength(200)])
     });
   }
 

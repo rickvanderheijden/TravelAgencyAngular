@@ -1,6 +1,7 @@
 .chat-application {
   overflow: hidden;
-  margin-top: 10px;
+  margin-top: 1px;
+  border-left: 2px solid #e4e7ed;
 }
 .content-overlay {
   top: 0;
@@ -11,9 +12,11 @@
   display: block;
   z-index: 2;
   visibility: hidden;
+  border-left: 2px solid #e7e7e7;
 }
 .chat-application .chat-name {
   border-bottom: 1px solid #e4e7ed;
+  border-right: 1px solid #e4e7ed;
 }
 .chat-application .chat-app-window {
   padding: 20px 30px;

@@ -46,12 +46,12 @@
   </section>
   <section class="chat-app-form bg-blue-grey bg-lighten-5">
     <form class="chat-app-input row mt-2" [formGroup]="chatForm">
-      <fieldset class="form-group position-relative col-8 m-0 px-3">
-        <input class="form-control"  formControlName="message" placeholder="Type hier je bericht" type="text">
+      <fieldset class="form-group position-relative col-9 m-0 px-3">
+        <input class="form-control"  formControlName="message" placeholder="Type hier je bericht" type="text" (keyup.enter)="sendMessage()">
       </fieldset>
-      <fieldset class="form-group position-relative col-4 m-0">
+      <fieldset class="form-group position-relative col-3 m-0">
         <button class="btn btn-raised btn-primary px-4" type="button" [disabled]="!chatForm.valid" (click)="sendMessage()">
-          <span class="d-none d-lg-inline-block ml-1">verzenden </span>
+          <span class="d-none d-lg-inline-block">verzenden </span>
         </button>
       </fieldset>
     </form>
