@@ -18,7 +18,6 @@ export class TripCreateComponent implements OnInit {
   tripCreateForm: FormGroup;
   trip: Trip;
   loading = false;
-  dbTripItems: Array<TripItem>;
   dbDestinations: Array<Destination>;
 
   constructor(private tripService: TripService, private router: Router, private tripItemService: TripItemService, private destinationService: DestinationService, private formBuilder: FormBuilder) {
@@ -27,16 +26,8 @@ export class TripCreateComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    // this.tripItemService.getTripItems().subscribe((tripItems: any) => {
-    //   this.dbTripItems = tripItems;
-    //   this.setForm();
-    //   this.loading = false;
-    // });
     this.destinationService.getDestinations().subscribe((destinations: any) => {
       this.dbDestinations = destinations;
-
-
-      console.log(destinations);
       this.setForm();
       this.loading = false;
     });
@@ -44,8 +35,6 @@ export class TripCreateComponent implements OnInit {
 
   enterTrip() {
     this.trip = new Trip(this.tripCreateForm.value);
-
-    console.log(this.trip, this.tripCreateForm.value);
     if (this.tripCreateForm.valid) {
       this.tripService.createTrip(this.trip).subscribe(
         (response: any) => {

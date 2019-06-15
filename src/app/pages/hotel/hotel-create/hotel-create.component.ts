@@ -33,39 +33,42 @@ export class HotelCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.countries = new Array();
-    this.geographyService.getAllCountries().subscribe((countries: Array<any>) => {
-      countries.forEach((country) => {
-        if (country.cities.length) {
-          this.countries.push({name: country.name});
-        }
-      });
-      this.hotel = new Hotel();
-      this.countryForm = this.formBuilder.group({
-        name: this.formBuilder.control(this.hotel.address.country.name, [Validators.required])
-      });
-      this.cityForm = this.formBuilder.group({
-        name: this.formBuilder.control(this.hotel.address.city.name, [Validators.required])
-      }, );
-      this.cityForm.get('name').disable();
-      this.addressForm = this.formBuilder.group({
-        addressLine: this.formBuilder.control(this.hotel.address.addressLine, [Validators.required]),
-        zipCode: this.formBuilder.control(this.hotel.address.zipCode, [Validators.required]),
-        city: this.cityForm,
-        country: this.countryForm
-      });
-      this.hotelCreateForm = this.formBuilder.group({
-        name: this.formBuilder.control(this.hotel.name, [ Validators.required] ),
-        description: this.formBuilder.control(this.hotel.description, [ Validators.required] ),
-        price: this.formBuilder.control(this.hotel.price, [ Validators.required] ),
-        date: this.formBuilder.control(this.hotel.date, [ Validators.required] ),
-        imageBlob: this.formBuilder.control(this.hotel.imageBlob, [ Validators.required] ),
-        address: this.addressForm,
-      });
-      this.loaded = true;
+    this.countries = [];
+    this.cities = [];
+    this.geographyService.getAllCities().subscribe( (cities: City[]) => {
+      this.cities =  cities;
+      this.setForm();
+    });
+    this.geographyService.getAllCountries().subscribe((countries: Country[]) => {
+      this.countries = countries;
     });
   }
 
+  setForm() {
+    this.hotel = new Hotel();
+    this.countryForm = this.formBuilder.group({
+      name: this.formBuilder.control(this.hotel.address.country.name, [Validators.required])
+    });
+    this.cityForm = this.formBuilder.group({
+      name: this.formBuilder.control(this.hotel.address.city.name, [Validators.required])
+    }, );
+    this.addressForm = this.formBuilder.group({
+      addressLine: this.formBuilder.control(this.hotel.address.addressLine, [Validators.required]),
+      zipCode: this.formBuilder.control(this.hotel.address.zipCode, [Validators.required]),
+      city: this.cityForm,
+      country: this.countryForm
+    });
+    this.hotelCreateForm = this.formBuilder.group({
+      name: this.formBuilder.control(this.hotel.name, [ Validators.required] ),
+      description: this.formBuilder.control(this.hotel.description, [ Validators.required] ),
+      price: this.formBuilder.control(this.hotel.price, [ Validators.required] ),
+      availableFrom: this.formBuilder.control(this.hotel.availableFrom, [ Validators.required] ),
+      availableTo: this.formBuilder.control(this.hotel.availableTo, [ Validators.required] ),
+      imageBlob: this.formBuilder.control(this.hotel.imageBlob, [ Validators.required] ),
+      address: this.addressForm,
+    });
+    this.loaded = true;
+  }
   enterHotel() {
     this.hotel = new Hotel(this.hotelCreateForm.value);
     if (this.hotel) {
@@ -82,7 +85,7 @@ export class HotelCreateComponent implements OnInit {
 
 
   getCities(event: any) {
-    this.cities = new Array();
+    this.cities = [];
     if (event !== undefined) {
       this.geographyService.getCitiesByCountryName(event.name).subscribe((cities: Array<City>) => {
         this.cities = cities;
@@ -98,12 +101,18 @@ export class HotelCreateComponent implements OnInit {
   clearCountryAndCity() {
     this.cities = null;
     const city = this.cityName;
-    city.disable();
     city.setValue(null);
     this.countryForm.get('name').setValue(null);
   }
 
   get cityName() {
     return this.cityForm.get('name');
+  }
+
+  getCountry(event: City) {
+    this.geographyService.getCountryByCityName(event.name).subscribe( response => {
+      this.hotel.address.country = response;
+      this.countryForm.get('name').setValue(response.name);
+    });
   }
 }

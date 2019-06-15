@@ -2,11 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {HotelService} from '../../../services/hotel.service';
 import {Hotel} from '../../../../models/hotel';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {TripItemService} from '../../../services/trip-item.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NgOption} from '@ng-select/ng-select';
 import {City} from '../../../../models/city';
 import {GeographyService} from '../../../services/geography.service';
+import swal from 'sweetalert2';
+import {Country} from '../../../../models/country';
 
 @Component({
   selector: 'app-hotel-update',
@@ -35,19 +36,18 @@ export class HotelUpdateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.countries = new Array<NgOption>();
-    this.geoService.getAllCountries().subscribe((countries: Array<any>) => {
-      countries.forEach((country, index) => {
-        if (country.cities.length) {
-          this.countries.push({name: country.name});
-        }
-      });
+    this.countries = [];
+    this.cities = [];
+    this.geoService.getAllCities().subscribe( (cities: City[]) => {
+      this.cities =  cities;
       this.hotelService.getById(this.route.snapshot.params.id).subscribe((data: any) => {
         this.hotel = new Hotel(data);
-          this.setForm();
+        this.setForm();
         this.loading = false;
       });
-
+    });
+    this.geoService.getAllCountries().subscribe((countries: Country[]) => {
+      this.countries = countries;
     });
   }
 
@@ -57,6 +57,7 @@ export class HotelUpdateComponent implements OnInit {
     if (this.hotelUpdateForm.valid) {
       this.hotelService.updateHotel(this.hotel).subscribe(
         (response: any) => {
+          swal('Succes!', 'Hotel is succesvol aangepast!', 'success');
           this.back();
         });
     }
@@ -85,7 +86,8 @@ export class HotelUpdateComponent implements OnInit {
     name: this.formBuilder.control(this.hotel.name, [ Validators.required] ),
     description: this.formBuilder.control(this.hotel.description, [ Validators.required] ),
     price: this.formBuilder.control(this.hotel.price, [ Validators.required] ),
-    date: this.formBuilder.control(this.hotel.date, [ Validators.required] ),
+    availableFrom: this.formBuilder.control(this.hotel.availableFrom, [ Validators.required] ),
+    availableTo: this.formBuilder.control(this.hotel.availableTo, [ Validators.required] ),
     imageBlob: this.formBuilder.control(this.hotel.imageBlob, [ Validators.required] ),
     address: this.addressForm,
   });
@@ -97,8 +99,8 @@ export class HotelUpdateComponent implements OnInit {
     this.hotelUpdateForm.get('imageBlob').setValue(event)
   }
 
-  getCities(event) {
-    this.cities = new Array();
+  getCities(event: any) {
+    this.cities = [];
     if (event !== undefined) {
       this.geoService.getCitiesByCountryName(event.name).subscribe((cities: Array<City>) => {
         this.cities = cities;
@@ -110,12 +112,18 @@ export class HotelUpdateComponent implements OnInit {
   clearCountryAndCity() {
     this.cities = null;
     const city = this.cityName;
-    city.disable();
     city.setValue(null);
     this.countryForm.get('name').setValue(null);
   }
 
   get cityName() {
     return this.cityForm.get('name');
+  }
+
+  getCountry(event: City) {
+    this.geoService.getCountryByCityName(event.name).subscribe( response => {
+      this.hotel.address.country = response;
+      this.countryForm.get('name').setValue(response.name);
+    });
   }
 }
