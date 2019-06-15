@@ -121,4 +121,16 @@ export class UserService {
       sessionStorage.setItem('currentUser', JSON.stringify(updated_user));
     }
   }
+
+  sendMessage(message) {
+    return this.http.post(environment.server + '/users/message', message).pipe(
+      map(response => {
+        console.log(response);
+      }),
+      catchError(error => {
+        swal('createTrip', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(error);
+      })
+    );
+  }
 }
