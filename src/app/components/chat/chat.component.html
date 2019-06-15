@@ -1,0 +1,46 @@
+<div class="chatbody">
+  <div class="panel panel-primary">
+    <div class="panel-heading top-bar">
+      <div class="col-md-8 col-xs-8">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span>Chat met {{travelGroup.name}}</h3>
+      </div>
+    </div>
+    <div class="panel-body msg_container_base" style="min-height: 300px">
+      <div *ngFor="let messagefront of messages">
+        <div *ngIf="messagefront.userFrom==user.id" class="row msg_container base_sent">
+          <div class="col-md-10 col-xs-10">
+            <div class="messages msg_sent">
+              <p>{{messagefront.message}}</p>
+            </div>
+          </div>
+          <div class="col-md-2 col-xs-2 avatar">
+            <img class=" img-responsive "
+                 src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg">
+          </div>
+        </div>
+        <div *ngIf="messagefront.userFrom!=user.id" class="row msg_container base_receive">
+          <div class="col-md-2 col-xs-2 avatar">
+            <img class=" img-responsive "
+                 src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg">
+          </div>
+          <div class="col-md-10 col-xs-10">
+            <div class="messages msg_receive">
+              <p>{{messagefront.message}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <div class="input-group">
+        <input class="form-control input-sm chat_input" id="btn-input" placeholder="Write your message here..."
+               type="text" [(ngModel)]="message.message" (submit)="sendMessage()" />
+        <span class="input-group-btn">
+          <button class="btn btn-primary btn-sm" type="button" id="btn-chat"><i
+            class="fas fa-paper-plane" (click)="sendMessage()"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

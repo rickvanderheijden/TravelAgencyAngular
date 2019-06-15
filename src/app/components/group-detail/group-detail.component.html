@@ -1,38 +1,12 @@
 <div style="max-height: 200px; overflow: hidden;">
-  <section>
-    <div class="users-list-padding" style="float:left; width: 25%; overflow-y: auto">
-      <div *ngFor="let user of users">
-        <div style="float: left">
-          <i class="fas fa-user-circle userlogo"></i>
-        </div>
-        <div style="margin-left: 5px"><p>{{user.firstName + " " + user.lastName}}</p></div>
+  <div class="users-list-padding" style="float:left; overflow-y: auto">
+    <div *ngFor="let user of users">
+      <div style="float: left">
+        <i class="fas fa-user-circle userlogo"></i>
       </div>
+      <div style="margin-left: 5px"><p>{{user.firstName + " " + user.lastName}}</p></div>
     </div>
-    <div style="float: right; width: 75%;">
-      <div style=" float: top; height: 80%;">
-        <div style="float: left;"><p>
-          userFirstName userLastName
-        </p></div>
-        <div style="float: right; margin: 0px;">
-          <div><p>Wanneer gaan we weer op reis?</p>
-          </div>
-          <div>
-            <p>Iets in Azie lijkt me wel leuk.</p>
-          </div>
-          <div>
-            <p>Of misschien amerika?</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section>
-    <div style="height: 20%; float: bottom; overflow: auto">
-      <button _ngcontent-c7="" class="btn btn-raised btn-primary px-4" type="button"><i _ngcontent-c7=""
-                                                                                        class="fa fa-paper-plane-o d-block d-xl-inline-block d-lg-none p-0"></i><span
-        _ngcontent-c7="" class="d-none d-lg-inline-block ml-1">Send</span></button>
-    </div>
-  </section>
+  </div>
 </div>
 
 <h1>Demo for Messaging Service</h1>
