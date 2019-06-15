@@ -12,6 +12,7 @@ export class User {
     public avatar?: String;
     public authorities: Array<Authority>;
     public travelGroups: Array<TravelGroup>;
+    public online?: boolean;
 
     constructor(model?) {
         if (typeof model !== typeof undefined) {

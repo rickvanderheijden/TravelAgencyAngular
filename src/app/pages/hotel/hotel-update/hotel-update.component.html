@@ -39,9 +39,14 @@
                 <input type="text" name="imageBlob" formControlName="imageBlob" class="form-control" [hidden]="true">
               </div>
               <div class="form-group">
-                <label>Datum</label>
+                <label>Besckikbaar van</label>
                 <input class="form-control m-1" data-placement="top" data-title="Date Opened" data-toggle="tooltip"
-                       data-trigger="hover" name="dateFrom" type="date" formControlName="date" [valueAsDate]="hotel.date">
+                       data-trigger="hover" name="dateFrom" type="date" formControlName="availableFrom" [valueAsDate]="hotel.availableFrom" >
+              </div>
+              <div class="form-group">
+                <label>Besckikbaar tot</label>
+                <input class="form-control m-1" data-placement="top" data-title="Date Opened" data-toggle="tooltip"
+                       data-trigger="hover" name="dateFrom" type="date" formControlName="availableTo" [valueAsDate]="hotel.availableTo" >
               </div>
 
               <div [formGroup]="addressForm">
@@ -53,25 +58,23 @@
                   <label>Postcode</label>
                   <input type="text" name="zipcode" formControlName="zipCode" class="form-control">
                 </div>
+                <div [formGroup]="cityForm">
+                  <div class="form-group">
+                    <label>Stad</label>
+                    <ng-select placeholder="Stad" [items]="cities" bindValue="name" (change)="getCountry($event)"
+                               formControlName="name" [clearable]="true" class="m-1" bindLabel="name">
+                    </ng-select>
+                  </div>
+                </div>
                 <div [formGroup]="countryForm">
                   <div class="form-group">
                     <label>Land</label>
-                    <ng-select name="country" placeholder="land" [items]="countries" bindValue="name"
+                    <ng-select placeholder="land" [items]="countries"
                                formControlName="name" [clearable]="true" class="m-1" bindLabel="name"
                                (change)="getCities($event)" (clear)="clearCountryAndCity()">
                     </ng-select>
                   </div>
                 </div>
-                <div [formGroup]="cityForm">
-                  <div class="form-group">
-                    <label>Stad</label>
-                    <ng-select name="city" placeholder="Stad" [items]="cities" bindValue="name"
-                               formControlName="name" [clearable]="true" class="m-1" bindLabel="name">
-                    </ng-select>
-                  </div>
-                </div>
-
-
               </div>
               <div class="form-actions">
                 <div class="row">

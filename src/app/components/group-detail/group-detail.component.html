@@ -1,10 +1,10 @@
-<div style="max-height: 200px; overflow: hidden;">
-  <div class="users-list-padding" style="float:left; overflow-y: auto">
-    <div *ngFor="let user of users">
-      <div style="float: left">
-        <i class="fas fa-user-circle userlogo"></i>
-      </div>
-      <div style="margin-left: 5px"><p>{{user.firstName + " " + user.lastName}}</p></div>
-    </div>
+<div class="media-list media-bordered">
+  <div class="media" *ngFor="let user of users">
+    <a>
+      <img alt="Generic placeholder image"
+           class="media-object d-flex mr-2 round-media"
+           [src]="'assets/img/portrait/avatars/' + user.avatar"
+           style="width: 50px;height: 50px;"></a>
+    <div class="media-body"><h6 class="media-heading" style="margin-top: 20px ">{{user.firstName + " " + user.lastName}}</h6></div>
   </div>
 </div>

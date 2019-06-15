@@ -60,7 +60,7 @@ export class BookingReadComponent implements OnInit {
     name: this.formBuilder.control(this.hotel.name, [ Validators.required] ),
     description: this.formBuilder.control(this.hotel.description, [ Validators.required] ),
     price: this.formBuilder.control(this.hotel.price, [ Validators.required] ),
-    date: this.formBuilder.control(this.hotel.date, [ Validators.required] ),
+    date: this.formBuilder.control(this.hotel.availableFrom, [ Validators.required] ),
     imageBlob: this.formBuilder.control(this.hotel.imageBlob, [ Validators.required] ),
     address: this.addressForm,
   });

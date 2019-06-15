@@ -103,7 +103,7 @@ export class AuthenticationService {
         return user;
       }),
       catchError(
-        error => {console.log(error.message); throw new Error(error)})
+        error => {console.log(error.chatMessage); throw new Error(error)})
     );
   }
 
