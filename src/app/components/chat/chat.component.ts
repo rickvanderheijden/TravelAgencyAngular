@@ -32,9 +32,9 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage() {
-    this.message.userFrom = this.user.id
+    this.message.senderId = this.user.id
     this.message.travelGroupTo = this.travelGroup.id;
-    this.message.userTo = null;
+    this.message.receiverId = null;
 
     this.chatService.createMessage(this.message).subscribe(response => this.messages.push(new Message(response)));
     this.message = new Message();

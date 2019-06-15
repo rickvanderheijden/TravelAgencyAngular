@@ -1,20 +1,18 @@
-import {Address} from './Address';
-
 export class Message {
 
   public id?: number;
   public message?: String;
-  public userFrom?: number;
+  public senderId?: number;
   public travelGroupTo?: number;
-  public userTo?: number;
+  public receiverId?: number;
 
   constructor(model?) {
     if (typeof model !== typeof undefined) {
       this.id = model.id;
       this.message = model.message;
-      this.userFrom = model.userFrom;
+      this.senderId = model.senderId;
       this.travelGroupTo = model.travelGroupTo;
-      this.userTo = model.userTo;
+      this.receiverId = model.receiverId;
     }
   }
 }
