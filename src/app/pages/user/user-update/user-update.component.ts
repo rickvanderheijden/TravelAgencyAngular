@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service';
 import swal from 'sweetalert2';
@@ -45,15 +45,18 @@ export class UserUpdateComponent implements OnInit {
     });
   }
   setForm() {
+
+
     this.userUpdateForm = this.formBuilder.group({
       username: this.formBuilder.control(this.user.username, [Validators.minLength(4), Validators.required]),
       firstName: this.formBuilder.control(this.user.firstName),
       lastName: this.formBuilder.control(this.user.lastName),
       emailAddress: this.formBuilder.control(this.user.emailAddress, [Validators.minLength(6), Validators.email, Validators.required]),
-      password: this.formBuilder.control([Validators.minLength(5)]),
-      password_repeat: this.formBuilder.control
+      password: this.formBuilder.control('', [ Validators.minLength(5)]),
+      password_repeat: this.formBuilder.control('')
     });
   }
+
   ngOnInit() {
   }
 

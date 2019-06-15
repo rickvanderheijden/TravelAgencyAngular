@@ -7,6 +7,7 @@ import {TripItem} from '../../../models/TripItem';
 import {Trip} from '../../../models/trip';
 import {Hotel} from '../../../models/hotel';
 import {MapsComponent} from '../maps/maps.component';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-selected-item-card',
@@ -77,8 +78,19 @@ export class SelectedItemCardComponent implements OnInit {
   }
 
   removeTripItem(tripItem: TripItem) {
-    this.travel.removeTripItem(tripItem);
-    this.tripItemOut.emit(tripItem);
+    swal({
+      title: 'Weet je het zeker?',
+      text: 'Weet je zeker dat je het product van de reis wil verwijderen',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ja, verwijderen!',
+      cancelButtonText: 'Nee, product behouden'
+    }).then((result) => {
+      if (result.value) {
+        this.travel.removeTripItem(tripItem);
+        this.tripItemOut.emit(tripItem);
+      }
+    });
   }
 
   bookTravel() {

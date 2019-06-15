@@ -40,7 +40,7 @@ export class TopFiltersComponent implements OnInit {
 
     this.geoService.getAllContinents().subscribe((continents: any) => {
       this.continents = continents;
-    })
+    });
 
     this.geoService.getAllCountries().subscribe((countries: any) => {
       this.countries = countries;
@@ -96,6 +96,11 @@ export class TopFiltersComponent implements OnInit {
       });
     } else if (this.continent !== null) {
       this.getCountries(this.continent);
+    } else if (this.searchDTO.keyword !== null) {
+      this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
+        this.trips = trips;
+        this.foundTrips.emit(trips);
+      });
     } else {
       this.trips = this.allTrips;
       this.foundTrips.emit(this.trips);

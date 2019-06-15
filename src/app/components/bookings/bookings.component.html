@@ -1,5 +1,11 @@
 <section class="bookings">
   <div class="row">
+    <div class="col-12">
+      <p>Hieronder worden ge geboekte reizen getoond. <a routerLink="/">klik hier</a> om onze reizen te bekijken en boeken! </p>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-4">
       <ul class="list-group">
         <a [class]="booking.id == selectedBooking?.id ? 'list-group-item active' : 'list-group-item'"
@@ -12,7 +18,7 @@
     <div class="col-8">
       <app-booked-item [booking]="selectedBooking" [trip]="trip" *ngIf="selectedBooking"></app-booked-item>
       <div *ngIf="!selectedBooking">
-        <p>Nog geen boeking gekozen</p>
+        <p style="text-align: center; padding: 20px; background: #e7e7e7;">Nog geen boeking gekozen <a routerLink="/">klik hier</a> om een reis te boeken</p>
       </div>
     </div>
   </div>

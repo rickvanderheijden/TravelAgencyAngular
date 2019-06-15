@@ -1,4 +1,6 @@
 .navbar{ height: 100px;}
 .header-navbar {max-width: 1170px!important; margin: 0 auto;}
 .navbar-header{padding-left: 0px;}
-#navbarSupportedContent p{margin-right: 5px;}
+#navbarSupportedContent p{margin-right: 5px; margin-top: 50px}
+.nav-item.dropdown img{background: rgba(255,255,255, 0.5); border: 2px solid #fff; border-radius: 50%;}
+#dropdownBasic3:after{position: absolute; bottom: 15px;}

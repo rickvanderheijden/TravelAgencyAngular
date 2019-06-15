@@ -13,12 +13,13 @@
                 <ul class="navbar-nav" *ngIf="loggedIn()">
                     <li class="nav-item" ngbDropdown [placement]="placement">
                         <a class="nav-link position-relative" id="dropdownBasic3"  ngbDropdownToggle>
-                          <i class="fas fa-user fa-3x"></i>
+                          <i *ngIf="user.avatar == null" class="fas fa-user fa-3x"></i>
+                          <img *ngIf="user.avatar !== null" [src]="'assets/img/portrait/avatars/' + user.avatar" width="50"/>
                             <p class="d-none">User Settings</p>
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="text-left">
                           <a class="dropdown-item py-1" routerLink="/bookings" *ngIf="user.isAdmin()">
-                            <i class="fas fa-hotel mr-2"></i>
+                            <i class="fas fa-ticket-alt mr-2"></i>
                             <span>Boekingen</span>
                           </a>
                           <a class="dropdown-item py-1" routerLink="/hotel" *ngIf="user.isAdmin()">
@@ -26,7 +27,7 @@
                             <span>Hotels</span>
                           </a>
                             <a class="dropdown-item py-1" routerLink="/destination" *ngIf="user.isAdmin()">
-                              <i class="fas fa-map-pin mr-2"></i>
+                              <i class="fas fa-map-marked-alt mr-2"></i>
                                 <span>Bestemmingen</span>
                             </a>
                             <a class="dropdown-item py-1" href="javascript:;" *ngIf="user.isAdmin()" routerLink="/user">
