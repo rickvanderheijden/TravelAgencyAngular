@@ -54,7 +54,7 @@ export class SelectedItemCardComponent implements OnInit {
     } else if (destinationLength === 1) {
       const destination = this.travel.trip.destinations[0].city.name;
       this.mapsComponent.setDirection(destination, destination);
-      this.mapsComponent.setZoom(10);
+      this.mapsComponent.setZoom(12);
     }
 
 
@@ -98,8 +98,6 @@ export class SelectedItemCardComponent implements OnInit {
   }
 
   bookTravel() {
-    console.log('bookTravel');
-    console.log(this.travel);
     this.router.navigateByUrl('/booktravel', { state: { travel: this.travel } });
   }
 

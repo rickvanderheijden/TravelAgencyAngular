@@ -18,8 +18,6 @@ export class MapsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = false;
-    console.log('ngOnInit');
-    console.log(this.waypoints);
   }
 
   setZoom(value: number) {

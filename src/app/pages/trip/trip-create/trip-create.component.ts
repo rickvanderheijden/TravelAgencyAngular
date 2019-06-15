@@ -36,7 +36,6 @@ export class TripCreateComponent implements OnInit {
   enterTrip() {
     this.trip = new Trip(this.tripCreateForm.value);
 
-    console.log(this.trip, this.tripCreateForm.value);
     if (this.tripCreateForm.valid) {
       this.tripService.createTrip(this.trip).subscribe(
         (response: any) => {
