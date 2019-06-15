@@ -10,14 +10,13 @@ export class MapsComponent implements OnInit {
   loading = true;
   latitude = 45.678418;
   longitude = 7.809007;
-  origin;
-  destination;
+  origin = '';
+  destination = '';
   zoom = 50;
-  waypoints: object[];
+  waypoints: object[] = new Array();
   travelMode: string;
 
   ngOnInit(): void {
-    this.waypoints = new Array();
     this.loading = false;
   }
 
@@ -29,6 +28,7 @@ export class MapsComponent implements OnInit {
     this.origin = org;
     this.destination = dest;
   }
+
   addWaypoint(location: any, stopover: boolean) {
     const waypoint = {location, stopover};
     this.waypoints.push(waypoint);

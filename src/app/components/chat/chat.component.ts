@@ -58,7 +58,7 @@ export class ChatComponent implements OnInit {
         this.messages = response;
         this.loading = false;
       }
-    )
+    );
     this.chatForm = this.formBuilder.group({
       message: this.formBuilder.control('', Validators.required)
     });

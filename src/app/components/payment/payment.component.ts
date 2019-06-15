@@ -90,7 +90,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
       this.paymentService.createPayment(this.payment).subscribe((payment: Payment) => {
         this.paymentOut.emit(payment);
       });
-    } else if(this.showPayPalForm) {
+    } else if (this.showPayPalForm) {
       this.payment.method = 'PAYPAL';
       this.paymentService.createPayment(this.payment).subscribe((payment: Payment) => {
         this.paymentOut.emit(payment);
