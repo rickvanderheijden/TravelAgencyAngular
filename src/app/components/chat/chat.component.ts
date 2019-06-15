@@ -26,7 +26,7 @@ export class ChatComponent implements OnInit {
     this.chatService.getByTravelGroup(this.travelGroup.id).subscribe(
       (response: any) => {
         this.messages = response;
-        this.loading = false; 
+        this.loading = false;
       }
     )
   }
