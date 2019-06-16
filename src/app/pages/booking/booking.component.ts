@@ -4,14 +4,19 @@ import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 import {Booking} from '../../../models/booking';
 import {BookingService} from '../../services/booking.service';
+import {Payment} from '../../../models/Payment';
+import {User} from '../../../models/user';
 
 @Component({
   selector: 'app-booking-actions',
   template: `
     <div>
       <span>
-        <button class="btn btn-raised btn-success" routerLink="/booking/read/{{rowData.id}}">
+        <button class="btn btn-raised btn-success" routerLink="/bookings/read/{{rowData.id}}">
           <i class="ft-eye"></i>
+        </button>
+        <button class="btn btn-raised btn-info" style="margin-left: 2px;" (click)="setPaid(rowData.id)" [disabled]="rowData.paid" title="set to paid">
+          <i class="fas fa-wallet"></i>
         </button>
       </span>
     </div>
@@ -29,10 +34,16 @@ export class BookingActionButtonsComponent implements ViewCell, OnInit {
   modalRef: NgbModalRef;
 
   constructor (
-    private router: Router
+    private router: Router,
+    private service: BookingService
   ) { }
 
   ngOnInit() {
+
+  }
+
+  setPaid(id: any) {
+    this.service.setPaid(id);
 
   }
 }
@@ -54,28 +65,59 @@ export class BookingComponent implements OnInit {
           title: 'ID',
           sortDirection: 'desc',
         },
-        name: {
-          title: 'Naam',
-        },
-        address: {
-          title: 'Adres',
-          valuePrepareFunction: (value) => {
-            return value !== null ? value.city.name + ' - ' + value.country.name : 'NB';
+        booker: {
+          title: 'Geboekt door',
+          filterFunction(cell?: User, search?: string): boolean {
+           return cell.firstName.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1 || cell.lastName.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1;
           },
-          filterFunction(cell?: any, search?: string): boolean {
-            if ( cell.city.name.indexOf(search) !== -1 || cell.country.name.indexOf(search) !== -1) {
-              return true;
-            }
-            return false;
+          sort: false,
+          valuePrepareFunction: (value: User) => {
+            return value.firstName + ' ' + value.lastName;
           }
         },
-        price: {
+        numberOfTravelers: {
+          title: 'Aantal reizigers',
+          sort: false
+        },
+        payments: {
           title: 'prijs',
           type: 'text',
-          filter: true,
-          sort: true,
+          filterFunction(cell?: Array<Payment>, search?: string): boolean {
+            let amount = 0;
+            cell.forEach(payment => {
+              amount += payment.amount;
+            });
+            return String(amount).indexOf(search) !== -1;
+          },
+          sort: false,
+          valuePrepareFunction: (value: Array<Payment>) => {
+            let amount = 0;
+            value.forEach(payment => {
+              amount += payment.amount;
+            });
+            return '€' + amount;
+          }
+        },
+        paid: {
+          title: 'Voldaan',
+          type: 'text',
+          filter: {
+            type: 'list',
+              config: {
+                selectText: 'Toon allen',
+                    list: [
+                      {value: true, title: 'Ja'},
+                      {value: false, title: 'Nee'},
+                    ]
+              }
+          },
+          sort: false,
           valuePrepareFunction: (value) => {
-            return '€' + value;
+            if (value) {
+              return 'Ja';
+            } else {
+              return 'Nee'
+            }
           }
         },
         actions: {

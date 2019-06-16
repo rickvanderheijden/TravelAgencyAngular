@@ -106,4 +106,15 @@ export class BookingService {
         throw new Error(err);
       }));
   }
+
+  setPaid(id: any) {
+    return this.http.get( environment.url + '/bookings/paid/' + id).pipe(
+      map((response: any) => {
+          return true;
+      }),
+      catchError(err => {
+        swal('getBookings', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(err);
+      }));
+  }
 }

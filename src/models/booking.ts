@@ -3,15 +3,18 @@ import {Travel} from './travel';
 import {User} from './user';
 import {Address} from './Address';
 import {Payment} from './Payment';
+import {Traveler} from './traveler';
 
 export class Booking {
 
   public id: number;
   public tripId: number;
   public basePrice: number;
+  public totalPrice: number;
   public booker: User;
   public address: Address;
   public numberOfTravelers: number;
+  public travelers: Traveler[];
   public bookingItems: BookingItem[];
   public payments: Payment[];
   public booked: boolean;
@@ -23,9 +26,11 @@ export class Booking {
       this.id = model.id;
       this.tripId = model.tripId;
       this.basePrice = model.basePrice;
+      this.totalPrice = model.totalPrice;
       this.booker = model.booker;
       this.address = model.address;
       this.numberOfTravelers = model.numberOfTravelers;
+      this.travelers = model.travelers;
       this.bookingItems = model.bookingItems;
       this.payments = model.payments;
       this.booked = model.booked;
@@ -34,6 +39,7 @@ export class Booking {
     } else {
       this.address = new Address();
       this.bookingDate = new Date();
+      this.travelers = [];
     }
   }
 
@@ -80,4 +86,9 @@ export class Booking {
 
     return totalPriceBooking;
   }
-}
+  addTraveler(traveler: Traveler) {
+    this.travelers.push(traveler);
+  }
+  setTravelers(travelers: Traveler[]) {
+    this.travelers = travelers;
+}}
