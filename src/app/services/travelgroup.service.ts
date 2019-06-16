@@ -93,4 +93,8 @@ export class TravelGroupService {
       })
     );
   }
+
+  getTravelGroup(id: any) {
+    return undefined;
+  }
 }

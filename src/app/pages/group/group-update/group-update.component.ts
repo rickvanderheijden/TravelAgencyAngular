@@ -4,7 +4,7 @@ import {TravelGroup} from '../../../../models/travelGroup';
 import {User} from '../../../../models/user';
 import {TravelGroupService} from '../../../services/travelgroup.service';
 import {UserService} from '../../../services/user.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 
 @Component({
@@ -23,7 +23,9 @@ export class GroupUpdateComponent implements OnInit {
   constructor(
     private travelGroupService: TravelGroupService,
     private userService: UserService,
-    private location: Location) {
+    private router: Router,
+    private location: Location,
+    private route: ActivatedRoute) {
     this.travelgroup = new TravelGroup();
     this.allUsers = new Array<User>();
   }
@@ -31,6 +33,7 @@ export class GroupUpdateComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.setForm();
+    this.travelgroup = this.travelGroupService.getTravelGroup(this.route.snapshot.params.id);
     this.userService.getUsers().subscribe(
       (response: any) => {
         this.allUsers = response;
