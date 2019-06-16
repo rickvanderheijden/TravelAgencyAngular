@@ -41,7 +41,7 @@ export class UserCreateComponent implements OnInit {
       firstName: this.formBuilder.control('', [Validators.minLength(1), Validators.required]),
       lastName: this.formBuilder.control('', [Validators.minLength(1), Validators.required]),
       emailAddress: this.formBuilder.control('', [Validators.minLength(6), Validators.email, Validators.required]),
-      password: this.formBuilder.control('',[Validators.minLength(4)]),
+      password: this.formBuilder.control('', [Validators.minLength(4)]),
       authorities: this.formBuilder.control(this.authority)
 
     });

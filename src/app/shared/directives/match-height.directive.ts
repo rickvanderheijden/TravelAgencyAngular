@@ -22,12 +22,12 @@ export class MatchHeightDirective implements AfterViewChecked {
     matchHeights(parent: HTMLElement, className: string) {
         // match height logic here
 
-        if (!parent) return;
+        if (!parent) { return };
 
         // step 1: find all the child elements with the selected class name
         const children = parent.getElementsByClassName(className);
 
-        if (!children) return;
+        if (!children) { return };
 
         Array.from(children).forEach((x: HTMLElement) => {
             x.style.height = 'initial';

@@ -34,7 +34,6 @@ export class TripComponent implements OnInit {
     this.tripService.getById(this.tripId).subscribe(
       (response: any) => {
         this.trip = response;
-        console.log(this.trip);
         this.destinations = this.trip.destinations;
         this.travel = new Travel(this.trip);
         this.loading = false;

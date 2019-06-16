@@ -6,6 +6,7 @@ import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {User} from '../../../models/user';
 import {Booking} from '../../../models/booking';
+import {Hotel} from '../../../models/hotel';
 
 @Component({
   selector: 'app-booking-traveler-information',
@@ -44,6 +45,10 @@ export class BookingTravelerInformationComponent implements OnInit {
         }
       });
 
+      this.geographyService.getAllCities().subscribe( (cities: City[]) => {
+        this.cities =  cities;
+        });
+
       this.setForm();
 
       this.bookingTravelerInformationForm.statusChanges
@@ -71,6 +76,13 @@ export class BookingTravelerInformationComponent implements OnInit {
     this.countryForm.get('name').setValue(null);
   }
 
+  getCountry(event: City) {
+    this.geographyService.getCountryByCityName(event.name).subscribe( response => {
+      this.booking.address.country = response;
+      this.countryForm.get('name').setValue(response.name);
+    });
+  }
+
   get cityName() {
     return this.cityForm.get('name');
   }
@@ -83,8 +95,6 @@ export class BookingTravelerInformationComponent implements OnInit {
     this.cityForm = this.formBuilder.group({
       name: this.formBuilder.control(this.booking.address.city.name, [Validators.required])
     }, );
-
-    this.cityForm.get('name').disable();
 
     this.addressForm = this.formBuilder.group({
       addressLine: this.formBuilder.control(this.booking.address.addressLine, [Validators.required]),

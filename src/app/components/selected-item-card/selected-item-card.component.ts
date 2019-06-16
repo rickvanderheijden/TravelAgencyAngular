@@ -39,19 +39,23 @@ export class SelectedItemCardComponent implements OnInit {
     this.travel.trip = this.trip;
     this.travel.totalPrice = this.trip.totalPrice;
 
-    if (this.travel.trip.destinations.length >= 2) {
-      const firstDestination = this.travel.trip.destinations[0].city.name;
-      const lastDestination = this.travel.trip.destinations[this.travel.trip.destinations.length - 1].city.name;
-      this.mapsComponent.setDirection(firstDestination, lastDestination)
-    }
+    const destinationLength = this.travel.trip.destinations.length;
 
-    if (this.travel.trip.destinations.length === 1) {
+    if (destinationLength >= 2) {
+      const firstDestination = this.travel.trip.destinations[0].city.name;
+      const lastDestination = this.travel.trip.destinations[destinationLength - 1].city.name;
+      this.mapsComponent.setDirection(firstDestination, lastDestination);
+
+      if (destinationLength > 2) {
+        for (let index = 1; index < (destinationLength - 1); index++) {
+          this.mapsComponent.addWaypoint(this.travel.trip.destinations[index].city.name, true);
+        }
+      }
+    } else if (destinationLength === 1) {
       const destination = this.travel.trip.destinations[0].city.name;
       this.mapsComponent.setDirection(destination, destination);
-      this.mapsComponent.setZoom(1000);
+      this.mapsComponent.setZoom(12);
     }
-
-    // TODO: Add waypoints
 
 
     // Hotel are static for now. Add them to travel.
@@ -94,8 +98,6 @@ export class SelectedItemCardComponent implements OnInit {
   }
 
   bookTravel() {
-    console.log('bookTravel');
-    console.log(this.travel);
     this.router.navigateByUrl('/booktravel', { state: { travel: this.travel } });
   }
 
