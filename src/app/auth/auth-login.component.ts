@@ -58,6 +58,7 @@ export class AuthLoginComponent implements OnInit {
 
   doRegister(form: any, valid: boolean) {
     if ( valid ) {
+      this.auth.avatar = 'avatar-01.png';
       this.authService.register(this.auth).subscribe(
         response => {
           if (response === true) {

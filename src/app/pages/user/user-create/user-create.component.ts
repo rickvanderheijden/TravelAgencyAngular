@@ -50,6 +50,7 @@ export class UserCreateComponent implements OnInit {
   submitForm() {
     this.user = new User(this.userCreateForm.value);
     this.user.password = this.userCreateForm.get('password').value;
+    this.user.avatar = 'avatar-01.png';
 
     this.user.authorities = new Array<Authority>();
     this.user.addAuthority(this.userCreateForm.get('authorities').value);
