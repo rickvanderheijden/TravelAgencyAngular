@@ -88,10 +88,7 @@ export class HotelComponent implements OnInit {
             return value !== null ? value.city.name + ' - ' + value.country.name : 'NB';
           },
           filterFunction(cell?: any, search?: string): boolean {
-            if ( cell.city.name.indexOf(search) !== -1 || cell.country.name.indexOf(search) !== -1) {
-              return true;
-            }
-            return false;
+            return cell.city.name.indexOf(search) !== -1 || cell.country.name.indexOf(search) !== -1;
           }
         },
         price: {

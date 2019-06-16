@@ -49,7 +49,6 @@ export class ChatComponent implements OnInit {
             }
           } else {
             const chatMessage = new ChatMessage(response);
-            // this.messages.unshift(chatMessage);
             this.messages.push(chatMessage);
           }
         }
@@ -75,7 +74,6 @@ export class ChatComponent implements OnInit {
     this.chatMessage.travelGroupTo = this.travelGroup.id;
     this.chatMessage.receiverId = null;
     this.chatMessage.message = this.chatForm.get('message').value;
-    // this.messagingService.send('/server-receiver', this.message);
 
     this.chatService.createMessage(this.chatMessage).subscribe();
     this.chatMessage = new ChatMessage();
