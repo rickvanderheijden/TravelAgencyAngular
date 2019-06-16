@@ -17,8 +17,6 @@
         <div class="card-body">
           <div class="card-block">
             <form *ngIf="authorities != null" [formGroup]="userCreateForm" novalidate (ngSubmit)="submitForm()">
-
-              <pre>{{userCreateForm.value | json}}</pre>
               <div class="form-group">
                 <label>Gebruikersnaam</label>
                 <input type="text" formControlName="username" autocomplete="off"  class="form-control" >

@@ -73,6 +73,7 @@ export class UserUpdateComponent implements OnInit {
         this.loading = true;
         this.password = this.user.password;
         this.user = new User(this.userUpdateForm.value);
+        this.user.id = this.userId;
         this.user.password = this.password;
         this.userService.updateUser(this.user)
           .subscribe(response => {
