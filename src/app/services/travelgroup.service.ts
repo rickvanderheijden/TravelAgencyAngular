@@ -66,6 +66,22 @@ export class TravelGroupService {
     );
   }
 
+  /**
+   * Update a group
+   * @param group
+   */
+  updateTravelGroup(group: TravelGroup) {
+    return this.http.put(environment.server + '/travelgroups/updateTravelGroup', group).pipe(
+      map(response => {
+        return new TravelGroup(response);
+      }),
+      catchError(error => {
+        swal('updateTravelGroup', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(error);
+      })
+    );
+  }
+
   addUser(group: TravelGroup, id) {
     return this.http.post(environment.server + '/travelgroups/addUser/' + id, group).pipe(
       map(response => {

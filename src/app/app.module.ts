@@ -27,6 +27,7 @@ import {TabsModule} from 'ngx-bootstrap';
 import {FileUploadModule} from 'ng2-file-upload';
 import {ModalModule} from 'ngx-bootstrap';
 import {HomeModule} from './pages/home/home.module';
+import { GroupUpdateComponent } from './pages/group/group-update/group-update.component';
 
 export function jwtOptionsFactory(tokenService) {
   return {
@@ -43,6 +44,7 @@ export function jwtOptionsFactory(tokenService) {
     AppComponent,
     FullLayoutComponent,
     AuthLoginComponent,
+    GroupUpdateComponent,
   ],
   imports: [
     CommonModule,

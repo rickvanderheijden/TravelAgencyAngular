@@ -1,0 +1,81 @@
+<section id="group-update">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4 class="card-title">Groep bewerken</h4>
+            </div>
+            <div class="col-sm-6">
+              <a (click)="back()" class="btn btn-raised btn-grey float-sm-right">
+                Terug
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-block">
+            <form (ngSubmit)="submitForm(groupUpdateForm)" [formGroup]="groupUpdateForm" novalidate>
+              <div class="form-group">
+                <label>Naam</label>
+                <input [(ngModel)]="travelgroup.name" class="form-control" formControlName="name" name="groupname"
+                       type="text">
+              </div>
+            </form>
+            <div _ngcontent-c2="" class="position-relative has-icon-right">
+              <ng-select name="user" placeholder="Search by username" [items]="allUsers" bindLabel="username" bindValue="id"
+                         [(ngModel)]="user" [clearable]="true" (change)="addUser(user)" class="m-1">
+              </ng-select>
+              <section _ngcontent-c11="" id="extended">
+                <div _ngcontent-c11="" class="row text-left">
+                  <div _ngcontent-c11="" class="col-sm-12">
+                    <div _ngcontent-c11="" class="card">
+                      <div _ngcontent-c11="" class="card-header">
+                        <h4 _ngcontent-c11="" class="card-title">Users</h4>
+                      </div>
+                      <div _ngcontent-c11="" class="card-content">
+                        <div _ngcontent-c11="" class="card-body">
+                          <table _ngcontent-c11="" class="table table-responsive-md text-center">
+                            <thead _ngcontent-c11="">
+                            <tr _ngcontent-c11="">
+                              <th _ngcontent-c11="">First Name</th>
+                              <th _ngcontent-c11="">Last Name</th>
+                              <th _ngcontent-c11=""></th>
+                            </tr>
+                            </thead>
+                            <tbody _ngcontent-c11="">
+                            <tr _ngcontent-c11="" *ngFor="let userR of travelgroup.users">
+                              <td _ngcontent-c11="">{{userR.firstName}}</td>
+                              <td _ngcontent-c11="">{{userR.lastName}}</td>
+                              <td _ngcontent-c11="">
+                                <a _ngcontent-c11="" class="danger p-0" data-original-title="" title="" (click)="removeUser(userR.id)">
+                                  <i _ngcontent-c11="" class="ft-x font-medium-3 mr-2"></i>
+                                </a>
+                              </td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="form-actions">
+              <div class="row">
+                <div class="col-12">
+                  <button class="btn btn-primary" (click)="submitForm()">
+                    <span>Groep opslaan</span>
+                    <i *ngIf="loading" class="ft-loader spinner right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
