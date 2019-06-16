@@ -33,14 +33,19 @@ export class ChatComponent implements OnInit {
   constructor(private chatService: ChatService,  private toastr: ToastrService, private formBuilder: FormBuilder) {
     this.messagingService = new MessagingService(WEBSOCKET_URL, EXAMPLE_URL);
     // Subscribe to its stream (to listen on messages)
+    let send = false;
+    let count = 0;
     this.messagingService.stream().subscribe((message: Message) => {
 
       if (message.body.indexOf('{') !== -1) {
         const response: any = JSON.parse(message.body);
+
         if (response.connected !== typeof undefined) {
           if (response.connected) {
-            if (response.userId !== this.user.id) {
+            if (response.userId !== this.user.id && !send && count === 0) {
               this.toastr.success(response.username + ' is online gekomen');
+              send = true;
+              count++;
             }
           } else {
             const chatMessage = new ChatMessage(response);
@@ -59,7 +64,7 @@ export class ChatComponent implements OnInit {
         this.messages = response;
         this.loading = false;
       }
-    )
+    );
     this.chatForm = this.formBuilder.group({
       message: this.formBuilder.control('', [Validators.required, Validators.maxLength(200)])
     });
