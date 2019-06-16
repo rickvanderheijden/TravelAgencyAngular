@@ -4,7 +4,7 @@
       <div class="col-6">
         <div class="row">
           <div class="col-12">
-            <h5 class="text-light" style="margin-left: 6px;">Waar wil je Naartoe?</h5>
+            <h5 class="text-light" style="margin-left: 6px;">Waar wil je naartoe?</h5>
           </div>
           <div class="col-12">
             <ng-select  name="continent" placeholder="Continent" [items]="continents" bindLabel="name" bindValue="name"
@@ -13,7 +13,7 @@
             </ng-select>
           </div>
           <div class="col-12">
-            <ng-select name="country" placeholder="land" [items]="countries" bindLabel="name" bindValue="name"
+            <ng-select name="country" placeholder="Land" [items]="countries" bindLabel="name" bindValue="name"
                        [(ngModel)]="country" [clearable]="true" (change)="getTrips(country)" class="m-1" >
             </ng-select>
           </div>
@@ -26,18 +26,26 @@
           </div>
           <div class="col-12">
             <input class="form-control m-1" data-placement="top" data-title="Date Opened" data-toggle="tooltip"
-                   data-trigger="hover" id="dateFrom" name="dateFrom" type="date" [(ngModel)]="from" placeholder="van">
+                   data-trigger="hover" id="dateFrom" name="dateFrom" type="date" [(ngModel)]="from" placeholder="van" (change)="getTripsFrom(from)">
           </div>
           <div class="col-12">
             <input class="form-control m-1" data-placement="top" data-title="Date Opened"
-                   data-toggle="tooltip" data-trigger="hover" id="dateTill" name="dateTill" type="date" [(ngModel)]="till">
+                   data-toggle="tooltip" data-trigger="hover" id="dateTill" name="dateTill" type="date" [(ngModel)]="till" (change)="getTripsTo(till)">
           </div>
         </div>
       </div>
     </div>
     <div class="row">
+      <div class="col-12">
+        <div style="margin: 6px; width: 100%">
+          <input class="form-control" type="search" id="search6" (keydown)="onKeydown($event)" placeholder="Zoeken" aria-label="Search" mdbInput [(ngModel)]="searchDTO.keyword">
+        </div>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-12 ">
-        <button class="btn btn-full btn-primary align-content-center valign-bottom" (click)="doFilter()" style="margin-left: 6px;"> {{trips?.length}} {{trips?.length  == 1 ? "reis" : "reizen"}} <i class="fa fa-chevron-right"></i> </button>
+        <h5  *ngIf="trips" class="align-content-center valign-bottom mt-2 text-bold-400" style="color: white; margin-left: 6px;"> {{trips?.length}} {{trips?.length  == 1 ? "reis" : "reizen"}} gevonden </h5>
+        <h5  *ngIf="!trips" class="align-content-center valign-bottom mt-2 text-bold-400" style="color: white; margin-left: 6px;"> Filter hier op reizen</h5>
       </div>
     </div>
   </div>

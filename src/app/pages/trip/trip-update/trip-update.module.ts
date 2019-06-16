@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { TripUpdateComponent } from './trip-update.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgSelectModule} from '@ng-select/ng-select';
+import {TripItemCreateModule} from '../../trip-item/create/trip-item-create.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    NgSelectModule
+    NgSelectModule,
+    TripItemCreateModule
   ],
   declarations: [
     TripUpdateComponent,

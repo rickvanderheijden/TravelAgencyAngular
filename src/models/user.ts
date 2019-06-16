@@ -9,8 +9,10 @@ export class User {
     public firstName?: String;
     public lastName?: String;
     public emailAddress?: String;
+    public avatar?: String;
     public authorities: Array<Authority>;
     public travelGroups: Array<TravelGroup>;
+    public online?: boolean;
 
     constructor(model?) {
         if (typeof model !== typeof undefined) {
@@ -19,6 +21,7 @@ export class User {
             this.firstName = model.firstName;
             this.lastName = model.lastName;
             this.emailAddress = model.emailAddress;
+            this.avatar = model.avatar;
             this.authorities = new Array<Authority>();
             this.travelGroups = new Array<TravelGroup>();
             if ( model.authorities !== undefined ) {

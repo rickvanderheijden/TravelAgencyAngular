@@ -17,10 +17,10 @@ export class Service {
       this.serviceType = model.serviceType;
       this.name = model.name;
       this.description = model.description;
-      this.imageUrl = model.imageUrl;
+      this.imageUrl = model.imageBlob;
       this.address = model.address;
       this.price = model.price;
-      this.date = model.date;
+      this.date = model.availableFrom;
     }
   }
 }

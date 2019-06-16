@@ -19,43 +19,56 @@
             <form [formGroup]="tripUpdateForm">
               <div class="form-group">
                 <label>Naam</label>
-                <input type="text" name="username" formControlName="name" class="form-control">
+                <input type="text" formControlName="name" class="form-control">
               </div>
               <div class="form-group">
                 <label>Omschrijving</label>
-                <input type="text" name="description" formControlName="description" class="form-control">
+                <textarea formControlName="description" class="form-control"></textarea>
               </div>
               <div class="form-group">
                 <label>Samenvatting</label>
-                <input type="text" name="summary" formControlName="summary" class="form-control">
+                <textarea type="text"  formControlName="summary" class="form-control"></textarea>
               </div>
               <div class="form-group">
-                <label>Afbeelding URL</label>
-                <input type="text" name="imageUrl" formControlName="imageUrl" class="form-control">
+                <label>Foto</label>
+                <app-drop-zone [srcUrl]="trip.imageBlob" (imageBlob)="updateImageBlob($event)" ></app-drop-zone>
               </div>
               <div class="form-group">
                 <label>Totaal prijs</label>
-                <input type="number" name="totalPrice" formControlName="totalPrice" class="form-control">
+                <input type="number" formControlName="totalPrice" class="form-control">
               </div>
               <div class="form-group">
                 <label>Korting</label>
-                <input type="number" name="discount" formControlName="discount" class="form-control">
+                <input type="number" formControlName="discount" class="form-control">
               </div>
               <div class="form-group">
-                <label>Minimaal aantal personen</label>
-                <input type="number" name="minimumNumberOfTravelers" formControlName="minimumNumberOfTravelers" class="form-control">
+                <label>Beschikbaar van</label>
+                <input type="date" formControlName="availableFrom" autocomplete="off"  class="form-control" [valueAsDate]="trip.availableFrom">
               </div>
               <div class="form-group">
-                <label>Maximaal aantal personen</label>
-                <input type="number" name="maximumNumberOfTravelers" formControlName="maximumNumberOfTravelers" class="form-control">
+                <label>Beschikbaar tot</label>
+                <input type="date" formControlName="availableTo" autocomplete="off"  class="form-control" [valueAsDate]="trip.availableTo">
               </div>
               <div class="form-group">
-                <label>Trip Items</label>
+                <label>Minimaal aantal reizigers</label>
+                <input type="number" formControlName="minimumNumberOfTravelers" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Maximaal aantal reizigers</label>
+                <input type="number"  formControlName="maximumNumberOfTravelers" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Bestemmingen</label>
                 <ng-select [items]="dbDestination"
                            formControlName="destinations"
-                            bindLabel="name"
-                           [multiple]="false"
-                            >
+                           [multiple]="true"
+                >
+                  <ng-template ng-label-tmp let-item="item">
+                    <span >{{item.name}}</span>
+                  </ng-template>
+                  <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                    <span [ngOptionHighlight]="search">{{item.name}}</span>
+                  </ng-template>
                 </ng-select>
               </div>
               <div class="form-actions">

@@ -6,6 +6,9 @@ import {Router} from '@angular/router';
 
 import {DestinationService} from '../../../services/destination.service';
 import swal from 'sweetalert2';
+import {Hotel} from '../../../../models/hotel';
+import {City} from '../../../../models/city';
+import {TripItem} from '../../../../models/TripItem';
 
 @Component({
   selector: 'app-destination-actions',
@@ -82,13 +85,19 @@ export class DestinationComponent implements OnInit {
           title: 'Hotel',
           valuePrepareFunction: (value) => {
             return value !== null ? value.name : 'Geen';
+          },
+          sort: false,
+          filterFunction(cell?: Hotel, search?: string): boolean {
+            return cell.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
           }
         },
         city: {
           title: 'Stad',
           type: 'text',
-          filter: true,
-          sort: true,
+          filterFunction(cell?: City, search?: string): boolean {
+            return cell.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+          },
+          sort: false,
           valuePrepareFunction: (value) => {
             return value.name;
           }
@@ -96,8 +105,10 @@ export class DestinationComponent implements OnInit {
         tripItems: {
           title: 'Aantal TripItems',
           type: 'text',
-          filter: true,
-          sort: true,
+          filterFunction(cell?: TripItem[], search?: string): boolean {
+            return String(cell.length).indexOf(search) !== -1;
+          },
+          sort: false,
           valuePrepareFunction: (value) => {
             return value.length;
           }

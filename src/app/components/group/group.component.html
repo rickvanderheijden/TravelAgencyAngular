@@ -5,8 +5,7 @@
         <div class="card-header">
           <div class="row">
             <div class="col-sm-6">
-              <h4 class="card-title">Groepen </h4>
-              <button class="btn btn-primary" (click)="createGroup()">
+              <button (click)="createGroup()" class="btn btn-primary">
                 <span>Groep aanmaken</span>
                 <i *ngIf="loading" class="ft-loader spinner right"></i>
               </button>
@@ -17,9 +16,12 @@
           <div class="card-block">
             <div *ngIf="!loading">
               <ngb-accordion activeIds="ngb-panel-0" closeOthers="true">
-                <ngb-panel *ngFor="let travelGroup of groups" title='{{travelGroup.name}}' class="accordion" style="background: #e7e7e7">
+                <ngb-panel *ngFor="let travelGroup of groups" class="accordion" title='{{travelGroup.name}}'>
                   <ng-template ngbPanelContent>
-                    <app-group-detail [travelGroup]="travelGroup"></app-group-detail>
+                    <div class="row">
+                      <app-group-detail [travelGroup]="travelGroup" class="col-lg-3"></app-group-detail>
+                      <app-chat class="col-lg-9" [travelGroup]="travelGroup" [user]="user"></app-chat>
+                    </div>
                   </ng-template>
                 </ngb-panel>
               </ngb-accordion>

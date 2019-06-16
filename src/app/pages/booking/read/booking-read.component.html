@@ -1,89 +1,126 @@
 <section id="hotel-update">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="card" *ngIf="!loading">
-        <div class="card-header">
-          <div class="row">
-            <div class="col-sm-6">
-              <h4 class="card-title">Booking inzien</h4>
-            </div>
-            <div class="col-sm-6">
-              <a class="btn btn-raised btn-grey float-sm-right" (click)="back()">
-                Terug
-              </a>
+  <div class="card" style="height: 528px;" *ngIf="loaded">
+    <div class="card-content">
+      <div class="card-img">
+        <img alt="Card image cap" class="card-img-top img-fluid" [src]="trip.imageBlob">
+        <h4 class="card-title">{{trip.name}}</h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card" style="padding: 15px;">
+              <div class="card-header">
+                <h4 class="card-title">PersoonsGegevens</h4>
+              </div>
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="form-body">
+                    <h4 class="form-section mt-3"><i class="fas fa-user-cog"></i> Gegevens hoofdboeker</h4>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p>Voornaam en Achternaam:</p>
+                      </div>
+                      <div class="col-md-6">
+                        <strong>{{booking.booker.firstName}} {{booking.booker.lastName}}</strong>
+                      </div>
+                    </div>
+                    <h4 class="form-section mt-3"><i class="fas fa-home"></i> Adresgegevens</h4>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p>Straat en huisnummer:</p>
+                      </div>
+                      <div class="col-md-6">
+                        <strong>{{booking.address.addressLine}}</strong>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p>postcode en woonplaats:</p>
+                      </div>
+                      <div class="col-md-6">
+                        <strong>{{booking.address.zipCode}} {{booking.address.city.name}}</strong>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p>Land:</p>
+                      </div>
+                      <div class="col-md-6">
+                        <strong>{{booking.address.country.name}}</strong>
+                      </div>
+                    </div>
+                    <h4 class="form-section mt-3"><i class="fas fa-users"></i> Reisgezelschap ({{booking.numberOfTravelers - 1}} medereiziger(s))</h4>
+                    <div class="row" *ngFor="let traveler of booking.travelers; let i = index">
+                      <div class="col-md-6">
+                        <p>Medereiziger {{i+1}}:</p>
+                      </div>
+                      <div class="col-md-6">
+                        <strong>{{traveler.firstName}} {{traveler.lastName}}</strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="card-body" *ngIf="loaded">
-          <div class="card-block">
-<!--            <form [formGroup]="hotelUpdateForm" (ngSubmit)="updateHotel()">-->
-<!--              <div class="form-group">-->
-<!--                <label>#Id</label>-->
-<!--                <input type="text" name="id" formControlName="id" class="form-control">-->
-<!--              </div>-->
-<!--              <div class="form-group">-->
-<!--                <label>Naam</label>-->
-<!--                <input type="text" name="name" formControlName="name" class="form-control">-->
-<!--              </div>-->
-<!--              <div class="form-group">-->
-<!--                <label>Omschrijving</label>-->
-<!--                <input type="text" name="description" formControlName="description" class="form-control" >-->
-<!--              </div>-->
-<!--              <div class="form-group">-->
-<!--                <label>Prijs</label>-->
-<!--                <input type="text" name="price" formControlName="price" class="form-control" >-->
-<!--              </div>-->
-<!--              <div class="form-group">-->
-<!--                <label>Afbeelding</label>-->
-<!--                <app-drop-zone [srcUrl]="hotel.imageBlob" (imageBlob)="updateImageBlob($event)"></app-drop-zone>-->
-<!--                <input type="text" name="imageBlob" formControlName="imageBlob" class="form-control" [hidden]="true">-->
-<!--              </div>-->
-<!--              <div class="form-group">-->
-<!--                <label>Datum</label>-->
-<!--                <input class="form-control m-1" data-placement="top" data-title="Date Opened" data-toggle="tooltip"-->
-<!--                       data-trigger="hover" name="dateFrom" type="date" formControlName="date" [valueAsDate]="hotel.date">-->
-<!--              </div>-->
+          <div class="col-md-6">
+            <div class="card" style="padding: 15px;">
+              <div class="card-header">
+                <h4 class="card-title">Betalings overzicht</h4>
+              </div>
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="form-body">
+                    <h4 class="form-section mt-3"><i class="fas fa-user-cog"></i> Gegevens hoofdboeker</h4>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p>Bedrag:</p>
+                      </div>
+                      <div class="col-md-6">
+                        <strong>{{booking.totalPrice | currency:'EUR':true}}</strong>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p>Voldaan:</p>
+                      </div>
+                      <div class="col-md-6">
+                        <strong>{{booking.paid ? 'Ja': 'Nee'}}</strong>
+                      </div>
+                    </div>
+                    <h4 class="form-section mt-3"><i class="fas fa-cash-register"></i> Betalingen</h4>
+                    <div class="row" *ngIf="booking.payments.length === 0">
+                      <div class="col-md-12">
+                        <p>Nog geen betalingen.</p>
+                      </div>
+                    </div>
+                    <div class="row" *ngIf="booking.payments.length > 0">
+                    <div class="col-md-12">
+                      <ul class="list-group">
+                        <li class="list-group-item list-group-item-action flex-column align-items-start"
+                            *ngFor="let payment of booking.payments">
+                          <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-3">{{payment.method}}</h5><small class="text-muted">{{payment.createdAt | date}}</small>
+                          </div>
+                          <p class="mb-3">{{payment.amount | currency:'EUR':true}}</p>
+<!--                          <small class="text-muted">Donec id elit non mi porta.</small>-->
+                        </li>
+                      </ul>
 
-<!--              <div [formGroup]="addressForm">-->
-<!--                <div class="form-group">-->
-<!--                  <label>Straat en huisnummer</label>-->
-<!--                  <input type="text" name="addressline" formControlName="addressLine" class="form-control">-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                  <label>Postcode</label>-->
-<!--                  <input type="text" name="zipcode" formControlName="zipCode" class="form-control">-->
-<!--                </div>-->
-<!--                <div [formGroup]="countryForm">-->
-<!--                  <div class="form-group">-->
-<!--                    <label>Land</label>-->
-<!--                    <ng-select name="country" placeholder="land" [items]="countries" bindValue="name"-->
-<!--                               formControlName="name" [clearable]="true" class="m-1" bindLabel="name"-->
-<!--                               (change)="getCities($event)" (clear)="clearCountryAndCity()">-->
-<!--                    </ng-select>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div [formGroup]="cityForm">-->
-<!--                  <div class="form-group">-->
-<!--                    <label>Stad</label>-->
-<!--                    <ng-select name="city" placeholder="Stad" [items]="cities" bindValue="name"-->
-<!--                               formControlName="name" [clearable]="true" class="m-1" bindLabel="name">-->
-<!--                    </ng-select>-->
-<!--                  </div>-->
-<!--                </div>-->
+                    </div>
+                  </div>
+                    <div class="row" *ngIf="!booking.paid">
+                      <div class="col-md-12">
+                        <a class="btn btn-raised mr-1 shadow-z-2 btn-warning" (click)="setBookingToPaid()" > Transactie ontvangen</a>
+                      </div>
+                    </div>
 
 
-<!--              </div>-->
-<!--              <div class="form-actions">-->
-<!--                <div class="row">-->
-<!--                  <div class="col-12">-->
-<!--                    <button type="submit" class="btn btn-primary" [disabled]="!hotelUpdateForm.valid">-->
-<!--                      <span>Hotel opslaan</span>-->
-<!--                      <i *ngIf="loading" class="ft-loader spinner right"></i>-->
-<!--                    </button>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </form>-->
+
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

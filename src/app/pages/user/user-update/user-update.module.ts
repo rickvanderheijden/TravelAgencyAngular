@@ -7,6 +7,7 @@ import {GroupComponent} from '../../../components/group/group.component';
 import {NgbAccordionModule, NgbModule, NgbPanel} from '@ng-bootstrap/ng-bootstrap';
 import {GroupDetailComponent} from '../../../components/group-detail/group-detail.component';
 import {MatTabsModule} from '@angular/material';
+import {ChatComponent} from '../../../components/chat/chat.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {MatTabsModule} from '@angular/material';
     UserUpdateComponent,
     GroupComponent,
     GroupDetailComponent,
+    ChatComponent,
   ]
 })
 export class UserUpdateModule { }

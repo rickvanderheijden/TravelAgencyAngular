@@ -12,8 +12,6 @@ import {User} from '../../models/user';
 })
 export class TravelGroupService {
 
-  travelGroup: TravelGroup;
-
   constructor(private http: HttpClient) {
   }
 
@@ -57,7 +55,6 @@ export class TravelGroupService {
    * @param group
    */
   createTravelGroup(group: TravelGroup) {
-    console.log(group);
     return this.http.post(environment.server + '/travelgroups/createTravelGroup', group).pipe(
       map(response => {
         return new TravelGroup(response);
@@ -70,14 +67,14 @@ export class TravelGroupService {
   }
 
   addUser(group: TravelGroup, id) {
-      return this.http.post(environment.server + '/travelgroups/addUser/' + id, group).pipe(
-        map(response => {
-          return true;
-        }),
-        catchError(error => {
-          swal('addUsers', 'Er is iets niet goed gegaan.', 'error');
-          throw new Error(error);
-        })
-      );
+    return this.http.post(environment.server + '/travelgroups/addUser/' + id, group).pipe(
+      map(response => {
+        return true;
+      }),
+      catchError(error => {
+        swal('addUsers', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(error);
+      })
+    );
   }
 }

@@ -51,7 +51,7 @@ export class HotelActionButtonsComponent implements ViewCell, OnInit {
       type: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Ja, verwijderen!',
-      cancelButtonText: 'Nee, Hotel behouden'
+      cancelButtonText: 'Nee, hotel behouden'
     }).then((result) => {
       if (result.value) {
         this.hotelService.deleteHotel(id).subscribe((response: any) => {
@@ -88,14 +88,11 @@ export class HotelComponent implements OnInit {
             return value !== null ? value.city.name + ' - ' + value.country.name : 'NB';
           },
           filterFunction(cell?: any, search?: string): boolean {
-            if ( cell.city.name.indexOf(search) !== -1 || cell.country.name.indexOf(search) !== -1) {
-              return true;
-            }
-            return false;
+            return cell.city.name.indexOf(search) !== -1 || cell.country.name.indexOf(search) !== -1;
           }
         },
         price: {
-          title: 'prijs',
+          title: 'Prijs',
           type: 'text',
           filter: true,
           sort: true,
@@ -129,9 +126,5 @@ export class HotelComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  delete(event) {
-    console.log('hoi', event);
   }
 }

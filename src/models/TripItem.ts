@@ -9,7 +9,8 @@ export class TripItem {
   public imageBlob?: string | ArrayBuffer;
   public address?: Address;
   public price?: number;
-  public date?: Date;
+  public availableFrom?: Date;
+  public availableTo?: Date;
   public minimumNumberOfAttendees: number;
   public maximumNumberOfAttendees: number;
   public numberOfAttendees: number;
@@ -22,13 +23,15 @@ export class TripItem {
       this.tripItemType = model.tripItemType;
       this.address = new Address(model.address);
       this.price = model.price;
-      this.date = new Date(model.date);
+      this.availableFrom = new Date(model.availableFrom);
+      this.availableTo = new Date(model.availableTo);
       this.imageBlob = model.imageBlob;
       this.minimumNumberOfAttendees = model.minimumNumberOfAttendees;
       this.maximumNumberOfAttendees = model.maximumNumberOfAttendees;
       this.numberOfAttendees = model.numberOfAttendees;
     } else {
-      this.date = new Date();
+      this.availableFrom = new Date();
+      this.availableTo = new Date();
       this.address = new Address();
     }
   }

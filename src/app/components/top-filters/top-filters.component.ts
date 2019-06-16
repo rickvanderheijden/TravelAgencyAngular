@@ -35,10 +35,12 @@ export class TopFiltersComponent implements OnInit {
     this.tripService = tripService;
     this.country = null;
     this.continent = null;
-    
+
+    this.setSearchDto();
+
     this.geoService.getAllContinents().subscribe((continents: any) => {
       this.continents = continents;
-    })
+    });
 
     this.geoService.getAllCountries().subscribe((countries: any) => {
       this.countries = countries;
@@ -58,53 +60,116 @@ export class TopFiltersComponent implements OnInit {
 
   getCountries(continent) {
     this.continent = continent;
-    this.searchDTO.continent = continent;
+    this.searchDTO.continent = this.continent;
     if (this.country != null) {
       this.searchDTO.country = this.country;
-    } else {
-      this.searchDTO.country = null;
     }
 
-    if (this.continent !== null) {
-      this.tripService.searchTrips(this.searchDTO).subscribe((trips: any) => {
-        this.trips = trips;
-        this.foundTrips.emit(trips);
-      })
-    } else if (this.country !== null) {
-      this.countries = this.allCountries;
-      this.tripService.searchTrips(this.searchDTO).subscribe((trips: any) => {
-        this.trips = trips;
-        this.foundTrips.emit(trips);
-      });
-    } else {
+    if (this.searchDTO.emptySearch()) {
       this.countries = this.allCountries;
       this.trips = this.allTrips;
-      this.foundTrips.emit(this.allTrips);
+      this.foundTrips.emit(this.trips);
+    } else {
+      this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
+        this.trips = trips;
+        this.foundTrips.emit(this.trips);
+      })
     }
 
     if (continent !== null) {
       this.geoService.getCountriesByContinentName(continent).subscribe((countries: any) => {
         this.countries = countries;
       });
+    } else {
+      this.countries = this.allCountries;
     }
   }
 
   getTrips(country) {
     this.country = country;
-    this.searchDTO.country = country;
+    this.searchDTO.country = this.country;
 
     if (this.country != null) {
-      this.tripService.searchTrips(this.searchDTO).subscribe((trips: any) => {
+      this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
+        this.trips = trips;
+        this.foundTrips.emit(trips);
+      });
+    } else if (this.continent !== null) {
+      this.getCountries(this.continent);
+    } else if (this.searchDTO.keyword !== null) {
+      this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
         this.trips = trips;
         this.foundTrips.emit(trips);
       });
     } else {
       this.trips = this.allTrips;
-      this.foundTrips.emit(this.allTrips);
+      this.foundTrips.emit(this.trips);
     }
   }
 
-  doFilter() {
+  getTripsFrom(from) {
+    if (from) {
+      this.searchDTO.from = from;
+    } else {
+      this.searchDTO.from = null;
+    }
+    if (this.searchDTO.emptySearch()) {
+      this.trips = this.allTrips;
+      this.foundTrips.emit(this.trips);
+    } else {
+      this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
+        this.trips = trips;
+        this.foundTrips.emit(trips);
+      });
+    }
+  }
+
+  getTripsTo(to) {
+    if (to) {
+      this.searchDTO.to = to;
+    } else {
+      this.searchDTO.to = null;
+    }
+    if (this.searchDTO.emptySearch()) {
+      this.trips = this.allTrips;
+      this.foundTrips.emit(this.trips);
+    } else {
+      this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
+        this.trips = trips;
+        this.foundTrips.emit(trips);
+      });
+    }
+  }
+
+  onKeydown(event) {
+    if (event.key === 'Enter') {
+      if (event.target.value) {
+        this.searchDTO.keyword = event.target.value;
+        this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
+          this.trips = trips;
+          this.foundTrips.emit(trips);
+        })
+      } else {
+        this.searchDTO.keyword = null;
+        if (this.searchDTO.emptySearch()) {
+          this.trips = this.allTrips;
+          this.foundTrips.emit(this.trips);
+        } else {
+          this.tripService.searchTripsByKeywordAndCountryOrContinent(this.searchDTO).subscribe((trips: any) => {
+            this.trips = trips;
+            this.foundTrips.emit(trips);
+          })
+        }
+      }
+    }
+  }
+
+  setSearchDto() {
+    this.searchDTO.country = null;
+    this.searchDTO.continent = null;
+    this.searchDTO.keyword = null;
+    this.searchDTO.from = null;
+    this.searchDTO.to = null;
   }
 
 }
