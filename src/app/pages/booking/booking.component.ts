@@ -4,8 +4,8 @@ import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 import {Booking} from '../../../models/booking';
 import {BookingService} from '../../services/booking.service';
-import {Payment} from '../../../models/Payment';
 import {User} from '../../../models/user';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-booking-actions',
@@ -15,7 +15,7 @@ import {User} from '../../../models/user';
         <button class="btn btn-raised btn-success" routerLink="/bookings/read/{{rowData.id}}">
           <i class="ft-eye"></i>
         </button>
-        <button class="btn btn-raised btn-info" style="margin-left: 2px;" (click)="setPaid(rowData.id)" [disabled]="rowData.paid" title="set to paid">
+        <button class="btn btn-raised btn-warning" style="margin-left: 2px;" (click)="setPaid(rowData.id)" [disabled]="rowData.paid" title="set to paid">
           <i class="fas fa-wallet"></i>
         </button>
       </span>
@@ -30,6 +30,7 @@ export class BookingActionButtonsComponent implements ViewCell, OnInit {
 
   @Output() cancelEmitter: EventEmitter<any> = new EventEmitter();
 
+
   @ViewChild('confirm') confirm: ElementRef;
   modalRef: NgbModalRef;
 
@@ -43,7 +44,11 @@ export class BookingActionButtonsComponent implements ViewCell, OnInit {
   }
 
   setPaid(id: any) {
-    this.service.setPaid(id);
+    this.service.setPaid(id).subscribe((response: boolean) => {
+      if ( response ) {
+        swal('Succes', 'Boeking succesvol ingevoerd!', 'success');
+      }
+    });
 
   }
 }
@@ -59,6 +64,11 @@ export class BookingComponent implements OnInit {
   source: LocalDataSource;
 
   constructor(private service: BookingService) {
+
+    this.source = new LocalDataSource();
+  }
+
+  ngOnInit() {
     this.settings = {
       columns: {
         id: {
@@ -68,7 +78,7 @@ export class BookingComponent implements OnInit {
         booker: {
           title: 'Geboekt door',
           filterFunction(cell?: User, search?: string): boolean {
-           return cell.firstName.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1 || cell.lastName.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1;
+            return cell.firstName.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1 || cell.lastName.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1;
           },
           sort: false,
           valuePrepareFunction: (value: User) => {
@@ -79,23 +89,13 @@ export class BookingComponent implements OnInit {
           title: 'Aantal reizigers',
           sort: false
         },
-        payments: {
-          title: 'prijs',
+        totalPrice: {
+          title: 'Prijs',
           type: 'text',
-          filterFunction(cell?: Array<Payment>, search?: string): boolean {
-            let amount = 0;
-            cell.forEach(payment => {
-              amount += payment.amount;
-            });
-            return String(amount).indexOf(search) !== -1;
-          },
+          filter: true,
           sort: false,
-          valuePrepareFunction: (value: Array<Payment>) => {
-            let amount = 0;
-            value.forEach(payment => {
-              amount += payment.amount;
-            });
-            return '€' + amount;
+          valuePrepareFunction: (value: number) => {
+            return '€' + value;
           }
         },
         paid: {
@@ -103,13 +103,13 @@ export class BookingComponent implements OnInit {
           type: 'text',
           filter: {
             type: 'list',
-              config: {
-                selectText: 'Toon allen',
-                    list: [
-                      {value: true, title: 'Ja'},
-                      {value: false, title: 'Nee'},
-                    ]
-              }
+            config: {
+              selectText: 'Toon allen',
+              list: [
+                {value: true, title: 'Ja'},
+                {value: false, title: 'Nee'},
+              ]
+            }
           },
           sort: false,
           valuePrepareFunction: (value) => {
@@ -138,14 +138,9 @@ export class BookingComponent implements OnInit {
         perPage: 20
       }
     };
-
-    this.source = new LocalDataSource();
     this.service.getBookings().subscribe((data: any) => {
       this.source.load(data);
     });
-  }
-
-  ngOnInit() {
   }
 
 }
