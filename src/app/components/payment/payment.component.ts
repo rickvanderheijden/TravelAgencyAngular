@@ -69,7 +69,6 @@ export class PaymentComponent implements OnInit, AfterViewInit {
   setForms() {
     this.creditCardForm = this.formBuilder.group({
       cardHolder: this.formBuilder.control('', Validators.required),
-      cardNumber: this.formBuilder.control('', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]),
       cardNumber: this.formBuilder.control('', [Validators.required]),
       ccv: this.formBuilder.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]),
       amount: this.formBuilder.control({value: this.booking.getTotalPrice(), disabled: true}, Validators.required),
