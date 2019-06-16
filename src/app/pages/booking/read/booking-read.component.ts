@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {HotelService} from '../../../services/hotel.service';
-import {Hotel} from '../../../../models/hotel';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NgOption} from '@ng-select/ng-select';
-import {City} from '../../../../models/city';
 import {GeographyService} from '../../../services/geography.service';
+import {Booking} from '../../../../models/booking';
+import {Trip} from '../../../../models/trip';
+import {BookingService} from '../../../services/booking.service';
+import {TripService} from '../../../services/trip.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-booking-read',
@@ -13,58 +13,61 @@ import {GeographyService} from '../../../services/geography.service';
   styleUrls: ['./booking-read.component.scss']
 })
 export class BookingReadComponent implements OnInit {
-  hotelUpdateForm: FormGroup;
-  addressForm: FormGroup;
-  cityForm: FormGroup;
-  countryForm: FormGroup;
-  hotel: Hotel;
-  loading = false;
-  countries: NgOption[];
-  private loaded = false;
-  private cities: City[];
+
+  booking: Booking;
+  bookingId: number;
+  trip: Trip;
+  loaded = false;
+  loading = true;
 
   constructor(
-    private hotelService: HotelService,
     private route: ActivatedRoute,
     private geoService: GeographyService,
+    private bookingService: BookingService,
+    private tripService: TripService,
     private router: Router,
-    private formBuilder: FormBuilder
   ) {
 
   }
 
   ngOnInit() {
+    this.bookingId = this.route.snapshot.params.id;
+
+    this.bookingService.getById(this.bookingId).subscribe(
+      (booking: Booking) => {
+        this.booking = booking;
+
+        this.tripService.getById(this.booking.tripId).subscribe(
+          (trip: Trip) => {
+            this.trip = trip;
+            this.loaded = true;
+            this.loading = false;
+          }
+        )
+      }
+    )
+
 
   }
 
   back() {
-    this.router.navigate(['/hotel/']);
+    this.router.navigate(['/bookings/']);
   }
 
-  setForm() {
-
-  this.countryForm = this.formBuilder.group({
-    name: this.formBuilder.control(this.hotel.address.country.name, [Validators.required])
-  });
-  this.cityForm = this.formBuilder.group({
-    name: this.formBuilder.control(this.hotel.address.city.name,  [Validators.required])
-  }, );
-  this.addressForm = this.formBuilder.group({
-    addressLine: this.formBuilder.control(this.hotel.address.addressLine, [Validators.required]),
-    zipCode: this.formBuilder.control(this.hotel.address.zipCode, [Validators.required]),
-    city: this.cityForm,
-    country: this.countryForm
-  });
-  this.hotelUpdateForm = this.formBuilder.group({
-    id: this.formBuilder.control({ value: this.hotel.id, disabled: true}, [ Validators.required] ),
-    name: this.formBuilder.control(this.hotel.name, [ Validators.required] ),
-    description: this.formBuilder.control(this.hotel.description, [ Validators.required] ),
-    price: this.formBuilder.control(this.hotel.price, [ Validators.required] ),
-    date: this.formBuilder.control(this.hotel.availableFrom, [ Validators.required] ),
-    imageBlob: this.formBuilder.control(this.hotel.imageBlob, [ Validators.required] ),
-    address: this.addressForm,
-  });
-    this.loaded = true;
-
+  setBookingToPaid() {
+    swal({
+      title: 'Weet je het zeker?',
+      text: 'Weet je zeker dat de betaling is ontvangen, bij ja is de betaling voor deze trip voldaan.',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ja, Betaling is ontvangen!',
+      cancelButtonText: 'Nee, is nog niet ontvangen'
+    }).then((result) => {
+      if (result.value) {
+        this.bookingService.setPaid(this.booking.id).subscribe((response: any) => {
+          this.ngOnInit();
+        });
+      }
+    });
   }
 }

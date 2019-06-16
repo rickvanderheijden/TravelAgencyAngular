@@ -3,14 +3,15 @@ import { CommonModule } from '@angular/common';
 import {BookingActionButtonsComponent, BookingComponent} from './booking.component';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {BookingRoutingModule} from './booking-routing.module';
-import {BookingReadComponent} from './read/booking-read.component';
 
 @NgModule({
-  declarations: [BookingComponent, BookingActionButtonsComponent, BookingReadComponent],
+  declarations: [BookingComponent, BookingActionButtonsComponent],
   imports: [
     CommonModule,
     BookingRoutingModule,
-    Ng2SmartTableModule,
-  ]
+    Ng2SmartTableModule
+  ],
+  entryComponents: [BookingActionButtonsComponent
+  ],
 })
 export class BookingModule { }

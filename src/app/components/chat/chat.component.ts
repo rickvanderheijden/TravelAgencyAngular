@@ -44,7 +44,8 @@ export class ChatComponent implements OnInit {
             }
           } else {
             const chatMessage = new ChatMessage(response);
-            this.messages.unshift(chatMessage);
+            // this.messages.unshift(chatMessage);
+            this.messages.push(chatMessage);
           }
         }
       }
@@ -60,7 +61,7 @@ export class ChatComponent implements OnInit {
       }
     );
     this.chatForm = this.formBuilder.group({
-      message: this.formBuilder.control('', Validators.required)
+      message: this.formBuilder.control('', [Validators.required, Validators.maxLength(200)])
     });
   }
 
