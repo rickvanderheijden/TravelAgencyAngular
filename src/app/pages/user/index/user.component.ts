@@ -101,6 +101,9 @@ export class UserComponent implements OnInit {
           sortDirection: 'desc',
           width: '100px'
         },
+        username: {
+          title: 'Gebruikersnaam',
+        },
         firstName: {
           title: 'Voornaam',
         },

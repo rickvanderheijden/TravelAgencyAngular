@@ -74,7 +74,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
       amount: this.formBuilder.control({value: this.booking.getTotalPrice(), disabled: true}, Validators.required),
     });
     this.creditCardForm.get('cardNumber').valueChanges.subscribe( value => {
-       let newVal = value.replace(/[a-z]+/g, '');
+       let newVal = String(value).replace(/[a-z]+/g, '');
       const length = newVal.length;
       if (length === 4) {newVal = newVal + ' '; }
       if (length === 9) {newVal = newVal + ' '; }
