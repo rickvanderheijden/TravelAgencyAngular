@@ -14,8 +14,8 @@ export class GroupDetailComponent implements OnInit {
 
   users: User[];
   loading = false;
-
   constructor(private travelGroupService: TravelGroupService) {
+
   }
 
   ngOnInit() {

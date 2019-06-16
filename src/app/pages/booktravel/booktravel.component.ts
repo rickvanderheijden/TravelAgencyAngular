@@ -58,6 +58,7 @@ export class BookTravelComponent implements OnInit {
     const booker = new User(JSON.parse(sessionStorage.getItem('currentUser')));
     this.booking.booker = booker;
     this.booking.address = travelerInformation.address;
+  this.booking.setTravelers(travelerInformation.travelers);
 
     this.bookingService.createBooking(this.booking).subscribe(response => this.savedBooking = new Booking(response));
   }

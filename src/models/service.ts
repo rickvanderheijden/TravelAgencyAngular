@@ -20,7 +20,7 @@ export class Service {
       this.imageUrl = model.imageBlob;
       this.address = model.address;
       this.price = model.price;
-      this.date = model.date;
+      this.date = model.availableFrom;
     }
   }
 }

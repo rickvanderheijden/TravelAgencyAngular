@@ -1,46 +1,59 @@
-<div class="chatbody">
-  <div class="panel panel-primary">
-    <div class="panel-heading top-bar">
-      <div class="col-md-8 col-xs-8">
-        <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span>Chat met {{travelGroup.name}}</h3>
-      </div>
-    </div>
-    <div class="panel-body msg_container_base" style="min-height: 300px">
-      <div *ngFor="let messagefront of messages">
-        <div *ngIf="messagefront.userFrom==user.id" class="row msg_container base_sent">
-          <div class="col-md-10 col-xs-10">
-            <div class="messages msg_sent">
-              <p>{{messagefront.message}}</p>
-            </div>
-          </div>
-          <div class="col-md-2 col-xs-2 avatar">
-            <img class=" img-responsive "
-                 src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg">
-          </div>
-        </div>
-        <div *ngIf="messagefront.userFrom!=user.id" class="row msg_container base_receive">
-          <div class="col-md-2 col-xs-2 avatar">
-            <img class=" img-responsive "
-                 src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg">
-          </div>
-          <div class="col-md-10 col-xs-10">
-            <div class="messages msg_receive">
-              <p>{{messagefront.message}}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="panel-footer">
-      <div class="input-group">
-        <input class="form-control input-sm chat_input" id="btn-input" placeholder="Write your message here..."
-               type="text" [(ngModel)]="message.message" (submit)="sendMessage()" />
-        <span class="input-group-btn">
-          <button class="btn btn-primary btn-sm" type="button" id="btn-chat"><i
-            class="fas fa-paper-plane" (click)="sendMessage()"></i>
-          </button>
-        </span>
+<div class="chat-application">
+  <div class="content-overlay"></div>
+  <div class="chat-name p-2 bg-white">
+    <div class="media"><span
+      class="chat-app-sidebar-toggle ft-align-justify font-large-1 mr-2 d-none d-block d-sm-block d-md-none"></span>
+      <div class="media-body text-left">
+<!--        <img alt="avatar" class="rounded-circle mr-1" width="37" src="assets/img/portrait/small/avatar-s-3.png">-->
+        <span>{{travelGroup.name}}</span><i class="ft-more-vertical float-right mt-1"></i>
       </div>
     </div>
   </div>
+  <section class="chat-app-window">
+    <div class="chats">
+      <div class="chats" *ngFor="let message of messages"><!---->
+
+<!--        VAN MIJ-->
+        <div class="chat ng-star-inserted" *ngIf="message.sender.id === user.id">
+          <div class="chat-avatar">
+            <a class="avatar" data-original-title="" data-placement="[chat.avatar]" data-toggle="tooltip" title="">
+              <img alt="avatar" class="width-50" [src]="'assets/img/portrait/avatars/' + message.sender.avatar"><br>
+              Me
+            </a>
+          </div>
+          <div class="chat-body">
+            <div class="chat-content ng-star-inserted">
+              <p class="ng-star-inserted">{{message.message}}</p>
+            </div>
+          </div><!---->
+        </div>
+<!--        VAN IEMAND ANDERS-->
+        <div class="chat chat-left ng-star-inserted" *ngIf="message.sender.id !== user.id">
+          <div class="chat-avatar">
+            <a class="avatar" data-original-title="" data-placement="[chat.avatar]" data-toggle="tooltip" title="">
+              <img alt="avatar" class="width-50" [src]="'assets/img/portrait/avatars/' + message.sender.avatar"><br>
+              {{message.sender.firstName}}
+            </a>
+          </div>
+          <div class="chat-body"><!---->
+            <div class="chat-content ng-star-inserted">
+              <p class="ng-star-inserted">{{message.message}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="chat-app-form bg-blue-grey bg-lighten-5">
+    <form class="chat-app-input row mt-2" [formGroup]="chatForm">
+      <fieldset class="form-group position-relative col-9 m-0 px-3">
+        <input class="form-control"  formControlName="message" placeholder="Type hier je bericht" type="text" (keyup.enter)="sendMessage()">
+      </fieldset>
+      <fieldset class="form-group position-relative col-3 m-0">
+        <button class="btn btn-raised btn-primary px-4" type="button" [disabled]="!chatForm.valid" (click)="sendMessage()">
+          <span class="d-none d-lg-inline-block">verzenden </span>
+        </button>
+      </fieldset>
+    </form>
+  </section>
 </div>

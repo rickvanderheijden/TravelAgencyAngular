@@ -1,20 +1,20 @@
-import {Address} from './Address';
+import {User} from './user';
 
-export class Message {
+export class ChatMessage {
 
   public id?: number;
   public message?: String;
-  public userFrom?: number;
+  public sender?: User;
   public travelGroupTo?: number;
-  public userTo?: number;
+  public receiverId?: number;
 
   constructor(model?) {
     if (typeof model !== typeof undefined) {
       this.id = model.id;
       this.message = model.message;
-      this.userFrom = model.userFrom;
+      this.sender = model.sender;
       this.travelGroupTo = model.travelGroupTo;
-      this.userTo = model.userTo;
+      this.receiverId = model.receiverId;
     }
   }
 }

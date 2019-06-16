@@ -69,9 +69,19 @@ export class PaymentComponent implements OnInit, AfterViewInit {
   setForms() {
     this.creditCardForm = this.formBuilder.group({
       cardHolder: this.formBuilder.control('', Validators.required),
-      cardNumber: this.formBuilder.control('', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]),
+      cardNumber: this.formBuilder.control('', [Validators.required]),
       ccv: this.formBuilder.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]),
       amount: this.formBuilder.control({value: this.booking.getTotalPrice(), disabled: true}, Validators.required),
+    });
+    this.creditCardForm.get('cardNumber').valueChanges.subscribe( value => {
+       let newVal = value.replace(/[a-z]+/g, '');
+      const length = newVal.length;
+      if (length === 4) {newVal = newVal + ' '; }
+      if (length === 9) {newVal = newVal + ' '; }
+      if (length === 14) {newVal = newVal + ' '; }
+      if (length > 19) {newVal = newVal.substring(0, 19); }
+
+      this.creditCardForm.get('cardNumber').setValue(newVal, {emitEvent: false});
     });
 
     this.paypalForm = this.formBuilder.group({
@@ -90,7 +100,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
       this.paymentService.createPayment(this.payment).subscribe((payment: Payment) => {
         this.paymentOut.emit(payment);
       });
-    } else if(this.showPayPalForm) {
+    } else if (this.showPayPalForm) {
       this.payment.method = 'PAYPAL';
       this.paymentService.createPayment(this.payment).subscribe((payment: Payment) => {
         this.paymentOut.emit(payment);

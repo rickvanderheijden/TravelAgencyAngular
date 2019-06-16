@@ -31,22 +31,22 @@
     </div>
     <div class="row">
       <div class="col-6">
+        <div [formGroup]="cityForm">
+          <div class="form-group">
+            <label>Stad</label>
+            <ng-select name="city" placeholder="Stad" [items]="cities" bindValue="name" (change)="getCountry($event)"
+                       formControlName="name" [clearable]="true" class="m-1" bindLabel="name">
+            </ng-select>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
         <div [formGroup]="countryForm">
           <div class="form-group">
             <label>Land</label>
             <ng-select name="country" placeholder="land" [items]="countries" bindValue="name"
                        formControlName="name" [clearable]="true" class="m-1" bindLabel="name"
                        (change)="getCities($event)" (clear)="clearCountryAndCity()">
-            </ng-select>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div [formGroup]="cityForm">
-          <div class="form-group">
-            <label>Stad</label>
-            <ng-select name="city" placeholder="Stad" [items]="cities" bindValue="name"
-                       formControlName="name" [clearable]="true" class="m-1" bindLabel="name">
             </ng-select>
           </div>
         </div>

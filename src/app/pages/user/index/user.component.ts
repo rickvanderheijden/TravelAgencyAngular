@@ -4,6 +4,7 @@ import {LocalDataSource, ViewCell} from 'ng2-smart-table';
 import {UserService} from '../../../services/user.service';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-authority',
@@ -37,7 +38,7 @@ export class UserAuthorityComponent implements ViewCell, OnInit {
         </button>
       </span>
       <span>
-        <button class="btn btn-raised btn-danger" (click)="deleteUser()">
+        <button class="btn btn-raised btn-danger" (click)="deleteUser(this.rowData.id)">
           <i class="ft-trash"></i>
         </button>
       </span>
@@ -64,8 +65,21 @@ export class UserActionButtonsComponent implements ViewCell, OnInit {
 
   }
 
-  deleteUser() {
-    this.userService.deleteUser(this.rowData.id);
+  deleteUser(id) {
+    swal({
+    title: 'Weet je het zeker?',
+    text: 'Weet je zeker dat je de gebruiker wil verwijderen',
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Ja, verwijderen!',
+    cancelButtonText: 'Nee, gebruiker behouden'
+  }).then((result) => {
+    if (result.value) {
+      this.userService.deleteUser(id).subscribe((response: any) => {
+        location.reload();
+      });
+    }
+  });
   }
 }
 @Component({
@@ -85,6 +99,7 @@ export class UserComponent implements OnInit {
         id: {
           title: 'ID',
           sortDirection: 'desc',
+          width: '100px'
         },
         firstName: {
           title: 'Voornaam',

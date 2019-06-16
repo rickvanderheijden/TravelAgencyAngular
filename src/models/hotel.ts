@@ -8,7 +8,8 @@ export class Hotel {
   public price: number;
   public imageBlob: String;
   public address: Address;
-  public date: Date;
+  public availableFrom: Date;
+  public availableTo: Date;
   public numberOfGuests: number;
 
   constructor(model?) {
@@ -19,7 +20,8 @@ export class Hotel {
       this.price = model.price;
       this.imageBlob = model.imageBlob;
       this.address = model.address;
-      this.date = new Date(model.date);
+      this.availableFrom = new Date(model.availableFrom);
+      this.availableTo = new Date(model.availableTo);
       this.numberOfGuests = model.numberOfGuests;
     } else {
       this.address = new Address()

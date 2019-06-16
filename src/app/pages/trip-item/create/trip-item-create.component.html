@@ -15,35 +15,30 @@
           </div>
         </div>
         <div class="card-body">
-<!--          {{tripItemCreateForm.value | json}}-->
-          <div class="card-block">
+          <div class="card-block" *ngIf="loaded">
             <form [formGroup]="tripItemCreateForm">
             <ngb-tabset>
               <ngb-tab title="Gegevens TripItem">
                 <ng-template ngbTabContent>
                   <div class="form-group">
                     <label>Naam</label>
-                    <input type="text" name="name" formControlName="name" autocomplete="off"  class="form-control">
+                    <input type="text" formControlName="name" autocomplete="off"  class="form-control">
                   </div>
                   <div class="form-group">
                     <label>Omschrijving</label>
-                    <input type="text" name="description" formControlName="description" autocomplete="off"  class="form-control">
+                    <input type="text" formControlName="description" autocomplete="off"  class="form-control">
                   </div>
                   <div class="form-group">
                     <label>Prijs</label>
-                    <input type="number" name="price" formControlName="price" autocomplete="off"  class="form-control">
+                    <input type="number"  formControlName="price" autocomplete="off"  class="form-control">
                   </div>
                   <div class="form-group">
                     <label>Minimaal deelnemers</label>
-                    <input type="number" name="minimumNumberOfAttendees" formControlName="minimumNumberOfAttendees" class="form-control">
+                    <input type="number"  formControlName="minimumNumberOfAttendees" class="form-control">
                   </div>
                   <div class="form-group">
                     <label>Maximaal deelnemers</label>
-                    <input type="number" name="maximumNumberOfAttendees" formControlName="maximumNumberOfAttendees" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label>Aantal deelnemers</label>
-                    <input type="number" name="numberOfAttendees" formControlName="numberOfAttendees" class="form-control">
+                    <input type="number"  formControlName="maximumNumberOfAttendees" class="form-control">
                   </div>
                   <div class="form-group">
                     <label>Foto</label>
@@ -60,8 +55,12 @@
                     </ng-select>
                   </div>
                   <div class="form-group">
-                    <label>Datum</label>
-                    <input type="date" name="date" formControlName="date" autocomplete="off"  class="form-control">
+                    <label>Beschikbaar van</label>
+                    <input type="date" formControlName="availableFrom" autocomplete="off"  class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Beschikbaar tot</label>
+                    <input type="date" formControlName="availableTo" autocomplete="off"  class="form-control">
                   </div>
                 </ng-template>
               </ngb-tab>
@@ -70,17 +69,17 @@
                 <ng-template ngbTabContent>
                   <div [formGroup]="addressForm">
                     <div class="form-group">
-                      <label>Adres</label>
-                      <input type="text" name="addressline" formControlName="addressLine" class="form-control">
+                      <label>Straat en huisnummer</label>
+                      <input type="text" formControlName="addressLine" class="form-control">
                     </div>
                     <div class="form-group">
                       <label>Postcode</label>
-                      <input type="text" name="zipcode" formControlName="zipCode" class="form-control">
+                      <input type="text" formControlName="zipCode" class="form-control">
                     </div>
                     <div [formGroup]="cityForm">
                       <div class="form-group">
                         <label>Stad</label>
-                        <ng-select name="city" placeholder="Stad" [items]="cities" bindValue="name"
+                        <ng-select placeholder="Stad" [items]="cities" bindValue="name" (change)="getCountry($event)"
                                    formControlName="name" [clearable]="true" class="m-1" bindLabel="name">
                         </ng-select>
                       </div>
@@ -88,7 +87,7 @@
                     <div [formGroup]="countryForm">
                       <div class="form-group">
                         <label>Land</label>
-                        <ng-select name="country" placeholder="land" [items]="countries"
+                        <ng-select placeholder="land" [items]="countries"
                                    formControlName="name" [clearable]="true" class="m-1" bindLabel="name"
                                    (change)="getCities($event)" (clear)="clearCountryAndCity()">
                         </ng-select>

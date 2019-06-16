@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import swal from 'sweetalert2';
-import {Message} from '../../models/message';
+import {ChatMessage} from '../../models/chatMessage';
 import {TravelGroup} from '../../models/travelGroup';
 import {Booking} from '../../models/booking';
 
@@ -20,12 +20,12 @@ export class ChatService {
    * Get all message to travelgroup
    * @param emailAddress
    */
-  getByTravelGroup(id): Observable<Array<Message>> {
+  getByTravelGroup(id): Observable<Array<ChatMessage>> {
     return this.http.get(environment.server + '/messages/travelgroup/' + id).pipe(
       map((response: Array<any>) => {
-        const messages: Array<Message> = [];
+        const messages: Array<ChatMessage> = [];
         response.forEach(function (message, index) {
-          messages.push(new Message(message));
+          messages.push(new ChatMessage(message));
         });
         return messages;
       }),
@@ -38,12 +38,12 @@ export class ChatService {
   /**
    * Get all messages from user
    */
-  getByUser(id): Observable<Array<Message>> {
+  getByUser(id): Observable<Array<ChatMessage>> {
     return this.http.get(environment.server + '/messages/userfrom/' + id).pipe(
       map((response: Array<any>) => {
-        const messages: Array<Message> = [];
+        const messages: Array<ChatMessage> = [];
         response.forEach(function (message, index) {
-          messages.push(new Message(message));
+          messages.push(new ChatMessage(message));
         });
         return messages;
       }),
@@ -57,12 +57,12 @@ export class ChatService {
    * Get all messages to user
    * @param id
    */
-  getToUser(id): Observable<Array<Message>> {
+  getToUser(id): Observable<Array<ChatMessage>> {
     return this.http.get(environment.server + '/messages/userto/' + id).pipe(
       map((response: Array<any>) => {
-        const messages: Array<Message> = [];
+        const messages: Array<ChatMessage> = [];
         response.forEach(function (message, index) {
-          messages.push(new Message(message));
+          messages.push(new ChatMessage(message));
         });
         return messages;
       }),
@@ -76,10 +76,10 @@ export class ChatService {
    * Send message
    * @param Message
    */
-  createMessage(message: Message) {
+  createMessage(message: ChatMessage) {
     return this.http.post(environment.server + '/messages/message', message).pipe(
       map(response => {
-        return new Message(message);
+        return new ChatMessage(message);
       }),
       catchError(error => {
         swal('createMessage', 'Er is iets niet goed gegaan.', 'error');

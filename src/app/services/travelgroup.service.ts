@@ -55,7 +55,6 @@ export class TravelGroupService {
    * @param group
    */
   createTravelGroup(group: TravelGroup) {
-    console.log(group);
     return this.http.post(environment.server + '/travelgroups/createTravelGroup', group).pipe(
       map(response => {
         return new TravelGroup(response);

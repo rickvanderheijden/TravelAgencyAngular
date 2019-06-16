@@ -82,8 +82,6 @@ export class GroupCreateComponent implements OnInit {
     } else {
       this.travelgroup.users.push(this.user);
       this.users.splice(this.users.indexOf(this.user), 1);
-      console.log(this.users);
-      console.log('User added');
     }
   }
 
@@ -93,8 +91,6 @@ export class GroupCreateComponent implements OnInit {
     if (this.travelgroup.users.find(user => user.id === this.user.id)) {
       this.travelgroup.users.splice(this.travelgroup.users.indexOf(this.user), 1);
       this.users.push(this.user);
-      console.log(this.users);
-      console.log('User removed');
     } else {
       console.log('User not found!!');
     }
