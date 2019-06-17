@@ -55,12 +55,28 @@ export class TravelGroupService {
    * @param group
    */
   createTravelGroup(group: TravelGroup) {
-    return this.http.post(environment.server + '/travelgroups/createTravelGroup', group).pipe(
+    return this.http.post(environment.server + '/travelgroups', group).pipe(
       map(response => {
         return new TravelGroup(response);
       }),
       catchError(error => {
         swal('createTravelGroup', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(error);
+      })
+    );
+  }
+
+  /**
+   * Update a group
+   * @param group
+   */
+  updateTravelGroup(group: TravelGroup) {
+    return this.http.put(environment.server + '/travelgroups', group).pipe(
+      map(response => {
+        return new TravelGroup(response);
+      }),
+      catchError(error => {
+        swal('updateTravelGroup', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(error);
       })
     );
@@ -73,6 +89,18 @@ export class TravelGroupService {
       }),
       catchError(error => {
         swal('addUsers', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(error);
+      })
+    );
+  }
+
+  getTravelGroup(id) {
+    return this.http.get(environment.server + '/travelgroups/' + id).pipe(
+      map(response => {
+        return new TravelGroup(response);
+      }),
+      catchError(error => {
+        swal('getTravelGroup', 'Er is iets niet goed gegaan.', 'error');
         throw new Error(error);
       })
     );

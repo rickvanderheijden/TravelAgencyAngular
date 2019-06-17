@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {TravelGroup} from '../../../models/travelGroup';
 import {User} from '../../../models/user';
 import {TravelGroupService} from '../../services/travelgroup.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-group-detail',
@@ -14,8 +15,7 @@ export class GroupDetailComponent implements OnInit {
 
   users: User[];
   loading = false;
-  constructor(private travelGroupService: TravelGroupService) {
-
+  constructor(private travelGroupService: TravelGroupService, private router: Router) {
   }
 
   ngOnInit() {
@@ -26,5 +26,9 @@ export class GroupDetailComponent implements OnInit {
         this.loading = false;
       }
     )
+  }
+
+  updateGroup() {
+    this.router.navigate(['/group/update/' + this.travelGroup.id])
   }
 }

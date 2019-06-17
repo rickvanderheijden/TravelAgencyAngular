@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import {GroupComponent} from './group.component';
 import {GroupCreateComponent} from '../group-create/group-create.component';
 import {GroupCreateModule} from '../group-create/group-create.module';
+import {GroupUpdateComponent} from '../group-update/group-update.component';
+import {GroupUpdateModule} from '../group-update/group-update.module';
 
 const routes: Routes = [
   {
@@ -15,10 +17,15 @@ const routes: Routes = [
     component: GroupCreateComponent,
     // canActivate: [AdminGuard]
   },
+  {
+    path: 'update/:id',
+    component: GroupUpdateComponent,
+    // canActivate: [AdminGuard]
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), GroupCreateModule],
+  imports: [RouterModule.forChild(routes), GroupCreateModule, GroupUpdateModule],
   exports: [RouterModule],
 })
 export class GroupRoutingModule { }
