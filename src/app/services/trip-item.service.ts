@@ -70,7 +70,7 @@ export class TripItemService {
   }
 
   updateTripItem(tripItem: TripItem) {
-    return this.http.put(environment.url + '/tripItems/' + tripItem.id, tripItem).pipe(
+    return this.http.put(environment.url + '/tripItems/', tripItem).pipe(
       map((response: any) => {
         console.log(response);
       })
