@@ -13,7 +13,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
     NgSelectModule
   ],
   declarations: [
-    GroupUpdateModule,
+    GroupUpdateComponent,
   ]
 })
 export class GroupUpdateModule { }

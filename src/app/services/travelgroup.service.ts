@@ -55,7 +55,7 @@ export class TravelGroupService {
    * @param group
    */
   createTravelGroup(group: TravelGroup) {
-    return this.http.post(environment.server + '/travelgroups/createTravelGroup', group).pipe(
+    return this.http.post(environment.server + '/travelgroups', group).pipe(
       map(response => {
         return new TravelGroup(response);
       }),
@@ -71,7 +71,7 @@ export class TravelGroupService {
    * @param group
    */
   updateTravelGroup(group: TravelGroup) {
-    return this.http.put(environment.server + '/travelgroups/updateTravelGroup', group).pipe(
+    return this.http.put(environment.server + '/travelgroups', group).pipe(
       map(response => {
         return new TravelGroup(response);
       }),
@@ -94,7 +94,15 @@ export class TravelGroupService {
     );
   }
 
-  getTravelGroup(id: any) {
-    return undefined;
+  getTravelGroup(id) {
+    return this.http.get(environment.server + '/travelgroups/' + id).pipe(
+      map(response => {
+        return new TravelGroup(response);
+      }),
+      catchError(error => {
+        swal('getTravelGroup', 'Er is iets niet goed gegaan.', 'error');
+        throw new Error(error);
+      })
+    );
   }
 }

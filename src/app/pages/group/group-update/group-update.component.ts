@@ -14,6 +14,7 @@ import {Location} from '@angular/common';
 })
 export class GroupUpdateComponent implements OnInit {
   groupUpdateForm: FormGroup;
+  travelgroupId: number;
   travelgroup: TravelGroup;
   allUsers: Array<User>;
   loading = false;
@@ -33,11 +34,18 @@ export class GroupUpdateComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.setForm();
-    this.travelgroup = this.travelGroupService.getTravelGroup(this.route.snapshot.params.id);
+    this.travelGroupService.getTravelGroup(this.route.snapshot.params.id).subscribe(
+      (response: any) => {
+        this.travelgroup = response;
+        this.travelGroupService.getUsers(this.travelgroup.id).subscribe((users: any) => {
+          this.travelgroup.users = users;
+        });
+        this.loading = false;
+      }
+    );
     this.userService.getUsers().subscribe(
       (response: any) => {
         this.allUsers = response;
-        this.loading = false;
       }
     );
   }
